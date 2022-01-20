@@ -7,7 +7,7 @@ namespace Area51.Module.Settings.Logging
 {
     class SteamID : BaseModule, OnPlayerJoinEvent
     {
-        public SteamID() : base("Join/Leave Log", "Logs Players Joining And Leaving", Main.Instance.SettingsButtonLoggging, null, true, true)
+        public SteamID() : base("SteamID", "Logs Players Joining And Leaving", Main.Instance.SettingsButtonLoggging, null, true, true)
         {
         }
 

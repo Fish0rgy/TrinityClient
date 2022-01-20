@@ -15,8 +15,15 @@ namespace Area51.SDK
 {
     static class PlayerWrapper
     {
-        
+
         //converted all the bs to one lines to clean the class
+        
+        private static VRCPlayer Local_Player() => VRCPlayer.field_Internal_Static_VRCPlayer_0;
+        private static GameObject avatarPreviewBase;
+        private static int noUpdateCount = 0;
+
+        public static string backupID = "";
+        public static GameObject GetAvatarPreviewBase() => avatarPreviewBase = GameObject.Find("UserInterface/MenuContent/Screens/Avatar/AvatarPreviewBase");
         public static Dictionary<int, VRC.Player> PlayersActorID = new Dictionary<int, VRC.Player>();
         public static Player[] GetAllPlayers() => PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0;
         public static string GetUserID => GetAPIUser(LocalPlayer).id;
@@ -38,11 +45,28 @@ namespace Area51.SDK
         public static APIUser GetAPIUser(this VRCPlayer Instance) => Instance.GetPlayer().GetAPIUser();
         public static VRCPlayerApi GetVRCPlayerApi(this Player Instance) => Instance?.prop_VRCPlayerApi_0;
         public static bool GetIsMaster(this Player Instance) => Instance.GetVRCPlayerApi().isMaster;
-        public static USpeaker GetUspeaker(this Player player) => player.prop_USpeaker_0;
-        private static int noUpdateCount = 0;
+        public static USpeaker GetUspeaker(this Player player) => player.prop_USpeaker_0;   
         public static int GetActorNumber2(this Player player) => player.GetVRCPlayerApi().playerId;
         public static string GetName(this Player player) => player.GetAPIUser().displayName;
         public static List<Player> AllPlayers => PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0.ToList<Player>();
+
+     
+
+        public static void ShowSelf(bool state)
+        {
+            GetAvatarPreviewBase().SetActive(state);
+            Local_Player().prop_VRCAvatarManager_0.gameObject.SetActive(state);
+            AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0.gameObject.SetActive(state);
+          
+        }
+
+        public static void ClearAssets()
+        {
+            AssetBundleDownloadManager.field_Private_Static_AssetBundleDownloadManager_0.field_Private_Cache_0.ClearCache();
+            AssetBundleDownloadManager.field_Private_Static_AssetBundleDownloadManager_0.field_Private_Queue_1_AssetBundleDownload_0.Clear();
+            AssetBundleDownloadManager.field_Private_Static_AssetBundleDownloadManager_0.field_Private_Queue_1_AssetBundleDownload_1.Clear();
+        }
+
         public static Player GetPlayer(int ActorNumber)
         {
             return (from p in AllPlayers

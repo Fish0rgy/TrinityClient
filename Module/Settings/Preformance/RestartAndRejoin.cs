@@ -8,12 +8,9 @@ namespace Area51.Module.Settings.Preformance
 {
 	internal class RestartAndRejoin : BaseModule
 	{
-		// Token: 0x0600016D RID: 365 RVA: 0x00002D41 File Offset: 0x00000F41
-		public RestartAndRejoin() : base("Quick Restart", "Restart VRChat can also be triggerd by pressing \nctrl alt backspace", Main.Instance.SettingsButtonpreformance, Main.Instance.QuickMenuStuff.Button_RespawnIcon.sprite, false, false)
+		public RestartAndRejoin() : base("Restart\nReJoin", "Restart VRChat can also be triggerd by pressing \nctrl alt backspace", Main.Instance.SettingsButtonpreformance, Main.Instance.QuickMenuStuff.Button_RespawnIcon.sprite, false, false)
 		{
 		}
-
-		// Token: 0x0600016E RID: 366 RVA: 0x00002D62 File Offset: 0x00000F62
 		public override void OnEnable()
 		{
 			ApiWorldInstance Instance = RoomManager.field_Internal_Static_ApiWorldInstance_0;

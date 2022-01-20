@@ -256,7 +256,8 @@ namespace Area51
             Instance.Modules.Add(new HideVideoPlayers());
             Instance.Modules.Add(new HideChairs());
             Instance.Modules.Add(new HidePickUps());
-
+            Instance.Modules.Add(new RestartAndRejoin());
+            Instance.Modules.Add(new SteamID());
             Instance.Modules.Add(new ConsoleClear());
             Instance.Modules.Add(new QuickRestart());
             //render 
