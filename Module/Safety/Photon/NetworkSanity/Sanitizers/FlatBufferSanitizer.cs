@@ -1,0 +1,148 @@
+﻿using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using ExitGames.Client.Photon;
+using MelonLoader;
+using Area51.Module.Safety.Photon.NetworkSanity.Core;
+using Photon.Realtime;
+using UnhollowerBaseLib;
+using UnhollowerRuntimeLib.XrefScans;
+using UnityEngine;
+using VRC;
+using VRC.Networking;
+using Il2CppMethodInfo = Area51.Module.Safety.Photon.NetworkSanity.Core.Il2CppMethodInfo;
+using Area51.Events;
+
+namespace Area51.Module.Safety.Photon.Sanitizers
+{
+    internal class FlatBufferSanitizer : OnVrcEvent, OnPhotonEvent
+    {
+        private static IntPtr _ourAvatarPlayableDecode;
+        private static IntPtr _ourAvatarPlayableDecodeMethodInfo;
+
+        private static IntPtr _ourSyncPhysicsDecode;
+        private static IntPtr _ourSyncPhysicsDecodeMethodInfo;
+
+        private static IntPtr _ourPoseRecorderDecode;
+        private static IntPtr _ourPoseRecorderDecodeMethodInfo;
+
+        private static IntPtr _ourPoseRecorderDispatchedUpdate;
+        private static IntPtr _ourPoseRecorderDispatchedUpdateMethodInfo;
+
+        private static IntPtr _ourSyncPhysicsDispatchedUpdate;
+        private static IntPtr _ourSyncPhysicsDispatchedUpdateMethodInfo;
+
+        private static readonly RateLimiter RateLimiter = new RateLimiter();
+         
+        public static bool FlatBufferNetworkSerializeReceivePatch(EventData __0)
+        {
+            if (__0.Code == 9 && RateLimiter.IsRateLimited(__0.Sender))
+                return false;
+
+            return true;
+        }
+
+        public static void SyncPhysicsDispatchedUpdatePatch(IntPtr thisPtr, float param1, float param2, IntPtr nativeMethodInfo)
+        {
+            SafeDispatchedUpdate(_ourSyncPhysicsDispatchedUpdateMethodInfo, _ourSyncPhysicsDispatchedUpdate, thisPtr,
+                param1, param2);
+        }
+
+        public static void PoseRecorderDispatchedUpdatePatch(IntPtr thisPtr, float param1, float param2, IntPtr nativeMethodInfo)
+        {
+            SafeDispatchedUpdate(_ourPoseRecorderDispatchedUpdateMethodInfo, _ourPoseRecorderDispatchedUpdate, thisPtr,
+                param1, param2);
+        }
+
+        public static unsafe void SafeDispatchedUpdate(IntPtr ourMethodInfoPtr, IntPtr ourMethodPtr, IntPtr thisPtr, float param1,
+            float param2)
+        {
+            void** args = stackalloc void*[2];
+            ((Il2CppMethodInfo*)ourMethodInfoPtr)->methodPointer = ourMethodPtr;
+            args[0] = &param1;
+            args[1] = &param2;
+            var exc = IntPtr.Zero;
+            IL2CPP.il2cpp_runtime_invoke(ourMethodInfoPtr, thisPtr, args, ref exc);
+        }
+
+        public static unsafe bool SafeInvokeDecode(IntPtr ourMethodInfoPtr, IntPtr ourMethodPtr, IntPtr thisPtr, IntPtr objectsPtr, int objectIndex, float sendTime)
+        {
+            void** args = stackalloc void*[3];
+            ((Il2CppMethodInfo*)ourMethodInfoPtr)->methodPointer = ourMethodPtr;
+            args[0] = objectsPtr.ToPointer();
+            args[1] = &objectIndex;
+            args[2] = &sendTime;
+            var exc = IntPtr.Zero;
+            IL2CPP.il2cpp_runtime_invoke(ourMethodInfoPtr, thisPtr, args, ref exc);
+
+            return exc == IntPtr.Zero;
+        }
+
+        public static void SyncPhysicsDecodePatch(IntPtr thisPtr, IntPtr objectsPtr, int objectIndex,
+            float sendTime, IntPtr nativeMethodInfo)
+        {
+            SafeDecode(_ourSyncPhysicsDecodeMethodInfo, _ourSyncPhysicsDecode, thisPtr, objectsPtr, objectIndex, sendTime);
+        }
+
+        public static void AvatarPlayableControllerDecodePatch(IntPtr thisPtr, IntPtr objectsPtr, int objectIndex,
+            float sendTime, IntPtr nativeMethodInfo)
+        {
+            SafeDecode(_ourAvatarPlayableDecodeMethodInfo, _ourAvatarPlayableDecode, thisPtr, objectsPtr, objectIndex, sendTime);
+        }
+
+        public static void PoseRecorderDecodePatch(IntPtr thisPtr, IntPtr objectsPtr, int objectIndex,
+            float sendTime, IntPtr nativeMethodInfo)
+        {
+            SafeDecode(_ourPoseRecorderDecodeMethodInfo, _ourPoseRecorderDecode, thisPtr, objectsPtr, objectIndex, sendTime);
+        }
+
+        public static void SafeDecode(IntPtr ourMethodInfoPtr, IntPtr ourMethodPtr, IntPtr thisPtr, IntPtr objectsPtr, int objectIndex, float sendTime)
+        {
+            if (SafeInvokeDecode(ourMethodInfoPtr, ourMethodPtr, thisPtr, objectsPtr, objectIndex, sendTime))
+                return;
+
+            var component = new Component(thisPtr);
+            var vrcPlayer = component.GetComponentInParent<VRCPlayer>();
+            if (vrcPlayer == null)
+                return;
+
+            var player = vrcPlayer._player;
+            if (player == null)
+                return;
+
+            RateLimiter.BlacklistUser(player.prop_Int32_0);
+        }
+
+        public bool OnEventPatch(LoadBalancingClient loadBalancingClient, EventData eventData)
+        {
+            return eventData.Code == 9 && IsReliableBad(eventData);
+        }
+
+        public bool VRCNetworkingClientOnPhotonEvent(EventData eventData)
+        {
+            return eventData.Code == 9 && RateLimiter.IsRateLimited(eventData.Sender);
+        }
+
+        public static bool IsReliableBad(EventData eventData)
+        {
+            if (RateLimiter.IsRateLimited(eventData.Sender))
+                return true;
+
+            var bytes = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(eventData.CustomData.Pointer);
+            if (bytes.Length <= 10)
+            {
+                RateLimiter.BlacklistUser(eventData.Sender);
+                return true;
+            }
+
+            var serverTime = BitConverter.ToInt32(bytes, 4);
+            if (serverTime == 0)
+            {
+                RateLimiter.BlacklistUser(eventData.Sender);
+                return true;
+            }
+
+            return false;
+        }
+    }
+}
