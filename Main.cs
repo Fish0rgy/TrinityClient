@@ -223,7 +223,7 @@ namespace Area51
             //Photonbots
             Instance.Modules.Add(new ExploitLogs());
             //photonevents
-
+            Instance.Modules.Add(new RateLimit());
             Instance.Modules.Add(new PhotonProtection());
 
             //avatar
@@ -254,6 +254,8 @@ namespace Area51
 
             Instance.Modules.Add(new ConsoleClear());
             Instance.Modules.Add(new QuickRestart());
+            Instance.Modules.Add(new RestartAndRejoin());
+
             //render 
             Instance.Modules.Add(new PlayerList());
             Instance.Modules.Add(new DebugLog());
