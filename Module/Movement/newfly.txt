@@ -1,0 +1,76 @@
+using Area51.Events;
+using System;
+using UnityEngine;
+using UnityEngine.XR;
+using VRC.Animation;
+using VRC.SDKBase;
+using RealisticEyeMovements;
+using RootMotion.FinalIK;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Area51.SDK;
+
+namespace Area51.Module.Movement
+{
+    class Fly : BaseModule, OnUpdateEvent
+    {
+        private VRCMotionState vrcMotionState;
+
+        public Fly() : base("Fly", "Fly high", Main.Instance.MovementButton, null, true)
+        {
+        }
+
+        public override void OnEnable()
+        {
+            vrcMotionState = VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<VRCMotionState>();
+            VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = false;
+            Main.Instance.OnUpdateEvents.Add(this);
+        }
+
+        public override void OnDisable()
+        {
+            Main.Instance.OnUpdateEvents.Remove(this);
+            vrcMotionState.Method_Public_Void_0();
+            VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = true;
+        }
+
+        private static VRC.Player LocalPlayer;
+        private static Transform CameraTransform;
+        public static float FlySpeed = 5f;
+        public void OnUpdate()
+        {
+            if (RoomManager.field_Internal_Static_ApiWorld_0 == null) return;
+            float right = 0f;
+            float up = 0f;
+            float forward = 0f;
+
+            if (LocalPlayer == null || CameraTransform == null)
+            {
+                LocalPlayer = PlayerWrapper.LocalPlayer;
+                CameraTransform = Camera.main.transform;
+            }
+            if (XRDevice.isPresent)
+            {
+
+                if (Math.Abs(Input.GetAxis("Vertical")) != 0f) LocalPlayer.transform.position += CameraTransform.forward * 5f * Time.deltaTime * Input.GetAxis("Vertical");
+                if (Math.Abs(Input.GetAxis("Horizontal")) != 0f) LocalPlayer.transform.position += CameraTransform.right * 5f * Time.deltaTime * Input.GetAxis("Horizontal");
+                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f) LocalPlayer.transform.position += CameraTransform.up * 5f * Time.deltaTime * Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical");
+                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f) LocalPlayer.transform.position += CameraTransform.up * 5f * Time.deltaTime * Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical");
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.LeftShift)) FlySpeed *= 2f;
+                if (Input.GetKeyUp(KeyCode.LeftShift)) FlySpeed /= 2f;
+                if (Input.GetKey(KeyCode.E)) LocalPlayer.transform.position += CameraTransform.up * 5f * Time.deltaTime;
+                if (Input.GetKey(KeyCode.Q)) LocalPlayer.transform.position += CameraTransform.up * -1f * 5f * Time.deltaTime;
+                if (Input.GetKey(KeyCode.W)) LocalPlayer.transform.position += CameraTransform.forward * 5f * Time.deltaTime;
+                if (Input.GetKey(KeyCode.A)) LocalPlayer.transform.position += CameraTransform.right * -1f * 5f * Time.deltaTime;
+                if (Input.GetKey(KeyCode.D)) LocalPlayer.transform.position += CameraTransform.right * 5f * Time.deltaTime;
+                if (Input.GetKey(KeyCode.S)) LocalPlayer.transform.position += CameraTransform.forward * -1f * 5f * Time.deltaTime;
+            }
+        }
+    }
+}
