@@ -2,6 +2,7 @@
 using Area51.SDK;
 using Area51.SDK.ButtonAPI;
 using MelonLoader;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,6 +87,11 @@ namespace Area51.Module.Settings.Render
             playerList.text.fontSizeMax = 30;
             playerList.text.alignment = TMPro.TextAlignmentOptions.Right;
             playerList.text.color = Color.white;
+        }
+
+        public void OnPlayerEnteredRoom(Photon.Realtime.Player player)
+        {
+            throw new System.NotImplementedException();
         }
     }
 } 

@@ -1,4 +1,7 @@
+using System.Net;
 using System.Windows.Forms;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Area51.SDK
 {
@@ -15,6 +18,9 @@ namespace Area51.SDK
             }
             return s;
         }
+
+      
+        
 
         //sorry was lazy https://stackoverflow.com/questions/11743160/how-do-i-encode-and-decode-a-base64-string
         internal static string Base64Decode(string base64EncodedData)

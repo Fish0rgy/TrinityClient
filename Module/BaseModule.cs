@@ -64,6 +64,7 @@ namespace Area51.Module
                     Main.Instance.OnUpdateEventArray = Main.Instance.OnUpdateEvents.ToArray();
                     Main.Instance.OnAssetBundleLoadEventArray = Main.Instance.OnAssetBundleLoadEvents.ToArray();
                     Main.Instance.OnNetworkSanityArray = Main.Instance.OnNetworkSanityEvents.ToArray();
+                  //  Main.Instance.OnPlayerEnteredRoomArray = Main.Instance.OnPlayerEnteredRoom.ToArray();
                 }));
                 if (save)
                 {

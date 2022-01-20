@@ -27,7 +27,8 @@ namespace Area51.Module.Safety
 
         public override void OnEnable()
         {
-            Main.Instance.OnNetworkSanityEvents.Add(this); 
+            Main.Instance.OnNetworkSanityEvents.Add(this);
+         ///try { Area51.Patches.networksanitypatch(); } catch (Exception ex) { Logg.Log(Logg.Colors.Red, $"[Patch] [Error] NetworkSanity {ex.ToString()}", false, false); }
         }
 
         public override void OnDisable()

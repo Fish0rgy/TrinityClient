@@ -1,5 +1,6 @@
 ﻿using Area51.Events;
 using Area51.SDK;
+using Photon.Realtime;
 
 namespace Area51.Module.Settings.Logging
 {
@@ -31,6 +32,11 @@ namespace Area51.Module.Settings.Logging
         {
             Logg.Log(Logg.Colors.Blue, $"Player Left ~> Username: {player.prop_APIUser_0.displayName} | UserID: {player.prop_APIUser_0.id}", false, false);
             Logg.LogDebug($"Player Left ~> Username: {player.prop_APIUser_0.displayName}");
+        }
+
+        public void OnPlayerEnteredRoom(Photon.Realtime.Player player)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Area51.Events;
 using Area51.SDK;
+using Photon.Realtime;
 using UnityEngine;
 
 namespace Area51.Module.Settings.Render
@@ -50,6 +51,11 @@ namespace Area51.Module.Settings.Render
         public void OnPlayerJoin(VRC.Player player)
         {
             HighlightPlayer(player, true);
+        }
+
+        public void OnPlayerEnteredRoom(Photon.Realtime.Player player)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

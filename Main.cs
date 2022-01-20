@@ -27,6 +27,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using UnhollowerRuntimeLib;
 using UnityEngine;
+using UnityEngine.UIElements;
 using VRC.Core;
 
 namespace Area51
@@ -62,7 +63,7 @@ namespace Area51
         public QMNestedButton Privatebotbutton { get; set; }
         public QMNestedButton Publicbotbutton { get; set; }
         public QMNestedButton Zombiebutton { get; set; }
-
+        
         internal List<BaseModule> Modules { get; set; } = new List<BaseModule>();
         public List<OnPlayerJoinEvent> OnPlayerJoinEvents { get; set; } = new List<OnPlayerJoinEvent>();
         public List<OnAssetBundleLoadEvent> OnAssetBundleLoadEvents { get; set; } = new List<OnAssetBundleLoadEvent>();
@@ -76,6 +77,7 @@ namespace Area51
         public List<OnSceneLoadedEvent> OnSceneLoadedEvents { get; set; } = new List<OnSceneLoadedEvent>();
         public List<OnWorldInitEvent> OnWorldInitEvents { get; set; } = new List<OnWorldInitEvent>();
         public List<OnNetworkSanityEvent> OnNetworkSanityEvents { get; set; } = new List<OnNetworkSanityEvent>();
+     //   public List<OnPlayerEnteredRoom> OnPlayerEnteredRoom { get; set; } = new List<OnPlayerEnteredRoom>();
         public OnPlayerJoinEvent[] OnPlayerJoinEventArray { get; set; } = new OnPlayerJoinEvent[0];
         public OnAssetBundleLoadEvent[] OnAssetBundleLoadEventArray { get; set; } = new OnAssetBundleLoadEvent[0];
         public OnPlayerLeaveEvent[] OnPlayerLeaveEventArray { get; set; } = new OnPlayerLeaveEvent[0];
@@ -88,6 +90,7 @@ namespace Area51
         public OnSceneLoadedEvent[] OnSceneLoadedEventArray { get; set; } = new OnSceneLoadedEvent[0];
         public OnWorldInitEvent[] OnWorldInitEventArray { get; set; } = new OnWorldInitEvent[0];
         public OnNetworkSanityEvent[] OnNetworkSanityArray { get; set; } = new OnNetworkSanityEvent[0];
+        //public OnPlayerEnteredRoom[] OnPlayerEnteredRoomArray { get; set; } = new OnPlayerEnteredRoom[0];
 
         public static void OnApplicationStart()
         {
@@ -132,6 +135,7 @@ namespace Area51
                 Instance.OnSceneLoadedEventArray[i].OnSceneWasLoadedEvent(buildIndex, sceneName);
         }
 
+        
 
         [Obfuscation(Exclude = true)]
         private static void OnUIInit()
@@ -208,7 +212,7 @@ namespace Area51
             Instance.Modules.Add(new UdonSpam());
             //serialization
             Instance.Modules.Add(new FreezePlayer());
-         //   Instance.Modules.Add(new ());
+         
             //Avatar
             Instance.Modules.Add(new VRCA());
             Instance.Modules.Add(new VRCW());
@@ -222,8 +226,9 @@ namespace Area51
 
             //Photonbots
             Instance.Modules.Add(new ExploitLogs());
-            //photonevents
 
+            //photonevents
+            //Instance.Modules.Add(new RateLimit());
             Instance.Modules.Add(new PhotonProtection());
 
             //avatar

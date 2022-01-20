@@ -572,6 +572,7 @@
     <Compile Include="Module\Settings\Logging\Dump210.cs" />
     <Compile Include="Module\Settings\Logging\Dump6.cs" />
     <Compile Include="Module\Settings\Logging\Dump7.cs" />
+    <Compile Include="Module\Settings\Logging\SteamID.cs" />
     <Compile Include="Module\Settings\Spoofer\fpsSpoofer.cs" />
     <Compile Include="Module\Settings\Theme\Area51Theme.cs" />
     <Compile Include="Module\Settings\Theme\muchen.cs" />

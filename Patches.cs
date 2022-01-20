@@ -1,10 +1,8 @@
 ﻿using AmplitudeSDKWrapper;
-using Area51.Events;
 using Area51.Module.Safety.Photon.NetworkSanity.Core;
 using Area51.Module.Safety.Photon.Sanitizers;
 using Area51.Module.Settings.Logging;
 using Area51.SDK;
-using Area51.SDK.Photon;
 using ExitGames.Client.Photon;
 using HarmonyLib;
 using MelonLoader;
@@ -111,10 +109,11 @@ namespace Area51
             }
             try
             {
-                try { networksanitypatch(); } catch (Exception ex) { Logg.Log(Logg.Colors.Red, $"[Patch] [Error] NetworkSanity {ex.ToString()}", false, false); }
+               
                 Instance.Patch(typeof(LoadBalancingClient).GetMethod("OnEvent"), new HarmonyMethod(AccessTools.Method(typeof(Patches), nameof(OnEvent))));
                 Instance.Patch(typeof(VRC_EventDispatcherRFC).GetMethod("Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0"), new HarmonyMethod(AccessTools.Method(typeof(Patches), nameof(OnRPC))));
                 Instance.Patch(AccessTools.Method(typeof(LoadBalancingClient), "Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0", null, null), new HarmonyMethod(AccessTools.Method(typeof(Patches), nameof(OpRaiseEvent))));
+             //  try { networksanity(); } catch (Exception ex) { Logg.Log(Logg.Colors.Red, $"[Patch] [Error] NetworkSanity {ex.ToString()}", false, false); }
                 Logg.Log(Logg.Colors.Green, "[Patch] Networking", false, false);
             }
             catch
@@ -522,7 +521,7 @@ namespace Area51
             "Windows XP 32bit"
         };
 
-        private unsafe static void networksanitypatch()
+        public unsafe static void networksanitypatch()
         {
             IEnumerable<Type> types;
             try
