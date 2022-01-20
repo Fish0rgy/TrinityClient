@@ -17,7 +17,7 @@ namespace Area51.SDK
         {
             APIUser currentUser = APIUser.CurrentUser;
             string fileVersion = FileVersionInfo.GetVersionInfo("Area51/DLL/Area51.dll").FileVersion;
-            Console.Title = $"Area 51 Client | Stable Beta: {fileVersion} | Fish, Silly & Josh";
+            Console.Title = $"Area 51 Client | Stable Beta: {fileVersion} | Fish, Silly, Josh, Kanna & Swordsith ";
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("========================================================================================================================");
@@ -33,7 +33,7 @@ namespace Area51.SDK
             Console.WriteLine("                                I OR SOMEONE I'M CHILL WITH IS COOL WITH YOU, Congrats!                                 ");
             Console.WriteLine("                                               Here's A Fucking Cookie *                                                ");
             Console.WriteLine("                               Update Log -> SpaceshipLoader √ , API √ , BOT √, TWEAKS √                                ");
-            Console.WriteLine("                                           The Developers's: Fish, Josh, Silly                                          ");
+            Console.WriteLine("                                 The Developers's: Fish, Josh, Silly, Kanna, Swordsith                                  ");
             Console.WriteLine($"                                               Client Version {fileVersion}                                            ");
             Console.WriteLine("                                                                                                                        ");
             Console.WriteLine("                                                                                                                        ");
