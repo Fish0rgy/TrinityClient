@@ -24,19 +24,14 @@ namespace Area51.Module.Settings.Logging
 
         void OnPlayerJoinEvent.OnPlayerJoin(VRC.Player player)
         {
-            Logg.Log(Logg.Colors.Blue, $"Player Joined ~> Username: {player.prop_APIUser_0.displayName} | Photon ID: {player.prop_VRCPlayerApi_0.playerId} | UserID: {player.prop_APIUser_0.id}", false, false);
-            Logg.LogDebug($"Player Joined ~> Username: {player.prop_APIUser_0.displayName}");
+            LogHandler.Log(LogHandler.Colors.Blue, $"Player Joined ~> Username: {player.prop_APIUser_0.displayName} | Photon ID: {player.prop_VRCPlayerApi_0.playerId} | UserID: {player.prop_APIUser_0.id}", false, false);
+            LogHandler.LogDebug($"Player Joined ~> Username: {player.prop_APIUser_0.displayName}");
         }
 
         public void PlayerLeave(VRC.Player player)
         {
-            Logg.Log(Logg.Colors.Blue, $"Player Left ~> Username: {player.prop_APIUser_0.displayName} | UserID: {player.prop_APIUser_0.id}", false, false);
-            Logg.LogDebug($"Player Left ~> Username: {player.prop_APIUser_0.displayName}");
-        }
-
-        public void OnPlayerEnteredRoom(Photon.Realtime.Player player)
-        {
-            throw new System.NotImplementedException();
+            LogHandler.Log(LogHandler.Colors.Blue, $"Player Left ~> Username: {player.prop_APIUser_0.displayName} | UserID: {player.prop_APIUser_0.id}", false, false);
+            LogHandler.LogDebug($"Player Left ~> Username: {player.prop_APIUser_0.displayName}");
         }
     }
 }

@@ -4,15 +4,14 @@ namespace Area51.Module.World
 {
     class CopyWID : BaseModule
     {
-        public CopyWID() : base("Get World ID", "Copy the World + InstanceID", Main.Instance.WorldButton, null, false) { }
+        public CopyWID() : base("World ID", "Copies the World & InstanceID", Main.Instance.WorldButton, SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Alien.earth), false, false) { }
 
         public override void OnEnable()
         {
-            if (WorldWrapper.GetWorldID != "")
-                Misc.SetClipboard(PlayerWrapper.GetAPIUser(PlayerWrapper.LocalPlayer).location);
-            Logg.Log(Logg.Colors.Blue, "World ID: " + WorldWrapper.GetWorldID + " copied to clipboard.", false, false);
-            Logg.LogDebug($"Copied World ID To Clipboard!");
+            if (WorldWrapper.GetWorldID != "") { Misc.SetClipboard(PlayerWrapper.GetAPIUser(PlayerWrapper.LocalPlayer).location);          
+            LogHandler.Log(LogHandler.Colors.Green, "World ID: " + WorldWrapper.GetWorldID + " copied to clipboard.", false, false);
+            LogHandler.LogDebug($"Copied World ID To Clipboard!");
+            }
         }
-
     }
 }

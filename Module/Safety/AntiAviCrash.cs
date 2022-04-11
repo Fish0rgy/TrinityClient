@@ -18,7 +18,7 @@ namespace Area51.Module.Safety
         private int maxCloth;
         private int maxColliders;
         private Shader defaultShader;
-        public AntiAviCrash() : base("Basic\nAnti-Crash", "Remove Crashers from Avatars", Main.Instance.Avatarbutton, null, true, true)
+        public AntiAviCrash() : base("Basic\nAnti-Crash", "Remove Crashers from Avatars", Main.Instance.Avatarbutton, null, true, false)
         {
             this.maxAudio = Main.Instance.Config.getConfigInt("MaxAudioSources", 10);
             this.maxLight = Main.Instance.Config.getConfigInt("MaxLightSources", 0);
@@ -54,8 +54,8 @@ namespace Area51.Module.Safety
                 if (!skinnedMeshRenderer.sharedMesh.isReadable)
                 {
                     UnityEngine.Object.DestroyImmediate(skinnedMeshRenderer, true);
-                    Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted unreadable Mesh", false, false);
-                    Logg.LogDebug($"[Anti AviCrash] Deleted Unreadable Mesh ");
+                    LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted unreadable Mesh", false, false);
+                    LogHandler.LogDebug($"[Anti AviCrash] Deleted Unreadable Mesh ");
                     continue;
                 }
 
@@ -63,8 +63,8 @@ namespace Area51.Module.Safety
                 {
                     if (skinnedMeshRenderer.name.ToLower().Contains(blacklistMesh[j]))
                     {
-                        Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted blackListed Mesh " + skinnedMeshRenderer.name, false, false);
-                        Logg.LogDebug($"[Anti AviCrash] Deleted BlackListed Mesh ");
+                        LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted blackListed Mesh " + skinnedMeshRenderer.name, false, false);
+                        LogHandler.LogDebug($"[Anti AviCrash] Deleted BlackListed Mesh ");
                         UnityEngine.Object.DestroyImmediate(skinnedMeshRenderer, true);
                         destroyed = true;
                         break;
@@ -80,8 +80,8 @@ namespace Area51.Module.Safety
                     if (polyCount >= this.maxPoly)
                     {
                         UnityEngine.Object.DestroyImmediate(skinnedMeshRenderer, true);
-                        Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted Mesh with too many polys", false, false);
-                        Logg.LogDebug($"[Anti AviCrash] Deleted Mesh With Too Many Polys ");
+                        LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted Mesh with too many polys", false, false);
+                        LogHandler.LogDebug($"[Anti AviCrash] Deleted Mesh With Too Many Polys ");
                         destroyed = true;
                         break;
                     }
@@ -93,8 +93,8 @@ namespace Area51.Module.Safety
                 if (materials.Length >= maxMatirial)
                 {
                     UnityEngine.Object.DestroyImmediate(skinnedMeshRenderer, true);
-                    Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted Mesh with " + materials.Length + " materials", false, false);
-                    Logg.LogDebug($"[Anti AviCrash] Deleted Mesh With {materials.Length} Materials ");
+                    LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted Mesh with " + materials.Length + " materials", false, false);
+                    LogHandler.LogDebug($"[Anti AviCrash] Deleted Mesh With {materials.Length} Materials ");
                     continue;
                 }
 
@@ -105,8 +105,8 @@ namespace Area51.Module.Safety
                     {
                         if (shader.name.ToLower().Contains(blacklistShaders[k]))
                         {
-                            Logg.Log(Logg.Colors.Red,"[AnitCrash] replaced Shader " + shader.name, false, false);
-                            Logg.LogDebug($"[Anti AviCrash] Replaced Shader {shader.name} ");
+                            LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] replaced Shader " + shader.name, false, false);
+                            LogHandler.LogDebug($"[Anti AviCrash] Replaced Shader {shader.name} ");
                             shader = defaultShader;
                             continue;
                         }
@@ -120,8 +120,8 @@ namespace Area51.Module.Safety
                 if (!meshFilter.sharedMesh.isReadable)
                 {
                     UnityEngine.Object.DestroyImmediate(meshFilter, true);
-                    Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted unreadable Mesh", false, false);
-                    Logg.LogDebug($"[Anti AviCrash] Deleted Unreadable Mesh ");
+                    LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted unreadable Mesh", false, false);
+                    LogHandler.LogDebug($"[Anti AviCrash] Deleted Unreadable Mesh ");
                     continue;
                 }
 
@@ -131,8 +131,8 @@ namespace Area51.Module.Safety
                 {
                     if (meshFilter.name.ToLower().Contains(blacklistMesh[j]))
                     {
-                        Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted blackListed Mesh " + meshFilter.name, false, false);
-                        Logg.LogDebug($"[Anti AviCrash] Deleted BlackListed Mesh {meshFilter.name} ");
+                        LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted blackListed Mesh " + meshFilter.name, false, false);
+                        LogHandler.LogDebug($"[Anti AviCrash] Deleted BlackListed Mesh {meshFilter.name} ");
                         UnityEngine.Object.DestroyImmediate(meshFilter, true);
                         destroyed = true;
                         break;
@@ -148,8 +148,8 @@ namespace Area51.Module.Safety
                     if (polyCount >= this.maxPoly)
                     {
                         UnityEngine.Object.DestroyImmediate(meshFilter, true);
-                        Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted Mesh with too many polys", false, false);
-                        Logg.LogDebug($"[Anti AviCrash] Deleted Mesh With Too Many Polys ");
+                        LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted Mesh with too many polys", false, false);
+                        LogHandler.LogDebug($"[Anti AviCrash] Deleted Mesh With Too Many Polys ");
                         destroyed = true;
                         break;
                     }
@@ -162,8 +162,8 @@ namespace Area51.Module.Safety
                 if (materials.Length >= maxMatirial)
                 {
                     UnityEngine.Object.DestroyImmediate(meshFilter, true);
-                    Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted Mesh with " + materials.Length + " materials", false, false);
-                    Logg.LogDebug($"[Anti AviCrash] Deleted Mesh With {materials.Length} Materials");
+                    LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted Mesh with " + materials.Length + " materials", false, false);
+                    LogHandler.LogDebug($"[Anti AviCrash] Deleted Mesh With {materials.Length} Materials");
                     continue;
                 }
                 for (int j = 0; j < materials.Length; j++)
@@ -173,8 +173,8 @@ namespace Area51.Module.Safety
                     {
                         if (shader.name.ToLower().Contains(blacklistShaders[k]))
                         {
-                            Logg.Log(Logg.Colors.Red,"[AnitCrash] replaced Shader " + shader.name, false, false);
-                            Logg.LogDebug($"[Anti AviCrash] Replaced Shader {shader.name} ");
+                            LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] replaced Shader " + shader.name, false, false);
+                            LogHandler.LogDebug($"[Anti AviCrash] Replaced Shader {shader.name} ");
                             shader = defaultShader;
                             continue;
                         }
@@ -189,8 +189,8 @@ namespace Area51.Module.Safety
                 {
                     UnityEngine.Object.DestroyImmediate(audioSources[i].gameObject, true);
                 }
-                Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted " + maxAudio + " AudioSources", false, false);
-                Logg.LogDebug($"[Anti AviCrash] Deleted {maxAudio} AudioSources ");
+                LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted " + maxAudio + " AudioSources", false, false);
+                LogHandler.LogDebug($"[Anti AviCrash] Deleted {maxAudio} AudioSources ");
             }
             Light[] lights = avatar.GetComponentsInChildren<Light>();
             if (lights.Length >= maxLight)
@@ -199,8 +199,8 @@ namespace Area51.Module.Safety
                 {
                     UnityEngine.Object.DestroyImmediate(lights[i].gameObject, true);
                 }
-                Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted " + maxLight + " Lights", false, false);
-                Logg.LogDebug($"[Anti AviCrash] Deleted {maxLight} Lights ");
+                LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted " + maxLight + " Lights", false, false);
+                LogHandler.LogDebug($"[Anti AviCrash] Deleted {maxLight} Lights ");
             }
             Cloth[] cloths = avatar.GetComponentsInChildren<Cloth>();
             if (cloths.Length >= maxCloth)
@@ -209,8 +209,8 @@ namespace Area51.Module.Safety
                 {
                     UnityEngine.Object.DestroyImmediate(cloths[i].gameObject, true);
                 }
-                Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted " + maxCloth + " Cloth", false, false);
-                Logg.LogDebug($"[Anti AviCrash] Deleted {maxCloth} Cloth ");
+                LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted " + maxCloth + " Cloth", false, false);
+                LogHandler.LogDebug($"[Anti AviCrash] Deleted {maxCloth} Cloth ");
             }
             Collider[] collider = avatar.GetComponentsInChildren<Collider>();
             if (collider.Length >= maxColliders)
@@ -219,8 +219,8 @@ namespace Area51.Module.Safety
                 {
                     UnityEngine.Object.DestroyImmediate(collider[i].gameObject, true);
                 }
-                Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted " + maxColliders + " Colliders", false, false);
-                Logg.LogDebug($"[Anti AviCrash] Deleted {maxColliders} Colliders");
+                LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted " + maxColliders + " Colliders", false, false);
+                LogHandler.LogDebug($"[Anti AviCrash] Deleted {maxColliders} Colliders");
             }
             DynamicBoneCollider[] dynamicBoneColliders = avatar.GetComponentsInChildren<DynamicBoneCollider>();
             if (dynamicBoneColliders.Length >= maxDynamicBonesCollider)
@@ -229,8 +229,8 @@ namespace Area51.Module.Safety
                 {
                     UnityEngine.Object.DestroyImmediate(dynamicBoneColliders[i].gameObject, true);
                 }
-                Logg.Log(Logg.Colors.Red,"[AnitCrash] deleted " + maxDynamicBonesCollider + " DynamicBoneColliders", false, false);
-                Logg.LogDebug($"[Anti AviCrash] Deleted {maxDynamicBonesCollider} DynamicBoneColliders");
+                LogHandler.Log(LogHandler.Colors.Red,"[AnitCrash] deleted " + maxDynamicBonesCollider + " DynamicBoneColliders", false, false);
+                LogHandler.LogDebug($"[Anti AviCrash] Deleted {maxDynamicBonesCollider} DynamicBoneColliders");
             }
             return true;
         }

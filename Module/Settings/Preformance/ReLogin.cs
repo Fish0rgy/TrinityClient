@@ -1,0 +1,35 @@
+﻿using Area51.SDK;
+using Area51.SDK.ButtonAPI;
+using Area51.SDK.Security;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Area51.Module.Settings.Preformance
+{
+    class ReLogin : BaseModule
+    {
+        public ReLogin() : base("Re-Login", "Failed To Login? Press Me To Try Again!", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Alien.refresh), false, false)
+        {
+        }
+        public override void OnEnable()
+        {
+            try
+            {
+                if (File.Exists(SecurityCheck.key) && SecurityCheck.GetServerInfo(File.ReadAllText(SecurityCheck.key)))
+                {
+                    //200
+                    LogHandler.Log(LogHandler.Colors.Green, "[Area51] Successful Relogin", false, false);
+                }
+                else { LogHandler.Log(LogHandler.Colors.Red, "[Area51] Unsuccessful Relogin", false, false); }
+            }
+            catch (Exception EX)
+            {
+                Console.WriteLine(EX.Message);
+            }
+        }
+    }
+}

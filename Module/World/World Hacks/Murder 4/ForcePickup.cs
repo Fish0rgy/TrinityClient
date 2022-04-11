@@ -12,13 +12,13 @@ namespace Area51.Module.World.World_Hacks.Murder_4
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Force Pickup Is Active", false, false);
-                Logg.LogDebug("Force Pickup Is Active");
+                LogHandler.Log(LogHandler.Colors.Green, "Force Pickup Is Active", false, false);
+                LogHandler.LogDebug("Force Pickup Is Active");
                 MurderMisc.pickupsteal();
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

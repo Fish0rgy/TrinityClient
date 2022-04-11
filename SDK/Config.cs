@@ -13,6 +13,7 @@ namespace Area51.SDK
 
         public int getConfigInt(string key, int defaultVal)
         {
+         
             if (File.ReadAllText("Area51/Config.json").Contains(key))
             {
                 string[] arrLine = File.ReadAllLines("Area51/Config.json");
@@ -27,6 +28,7 @@ namespace Area51.SDK
             }
             else
             {
+
                 File.AppendAllText("Area51/Config.json", "\n" + key + "=" + defaultVal);
                 return defaultVal;
             }
@@ -63,6 +65,7 @@ namespace Area51.SDK
             }
             else
             {
+               
                 File.AppendAllText("Area51/Config.json", "\n" + key + "=False");
                 return false;
             }

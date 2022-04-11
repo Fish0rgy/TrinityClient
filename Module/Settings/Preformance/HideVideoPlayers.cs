@@ -8,20 +8,20 @@ namespace Area51.Module.Settings.Preformance
 {
     class HideVideoPlayers : BaseModule
     {
-        public HideVideoPlayers() : base("Hide VideoPlayers", "", Main.Instance.SettingsButtonpreformance, null, true, true)
+        public HideVideoPlayers() : base("Hide VideoPlayers", "Hides Video Player local", Main.Instance.SettingsButtonpreformance, null, true, false)
         {
         }
 
         public override void OnEnable()
         {
             SetAllObjectsOfTypeVideoPlayers(false);
-            Logg.LogDebug($"Video Players Hidden");
+            LogHandler.LogDebug($"Video Players Hidden");
         }
 
         public override void OnDisable()
         {
             SetAllObjectsOfTypeVideoPlayers(true);
-            Logg.LogDebug($"Video Players UnHidden");
+            LogHandler.LogDebug($"Video Players UnHidden");
         }
         internal static void SetAllObjectsOfTypeVideoPlayers(bool state)
         {

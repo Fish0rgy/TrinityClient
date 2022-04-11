@@ -12,12 +12,12 @@ namespace Area51.Module.World.World_Hacks.Among_Us
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Voting Skipped", false, false);
+                LogHandler.Log(LogHandler.Colors.Green, "Voting Skipped", false, false);
                 A_Misc.AmongUsMod("Btn_SkipVoting");
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

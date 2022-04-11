@@ -2,7 +2,6 @@
 {
     public interface OnPlayerJoinEvent
     {
-        void OnPlayerJoin(VRC.Player player);
-        void OnPlayerEnteredRoom(Photon.Realtime.Player player);
+        void OnPlayerJoin(VRC.Player player);       
     }
 }

@@ -8,7 +8,7 @@ namespace Area51.Module.World.World_Hacks.Among_Us
         public static bool Check()
         {
             string WORLDID = "";
-            return RoomManager.Method_Internal_Static_String_PDM_0().Contains(WORLDID);
+            return RoomManager.Method_Public_Static_String_0().Contains(WORLDID);
         }
         public static void AmongUsMod(string udonevent)
         {

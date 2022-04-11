@@ -28,13 +28,13 @@ namespace Area51.Module.Safety
                 VRC.Player player = PlayerWrapper.GetPlayerWithPlayerID(eventData.sender);
                 if (player == null)
                 {
-                    Logg.Log(Logg.Colors.Red,"Blocked Invalid 210", false,false);
+                    LogHandler.Log(LogHandler.Colors.Red,"Blocked Invalid 210", false,false);
                     return false;
                 }
                 Il2CppStructArray<int> il2CppStructArray = eventData.Parameters[245].TryCast<Il2CppStructArray<int>>();
                 if (il2CppStructArray[1] != player.prop_VRCPlayerApi_0.playerId)
                 {
-                    Logg.Log(Logg.Colors.Red,"Blocked Invalid 210", false,false);
+                    LogHandler.Log(LogHandler.Colors.Red,"Blocked Invalid 210", false,false);
                     return false;
                 }
             }

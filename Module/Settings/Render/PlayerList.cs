@@ -3,6 +3,7 @@ using Area51.SDK;
 using Area51.SDK.ButtonAPI;
 using MelonLoader;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,30 +13,57 @@ namespace Area51.Module.Settings.Render
     internal class PlayerList : BaseModule, OnPlayerJoinEvent, OnPlayerLeaveEvent
     {
         QMLable playerList;
-        public PlayerList() : base("PlayerList", "PlayerList on the side", Main.Instance.SettingsButtonrender, null, true, true)
+        public PlayerList() : base("PlayerList", "PlayerList on the side", Main.Instance.SettingsButtonrender, null, true, false)
         {
         }
 
         public override void OnEnable()
         {
-            playerList.lable.SetActive(true);
-            playerList.text.alignment = TMPro.TextAlignmentOptions.Right;
-            if (GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer").activeSelf)
-                playerList.lable.transform.localPosition = new Vector3(-526.6402f, -341.6801f, 0);
-            else
-                playerList.lable.transform.localPosition = new Vector3(-106.6402f, -341.6801f, 0);
-            playerList.text.color = Color.white;
-            Main.Instance.OnPlayerJoinEvents.Add(this);
-            Main.Instance.OnPlayerLeaveEvents.Add(this);
-            MelonCoroutines.Start(OnUpdate());
+
+            try
+            {
+                playerList.lable.SetActive(true);
+                playerList.text.alignment = TMPro.TextAlignmentOptions.Right;
+
+                if (GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer").activeSelf)
+                    playerList.lable.transform.localPosition = new Vector3(-526.6402f, -341.6801f, 0);
+
+                else
+                    playerList.lable.transform.localPosition = new Vector3(-106.6402f, -341.6801f, 0);
+                playerList.text.color = Color.white;
+                Main.Instance.OnPlayerJoinEvents.Add(this);
+                Main.Instance.OnPlayerLeaveEvents.Add(this);
+                MelonCoroutines.Start(OnUpdate());
+            }
+            catch (ArgumentNullException ERROR)
+            {
+
+            }
+            catch (Exception ERROR)
+            {
+
+            }
+           
         }
 
         public override void OnDisable()
         {
-            playerList.lable.SetActive(false);
-            Main.Instance.OnPlayerJoinEvents.Remove(this);
-            Main.Instance.OnPlayerLeaveEvents.Remove(this);
-            MelonCoroutines.Stop(OnUpdate());
+
+            try
+            {
+                MelonCoroutines.Stop(OnUpdate());
+                playerList.lable.SetActive(false);
+                Main.Instance.OnPlayerJoinEvents.Remove(this);
+                Main.Instance.OnPlayerLeaveEvents.Remove(this);
+            }
+            catch (ArgumentNullException ERROR)
+            {
+            }
+            catch (Exception ERROR)
+            {
+
+            }
+
         }
 
         public override void OnUIInit()
@@ -43,27 +71,31 @@ namespace Area51.Module.Settings.Render
             playerList = new QMLable(GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left").transform, -207.1015f, -2.14f, "PlayerList");
             base.OnUIInit();
         }
-
+        
         public IEnumerator OnUpdate()
         {
             while (this.toggled)
             {
                 try
                 {
-                    string info = "";
-
+                    string info = "";         
                     for (int i = 0; i < PlayerWrapper.GetAllPlayers().Length; i++)
                     {
                         VRC.Player player = PlayerWrapper.GetAllPlayers()[i];
-                        if (player.GetIsMaster())
-                            info += "[<color=yellow>H</color>]";
-                       
-                        info += " [" + player.GetPlatform() + "]";                      
+                        info += $"[ID] {player.GetActorNumber()}";
+                        //info += $"[PH] {player.GetPhotonID()}";
+                        if (player.GetIsMaster() == true)
+                        {
+                            info += " [<color=#FFB300>H</color>]";
+                        }
                         info += " [<color=#FFB300>P</color>] " + player.GetPingColord();
                         info += " [<color=#FFB300>F</color>] " + player.GetFramesColord();                       
-                        info += " <color=#" + ColorUtility.ToHtmlStringRGB(player.GetTrustColor()) + ">" + player.GetAPIUser().displayName + "</color>\n";
+                        info += " <color=#" + ColorUtility.ToHtmlStringRGB(player.GetTrustColor()) + ">" + player.GetAPIUser().displayName + "</color>";
+                        info += " <color=#" + ColorUtility.ToHtmlStringRGB(player.GetTrustColor()) + ">" + player.prop_APIUser_0.username + "</color>\n";
+                        
                     }
                     playerList.text.text = info;
+
                 }
                 catch { }
                 yield return new WaitForSeconds(0.25f);

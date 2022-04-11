@@ -142,7 +142,7 @@ namespace Area51.Module.Safety.Photon.Sanitizers
                 _ourSyncPhysicsDispatchedUpdate = originalMethodPtr;
             }
 
-            Area51.Patches.Harmony.Patch(typeof(FlatBufferNetworkSerializer).GetMethod(nameof(FlatBufferNetworkSerializer.Method_Public_Void_EventData_0)), typeof(FlatBufferSanitizer).GetMethod(nameof(FlatBufferNetworkSerializeReceivePatch), BindingFlags.NonPublic | BindingFlags.Static).ToNewHarmonyMethod());
+            Area51.OLD.Harmony.Patch(typeof(FlatBufferNetworkSerializer).GetMethod(nameof(FlatBufferNetworkSerializer.Method_Public_Void_EventData_0)), typeof(FlatBufferSanitizer).GetMethod(nameof(FlatBufferNetworkSerializeReceivePatch), BindingFlags.NonPublic | BindingFlags.Static).ToNewHarmonyMethod());
         }
         public static bool FlatBufferNetworkSerializeReceivePatch(EventData __0)
         {

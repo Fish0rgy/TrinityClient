@@ -1,44 +1,42 @@
-﻿using ExitGames.Client.Photon;
+﻿using Area51.SDK.Photon;
+using ExitGames.Client.Photon;
 using Photon.Realtime;
 using System;
 using System.Collections;
 using UnityEngine;
 using VRC.Core;
+using VRC.SDKBase;
+using VRC.Udon;
 
 namespace Area51.SDK
 {
     class Keybinds
     {
-        public static IEnumerator LogInfo()
+        public static IEnumerator udonNukeKeyBind()
         {
-            APIUser currentUser = APIUser.CurrentUser;
-            while (Input.GetKeyDown(KeyCode.P))
-            {
-                Logg.Log(Logg.Colors.White, $"  Displayname: {currentUser.displayName} | UserID: {currentUser.id} |username {currentUser.username}", false, false);
-                yield return new WaitForEndOfFrame();
-            }
-            yield break;
-        }
-
-        public static IEnumerator SendNineByKeybind()
-        {
-            byte[] LagData = new byte[8];
-            int idfirst2 = int.Parse(VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_VRCPlayerApi_0.playerId + "00001");
-            byte[] IDOut2 = BitConverter.GetBytes(idfirst2);
-            Buffer.BlockCopy(IDOut2, 0, LagData, 0, 4);
             while (Input.GetKeyDown(KeyCode.K))
             {
-                for (int i = 0; i < 80; i++)
+                for (int f = 0; f < WorldWrapper.udonBehaviours.Length; f++)
                 {
-                    Photon.PhotonExtensions.OpRaiseEvent(9, LagData, new RaiseEventOptions
+                    foreach (UdonBehaviour udonobjects in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
                     {
-                        field_Public_ReceiverGroup_0 = ReceiverGroup.Others,
-                        field_Public_EventCaching_0 = EventCaching.DoNotCache
-                    }, SendOptions.SendReliable);
+                        Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Collections.Generic.List<uint>>.Enumerator fatblackman = udonobjects._eventTable.GetEnumerator();
+                        while (fatblackman.MoveNext())
+                        {
+                            Il2CppSystem.Collections.Generic.KeyValuePair<string, Il2CppSystem.Collections.Generic.List<uint>> name = fatblackman.current;
+                            udonobjects.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, name.Key);
+                            name = null;
+                        }
+                        fatblackman = null;
+                    }
+                    yield return new WaitForSeconds(0.1f);
+                    if (!Input.GetKeyDown(KeyCode.K))
+                        break;
+
+                    yield return new WaitForSeconds(0.1f);
                 }
-                yield return new WaitForSecondsRealtime(0.1f);
+                yield break;
             }
-            yield break;
         }
     }
 }

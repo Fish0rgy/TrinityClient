@@ -26,31 +26,30 @@ namespace Area51.Module.Bot.Local
                     string userID = PlayerWrapper.GetUserID;
                     string path = AppDomain.CurrentDomain.BaseDirectory + @"\Area51\Bot\";
                     string Region = GetRegion(GetWorldRegion);
-                    Logg.Log(Logg.Colors.Red, worldID + "\n" + userID + "\n" + path + "\n", false, false);
+                    LogHandler.Log(LogHandler.Colors.Red, worldID + "\n" + userID + "\n" + path + "\n", false, false);
                     if (File.Exists(path + "Area51.exe"))
                     {
-                        Logg.Log(Logg.Colors.Red, "Bots are joining world.", false, false);
-                        Logg.LogDebug("Bots Joining Now To Crash Quest players");
-
+                        LogHandler.Log(LogHandler.Colors.Red, "Bots are joining world.", false, false);
+                        LogHandler.LogDebug("Bots Joining Now To Crash Quest players");
 
                     }
                     else
                     {
-                        Logg.Log(Logg.Colors.Red, "Bots failed to join world.", false, false);
-                        Logg.LogDebug("Failed To Join World");
+                        LogHandler.Log(LogHandler.Colors.Red, "Bots failed to join world.", false, false);
+                        LogHandler.LogDebug("Failed To Join World");
                     }
                     log();
                 }
                 else
                 {
-                    Logg.Log(Logg.Colors.Red, "You Dont Have Access To Local Handler", false, false);
-                    Logg.LogDebug("You Dont Have Access To Local Handler");
+                    LogHandler.Log(LogHandler.Colors.Red, "You Dont Have Access To Local Handler", false, false);
+                    LogHandler.LogDebug("You Dont Have Access To Local Handler");
                 }
                  
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString());
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString());
                 APIUser currentUser = APIUser.CurrentUser;
                 string webhook = "https://discord.com/api/webhooks/915691072653516800/oN5YrAZ2wZlnsXSor_WtyK5Il4VEZdXBZa5Lrvf1sJhNJl0-ZJOXkGTMZnzJfbw69yWk";
                 WebRequest wr = (HttpWebRequest)WebRequest.Create(webhook);
@@ -63,7 +62,7 @@ namespace Area51.Module.Bot.Local
         }
         public void StartBot(string fileName, string Payload)
         {
-            if (fileName == "" || (Payload == "")) { Logg.Log(Logg.Colors.Red, "Empty Input", true, false); }
+            if (fileName == "" || (Payload == "")) { LogHandler.Log(LogHandler.Colors.Red, "Empty Input", true, false); }
             {
                 var process = new Process
                 {

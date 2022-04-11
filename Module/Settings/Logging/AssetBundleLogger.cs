@@ -22,7 +22,7 @@ namespace Area51.Module.Settings.Logging
 
         public bool OnAvatarAssetBundleLoad(GameObject avatar, string avatarID)
         {
-            Logg.Log(Logg.Colors.Blue, $"Type: {avatar.name} |  Loaded Asset Bundle", false, false);
+            LogHandler.Log(LogHandler.Colors.Blue, $"Type: {avatar.name} |  Loaded Asset Bundle", false, false);
             return true;
         }
     }

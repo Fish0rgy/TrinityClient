@@ -1,31 +1,31 @@
 ﻿using Area51.Events;
 using Area51.SDK;
-using UnityEngine;
+using VRC;
 
 namespace Area51.Module.Settings.Logging
 {
-    class AvatarLogger : BaseModule, OnAvatarLoadedEvent
+    class AvatarLogger : BaseModule, OnPlayerJoinEvent
     {
-
-        public AvatarLogger() : base("Avatar Logger", "Logs Avatars In World", Main.Instance.SettingsButtonLoggging, null, true, true)
-        {
-        }
+        public AvatarLogger() : base("Avatar Logger", "Logs Avatars In World", Main.Instance.SettingsButtonLoggging, null, true, true) { }
 
         public override void OnEnable()
-        {
-            Main.Instance.OnAvatarLoadEvents.Add(this);
+        {        
+            Main.Instance.OnPlayerJoinEvents.Add(this);
         }
 
         public override void OnDisable()
         {
-            Main.Instance.OnAvatarLoadEvents.Remove(this);
+            Main.Instance.OnPlayerJoinEvents.Remove(this);
         }
 
-        public bool OnAvatarLoad(VRCPlayer player, GameObject __0)
-        {
-            Logg.Log(Logg.Colors.Blue, $"Username: {player.prop_VRCPlayerApi_0.displayName} | AvatarID: {player.prop_ApiAvatar_0.id}");
-            Logg.LogDebug($"[Avatar Logger] User: {player.prop_VRCPlayerApi_0.displayName} | Avi ID: {player.prop_ApiAvatar_0.id}");
-            return true;
+        public void OnPlayerJoin(VRC.Player player)
+        {            
+            SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"Username: {player.prop_VRCPlayerApi_0.displayName}", true, false);
+            SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"AvatarID: {player.prop_ApiAvatar_0.id}", true, false);
+            SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"URL:  {player.prop_ApiAvatar_0.assetUrl}", true, false);
+            SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"SIZE_LIMIT:  {ValidationHelpers.CONTENT_AVATAR_ASSET_BUNDLE_SIZE_LIMIT_PC}", true, false);
+            SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"FileSize:  {PlayerWrapper.IsAssetBundleFileTooLarge(player)}", true, false);
+            SDK.LogHandler.LogDebug($"[Avatar Logger] User: {player.prop_VRCPlayerApi_0.displayName}");
         }
     }
 }

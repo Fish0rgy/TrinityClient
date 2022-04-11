@@ -6,7 +6,7 @@ namespace Area51.Module.Settings.Render
 {
     class TriggerESP : BaseModule
     {
-        public TriggerESP() : base("Trigger ESP", "", Main.Instance.SettingsButtonrender, null, true, true) { }
+        public TriggerESP() : base("Trigger ESP", "World Trigger ESP", Main.Instance.SettingsButtonrender, null, true, false) { }
 
         public override void OnEnable()
         {

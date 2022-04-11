@@ -1,8 +1,8 @@
 ﻿namespace Area51.Module.Player
 {
-    class XBoxMic : BaseModule
+    class XBoxMicd : BaseModule
     {
-        public XBoxMic() : base("XboxMic", "1v1 in COD bro", Main.Instance.PlayerButton, null, true) { }
+        public XBoxMicd() : base("XboxMic", "1v1 in COD bro", Main.Instance.PlayerButton, null, true, false) { }
 
 
 

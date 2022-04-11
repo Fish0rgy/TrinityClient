@@ -16,7 +16,7 @@ namespace Area51.SDK.ButtonAPI
 
         public QMMenu(string menuName, string pageTitle, bool root = true, bool backButton = true)
         {
-            GameObject menu = UnityEngine.Object.Instantiate<GameObject>(Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_DevTools").gameObject, Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent"));
+            GameObject menu = UnityEngine.Object.Instantiate<GameObject>( Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_DevTools").gameObject, Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent"));
             menu.name = "Menu_" + menuName;
             menu.transform.SetSiblingIndex(5);
             menu.SetActive(false);
@@ -26,7 +26,7 @@ namespace Area51.SDK.ButtonAPI
             page = menu.AddComponent<UIPage>();
             page.field_Public_String_0 = menuName;
             page.field_Private_Boolean_1 = true;
-            page.field_Private_MenuStateController_0 = Main.Instance.QuickMenuStuff.menuStateController;
+            page.field_Protected_MenuStateController_0 = Main.Instance.QuickMenuStuff.menuStateController;
             page.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
             page.field_Private_List_1_UIPage_0.Add(page);
             if (!root)

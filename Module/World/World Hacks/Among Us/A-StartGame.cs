@@ -12,12 +12,12 @@ namespace Area51.Module.World.World_Hacks.Among_Us
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Game Started", false, false);
+                LogHandler.Log(LogHandler.Colors.Green, "Game Started", false, false);
                 A_Misc.AmongUsMod("Btn_Start");
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

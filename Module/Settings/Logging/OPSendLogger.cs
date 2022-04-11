@@ -24,8 +24,8 @@ namespace Area51.Module.Settings.Logging
 
         public bool OnSendOP(byte opCode, ref Il2CppSystem.Object parameters, ref RaiseEventOptions raiseEventOptions)
         {
-            Logg.Log(Logg.Colors.Blue, $"[OPSendLog] {opCode} {JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(parameters), Formatting.Indented)}", false, false);
-            Logg.LogDebug($"[OPSend Logger] Your Event: {opCode}");
+            LogHandler.Log(LogHandler.Colors.Blue, $"[OPSendLog] {opCode} {JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(parameters), Formatting.Indented)}", false, false);
+            LogHandler.LogDebug($"[OPSend Logger] Your Event: {opCode}");
             return true;
         }
     }

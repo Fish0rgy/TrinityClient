@@ -8,20 +8,20 @@ namespace Area51.Module.Settings.Preformance
 {
     class HidePickUps : BaseModule
     {
-        public HidePickUps() : base("Hide Items", "", Main.Instance.SettingsButtonpreformance, null, true, true)
+        public HidePickUps() : base("Hide Items", "Hides pick ups local", Main.Instance.SettingsButtonpreformance, null, true, false)
         {
         }
 
         public override void OnEnable()
         {
             pickupHIDE(false);
-            Logg.LogDebug($"Pickups Hidden");
+            LogHandler.LogDebug($"Pickups Hidden");
         }
 
         public override void OnDisable()
         {
             pickupHIDE(true);
-            Logg.LogDebug($"Pickups UnHidden");
+            LogHandler.LogDebug($"Pickups UnHidden");
         }
         internal static void pickupHIDE(bool a)
         {

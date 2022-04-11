@@ -1,0 +1,27 @@
+﻿using Area51.SDK;
+using Area51.SDK.ButtonAPI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
+using VRC.SDKBase;
+
+namespace Area51.Module.World.World_Hacks.Area51Engine
+{
+    class GetTriggerList : BaseModule
+    {
+        public GetTriggerList() : base("Trigger Table", "Gets List Of Sendable Trigger Events", Main.Instance.udonexploitbutton, QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.EventTable), false, false) { }
+
+        public override void OnEnable()
+        {
+            VRC_Trigger[] triggers = Resources.FindObjectsOfTypeAll<VRC_Trigger>();
+            for (int i = 0; i < triggers.Length; i++)
+            {
+                string sLine = $"-------------- {WorldWrapper.CurrentWorld().name} Trigger Table --------------";
+                LogHandler.Log(LogHandler.Colors.Green, $"{sLine}\nObject Name: {triggers[i].name.ToLower()}\n", false, false);
+            }
+        }
+    }
+}

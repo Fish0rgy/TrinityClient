@@ -2,7 +2,7 @@
 {
     class LoudMic : BaseModule
     {
-        public LoudMic() : base("LoudMic", "Microphone Go Brrrr", Main.Instance.PlayerButton, null, true) { }
+        public LoudMic() : base("LoudMic", "Microphone Go Brrrr", Main.Instance.PlayerButton, null, true, false) { }
 
         public override void OnEnable()
         {

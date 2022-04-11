@@ -12,13 +12,13 @@ namespace Area51.Module.World.World_Hacks.Murder_4
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Ended Game With The Bystanders As The Victor", false, false);
-                Logg.LogDebug("Ended Game With The Bystanders As The Victor");
+                LogHandler.Log(LogHandler.Colors.Green, "Ended Game With The Bystanders As The Victor", false, false);
+                LogHandler.LogDebug("Ended Game With The Bystanders As The Victor");
                 MurderMisc.MurderMod("SyncVictoryB");
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

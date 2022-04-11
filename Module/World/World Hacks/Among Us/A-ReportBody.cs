@@ -12,12 +12,12 @@ namespace Area51.Module.World.World_Hacks.Among_Us
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Found Dead Body Now Reporting", false, false);
+                LogHandler.Log(LogHandler.Colors.Green, "Found Dead Body Now Reporting", false, false);
                 A_Misc.AmongUsMod("OnBodyWasFound");
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, $"No Dead Body Found {ex.ToString()}", false, false);
+                LogHandler.Log(LogHandler.Colors.Red, $"No Dead Body Found {ex.ToString()}", false, false);
             }
         }
     }

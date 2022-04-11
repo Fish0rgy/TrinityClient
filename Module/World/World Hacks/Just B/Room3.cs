@@ -12,11 +12,12 @@ namespace Area51.Module.World.World_Hacks.Just_B
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Force Joined Room!", false, false);
+                JustBMisc.ForceJoin(3);
+                LogHandler.Log(LogHandler.Colors.Green, "Force Joined Room!", false, false);
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

@@ -16,13 +16,13 @@ namespace Area51.Module.World.World_Hacks.Murder_4
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Teleported Revolver To Your Position", false, false);
-                Logg.LogDebug("Teleported Revolver To Your Position");
+                LogHandler.Log(LogHandler.Colors.Green, "Teleported Revolver To Your Position", false, false);
+                LogHandler.LogDebug("Teleported Revolver To Your Position");
                 MurderMisc.MurderGive("Revolver");
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

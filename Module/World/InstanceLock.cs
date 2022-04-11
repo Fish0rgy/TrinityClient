@@ -5,7 +5,7 @@ namespace Area51.Module.Exploit
 {
     class InstanceLock : BaseModule, OnSendOPEvent
     {
-        public InstanceLock() : base("Instance Lock", "Needs to be Master Client", Main.Instance.WorldButton, null, true, true)
+        public InstanceLock() : base("Instance Lock", "Needs to be Master Client", Main.Instance.WorldButton, null, true, false)
         {
         }
 

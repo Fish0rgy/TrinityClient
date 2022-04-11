@@ -17,6 +17,5 @@ namespace Area51.SDK.ButtonAPI
                 menu.OpenMenu();
             });
         }
-
     }
 }

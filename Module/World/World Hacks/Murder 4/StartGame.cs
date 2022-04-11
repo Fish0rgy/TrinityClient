@@ -12,13 +12,13 @@ namespace Area51.Module.World.World_Hacks.Murder_4
         {
             try
             {
-                Logg.Log(Logg.Colors.Red, "Started Game", false, false);
-                Logg.LogDebug("Started Game");
+                LogHandler.Log(LogHandler.Colors.Red, "Started Game", false, false);
+                LogHandler.LogDebug("Started Game");
                 MurderMisc.MurderMod("Btn_Start");
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

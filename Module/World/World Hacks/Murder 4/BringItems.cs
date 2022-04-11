@@ -12,8 +12,8 @@ namespace Area51.Module.World.World_Hacks.Murder_4
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Teleported Every Object To Your Position", false, false);
-                Logg.LogDebug("Teleported Every Object To Your Position");
+                LogHandler.Log(LogHandler.Colors.Green, "Teleported Every Object To Your Position", false, false);
+                LogHandler.LogDebug("Teleported Every Object To Your Position");
                 MurderMisc.MurderGive("Revolver");
                 MurderMisc.MurderGive("Knife");
                 MurderMisc.MurderGive("Shotgun");
@@ -23,7 +23,7 @@ namespace Area51.Module.World.World_Hacks.Murder_4
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

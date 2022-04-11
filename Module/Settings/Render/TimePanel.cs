@@ -10,23 +10,23 @@ namespace Area51.Module.Settings.Render
 {
     class TimePanel : BaseModule
     {
-        public static QMPanel TimeLog;
-        public TimePanel() : base("Time", "Shows Current Time", Main.Instance.SettingsButtonrender, null, true, true)
+        public static VrConsoleLog TimeLog;
+        public TimePanel() : base("Time", "Shows Current Time", Main.Instance.SettingsButtonrender, null, true, false)
         {
         }
 
         public override void OnEnable()
         {
-            TimeLog.panel.SetActive(true);
+          //  TimeLog.panel.SetActive(true);
         }
 
         public override void OnDisable()
-        {
-            TimeLog.panel.SetActive(false);
+        {//
+          //  TimeLog.panel.SetActive(false);
         }
         public override void OnUIInit()
         {
-            TimeLog = new QMPanel($"{DateTime.Now.ToString("hh:mm tt")}");
+           // TimeLog = new QMPanel($"{DateTime.Now.ToString("hh:mm tt")}");
             base.OnUIInit();
         }
     }

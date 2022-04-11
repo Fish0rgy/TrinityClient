@@ -12,13 +12,13 @@ namespace Area51.Module.World.World_Hacks.Murder_4
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Opened All Doors", false, false);
-                Logg.LogDebug("Opened All Doors");
-                MurderMisc.MurderMod("SyncOpenL");
+                LogHandler.Log(LogHandler.Colors.Green, "Opened All Doors", false, false);
+                LogHandler.LogDebug("Opened All Doors");
+                MurderMisc.ObjectInteract("Interact open");
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

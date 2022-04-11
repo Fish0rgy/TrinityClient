@@ -21,13 +21,13 @@ namespace Area51.Module.World.World_Hacks.Murder_4
         {
             try
             {
-                Logg.Log(Logg.Colors.Red, "Killed Everyone", false, false);
-                Logg.LogDebug("Killed Everyone");
+                LogHandler.Log(LogHandler.Colors.Red, "Killed Everyone", false, false);
+                LogHandler.LogDebug("Killed Everyone");
                 Kill();
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
         private void Kill()

@@ -7,32 +7,30 @@ namespace Area51.Module.Settings.Preformance
 {
     class HideChairs : BaseModule
     {
-        public HideChairs() : base("Hide Chairs", "", Main.Instance.SettingsButtonpreformance, null, true, true)
+        public HideChairs() : base("Hide Chairs", "Hides Chairs local", Main.Instance.SettingsButtonpreformance, null, true, false)
         {
         }
 
         public override void OnEnable()
         {
             SetAllObjectsOfTypeChairs(false);
-            Logg.LogDebug($"Chairs Hidden");
+            LogHandler.LogDebug($"Chairs Hidden");
         }
 
         public override void OnDisable()
         {
             SetAllObjectsOfTypeChairs(true);
-            Logg.LogDebug($"Chairs UnHidden");
+            LogHandler.LogDebug($"Chairs UnHidden");
         }
-        internal static void SetAllObjectsOfTypeChairs(bool state)
+        private void SetAllObjectsOfTypeChairs(bool state)
         {
-            Il2CppArrayBase<VRCStation> il2CppArrayBase = Resources.FindObjectsOfTypeAll<VRCStation>();
-            for (int i = 0; i < il2CppArrayBase.Count; i++)
+            Il2CppArrayBase<VRC_StationInternal> TriggerStations = Resources.FindObjectsOfTypeAll<VRC_StationInternal>();
+            for (int i = 0; i < TriggerStations.Count; i++)
             {
-                VRCStation vrcstation = il2CppArrayBase[i];
-                bool station = !(vrcstation == null) && vrcstation.gameObject.active == !state;
-                if (station)
-                {
-                    vrcstation.gameObject.SetActive(state);
-                }
+                VRC_StationInternal Chairs = TriggerStations[i];
+                bool station = !(Chairs == null) && Chairs.gameObject.active == !state;
+                if (!station) return;
+                Chairs.gameObject.SetActive(state);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Area51.SDK;
 using System;
+using UnityEngine;
 
 namespace Area51.Module.World.World_Hacks.Murder_4
 {
@@ -12,13 +13,14 @@ namespace Area51.Module.World.World_Hacks.Murder_4
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Blinded Everyone In The Lobby", false, false);
-                Logg.LogDebug("Blinded Everyone In The Lobby");
-                MurderMisc.MurderMod("OnLocalPlayerBlinded");
+                LogHandler.Log(LogHandler.Colors.Green, "Blinded Everyone In The Lobby", false, false);
+                LogHandler.LogDebug("Blinded Everyone In The Lobby"); 
+                UdonExploitManager.udonsend("OnLocalPlayerFlashbanged", "everyone");
+                UdonExploitManager.udonsend("OnLocalPlayerBlinded", "everyone");
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

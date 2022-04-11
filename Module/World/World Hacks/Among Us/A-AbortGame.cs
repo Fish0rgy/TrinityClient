@@ -12,12 +12,12 @@ namespace Area51.Module.World.World_Hacks.Among_Us
         {
             try
             {
-                Logg.Log(Logg.Colors.Green, "Game Aborted!", false, false);
+                LogHandler.Log(LogHandler.Colors.Green, "Game Aborted!", false, false);
                 A_Misc.AmongUsMod("SyncAbort");
             }
             catch (Exception ex)
             {
-                Logg.Log(Logg.Colors.Red, ex.ToString(), false, false);
+                LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
         }
     }

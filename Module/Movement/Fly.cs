@@ -1,84 +1,86 @@
 ﻿using Area51.Events;
+using Area51.SDK;
+using System;
 using UnityEngine;
 using UnityEngine.XR;
 using VRC.Animation;
-using VRC.SDKBase;
 
 namespace Area51.Module.Movement
 {
     class Fly : BaseModule, OnUpdateEvent
     {
-        private VRCMotionState vrcMotionState;
+        //https://github.com/PhoenixAceVFX/evolve-leak/blob/main/Movements/Movements.cs#L150 <- fly from this client
 
-        public Fly() : base("Fly", "Fly high", Main.Instance.MovementButton, null, true)
+        private VRCMotionState vrcMotionState;
+        private static VRC.Player LocalPlayer;
+        private static Transform CameraTransform;
+        public static float FlySpeed = 7f;
+        public static bool IsFly, IsRunning = false;
+
+
+        public Fly() : base("Fly", "Fly high", Main.Instance.MovementButton, null, true, false)
         {
         }
 
         public override void OnEnable()
         {
+            IsFly = true;
             vrcMotionState = VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<VRCMotionState>();
             VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = false;
-            Main.Instance.OnUpdateEvents.Add(this);
+            Main.Instance.OnUpdateEvents.Add(this);         
         }
 
         public override void OnDisable()
         {
-            Main.Instance.OnUpdateEvents.Remove(this);
+            IsFly = false;
             vrcMotionState.Method_Public_Void_0();
             VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = true;
+            
+        }
+
+
+       public static bool ToggleFly()
+        {
+            if (IsFly != true)
+            {
+                IsFly = true;
+                return IsFly;
+            }
+            IsFly = false;
+            return IsFly;
         }
 
         public void OnUpdate()
         {
-            if (RoomManager.field_Internal_Static_ApiWorld_0 == null) return;
-            float right = 0f;
-            float up = 0f;
-            float forward = 0f;
-
-            if (XRDevice.isPresent)
+           if (IsFly == true)
             {
-                right = Input.GetAxis("Horizontal");
-                up = Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                forward = Input.GetAxis("Vertical");
-            }
-            else
-            {
-                if (Input.GetKey(KeyCode.W))
-                {
-                    forward += 1f;
-                }
+                if (RoomManager.field_Internal_Static_ApiWorld_0 == null) return;
 
-                if (Input.GetKey(KeyCode.S))
+                if (LocalPlayer == null || CameraTransform == null)
                 {
-                    forward -= 1f;
+                    LocalPlayer = PlayerWrapper.LocalPlayer;
+                    CameraTransform = Camera.main.transform;
                 }
-
-                if (Input.GetKey(KeyCode.D))
+                if (XRDevice.isPresent)
                 {
-                    right += 1f;
+
+                    if (Math.Abs(Input.GetAxis("Vertical")) != 0f) LocalPlayer.transform.position += CameraTransform.forward * 7f * Time.deltaTime * Input.GetAxis("Vertical");
+                    if (Math.Abs(Input.GetAxis("Horizontal")) != 0f) LocalPlayer.transform.position += CameraTransform.right * 5f * Time.deltaTime * Input.GetAxis("Horizontal");
+                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f) LocalPlayer.transform.position += CameraTransform.up * 5f * Time.deltaTime * Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical");
+                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f) LocalPlayer.transform.position += CameraTransform.up * 5f * Time.deltaTime * Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical");
                 }
-
-                if (Input.GetKey(KeyCode.A))
+                else
                 {
-                    right -= 1f;
-                }
-
-                if (Input.GetKey(KeyCode.E))
-                {
-                    up += 1f;
-                }
-
-                if (Input.GetKey(KeyCode.Q))
-                {
-                    up -= 1f;
+                    if (Input.GetKeyDown(KeyCode.LeftShift)) FlySpeed *= FlySpeed  ;
+                    if (Input.GetKeyUp(KeyCode.LeftShift)) FlySpeed /= FlySpeed;
+                    if (Input.GetKey(KeyCode.E)) LocalPlayer.transform.position += CameraTransform.up * 5f * Time.deltaTime;
+                    if (Input.GetKey(KeyCode.Q)) LocalPlayer.transform.position += CameraTransform.up * -1f * 5f * Time.deltaTime;
+                    if (Input.GetKey(KeyCode.W)) LocalPlayer.transform.position += CameraTransform.forward * 5f * Time.deltaTime;
+                    if (Input.GetKey(KeyCode.A)) LocalPlayer.transform.position += CameraTransform.right * -1f * 5f * Time.deltaTime;
+                    if (Input.GetKey(KeyCode.D)) LocalPlayer.transform.position += CameraTransform.right * 5f * Time.deltaTime;
+                    if (Input.GetKey(KeyCode.S)) LocalPlayer.transform.position += CameraTransform.forward * -1f * 7f * Time.deltaTime;
                 }
             }
-
-            VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.right * Networking.LocalPlayer.GetWalkSpeed() * Time.deltaTime * right * (float)(Input.GetKey(KeyCode.LeftShift) ? 8 : 1);
-            VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.forward * Networking.LocalPlayer.GetWalkSpeed() * Time.deltaTime * forward * (float)(Input.GetKey(KeyCode.LeftShift) ? 8 : 1);
-            VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position += VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.up * Networking.LocalPlayer.GetWalkSpeed() * Time.deltaTime * up * (float)(Input.GetKey(KeyCode.LeftShift) ? 8 : 1);
-
-            vrcMotionState.Reset();
         }
     }
 }

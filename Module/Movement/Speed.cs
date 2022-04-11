@@ -5,7 +5,7 @@ namespace Area51.Module.Movement
 {
     internal class Speed : BaseModule
     {
-        public Speed() : base("Speed", "go brrrrrrrrrrrrrrrrrr", Main.Instance.MovementButton, null, true)
+        public Speed() : base("Speed", "go brrrrrrrrrrrrrrrrrr", Main.Instance.MovementButton, null, true, false)
         {
         }
 

@@ -20,8 +20,8 @@ namespace Area51.Module.Settings.Logging
         }
         public bool OnUdon(string __0, VRC.Player __1)
         {
-            Logg.Log(Logg.Colors.Blue, $"Type: {__0} | From {__1.field_Private_APIUser_0.displayName}", false, false);
-            Logg.LogDebug($"[Udon Logger] Type: {__0} | From {__1.field_Private_APIUser_0.displayName}");
+            LogHandler.Log(LogHandler.Colors.Blue, $"Type: {__0} | From {__1.field_Private_APIUser_0.displayName}", false, false);
+            LogHandler.LogDebug($"[Udon Logger] Type: {__0} | From {__1.field_Private_APIUser_0.displayName}");
             return true;
         }
     }

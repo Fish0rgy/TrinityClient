@@ -5,19 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Area51.SDK.ButtonAPI
 {
-    class QMPanel
+    class VrConsoleLog
     {
-        public GameObject panel = null;
-        public QMPanel(string Contents)
+        public static List<TextMeshProUGUI> LogText { get; set; } = new List<TextMeshProUGUI>();
+        public VrConsoleLog(Transform parent, Sprite background, float x, float y, float z)
         {
-            //panel = UnityEngine.Object.Instantiate<GameObject>(Main.Instance.quickMenuStuff.quickMenu.transform.Find("Container/Window/QMNotificationsArea/DebugInfoPanel").gameObject, Main.Instance.quickMenuStuff.quickMenu.transform.Find("/Container/Window/QMNotificationsArea"));
-            //panel.name = "Panel_" + Contents;
-            //panel.SetActive(true);
-            //panel.GetComponentInChildren<TextBinding>().field_Public_String_0 = Contents;
+            GameObject Console = UnityEngine.Object.Instantiate<GameObject>(GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMNotificationsArea/DebugInfoPanel/Panel/Background"), parent);
+            Console.name = "Area51_ConsoleLog";
+            Console.transform.parent = parent;
+            Console.GetComponent<Image>().overrideSprite = background;      
+            Console.transform.localPosition = new Vector3(x, y, z); //-3.0204f, -72.5408f, 0.0908f
+            Console.transform.localScale = new Vector3(4.88f, 1.98f, 1);
+            Console.transform.TransformPoint(x, y, z);
+            Console.AddComponent<RectMask2D>();   
         }
+
+
+        //GameObject headershit = UnityEngine.Object.Instantiate<GameObject>(Console, Console.transform.parent);
+        //headershit.gameObject.name = "Area51_Header";
+        //headershit.GetComponent<Image>().sprite = Header;
+        //headershit.GetComponent<Image>().overrideSprite = Header;
+        //headershit.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+        //headershit.transform.localPosition = new Vector3(0f, 406f, 0f);
+        //headershit.transform.localScale = new Vector3(0.65f, 0.2f, 0.2f);
     }
-    //Canvas_QuickMenu(Clone)/Container/Window/QMNotificationsArea/DebugInfoPanel/
+
 }

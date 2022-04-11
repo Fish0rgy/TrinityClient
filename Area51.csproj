@@ -9,20 +9,22 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Area51</RootNamespace>
     <AssemblyName>Area51</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
     <LangVersion>7.3</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -179,8 +182,9 @@
     <Reference Include="Il2CppSystem.Xml.Linq">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="MelonLoader">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
+    <Reference Include="MelonLoader, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
     <Reference Include="Mono.CompilerServices.SymbolWriter">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Mono.CompilerServices.SymbolWriter.dll</HintPath>
@@ -233,6 +237,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -538,6 +543,8 @@
     <Compile Include="Events\OnAvatarLoadedEvent.cs" />
     <Compile Include="Events\OnEventEvent.cs" />
     <Compile Include="Events\OnNetworkSanityEvent.cs" />
+    <Compile Include="Events\OnObjectInstantiatedEvent.cs" />
+    <Compile Include="Events\OnPhotonPeerEvent.cs" />
     <Compile Include="Events\OnPlayerJoinEvent.cs" />
     <Compile Include="Events\OnPlayerLeaveEvent.cs" />
     <Compile Include="Events\OnRPCEvent.cs" />
@@ -548,7 +555,8 @@
     <Compile Include="Events\OnUpdateEvent.cs" />
     <Compile Include="Events\OnWorldInitEvent.cs" />
     <Compile Include="Module\Bot\Http.cs" />
-    <Compile Include="Module\Bot\Local\Join.cs" />
+    <Compile Include="Module\Bot\Local\Bot1.cs" />
+    <Compile Include="Module\Bot\Local\Bot2.cs" />
     <Compile Include="Module\Bot\Local\PlayAudio.cs" />
     <Compile Include="Module\Bot\Local\JoinQuestCrash.cs" />
     <Compile Include="Module\Bot\Local\KIllBots.cs" />
@@ -558,28 +566,103 @@
     <Compile Include="Module\Exploit\Avatar_Crash\VoidBypass.cs" />
     <Compile Include="Module\Exploit\Avatar_Crash\AudioCrash.cs" />
     <Compile Include="Module\Exploit\Avatar_Crash\GameClose.cs" />
-    <Compile Include="Module\Exploit\Old Modules\EmojiLagger.cs" />
-    <Compile Include="Module\Exploit\Old Modules\UspeakLaggercs.cs" />
-    <Compile Include="Module\Safety\NetworkSanity\Core\Il2CppMethodInfo.cs" />
-    <Compile Include="Module\Safety\NetworkSanity\Core\ISanitizer.cs" />
-    <Compile Include="Module\Safety\NetworkSanity\Core\RateLimiter.cs" />
-    <Compile Include="Module\Safety\NetworkSanity\Sanitizers\FlatBufferSanitizer.cs" />
-    <Compile Include="Module\Safety\NetworkSanity\Sanitizers\USpeakSanitizer.cs" />
-    <Compile Include="Module\Safety\NetworkSanity\Sanitizers\VrcEventSanitizer.cs" />
-    <Compile Include="Module\Safety\Photon\RateLimit.cs" />
-    <Compile Include="Module\Settings\Logging\Dump1.cs" />
-    <Compile Include="Module\Settings\Logging\Dump209.cs" />
-    <Compile Include="Module\Settings\Logging\Dump210.cs" />
-    <Compile Include="Module\Settings\Logging\Dump6.cs" />
-    <Compile Include="Module\Settings\Logging\Dump7.cs" />
+    <Compile Include="Module\Exploit\Photon_Exploit\EventNineMaster.cs" />
+    <Compile Include="Module\Exploit\Photon_Exploit\FakeLag.cs" />
+    <Compile Include="Module\Exploit\Photon_Exploit\FakeLagMic.cs" />
+    <Compile Include="Module\Exploit\Photon_Exploit\ItemLag.cs" />
+    <Compile Include="Module\Exploit\Photon_Exploit\ItemOrbit.cs" />
+    <Compile Include="Module\Exploit\SithsEventQuickMenu\Event91.cs" />
+    <Compile Include="Module\Exploit\SithsEventQuickMenu\Event91V2.cs" />
+    <Compile Include="Module\Exploit\SithsEventQuickMenu\Event9V1.cs" />
+    <Compile Include="Module\Exploit\SithsEventQuickMenu\Event9V2.cs" />
+    <Compile Include="Module\Exploit\SithsEventQuickMenu\Event9V3.cs" />
+    <Compile Include="Module\Exploit\SithsEventQuickMenu\Event9V4.cs" />
+    <Compile Include="Module\Exploit\SithsEventQuickMenu\Event9V5.cs" />
+    <Compile Include="Module\Exploit\UdonExploits\BlackCatLagger.cs" />
+    <Compile Include="Module\Exploit\UdonExploits\udonNuke.cs" />
+    <Compile Include="Module\Movement\InfinityJump.cs" />
+    <Compile Include="Module\Player\Audio\16k.cs" />
+    <Compile Include="Module\Player\Audio\18k.cs" />
+    <Compile Include="Module\Player\Audio\24k.cs" />
+    <Compile Include="Module\Player\Audio\512k.cs" />
+    <Compile Include="Module\Player\Audio\XBoxMic.cs" />
+    <Compile Include="Module\Safety\Photon\AntiRPC.cs" />
+    <Compile Include="Module\Safety\Photon\AntiUdon.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiAnimators.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiAudio.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiBones.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiCloth.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiColliders.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiLight.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiMatirials.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiMesh.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiParticles.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiShader.cs" />
+    <Compile Include="Module\Safety\Avatar\AntiTransform.cs" />
+    <Compile Include="Module\Safety\Avatar\MunchenAntiCrash.cs" />
+    <Compile Include="Module\Safety\Avatar\NotDone\AntiAssetCrash.cs" />
+    <Compile Include="Module\Safety\Avatar\Old\AntiAviCrash.cs" />
+    <Compile Include="Module\Settings\Logging\AvatarLogger.cs" />
+    <Compile Include="Module\Settings\Logging\Event Dumping\Dump1.cs" />
+    <Compile Include="Module\Settings\Logging\Event Dumping\Dump209.cs" />
+    <Compile Include="Module\Settings\Logging\Event Dumping\Dump210.cs" />
+    <Compile Include="Module\Settings\Logging\Event Dumping\Dump6.cs" />
+    <Compile Include="Module\Settings\Logging\Event Dumping\Dump7.cs" />
+    <Compile Include="Module\Settings\Logging\ModerationLogger.cs" />
     <Compile Include="Module\Settings\Logging\SteamID.cs" />
+    <Compile Include="Module\Settings\Preformance\ReLogin.cs" />
     <Compile Include="Module\Settings\Preformance\RestartAndRejoin.cs" />
     <Compile Include="Module\Settings\Spoofer\fpsSpoofer.cs" />
-    <Compile Include="Module\Settings\Theme\Area51Theme.cs" />
+    <Compile Include="Module\Settings\Theme\AlienTheme.cs" />
+    <Compile Include="Module\Player\Drippedout.cs" />
+    <Compile Include="Module\Settings\Theme\Background.cs" />
+    <Compile Include="Module\Settings\Theme\Buttons\ButtonsBlue.cs" />
+    <Compile Include="Module\Settings\Theme\Buttons\ButtonsGreen.cs" />
+    <Compile Include="Module\Settings\Theme\Buttons\ButtonsMagenta.cs" />
+    <Compile Include="Module\Settings\Theme\Buttons\ButtonsRed.cs" />
+    <Compile Include="Module\Settings\Theme\Logout.cs" />
     <Compile Include="Module\Settings\Theme\muchen.cs" />
+    <Compile Include="Module\Settings\Theme\RetroTheme.cs" />
+    <Compile Include="Module\TargetMenu\Avatar Settings\ReUploadTUT.cs" />
+    <Compile Include="Module\TargetMenu\Avatar Settings\Copydata.cs" />
+    <Compile Include="Module\TargetMenu\AvatarIDSelected.cs" />
+    <Compile Include="Module\TargetMenu\DownloadVRCA.cs" />
+    <Compile Include="Module\TargetMenu\Forceclone.cs" />
+    <Compile Include="Module\TargetMenu\Avatar Settings\Reuploader.cs" />
+    <Compile Include="Module\TargetMenu\ForceLewd.cs" />
+    <Compile Include="Module\TargetMenu\obitthatbitch.cs" />
+    <Compile Include="Module\TargetMenu\SafetySettings\TargetAntiPhoton.cs" />
+    <Compile Include="Module\TargetMenu\SafetySettings\TargetAntiRPC.cs" />
+    <Compile Include="Module\TargetMenu\SafetySettings\TargetAntiUdon.cs" />
+    <Compile Include="Module\TargetMenu\Teleport2SelectedUser.cs" />
+    <Compile Include="Module\TargetMenu\UserIDSelected.cs" />
+    <Compile Include="Module\TargetMenu\VoiceIM.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\AmongUs Settings\AForceSpawn.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\AmongUs Settings\AmongUsKill.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\AmongUs Settings\AssignCrew.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\AmongUs Settings\AssignImposter.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\JustB\ForceRespawn.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\JustB\LockPlayerMovement.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\MagicTag\FreezePlayer.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\MagicTag\MakeRunner.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\MagicTag\MakeTagger.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\MovieAndChill\TargetMCLag.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\MovieAndChill\TargetMCTeleport.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\BlindLoopTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\BlindTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\BringItemsTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\BringKnifeTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\BringRevolverTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\BystanderAssignTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\DetectiveAssignTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\ForceSpawn.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\KillLoopTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\murder4UdonSpam.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\MurderAssignTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\MurderKillTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\SentEvent.cs" />
     <Compile Include="Module\World\FreezeItems.cs" />
     <Compile Include="Module\World\InstanceLock.cs" />
-    <Compile Include="Module\Exploit\Old Modules\PickupDisconnect.cs" />
     <Compile Include="Module\Settings\Render\DebugLog.cs" />
     <Compile Include="Module\Settings\Render\TimePanel.cs" />
     <Compile Include="Module\Safety\Outdated\Anti209.cs" />
@@ -589,26 +672,22 @@
     <Compile Include="Module\Settings\Preformance\HideChairs.cs" />
     <Compile Include="Module\Settings\Preformance\HidePickUps.cs" />
     <Compile Include="Module\Settings\Preformance\HideVideoPlayers.cs" />
-    <Compile Include="Module\Settings\Logging\AvatarLogger.cs" />
+    <Compile Include="Module\Settings\Logging\VRCALogging.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Module\BaseModule.cs" />
     <Compile Include="Module\CustomNameplate.cs" />
     <Compile Include="Module\Exploit\Avatar_Crash\AssetBundleCrash.cs" />
-    <Compile Include="Module\Exploit\Old Modules\Event209.cs" />
-    <Compile Include="Module\Exploit\Old Modules\Event210.cs" />
-    <Compile Include="Module\Exploit\Old Modules\Event9.cs" />
-    <Compile Include="Module\Exploit\Old Modules\Event9V2.cs" />
-    <Compile Include="Module\Exploit\Photon_Exploit\Event9V3.cs" />
+    <Compile Include="Module\Exploit\Photon_Exploit\EventNineNull.cs" />
     <Compile Include="Module\Exploit\Photon_Exploit\USpeakEarRape.cs" />
-    <Compile Include="Module\Exploit\Photon_Exploit\FreezePlayer.cs" />
+    <Compile Include="Module\Exploit\Photon_Exploit\FreezePlayers.cs" />
     <Compile Include="Module\Exploit\Photon_Exploit\GhostWalk.cs" />
     <Compile Include="Module\Exploit\Avatar_Crash\QuestCrash.cs" />
-    <Compile Include="Module\Exploit\Photon_Exploit\UdonSpam.cs" />
+    <Compile Include="Module\Exploit\Photon_Exploit\Finder.cs" />
     <Compile Include="Module\Exploit\Avatar_Crash\VRCA.cs" />
     <Compile Include="Module\Exploit\Avatar_Crash\VRCW.cs" />
     <Compile Include="Module\Movement\Fly.cs" />
     <Compile Include="Module\Movement\Speed.cs" />
-    <Compile Include="Module\Player\AviToID.cs" />
+    <Compile Include="Module\Player\AvatarID.cs" />
     <Compile Include="Module\Settings\Preformance\FPSUnlocker.cs" />
     <Compile Include="Module\Player\HeadFlipper.cs" />
     <Compile Include="Module\Player\HideSelf.cs" />
@@ -621,7 +700,6 @@
     <Compile Include="Module\Settings\Render\TriggerESP.cs" />
     <Compile Include="Module\Safety\Photon\Anti-Events.cs" />
     <Compile Include="Module\Safety\Photon\ExploitLogs.cs" />
-    <Compile Include="Module\Safety\AntiAviCrash.cs" />
     <Compile Include="Module\Settings\Logging\AssetBundleLogger.cs" />
     <Compile Include="Module\Settings\Preformance\ConsoleClear.cs" />
     <Compile Include="Module\Settings\Logging\EventLogger.cs" />
@@ -637,6 +715,8 @@
     <Compile Include="Module\World\JoinByID.cs" />
     <Compile Include="Module\World\Rejoin.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-AbortGame.cs" />
+    <Compile Include="Module\World\World Hacks\Among Us\A-AssignCrew.cs" />
+    <Compile Include="Module\World\World Hacks\Among Us\A-AssignImposter.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-BystandersWin.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-CallMeeting.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-CloseVote.cs" />
@@ -647,8 +727,18 @@
     <Compile Include="Module\World\World Hacks\Among Us\A-SkipVote.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-StartGame.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-TaskDone.cs" />
+    <Compile Include="Module\World\World Hacks\Area51Engine\CustomTriggerEvent.cs" />
+    <Compile Include="Module\World\World Hacks\Area51Engine\CustomUdonEvent.cs" />
+    <Compile Include="Module\World\World Hacks\Area51Engine\GetTriggerList.cs" />
+    <Compile Include="Module\World\World Hacks\Area51Engine\GetUdonEventList.cs" />
+    <Compile Include="Module\World\World Hacks\Area51Engine\TriggerExploitFinder.cs" />
+    <Compile Include="Module\World\World Hacks\Area51Engine\TriggerNuke.cs" />
+    <Compile Include="Module\World\World Hacks\Area51Engine\UdonNuke.cs" />
+    <Compile Include="Module\World\World Hacks\Area51Engine\UdonExploitFinder.cs" />
     <Compile Include="Module\World\World Hacks\FBT\FBTMisc.cs" />
+    <Compile Include="Module\World\World Hacks\Just B\BlindPeople.cs" />
     <Compile Include="Module\World\World Hacks\Just B\JustBMisc.cs" />
+    <Compile Include="Module\World\World Hacks\Just B\LockMovement.cs" />
     <Compile Include="Module\World\World Hacks\Just B\Room1.cs" />
     <Compile Include="Module\World\World Hacks\Just B\Room2.cs" />
     <Compile Include="Module\World\World Hacks\Just B\Room3.cs" />
@@ -656,6 +746,14 @@
     <Compile Include="Module\World\World Hacks\Just B\Room5.cs" />
     <Compile Include="Module\World\World Hacks\Just B\Room6.cs" />
     <Compile Include="Module\World\World Hacks\Just B\Room7.cs" />
+    <Compile Include="Module\World\World Hacks\Just B\VIPSpoofer.cs" />
+    <Compile Include="Module\World\World Hacks\Just H\BypassVROnly.cs" />
+    <Compile Include="Module\World\World Hacks\Just H\JustHMisc.cs" />
+    <Compile Include="Module\World\World Hacks\MagicFreezeTag\GiveRunner.cs" />
+    <Compile Include="Module\World\World Hacks\MagicFreezeTag\GiveTagger.cs" />
+    <Compile Include="Module\World\World Hacks\MagicFreezeTag\Unfreeze.cs" />
+    <Compile Include="Module\World\World Hacks\MovieAndChill\MCMisc.cs" />
+    <Compile Include="Module\World\World Hacks\MovieAndChill\Teleport Everyone.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\AbortGame.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\BlindAll.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\BringItems.cs" />
@@ -663,50 +761,60 @@
     <Compile Include="Module\World\World Hacks\Murder 4\BringRevolver.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\BringSmoke.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\BystanderWin.cs" />
+    <Compile Include="Module\World\World Hacks\Murder 4\CloseDoors.cs" />
+    <Compile Include="Module\World\World Hacks\Murder 4\DetectiveAssign.cs" />
+    <Compile Include="Module\World\World Hacks\Murder 4\EveryoneMurder.cs" />
+    <Compile Include="Module\World\World Hacks\Murder 4\FlashLoop.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\ForcePickup.cs" />
-    <Compile Include="Module\World\World Hacks\Murder 4\KIllAll.cs" />
+    <Compile Include="Module\World\World Hacks\Murder 4\KillAll.cs" />
+    <Compile Include="Module\World\World Hacks\Murder 4\KillLoop.cs" />
+    <Compile Include="Module\World\World Hacks\Murder 4\LockDoors.cs" />
+    <Compile Include="Module\World\World Hacks\Murder 4\MurderAssign.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\MurderMisc.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\MurderWin.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\OpenDoors.cs" />
+    <Compile Include="Module\World\World Hacks\Murder 4\ShoveDoors.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\StartGame.cs" />
-    <Compile Include="Module\World\World Hacks\ZombieTag\HumansWin.cs" />
-    <Compile Include="Module\World\World Hacks\ZombieTag\MakeHuman.cs" />
-    <Compile Include="Module\World\World Hacks\ZombieTag\MakeZombie.cs" />
-    <Compile Include="Module\World\World Hacks\ZombieTag\TagAll.cs" />
-    <Compile Include="Module\World\World Hacks\ZombieTag\ZEndGame.cs" />
-    <Compile Include="Module\World\World Hacks\ZombieTag\ZombieMisc.cs" />
-    <Compile Include="Module\World\World Hacks\ZombieTag\ZombiesWin.cs" />
-    <Compile Include="Module\World\World Hacks\ZombieTag\ZStartGame.cs" />
-    <Compile Include="Patches.cs" />
+    <Compile Include="Module\World\World Hacks\PrisionEscape\PrisionMisc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SDK\ButtonAPI\QMNestedButtonTM.cs" />
-    <Compile Include="SDK\ButtonAPI\QMMenuTM.cs" />
     <Compile Include="SDK\ButtonAPI\QMButtonGroup.cs" />
     <Compile Include="SDK\ButtonAPI\QMHeader.cs" />
     <Compile Include="SDK\ButtonAPI\QMLable.cs" />
     <Compile Include="SDK\ButtonAPI\QMMenu.cs" />
     <Compile Include="SDK\ButtonAPI\QMNestedButton.cs" />
-    <Compile Include="SDK\ButtonAPI\QMPopup.cs" />
     <Compile Include="SDK\ButtonAPI\QMSingleButton.cs" />
+    <Compile Include="SDK\ButtonAPI\QMBadgeButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMTab.cs" />
+    <Compile Include="SDK\ButtonAPI\QMSpacer.cs" />
     <Compile Include="SDK\ButtonAPI\QMToggleButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMPanel.cs" />
-    <Compile Include="SDK\ButtonAPI\TargetMenuButton.cs" />
+    <Compile Include="SDK\ButtonAPI\QMButtonIcons.cs" />
     <Compile Include="SDK\Config.cs" />
+    <Compile Include="SDK\Extra Icons.cs" />
     <Compile Include="SDK\Keybinds.cs" />
-    <Compile Include="SDK\Logg.cs" />
+    <Compile Include="SDK\LogHandler.cs" />
+    <Compile Include="SDK\MenuUI.cs" />
     <Compile Include="SDK\Misc.cs" />
-    <Compile Include="SDK\Photon\PhotonExtensions.cs" />
-    <Compile Include="SDK\Photon\Serialization.cs" />
+    <Compile Include="SDK\PatchAPI\Patches\_AssetManagement.cs" />
+    <Compile Include="SDK\PatchAPI\Patches\_AvatarAssetBundleLoad.cs" />
+    <Compile Include="SDK\PatchAPI\Patches\_OnEvent.cs" />
+    <Compile Include="SDK\PatchAPI\Patches\_OnUInit.cs" />
+    <Compile Include="SDK\PatchAPI\Patches\_Spoofers.cs" />
+    <Compile Include="SDK\PatchAPI\Patches\_Logging.cs" />
+    <Compile Include="SDK\PatchAPI\Patches\_Udon.cs" />
+    <Compile Include="SDK\PatchAPI\AlienPatch.cs" />
+    <Compile Include="SDK\PhotonAPI\PhotonExtensions.cs" />
+    <Compile Include="SDK\PhotonAPI\Serialization.cs" />
     <Compile Include="SDK\PlayerWrapper.cs" />
-    <Compile Include="SDK\QuickMenuStuff.cs" />
-    <Compile Include="SDK\Security\SecurityCheck.cs" />
-    <Compile Include="SDK\BotClient.cs" />
-    <Compile Include="SDK\Utils.cs" />
+    <Compile Include="SDK\Alien.cs" />
+    <Compile Include="SDK\SecurityAPI\Client.cs" />
+    <Compile Include="SDK\UdonExploitManager.cs" />
     <Compile Include="SDK\WorldWrapper.cs" />
-    <Compile Include="Sockets\BotServer.cs" />
+    <Compile Include="Sockets\ClientServer.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Module\World\World Hacks\MidNight\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\VRChat\Area51\DLL\Area51.dll";</PostBuildEvent>

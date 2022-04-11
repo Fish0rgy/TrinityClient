@@ -1,6 +1,8 @@
 ﻿using Area51.Events;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Area51.Module.Settings.Theme
 {
@@ -10,26 +12,53 @@ namespace Area51.Module.Settings.Theme
 
         public override void OnEnable()
         {
-            Main.Instance.OnUpdateEvents.Add(this);   
+            try
+            {
+                Main.Instance.OnUpdateEvents.Add(this);
+            }
+            catch (NullReferenceException Error)
+            {
+                if (Error.Message.Contains("Object reference not set to an instance of an object")) { }
+            }
+            
+           
         }
         public override void OnDisable()
         {
-            Main.Instance.OnUpdateEvents.Remove(this);
-            GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_MünchenClientMünchenClient2/").active = true;
+            try
+            {
+                Main.Instance.OnUpdateEvents.Remove(this);
+                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_MünchenClientMünchenClient2/").active = true;
+            }
+            catch (NullReferenceException Error)
+            {
+                if (Error.Message.Contains("Object reference not set to an instance of an object")) { }
+            }
+        }
 
+
+        public async Task setUITheme(int WaitToUpdate)
+        {
+            try
+            {
+                for (int i = 0; i < WaitToUpdate; i++)
+                {
+                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_MünchenClientMünchenClient2/").active = false;
+                }
+            }
+            catch (NullReferenceException Error)
+            {
+
+            }
         }
 
         public void OnUpdate()
         {
             try
             {
-                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_MünchenClientMünchenClient2/").active = false;
+                setUITheme(1).Start();
             }
-            catch
-            {
-
-            }
+            catch (Exception Error) { }
         }
     }
 }
-

@@ -6,7 +6,7 @@ namespace Area51.Module.Settings.Render
 {
     class ObjectESP : BaseModule
     {
-        public ObjectESP() : base("Item ESP", "", Main.Instance.SettingsButtonrender, null, true, true) { }
+        public ObjectESP() : base("Item ESP", "Draws Items threw walls", Main.Instance.SettingsButtonrender, null, true, false) { }
 
         public override void OnEnable()
         {

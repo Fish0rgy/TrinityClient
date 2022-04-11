@@ -7,7 +7,7 @@ namespace Area51.Module.Settings.Render
 {
     class CapsuleEsp : BaseModule, OnPlayerJoinEvent
     {
-        public CapsuleEsp() : base("Player ESP", "See Players n shit", Main.Instance.SettingsButtonrender, null, true, true) { }
+        public CapsuleEsp() : base("Player ESP", "See Players n shit", Main.Instance.SettingsButtonrender, null, true, false) { }
 
         public override void OnEnable()
         {

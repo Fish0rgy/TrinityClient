@@ -5,7 +5,7 @@ namespace Area51.Module.Player
     class HeadFlipper : BaseModule
     {
 
-        public HeadFlipper() : base("HeadFlipper", "Fuck your desktop neck", Main.Instance.PlayerButton, null, true) { }
+        public HeadFlipper() : base("HeadFlipper", "Fuck your desktop neck", Main.Instance.PlayerButton, null, true, false) { }
         private NeckRange orgin;
 
         public override void OnEnable()
