@@ -82,7 +82,7 @@ namespace Trinity.SDK
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("[");
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("Area 51");
+            Console.Write("Trinity");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("]");
             Console.ForegroundColor = ConsoleColor.White;

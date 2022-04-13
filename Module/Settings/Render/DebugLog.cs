@@ -38,7 +38,7 @@ namespace Trinity.Module.Settings.Render
 
         public override void OnUIInit()
         {
-            debugLog = new QMLable(GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Right/Button").transform, 609.902f, 457.9203f, "Area 51 | Console - Debug Log");
+            debugLog = new QMLable(GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Right/Button").transform, 609.902f, 457.9203f, "Trinity | Console - Debug Log");
             base.OnUIInit();
         }
     }

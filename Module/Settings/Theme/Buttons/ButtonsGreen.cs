@@ -37,14 +37,14 @@ namespace Trinity.Module.Settings.Theme
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera/Background").GetComponent<Image>().color = Color.black;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_AudioSettings/Background").GetComponent<Image>().color = Color.black;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings/Background").GetComponent<Image>().color = Color.black;
-                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Area 51 ClientTab/Background").GetComponent<Image>().color = Color.black;
+                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Trinity ClientTab/Background").GetComponent<Image>().color = Color.black;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Dashboard/Icon").GetComponent<Image>().color = Color.green;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Notifications/Icon").GetComponent<Image>().color = Color.green;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Here/Icon").GetComponent<Image>().color = Color.green;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera/Icon").GetComponent<Image>().color = Color.green;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_AudioSettings/Icon").GetComponent<Image>().color = Color.green;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings/Icon").GetComponent<Image>().color = Color.green;
-                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Area 51 ClientTab/Icon").GetComponent<Image>().color = Color.green;
+                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Trinity ClientTab/Icon").GetComponent<Image>().color = Color.green;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/MicButton").GetComponent<Image>().color = Color.black;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/MicButton/Icon").GetComponent<Image>().color = Color.green;
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Toggle_SafeMode").GetComponent<Image>().color = Color.black;

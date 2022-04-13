@@ -92,7 +92,7 @@ namespace Trinity.Module.Settings.Render
             switch (userID)
             {
                 case "usr_308873ae-6ae8-48af-9082-c93c7335dbd3":
-                    return true; //(true, "<color=#BF40BF>Area 51 Developer</color>"); //new Tuple<bool, string>
+                    return true; //(true, "<color=#BF40BF>Trinity Developer</color>"); //new Tuple<bool, string>
                 case "usr_81aada0b-1b42-46e1-968b-d5688ed92f0a":
                     return true; //(true, "");
                 case "usr_8fa49306-0283-47c9-9d5d-8d095c3818f7":
@@ -104,7 +104,7 @@ namespace Trinity.Module.Settings.Render
                 case "usr_e63de320-f426-41a2-9afb-cc5ac1c6aeed":
                     return true;//(true, "");
                 case "usr_2538ccb2-d331-43ab-ac59-3226a0997038":
-                    return true;//(true, "<color=#BF40BF>Area 51 Discord Support</color>");
+                    return true;//(true, "<color=#BF40BF>Trinity Discord Support</color>");
                 default: return false; //(false, "VRC User"); ;
             }
         }
