@@ -9,7 +9,7 @@ namespace Trinity.SDK.Patching
     class AlienPatch
     {
         public new static HarmonyLib.Harmony Harmony { get; set; }
-        public static HarmonyLib.Harmony Instance = new HarmonyLib.Harmony("Area 51");
+        public static HarmonyLib.Harmony Instance = new HarmonyLib.Harmony("Trinity");
 
         public static HarmonyMethod GetLocalPatch(Type type, string methodName)
         {

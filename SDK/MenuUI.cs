@@ -47,9 +47,9 @@ namespace Trinity.SDK
         public static IEnumerator StartUI()
         {
             var pos = new Vector3(272, 964, 0);
-            Console.Title = $"Area 51 Private Client | User: {APIUser.CurrentUser.displayName}";
+            Console.Title = $"Trinity Private Client | User: {APIUser.CurrentUser.displayName}";
             Main.Instance.QuickMenuStuff = new Alien();
-            QMTab mainTab = new QMTab("Area 51 Client", "", "What's a client!", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
+            QMTab mainTab = new QMTab("Trinity Client", "", "What's a client!", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
             Alien.Spacer(mainTab.menuTransform);
 
             Main.Instance.WorldButton = new QMNestedButton(mainTab.menuTransform, "World", QMButtonIcons.CreateSpriteFromBase64(Alien.earth));
