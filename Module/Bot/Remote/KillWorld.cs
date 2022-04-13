@@ -1,4 +1,4 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Specialized;
@@ -6,7 +6,7 @@ using System.IO;
 using System.Net;
 using VRC.Core;
 
-namespace Area51.Module.Bot.Remote
+namespace Trinity.Module.Bot.Remote
 {
     class KillWorld : BaseModule
     {

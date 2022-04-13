@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using VRC.Udon;
 
-namespace Area51.Module.World.World_Hacks.Among_Us
+namespace Trinity.Module.World.World_Hacks.Among_Us
 {
     class A_Misc
     {

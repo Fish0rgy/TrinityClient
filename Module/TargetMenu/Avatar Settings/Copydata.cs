@@ -1,10 +1,10 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Net;
 using VRC.Core;
 
-namespace Area51.Module.TargetMenu
+namespace Trinity.Module.TargetMenu
 {
     internal class CopyData : BaseModule
     {

@@ -6,9 +6,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Area51.SDK;
+using Trinity.SDK;
 
-namespace Area51.Sockets.BotServer
+namespace Trinity.Sockets.BotServer
 {
     internal class BotServer
     {
@@ -31,7 +31,7 @@ namespace Area51.Sockets.BotServer
             switch (Command)
             {
                 case "Play":
-                   /// PhotonClient.Debuglog($"[{DateTime.Now}] Received Transmission From Mothership: ({Command})");
+                  // PhotonClient.Debuglog($"[{DateTime.Now}] Received Transmission From Mothership: ({Command})");
                     break;
                 case "Test":
                   //  PhotonClient.Debuglog($"[{DateTime.Now}] Received Transmission From Mothership: ({Command})");

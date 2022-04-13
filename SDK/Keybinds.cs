@@ -1,4 +1,4 @@
-﻿using Area51.SDK.Photon;
+﻿using Trinity.SDK.Photon;
 using ExitGames.Client.Photon;
 using Photon.Realtime;
 using System;
@@ -8,7 +8,7 @@ using VRC.Core;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace Area51.SDK
+namespace Trinity.SDK
 {
     class Keybinds
     {

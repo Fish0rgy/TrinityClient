@@ -1,9 +1,9 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using ExitGames.Client.Photon;
 using UnhollowerBaseLib;
 
-namespace Area51.Module.Safety
+namespace Trinity.Module.Safety
 {
     class Anti210 : BaseModule, OnEventEvent
     {

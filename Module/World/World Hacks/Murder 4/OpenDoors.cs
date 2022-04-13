@@ -1,7 +1,7 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using System;
 
-namespace Area51.Module.World.World_Hacks.Murder_4
+namespace Trinity.Module.World.World_Hacks.Murder_4
 {
     class OpenDoors : BaseModule
     {

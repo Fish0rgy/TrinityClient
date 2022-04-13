@@ -1,5 +1,5 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VRC.SDKBase;
 
-namespace Area51.Module.Player
+namespace Trinity.Module.Player
 {
     class GetUdonEventList : BaseModule
     {

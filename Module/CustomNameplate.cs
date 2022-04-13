@@ -1,10 +1,10 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using TMPro;
 using UnityEngine;
 
-namespace Area51.Module
+namespace Trinity.Module
 {
     class CustomNameplate : MonoBehaviour
     {
@@ -23,7 +23,6 @@ namespace Area51.Module
         {
         }
 
-
       
         public string SetCustomRank(string id)
         {
@@ -41,7 +40,7 @@ namespace Area51.Module
         {
             Transform Staff = Instantiate(gameObject.transform.Find("Contents/Quick Stats"), gameObject.transform.Find("Contents"));          
             Staff.parent = gameObject.transform.Find("Contents");
-            Staff.name = "Area51_Staffplate";
+            Staff.name = "Trinity_Staffplate";
             Staff.localPosition = new Vector3(0f, 102f, 0f);
             Staff.localScale = new Vector3(1f, 1f, 2f);
             Staff.gameObject.SetActive(true);
@@ -52,7 +51,7 @@ namespace Area51.Module
 
             Transform ClientInfo = Instantiate(gameObject.transform.Find("Contents/Quick Stats"), gameObject.transform.Find("Contents"));
             ClientInfo.parent = gameObject.transform.Find("Contents");
-            ClientInfo.name = "Area51_nameplate";
+            ClientInfo.name = "Trinity_nameplate";
             ClientInfo.localPosition = new Vector3(0f, 62f, 0f);
             ClientInfo.localScale = new Vector3(1f, 1f, 2f);
             ClientInfo.gameObject.SetActive(true);
@@ -108,17 +107,17 @@ namespace Area51.Module
       
             try
                 {
-                    if (player.GetIsMaster() == true && Area51.Module.Settings.Render.CustomNameplates.Staff.Contains(player.prop_APIUser_0.id))
+                    if (player.GetIsMaster() == true && Trinity.Module.Settings.Render.CustomNameplates.Staff.Contains(player.prop_APIUser_0.id))
                     {
                         Nameplatext.text = $"[<color=blue>Host</color>] [<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
-                        stafftext.text = $" Area51 STAFF ";
+                        stafftext.text = $" Trinity STAFF ";
                     }
-                    else if (Area51.Module.Settings.Render.CustomNameplates.Staff.Contains(player.prop_APIUser_0.id))
+                    else if (Trinity.Module.Settings.Render.CustomNameplates.Staff.Contains(player.prop_APIUser_0.id))
                     {
                         Nameplatext.text = $"[<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
-                        stafftext.text = $" Area51 STAFF ";
+                        stafftext.text = $" Trinity STAFF ";
                     }
-                    else if (player.GetIsMaster() == true && Area51.Module.Settings.Render.CustomNameplates.Staff.Contains(player.prop_APIUser_0.id) == false)
+                    else if (player.GetIsMaster() == true && Trinity.Module.Settings.Render.CustomNameplates.Staff.Contains(player.prop_APIUser_0.id) == false)
                     {
                         Nameplatext.text = $"[<color=blue>Host</color>] [<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
                         stafftext.text = " <color=#BF40BF>VRC USER</color> ";

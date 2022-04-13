@@ -1,10 +1,10 @@
-﻿using Area51.Module.Settings.Logging;
+﻿using Trinity.Module.Settings.Logging;
 using HarmonyLib;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace Area51.SDK.Patching.Patches
+namespace Trinity.SDK.Patching.Patches
 {
     public static class _Logging 
     {

@@ -1,4 +1,4 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using MelonLoader;
 using System;
 using System.Collections;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Area51.Module.World.World_Hacks.Murder_4
+namespace Trinity.Module.World.World_Hacks.Murder_4
 {
     class FlashLoop : BaseModule
     {

@@ -1,6 +1,6 @@
 ﻿using ExitGames.Client.Photon;
 
-namespace Area51.Events
+namespace Trinity.Events
 {
     public interface OnEventEvent
     {

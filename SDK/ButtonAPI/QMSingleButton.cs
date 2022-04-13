@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Area51.SDK.ButtonAPI
+namespace Trinity.SDK.ButtonAPI
 {
     public class QMSingleButton
     {
@@ -11,7 +11,7 @@ namespace Area51.SDK.ButtonAPI
         {
             GameObject singleButton = UnityEngine.Object.Instantiate<GameObject>( Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Emojis").gameObject, parent);     
             singleButton.transform.parent = parent;
-            singleButton.name = text + "_Area51_Button";         
+            singleButton.name = text + "_Trinity_Button";         
             singleButton.transform.Find("Text_H4").gameObject.GetComponent<TextMeshProUGUI>().text = text;
             singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>().faceColor = Color.green;
             singleButton.transform.Find("Background").GetComponent<Image>().color = Color.black;

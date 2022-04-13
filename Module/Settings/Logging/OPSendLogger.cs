@@ -1,10 +1,10 @@
-﻿using Area51.Events;
-using Area51.SDK;
-using Area51.SDK.Photon;
+﻿using Trinity.Events;
+using Trinity.SDK;
+using Trinity.SDK.Photon;
 using Newtonsoft.Json;
 using Photon.Realtime;
 
-namespace Area51.Module.Settings.Logging
+namespace Trinity.Module.Settings.Logging
 {
     class OPSendLogger : BaseModule, OnSendOPEvent
     {

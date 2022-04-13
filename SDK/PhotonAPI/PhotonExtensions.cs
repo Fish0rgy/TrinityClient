@@ -3,7 +3,7 @@ using Il2CppSystem.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 
-namespace Area51.SDK.Photon
+namespace Trinity.SDK.Photon
 {
     static class PhotonExtensions
     {

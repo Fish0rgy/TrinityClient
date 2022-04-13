@@ -1,7 +1,7 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 
-namespace Area51.Module.Player
+namespace Trinity.Module.Player
 { 
     class DrippedOut : BaseModule
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Area51.Events
+namespace Trinity.Events
 {
     public interface OnWorldInitEvent
     {

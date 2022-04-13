@@ -1,10 +1,10 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Net;
 using VRC.Core;
 
-namespace Area51.Module.TargetMenu
+namespace Trinity.Module.TargetMenu
 {
     internal class DownloadVRCSelected : BaseModule
     {
@@ -16,7 +16,7 @@ namespace Area51.Module.TargetMenu
             {
                
                 ApiAvatar avatar = PlayerWrapper.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
-                wc.DownloadFileAsync(new Uri(avatar.assetUrl), "Area51/VRCA/" + avatar.name + "_" + avatar.id + ".vrca");                            
+                wc.DownloadFileAsync(new Uri(avatar.assetUrl), "Trinity/VRCA/" + avatar.name + "_" + avatar.id + ".vrca");                            
                 LogHandler.Log(LogHandler.Colors.Grey, "Downloaded Selected User VRCA Completed", false, false);
                 LogHandler.LogDebug("[Ripper] -> Downloaded Selected User VRCA Completed!");
             }

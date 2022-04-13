@@ -1,4 +1,4 @@
-﻿using Area51.SDK.Patching;
+﻿using Trinity.SDK.Patching;
 using Harmony; 
 using MelonLoader;
 using System;
@@ -13,7 +13,7 @@ using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using VRC.Core;
 
-namespace Area51.SDK.PatchAPI.Patches
+namespace Trinity.SDK.PatchAPI.Patches
 {
     public static class _AssetManagement
     {

@@ -1,8 +1,8 @@
-using Area51.SDK;
+using Trinity.SDK;
 using UnityEngine;
 using VRC.Core;
 
-namespace Area51.Module.Exploit
+namespace Trinity.Module.Exploit
 {
     class HideSelf : BaseModule
     {

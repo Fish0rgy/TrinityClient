@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace Area51.SDK
+namespace Trinity.SDK
 {
     public class Config
     {
@@ -14,9 +14,9 @@ namespace Area51.SDK
         public int getConfigInt(string key, int defaultVal)
         {
          
-            if (File.ReadAllText("Area51/Config.json").Contains(key))
+            if (File.ReadAllText("Trinity/Config.json").Contains(key))
             {
-                string[] arrLine = File.ReadAllLines("Area51/Config.json");
+                string[] arrLine = File.ReadAllLines("Trinity/Config.json");
                 for (int i = 0; i < arrLine.Length; i++)
                 {
                     if (arrLine[i].Contains(key))
@@ -29,14 +29,14 @@ namespace Area51.SDK
             else
             {
 
-                File.AppendAllText("Area51/Config.json", "\n" + key + "=" + defaultVal);
+                File.AppendAllText("Trinity/Config.json", "\n" + key + "=" + defaultVal);
                 return defaultVal;
             }
         }
 
         public void setConfigBool(string key, bool state)
         {
-            string[] arrLine = File.ReadAllLines("Area51/Config.json");
+            string[] arrLine = File.ReadAllLines("Trinity/Config.json");
             for (int i = 0; i < arrLine.Length; i++)
             {
                 if (arrLine[i].Contains(key))
@@ -45,14 +45,14 @@ namespace Area51.SDK
                     break;
                 }
             }
-            File.WriteAllLines("Area51/Config.json", arrLine);
+            File.WriteAllLines("Trinity/Config.json", arrLine);
         }
 
         public bool getConfigBool(string key)
         {
-            if (File.ReadAllText("Area51/Config.json").Contains(key))
+            if (File.ReadAllText("Trinity/Config.json").Contains(key))
             {
-                string[] arrLine = File.ReadAllLines("Area51/Config.json");
+                string[] arrLine = File.ReadAllLines("Trinity/Config.json");
                 for (int i = 0; i < arrLine.Length; i++)
                 {
                     if (arrLine[i].Contains(key))
@@ -66,16 +66,16 @@ namespace Area51.SDK
             else
             {
                
-                File.AppendAllText("Area51/Config.json", "\n" + key + "=False");
+                File.AppendAllText("Trinity/Config.json", "\n" + key + "=False");
                 return false;
             }
         }
 
         public Color getConfigColor(string key, Color defaultVal)
         {
-            if (File.ReadAllText("Area51/Config.json").Contains(key))
+            if (File.ReadAllText("Trinity/Config.json").Contains(key))
             {
-                string[] arrLine = File.ReadAllLines("Area51/Config.json");
+                string[] arrLine = File.ReadAllLines("Trinity/Config.json");
                 for (int i = 0; i < arrLine.Length; i++)
                 {
                     if (arrLine[i].Contains(key))
@@ -97,7 +97,7 @@ namespace Area51.SDK
             }
             else
             {
-                File.AppendAllText("Area51/Config.json", "\n" + key + "=" + defaultVal.r + "," + defaultVal.g + "," + defaultVal.b + "," + defaultVal.a);
+                File.AppendAllText("Trinity/Config.json", "\n" + key + "=" + defaultVal.r + "," + defaultVal.g + "," + defaultVal.b + "," + defaultVal.a);
                 MelonLoader.MelonLogger.Msg("[Config] created color " + key);
                 return defaultVal;
             }

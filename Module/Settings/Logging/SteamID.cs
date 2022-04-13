@@ -1,6 +1,6 @@
-﻿using Area51.Events;
+﻿using Trinity.Events;
 
-namespace Area51.Module.Settings.Logging
+namespace Trinity.Module.Settings.Logging
 {
     class SteamID : BaseModule
     {

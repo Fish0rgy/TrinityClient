@@ -1,5 +1,5 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using ExitGames.Client.Photon;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Area51.Module.Settings.Logging
+namespace Trinity.Module.Settings.Logging
 {
     class ModerationLogger : BaseModule, OnEventEvent
     {

@@ -1,4 +1,4 @@
-﻿using Area51.Events;
+﻿using Trinity.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using VRC.Core;
 
-namespace Area51.Module.Safety.Avatar
+namespace Trinity.Module.Safety.Avatar
 {
     class AntiAssetCrash : BaseModule 
     {

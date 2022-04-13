@@ -1,9 +1,9 @@
-﻿using Area51.Events;
-using Area51.SDK.Photon;
+﻿using Trinity.Events;
+using Trinity.SDK.Photon;
 using Photon.Realtime;
 using UnhollowerBaseLib;
 
-namespace Area51.Module.Settings.Spoofer
+namespace Trinity.Module.Settings.Spoofer
 {
     internal class FPSSpoofer : BaseModule, OnSendOPEvent
     {

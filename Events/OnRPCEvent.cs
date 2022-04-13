@@ -1,6 +1,6 @@
 ﻿using VRC.SDKBase;
 
-namespace Area51.Events
+namespace Trinity.Events
 {
     public interface OnRPCEvent
     {

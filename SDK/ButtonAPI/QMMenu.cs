@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Menus;
 
-namespace Area51.SDK.ButtonAPI
+namespace Trinity.SDK.ButtonAPI
 {
     public class QMMenu
     {

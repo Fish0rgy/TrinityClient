@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Area51.Module.Player.Audio
+namespace Trinity.Module.Player.Audio
 {
     class _16k : BaseModule
     {

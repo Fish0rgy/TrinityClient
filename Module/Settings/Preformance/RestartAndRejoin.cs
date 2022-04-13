@@ -1,13 +1,13 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
-using Area51.SDK.Security;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
+using Trinity.SDK.Security;
 using System;
 using System.Diagnostics;
 using System.IO;
 using VRC.Core;
 
 
-namespace Area51.Module.Settings.Preformance
+namespace Trinity.Module.Settings.Preformance
 {
 	internal class RestartAndRejoin : BaseModule
 	{
@@ -21,10 +21,10 @@ namespace Area51.Module.Settings.Preformance
 			else Process.Start(Directory.GetCurrentDirectory() + "/VRChat.exe", $"vrchat://launch?id={Instance.id} --no-vr");
             try
             {
-                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key))) { LogHandler.Log(LogHandler.Colors.Yellow, "[Area51] Shutting down, GoodBye......!", false, false); Process.GetCurrentProcess().Kill(); }
+                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key))) { LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Shutting down, GoodBye......!", false, false); Process.GetCurrentProcess().Kill(); }
                 else
                 {
-                    LogHandler.Log(LogHandler.Colors.Red, "[Area51] Failed to logout, please contact owner!", false, false);
+                    LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed to logout, please contact owner!", false, false);
                     Process.GetCurrentProcess().Kill();
                 }
             }

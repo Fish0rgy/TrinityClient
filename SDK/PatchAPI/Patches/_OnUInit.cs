@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using VRC.Core;
 
-namespace Area51.SDK.Patching.Patches
+namespace Trinity.SDK.Patching.Patches
 {
     public static class _OnUInit
     {

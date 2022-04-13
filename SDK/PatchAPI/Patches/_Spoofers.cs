@@ -10,7 +10,7 @@ using UnityEngine;
 using AccessTools = HarmonyLib.AccessTools;
 using HarmonyMethod = HarmonyLib.HarmonyMethod;
 
-namespace Area51.SDK.Patching.Patches
+namespace Trinity.SDK.Patching.Patches
 {
     public static class _Spoofers
     {

@@ -1,10 +1,10 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using System.IO;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Area51.Module.Safety
+namespace Trinity.Module.Safety
 {
     class AntiAviCrash : BaseModule, OnAssetBundleLoadEvent
     {
@@ -35,8 +35,8 @@ namespace Area51.Module.Safety
             this.maxColliders = Main.Instance.Config.getConfigInt("MaxColliders", 0);
             this.maxPoly = Main.Instance.Config.getConfigInt("MaxPolys", 200000);
             defaultShader = Shader.Find("VRChat/PC/Toon Lit Cutout");
-            blacklistShaders = File.ReadAllLines("Area51/BlackList/Avatar/Shader.txt");
-            blacklistMesh = File.ReadAllLines("Area51/BlackList/Avatar/Mesh.txt");
+            blacklistShaders = File.ReadAllLines("Trinity/BlackList/Avatar/Shader.txt");
+            blacklistMesh = File.ReadAllLines("Trinity/BlackList/Avatar/Mesh.txt");
         }
 
         public override void OnEnable()

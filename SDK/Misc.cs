@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-namespace Area51.SDK
+namespace Trinity.SDK
 {
     public static class Misc
     {
@@ -68,7 +68,7 @@ namespace Area51.SDK
             // I used some code of Knah´s join notifier for the unitywebrequest.
 
 
-            var uwr = UnityWebRequest.Get($"file://{Path.Combine(Environment.CurrentDirectory, "Area51/LoadingScreenMusic/Music.ogg")}");
+            var uwr = UnityWebRequest.Get($"file://{Path.Combine(Environment.CurrentDirectory, "Trinity/LoadingScreenMusic/Music.ogg")}");
             uwr.SendWebRequest();
 
             while (!uwr.isDone) yield return null;

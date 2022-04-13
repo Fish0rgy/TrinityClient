@@ -3,7 +3,7 @@ using System;
 using System.Reflection;
 using VRC.Networking;
 
-namespace Area51.SDK.Patching.Patches
+namespace Trinity.SDK.Patching.Patches
 {
     public static class _Udon 
     {

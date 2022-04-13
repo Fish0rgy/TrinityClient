@@ -1,7 +1,7 @@
 ﻿using ExitGames.Client.Photon;
 using Il2CppSystem.Collections.Generic;
 
-namespace Area51.Events
+namespace Trinity.Events
 {
     public interface OnPhotonPeerEvent
     {

@@ -1,10 +1,10 @@
-﻿using Area51.Events;
-using Area51.Module;
-using Area51.Module.World;
-using Area51.SDK;
-using Area51.SDK.ButtonAPI;
-using Area51.SDK.Patching;
-using Area51.SDK.Security;
+﻿using Trinity.Events;
+using Trinity.Module;
+using Trinity.Module.World;
+using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
+using Trinity.SDK.Patching;
+using Trinity.SDK.Security;
 using MelonLoader;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 
-namespace Area51
+namespace Trinity
 {
     public class Main
     {
@@ -26,6 +26,7 @@ namespace Area51
         public QMNestedButton PlayerButton { get; set; }
         public QMNestedButton JustHButton { get; set; }
         public QMNestedButton MoveAndChillSettings { get; set; }
+        public QMNestedButton MovieAndChillButton { get; set; }
         public QMNestedButton SafetyTargetButton { get; set; }
         public QMNestedButton MovementButton { get; set; }
         public QMNestedButton ExploistButton { get; set; }
@@ -104,7 +105,7 @@ namespace Area51
             Instance = new Main();
             ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
             LogHandler.DisplayLogo();
-            Directory.CreateDirectory("Area51\\LoadingScreenMusic");
+            Directory.CreateDirectory("Trinity\\LoadingScreenMusic");
             MelonCoroutines.Start(Misc.LoadingMusic());
             Task.Run(() =>
             {
@@ -148,11 +149,11 @@ namespace Area51
             try
             {
                 foreach (BaseModule module in Instance.Modules) { if (module.save) { Instance.Config.setConfigBool(module.name, module.toggled); } }
-                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key)) == true) { LogHandler.Log(LogHandler.Colors.Yellow, "[Area51] Shutting down, GoodBye......!", false, false); Process.GetCurrentProcess().Kill(); }
+                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key)) == true) { LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Shutting down, GoodBye......!", false, false); Process.GetCurrentProcess().Kill(); }
                 else
                 {
                     Process.GetCurrentProcess().Kill();
-                    LogHandler.Log(LogHandler.Colors.Red, "[Area51] Failed to logout, please contact owner!", false, false);
+                    LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed to logout, please contact owner!", false, false);
                 }
             }
             catch (Exception EX) { LogHandler.Log(LogHandler.Colors.Red, EX.StackTrace, true, false); }

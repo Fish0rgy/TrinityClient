@@ -1,5 +1,5 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace Area51.Module.World.World_Hacks.Area51Engine
+namespace Trinity.Module.World.World_Hacks.TrinityEngine
 {
     class GetTriggerList : BaseModule
     {

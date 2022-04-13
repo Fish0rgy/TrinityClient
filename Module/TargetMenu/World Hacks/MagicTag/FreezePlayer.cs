@@ -1,5 +1,5 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VRC.Core;
 
-namespace Area51.Module.TargetMenu.World_Hacks.MagicTag
+namespace Trinity.Module.TargetMenu.World_Hacks.MagicTag
 {
     class FreezePlayer : BaseModule
     {

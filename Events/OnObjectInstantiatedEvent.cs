@@ -1,4 +1,4 @@
-﻿using Area51.SDK.PatchAPI.Patches;
+﻿using Trinity.SDK.PatchAPI.Patches;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Area51.Events
+namespace Trinity.Events
 {
     public interface OnObjectInstantiatedEvent
     {

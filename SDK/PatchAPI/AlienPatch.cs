@@ -1,10 +1,10 @@
-﻿using Area51.SDK.PatchAPI.Patches;
-using Area51.SDK.Patching.Patches;
+﻿using Trinity.SDK.PatchAPI.Patches;
+using Trinity.SDK.Patching.Patches;
 using HarmonyLib;
 using System;
 using System.Reflection;
 
-namespace Area51.SDK.Patching
+namespace Trinity.SDK.Patching
 {
     class AlienPatch
     {

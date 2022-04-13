@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using UnhollowerBaseLib;
 using UnityEngine;
 
-namespace Area51.Module.Safety.Avatar
+namespace Trinity.Module.Safety.Avatar
 {
     //thanks killer Munchen Server: https://discord.gg/DysbzmWTcV
     internal class AntiCrashRendererPostProcess
@@ -59,7 +59,7 @@ namespace Area51.Module.Safety.Avatar
     }
     class MunchenAntiCrash
     {
-        public static string[] BlackListedShaders = File.ReadAllLines("Area51/BlackList/Avatar/Shader.txt");
+        public static string[] BlackListedShaders = File.ReadAllLines("Trinity/BlackList/Avatar/Shader.txt");
         public static int maxAudio = 150;
         public static int maxLight = 8;
         public static int maxMaterials = 300;

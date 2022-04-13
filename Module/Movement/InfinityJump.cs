@@ -1,7 +1,7 @@
-﻿using Area51.Events;
+﻿using Trinity.Events;
 using VRC.SDKBase;
 
-namespace Area51.Module.World
+namespace Trinity.Module.World
 {
     internal class InfinityJump : BaseModule, OnUpdateEvent
     {

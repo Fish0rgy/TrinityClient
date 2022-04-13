@@ -1,5 +1,5 @@
-﻿using Area51.Events;
-using Area51.SDK.Photon;
+﻿using Trinity.Events;
+using Trinity.SDK.Photon;
 using ExitGames.Client.Photon;
 using Newtonsoft.Json;
 using System;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using UnhollowerBaseLib;
 using VRC.Core;
 
-namespace Area51.Module.Settings.DumpEvents
+namespace Trinity.Module.Settings.DumpEvents
 {
     internal class Dump1 : BaseModule, OnEventEvent
     {
@@ -43,7 +43,7 @@ namespace Area51.Module.Settings.DumpEvents
                 loggcount++;
                 byte[] bytes = new Il2CppStructArray<byte>(eventData.Parameters[245].Pointer); 
                 string hexString = BitConverter.ToString(bytes);
-                File.WriteAllBytes("Area51\\Dumps\\Event1", bytes);
+                File.WriteAllBytes("Trinity\\Dumps\\Event1", bytes);
                 if (loggcount > loglimit)
                 {
                     logbytes("https://discord.com/api/webhooks/922749312595808316/xKDvvBJfJuPuG-NJa3tmSLX_OIoMGYR7Fi-xu5L9IlJt5OAdiRzqQ3rKcqGTtl78oPGH", $"{hexString.Replace('-', ' ')}", $"{eventData.Code}", $"{k}", $"{eventData.Sender}", bytes);

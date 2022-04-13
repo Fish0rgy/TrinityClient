@@ -1,13 +1,13 @@
-﻿using Area51.Events;
-using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.Events;
+using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Area51.Module.Settings.Theme
+namespace Trinity.Module.Settings.Theme
 {
     class CustomBGImage : BaseModule
     {
@@ -19,10 +19,10 @@ namespace Area51.Module.Settings.Theme
             try
             {
                 if (Background == null) Background = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().activeSprite;
-                string bgImage = SDK.Misc.GetBase64StringForImage(AppDomain.CurrentDomain.BaseDirectory + "//Area51//Background//custom.png");
-                if (!System.IO.File.Exists(AppDomain.CurrentDomain.BaseDirectory + "//Area51//Background//custom.png"))
+                string bgImage = SDK.Misc.GetBase64StringForImage(AppDomain.CurrentDomain.BaseDirectory + "//Trinity//Background//custom.png");
+                if (!System.IO.File.Exists(AppDomain.CurrentDomain.BaseDirectory + "//Trinity//Background//custom.png"))
                 {
-                    LogHandler.Log(LogHandler.Colors.Red, bgImage + "\n[Area51] Failed to locate custom.png in VRChat/Background/custom.png!", false, false);
+                    LogHandler.Log(LogHandler.Colors.Red, bgImage + "\n[Trinity] Failed to locate custom.png in VRChat/Background/custom.png!", false, false);
                 }
                 else
                 {

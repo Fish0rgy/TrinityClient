@@ -1,10 +1,10 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using UnhollowerBaseLib;
 using UnityEngine;
 using VRC.SDK3.Video.Components;
 using VRCSDK2;
 
-namespace Area51.Module.Settings.Preformance
+namespace Trinity.Module.Settings.Preformance
 {
     class HideVideoPlayers : BaseModule
     {

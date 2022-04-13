@@ -7,8 +7,8 @@
     <ProjectGuid>{36767960-6A5A-4242-A6F5-1A9818310C50}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Area51</RootNamespace>
-    <AssemblyName>Area51</AssemblyName>
+    <RootNamespace>Trinity</RootNamespace>
+    <AssemblyName>Trinity</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -727,14 +727,14 @@
     <Compile Include="Module\World\World Hacks\Among Us\A-SkipVote.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-StartGame.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-TaskDone.cs" />
-    <Compile Include="Module\World\World Hacks\Area51Engine\CustomTriggerEvent.cs" />
-    <Compile Include="Module\World\World Hacks\Area51Engine\CustomUdonEvent.cs" />
-    <Compile Include="Module\World\World Hacks\Area51Engine\GetTriggerList.cs" />
-    <Compile Include="Module\World\World Hacks\Area51Engine\GetUdonEventList.cs" />
-    <Compile Include="Module\World\World Hacks\Area51Engine\TriggerExploitFinder.cs" />
-    <Compile Include="Module\World\World Hacks\Area51Engine\TriggerNuke.cs" />
-    <Compile Include="Module\World\World Hacks\Area51Engine\UdonNuke.cs" />
-    <Compile Include="Module\World\World Hacks\Area51Engine\UdonExploitFinder.cs" />
+    <Compile Include="Module\World\World Hacks\TrinityEngine\CustomTriggerEvent.cs" />
+    <Compile Include="Module\World\World Hacks\TrinityEngine\CustomUdonEvent.cs" />
+    <Compile Include="Module\World\World Hacks\TrinityEngine\GetTriggerList.cs" />
+    <Compile Include="Module\World\World Hacks\TrinityEngine\GetUdonEventList.cs" />
+    <Compile Include="Module\World\World Hacks\TrinityEngine\TriggerExploitFinder.cs" />
+    <Compile Include="Module\World\World Hacks\TrinityEngine\TriggerNuke.cs" />
+    <Compile Include="Module\World\World Hacks\TrinityEngine\UdonNuke.cs" />
+    <Compile Include="Module\World\World Hacks\TrinityEngine\UdonExploitFinder.cs" />
     <Compile Include="Module\World\World Hacks\FBT\FBTMisc.cs" />
     <Compile Include="Module\World\World Hacks\Just B\BlindPeople.cs" />
     <Compile Include="Module\World\World Hacks\Just B\JustBMisc.cs" />
@@ -752,7 +752,6 @@
     <Compile Include="Module\World\World Hacks\MagicFreezeTag\GiveRunner.cs" />
     <Compile Include="Module\World\World Hacks\MagicFreezeTag\GiveTagger.cs" />
     <Compile Include="Module\World\World Hacks\MagicFreezeTag\Unfreeze.cs" />
-    <Compile Include="Module\World\World Hacks\MovieAndChill\MCMisc.cs" />
     <Compile Include="Module\World\World Hacks\MovieAndChill\Teleport Everyone.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\AbortGame.cs" />
     <Compile Include="Module\World\World Hacks\Murder 4\BlindAll.cs" />
@@ -817,6 +816,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\VRChat\Area51\DLL\Area51.dll";</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "D:\Steam\steamapps\common\VRChat\Trinity\DLL\$(TargetName).dll";</PostBuildEvent>
   </PropertyGroup>
 </Project>

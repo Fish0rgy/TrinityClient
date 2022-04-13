@@ -1,8 +1,8 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using VRC.Core;
 
-namespace Area51.Module.TargetMenu
+namespace Trinity.Module.TargetMenu
 {
     class ForceLewd : BaseModule
     {

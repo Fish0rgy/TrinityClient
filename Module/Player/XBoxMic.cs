@@ -1,4 +1,4 @@
-﻿namespace Area51.Module.Player
+﻿namespace Trinity.Module.Player
 {
     class XBoxMicd : BaseModule
     {

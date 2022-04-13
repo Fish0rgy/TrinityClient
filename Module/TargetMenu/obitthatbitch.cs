@@ -1,13 +1,13 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using VRC.Core;
-using Area51.Events;
+using Trinity.Events;
 using UnityEngine;
 using VRC.SDKBase;
 using VRCSDK2;
 using System.Collections;
 
 
-namespace Area51.Module.TargetMenu
+namespace Trinity.Module.TargetMenu
 {
     internal class TargetOrbitch : BaseModule
     {

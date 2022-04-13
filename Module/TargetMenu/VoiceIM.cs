@@ -1,8 +1,8 @@
-﻿using Area51.Events;
-using Area51.SDK.Photon;
+﻿using Trinity.Events;
+using Trinity.SDK.Photon;
 using ExitGames.Client.Photon;
 
-namespace Area51.Module.TargetMenu
+namespace Trinity.Module.TargetMenu
 {
     class VoiceIM : BaseModule, OnEventEvent
     {

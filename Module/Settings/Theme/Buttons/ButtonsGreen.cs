@@ -1,6 +1,6 @@
-﻿using Area51.Events;
-using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.Events;
+using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Threading.Tasks;
 using TMPro;
@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-namespace Area51.Module.Settings.Theme
+namespace Trinity.Module.Settings.Theme
 {
     internal class ButtonsGreen : BaseModule, OnUpdateEvent
     {

@@ -1,6 +1,6 @@
-﻿using Area51.Events;
-using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.Events;
+using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using MelonLoader;
 using Photon.Realtime;
 using System;
@@ -8,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Area51.Module.Settings.Render
+namespace Trinity.Module.Settings.Render
 {
     internal class PlayerList : BaseModule, OnPlayerJoinEvent, OnPlayerLeaveEvent
     {

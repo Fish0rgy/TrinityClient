@@ -19,7 +19,7 @@ using VRC.UI;
 using VRC.UI.Elements.Menus;
 
 
-namespace Area51.SDK
+namespace Trinity.SDK
 {
     static class PlayerWrapper
     {

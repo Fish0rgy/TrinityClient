@@ -1,4 +1,4 @@
-﻿namespace Area51.Module.Settings.Logging
+﻿namespace Trinity.Module.Settings.Logging
 {
     class UnityLogger : BaseModule
     {

@@ -1,9 +1,9 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using Photon.Realtime;
 using UnityEngine;
 
-namespace Area51.Module.Settings.Render
+namespace Trinity.Module.Settings.Render
 {
     class CapsuleEsp : BaseModule, OnPlayerJoinEvent
     {

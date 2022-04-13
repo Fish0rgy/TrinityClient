@@ -1,7 +1,7 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using System;
 
-namespace Area51.Module.World.World_Hacks.Just_B
+namespace Trinity.Module.World.World_Hacks.Just_B
 {
     class Room2 : BaseModule
     {

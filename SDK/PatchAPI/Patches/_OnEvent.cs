@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using VRC.SDKBase;
 
-namespace Area51.SDK.Patching.Patches
+namespace Trinity.SDK.Patching.Patches
 {
     public static class _OnEvent
     {

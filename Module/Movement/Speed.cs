@@ -1,7 +1,7 @@
-﻿using Area51.Events;
+﻿using Trinity.Events;
 using VRC.SDKBase;
 
-namespace Area51.Module.Movement
+namespace Trinity.Module.Movement
 {
     internal class Speed : BaseModule
     {

@@ -1,8 +1,8 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using ExitGames.Client.Photon;
 
-namespace Area51.Module.Safety
+namespace Trinity.Module.Safety
 {
     class AntiBot : BaseModule, OnEventEvent
     {

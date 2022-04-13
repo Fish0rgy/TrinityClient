@@ -1,4 +1,4 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VRC.Core;
 
-namespace Area51.Module.Bot.Local
+namespace Trinity.Module.Bot.Local
 {
     class JoinQuestCrash : BaseModule
     {
@@ -19,15 +19,15 @@ namespace Area51.Module.Bot.Local
         {
             try
             {
-                if (!Directory.Exists(@"\Area51\Bot\Area51.exe"))
+                if (!Directory.Exists(@"\Trinity\Bot\Trinity.exe"))
                 {
                     string worldID = PlayerWrapper.GetWorldID;
                     string instanceID = PlayerWrapper.GetinstanceID;
                     string userID = PlayerWrapper.GetUserID;
-                    string path = AppDomain.CurrentDomain.BaseDirectory + @"\Area51\Bot\";
+                    string path = AppDomain.CurrentDomain.BaseDirectory + @"\Trinity\Bot\";
                     string Region = GetRegion(GetWorldRegion);
                     LogHandler.Log(LogHandler.Colors.Red, worldID + "\n" + userID + "\n" + path + "\n", false, false);
-                    if (File.Exists(path + "Area51.exe"))
+                    if (File.Exists(path + "Trinity.exe"))
                     {
                         LogHandler.Log(LogHandler.Colors.Red, "Bots are joining world.", false, false);
                         LogHandler.LogDebug("Bots Joining Now To Crash Quest players");

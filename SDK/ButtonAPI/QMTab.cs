@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using VRC.UI.Core.Styles;
 using VRC.UI.Elements.Controls;
 
-namespace Area51.SDK.ButtonAPI
+namespace Trinity.SDK.ButtonAPI
 {
     class QMTab
     {
