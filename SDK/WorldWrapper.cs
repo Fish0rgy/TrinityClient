@@ -1,4 +1,4 @@
-﻿using Area51.Module.World.World_Hacks.Just_B;
+﻿using Trinity.Module.World.World_Hacks.Just_B;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,7 +8,7 @@ using VRC.Core;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace Area51.SDK
+namespace Trinity.SDK
 {
     class WorldWrapper
     {

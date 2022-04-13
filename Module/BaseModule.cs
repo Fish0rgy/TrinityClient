@@ -1,8 +1,8 @@
-﻿using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK.ButtonAPI;
 using System;
 using UnityEngine;
 
-namespace Area51.Module
+namespace Trinity.Module
 {
     abstract class BaseModule
     {

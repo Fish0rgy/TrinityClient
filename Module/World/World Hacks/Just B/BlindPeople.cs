@@ -1,4 +1,4 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using VRC.Udon;
 
-namespace Area51.Module.World.World_Hacks.Just_B
+namespace Trinity.Module.World.World_Hacks.Just_B
 {
     class BlindPeople : BaseModule
     {

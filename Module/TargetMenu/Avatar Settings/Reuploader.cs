@@ -1,5 +1,5 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System.Diagnostics;
 using VRC.Core;
 using System.Threading.Tasks;
@@ -7,7 +7,7 @@ using System;
 using System.Threading;
 using System.IO;
 
-namespace Area51.Module.TargetMenu
+namespace Trinity.Module.TargetMenu
 {
     internal class ReUploadAvatar : BaseModule
     {
@@ -16,7 +16,7 @@ namespace Area51.Module.TargetMenu
         {
              try
             {
-                Process.Start($"{Directory.GetCurrentDirectory()}\\Area51\\Reuploader");
+                Process.Start($"{Directory.GetCurrentDirectory()}\\Trinity\\Reuploader");
                 LogHandler.Log(LogHandler.Colors.Green, $"[Re-Uploader] Lunching ReUploader\n", false, false);
             }catch (Exception ERROR) { }
         }

@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Area51.SDK.ButtonAPI
+namespace Trinity.SDK.ButtonAPI
 {
     public class QMTEST
     {

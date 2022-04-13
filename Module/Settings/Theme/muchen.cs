@@ -1,10 +1,10 @@
-﻿using Area51.Events;
+﻿using Trinity.Events;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Area51.Module.Settings.Theme
+namespace Trinity.Module.Settings.Theme
 {
     class munchen : BaseModule, OnUpdateEvent
     {

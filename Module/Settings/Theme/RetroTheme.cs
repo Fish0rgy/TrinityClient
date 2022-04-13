@@ -1,6 +1,6 @@
-﻿using Area51.Events;
-using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.Events;
+using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Threading.Tasks;
 using TMPro;
@@ -9,11 +9,11 @@ using UnityEngine.UI;
 using System.Collections;
 using MelonLoader;
 
-namespace Area51.Module.Settings.Theme
+namespace Trinity.Module.Settings.Theme
 {
     class RetroTheme : BaseModule, OnUpdateEvent
     {
-        public RetroTheme() : base("Retro\nTheme", "Enable Area51 Theme", Main.Instance.SettingsButtonTheme, QMButtonIcons.CreateSpriteFromBase64(Alien.SpaceShip), true, false) { }
+        public RetroTheme() : base("Retro\nTheme", "Enable Trinity Theme", Main.Instance.SettingsButtonTheme, QMButtonIcons.CreateSpriteFromBase64(Alien.SpaceShip), true, false) { }
         private bool SetTheme, QMTheme = false;
         public Sprite Background = null;
         public bool BGSet = false;

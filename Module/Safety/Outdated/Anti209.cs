@@ -1,7 +1,7 @@
-﻿using Area51.Events;
+﻿using Trinity.Events;
 using ExitGames.Client.Photon;
 
-namespace Area51.Module.Safety
+namespace Trinity.Module.Safety
 {
     class Anti209 : BaseModule, OnEventEvent
     {

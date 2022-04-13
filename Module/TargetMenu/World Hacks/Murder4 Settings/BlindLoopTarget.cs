@@ -1,6 +1,6 @@
 ﻿
-using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using MelonLoader;
 using System;
 using System.Collections;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using VRC.Core;
 
-namespace Area51.Module.TargetMenu.Murder4_Settings
+namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     class BlindLoopTarget : BaseModule
     {

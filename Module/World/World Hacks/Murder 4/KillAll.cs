@@ -1,11 +1,11 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using VRC.Networking;
 using VRC.SDKBase;
 
-namespace Area51.Module.World.World_Hacks.Murder_4
+namespace Trinity.Module.World.World_Hacks.Murder_4
 {
     class KillAll : BaseModule
     {

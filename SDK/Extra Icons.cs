@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Area51.SDK
+namespace Trinity.SDK
 {
     class Extra_Icons
     {
@@ -33,7 +33,7 @@ namespace Area51.SDK
         //public static readonly string rejoin = "";
         //public static readonly string worldid = "";
         ////world hacks
-        //public static readonly string Area51_Engine = "";
+        //public static readonly string Trinity_Engine = "";
         //public static readonly string ZomTag = "";
         //public static readonly string AmoungUS = "";
         //public static readonly string Murder4 = "";

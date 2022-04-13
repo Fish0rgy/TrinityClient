@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
-using Area51.Events;
-using Area51.SDK;
+using Trinity.Events;
+using Trinity.SDK;
 using MelonLoader;
 using UnityEngine;
 using VRC;
 using VRC.SDKBase; 
 
-namespace Area51.Module.World.World_Hacks.Just_B
+namespace Trinity.Module.World.World_Hacks.Just_B
 {
     class VIPSpoofer : BaseModule, OnUpdateEvent
     {

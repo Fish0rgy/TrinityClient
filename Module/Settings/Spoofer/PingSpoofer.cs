@@ -1,13 +1,13 @@
-﻿using Area51.Events;
-using Area51.SDK;
-using Area51.SDK.Photon;
+﻿using Trinity.Events;
+using Trinity.SDK;
+using Trinity.SDK.Photon;
 using ExitGames.Client.Photon;
 using Photon.Realtime;
 using System;
 using UnhollowerBaseLib;
 using UnityEngine;
 
-namespace Area51.Module.Settings.Spoofer
+namespace Trinity.Module.Settings.Spoofer
 {
     internal class PingSpoofer : BaseModule, OnEventEvent
     {

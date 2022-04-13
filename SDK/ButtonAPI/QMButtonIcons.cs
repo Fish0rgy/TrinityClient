@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Area51.SDK.ButtonAPI
+namespace Trinity.SDK.ButtonAPI
 {
     internal class QMButtonIcons
     {

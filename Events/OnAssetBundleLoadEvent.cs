@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Area51.Events
+namespace Trinity.Events
 {
     public interface OnAssetBundleLoadEvent
     {

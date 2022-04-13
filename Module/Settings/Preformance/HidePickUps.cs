@@ -1,10 +1,10 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using System.Linq;
 using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
 
-namespace Area51.Module.Settings.Preformance
+namespace Trinity.Module.Settings.Preformance
 {
     class HidePickUps : BaseModule
     {

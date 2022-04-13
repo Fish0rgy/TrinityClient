@@ -5,7 +5,7 @@ using UnhollowerBaseLib;
 using UnityEngine;
 using VRC.Core;
 
-namespace Area51.SDK.Patching.Patches
+namespace Trinity.SDK.Patching.Patches
 {
     public static class _AvatarAssetBundleLoad 
     {

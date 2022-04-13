@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Area51.SDK.ButtonAPI
+namespace Trinity.SDK.ButtonAPI
 {
     public class QMToggleButton
     {
@@ -13,7 +13,7 @@ namespace Area51.SDK.ButtonAPI
         {
             GameObject singleButton = UnityEngine.Object.Instantiate<GameObject>( Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo").gameObject, parent);
             singleButton.transform.parent = parent;
-            singleButton.name = text + "_Area51_ToggleButton";
+            singleButton.name = text + "_Trinity_ToggleButton";
 
             singleButton.transform.Find("Text_H4").gameObject.GetComponent<TextMeshProUGUI>().text = text;
             singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>().faceColor = Color.green;

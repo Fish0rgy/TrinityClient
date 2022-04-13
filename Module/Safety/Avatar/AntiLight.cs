@@ -1,6 +1,6 @@
-﻿using Area51.Events;
-using Area51.SDK;
-using Area51.SDK.PatchAPI.Patches;
+﻿using Trinity.Events;
+using Trinity.SDK;
+using Trinity.SDK.PatchAPI.Patches;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Area51.Module.Safety.Avatar
+namespace Trinity.Module.Safety.Avatar
 {
     class AntiLight : BaseModule, OnObjectInstantiatedEvent
     { 

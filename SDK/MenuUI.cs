@@ -1,35 +1,37 @@
-﻿using Area51.Module;
-using Area51.Module.Bot.Local;
-using Area51.Module.Exploit;
-using Area51.Module.Exploit.Photon_Exploit;
-using Area51.Module.Exploit.UdonExploits;
-using Area51.Module.Movement;
-using Area51.Module.Player;
-using Area51.Module.Player.Audio;
-using Area51.Module.Safety;
-using Area51.Module.Safety.Avatar;
-using Area51.Module.Safety.Photon;
-using Area51.Module.Settings.Logging;
-using Area51.Module.Settings.Preformance;
-using Area51.Module.Settings.Render;
-using Area51.Module.Settings.Theme;
-using Area51.Module.TargetMenu;
-using Area51.Module.TargetMenu.Murder4_Settings;
-using Area51.Module.TargetMenu.SafetySettings;
-using Area51.Module.TargetMenu.World_Hacks.AmongUs_Settings;
-using Area51.Module.TargetMenu.World_Hacks.JustB;
-using Area51.Module.TargetMenu.World_Hacks.MagicTag;
-using Area51.Module.World;
-using Area51.Module.World.World_Hacks;
-using Area51.Module.World.World_Hacks.Among_Us;
-using Area51.Module.World.World_Hacks.Area51Engine;
-using Area51.Module.World.World_Hacks.Just_B;
-using Area51.Module.World.World_Hacks.Just_H;
-using Area51.Module.World.World_Hacks.MagicFreezeTag;
-using Area51.Module.World.World_Hacks.Murder_4;
-using Area51.Modules.Exploits;
-using Area51.SDK.ButtonAPI;
-using Area51.SDK.Security;
+﻿using Trinity.Module;
+using Trinity.Module.Bot.Local;
+using Trinity.Module.Exploit;
+using Trinity.Module.Exploit.Photon_Exploit;
+using Trinity.Module.Exploit.UdonExploits;
+using Trinity.Module.Movement;
+using Trinity.Module.Player;
+using Trinity.Module.Player.Audio;
+using Trinity.Module.Safety;
+using Trinity.Module.Safety.Avatar;
+using Trinity.Module.Safety.Photon;
+using Trinity.Module.Settings.Logging;
+using Trinity.Module.Settings.Preformance;
+using Trinity.Module.Settings.Render;
+using Trinity.Module.Settings.Theme;
+using Trinity.Module.TargetMenu;
+using Trinity.Module.TargetMenu.Murder4_Settings;
+using Trinity.Module.TargetMenu.SafetySettings;
+using Trinity.Module.TargetMenu.World_Hacks.AmongUs_Settings;
+using Trinity.Module.TargetMenu.World_Hacks.JustB;
+using Trinity.Module.TargetMenu.World_Hacks.MagicTag;
+using Trinity.Module.TargetMenu.World_Hacks.MovieAndChill;
+using Trinity.Module.World;
+using Trinity.Module.World.World_Hacks;
+using Trinity.Module.World.World_Hacks.Among_Us;
+using Trinity.Module.World.World_Hacks.TrinityEngine;
+using Trinity.Module.World.World_Hacks.Just_B;
+using Trinity.Module.World.World_Hacks.Just_H;
+using Trinity.Module.World.World_Hacks.MagicFreezeTag;
+using Trinity.Module.World.World_Hacks.MovieAndChill;
+using Trinity.Module.World.World_Hacks.Murder_4;
+using Trinity.Modules.Exploits;
+using Trinity.SDK.ButtonAPI;
+using Trinity.SDK.Security;
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -37,7 +39,7 @@ using System.IO;
 using UnityEngine;
 using VRC.Core;
 
-namespace Area51.SDK
+namespace Trinity.SDK
 {
     class MenuUI
     {
@@ -59,6 +61,7 @@ namespace Area51.SDK
             Main.Instance.Justbbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Just B", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.justb));
             Main.Instance.JustHButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Just H", QMButtonIcons.CreateSpriteFromBase64(Alien.earth));
             Main.Instance.Magictagbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Magic Tag", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.MGK));
+            Main.Instance.MovieAndChillButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Movie & Chill", QMButtonIcons.CreateSpriteFromBase64(Alien.earth));
             Main.Instance.PlayerButton = new QMNestedButton(mainTab.menuTransform, "Player", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
             Main.Instance.AudioButton = new QMNestedButton(Main.Instance.PlayerButton.menuTransform, "Audio Settings", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
             Main.Instance.MovementButton = new QMNestedButton(mainTab.menuTransform, "Movement", QMButtonIcons.CreateSpriteFromBase64(Alien.Movment));
@@ -77,7 +80,7 @@ namespace Area51.SDK
             //Main.Instance.SettingsButtonDumping = new QMNestedButton(Main.Instance.SettingsButtonLoggging.menuTransform, "Event\nDumping",  QMButtonIcons.CreateSpriteFromBase64(Alien.Save));
             Main.Instance.SettingsButtonTheme = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Theme", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
             //targetmenu
-            Main.Instance.Targetbutton = new QMNestedButton(Main.Instance.QuickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/").transform, "Area51", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
+            Main.Instance.Targetbutton = new QMNestedButton(Main.Instance.QuickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/").transform, "Trinity", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
             Main.Instance.AvatarSettings = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Avatar", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
             Main.Instance.SafetyTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Safety Settings", QMButtonIcons.CreateSpriteFromBase64(Alien.satlte));
             Main.Instance.WorldhacksTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "World Exploits", QMButtonIcons.CreateSpriteFromBase64(Alien.earth));
@@ -107,6 +110,8 @@ namespace Area51.SDK
             //Just H
             Main.Instance.Modules.Add(new BypassVROnly());
 
+            //Movie & Chill +
+            Main.Instance.Modules.Add(new Teleport_Everyone());
             //murder4
             Main.Instance.Modules.Add(new MurderAssign());
             Main.Instance.Modules.Add(new DetectiveAssign());
@@ -147,7 +152,7 @@ namespace Area51.SDK
             Main.Instance.Modules.Add(new A_AssignImposter());
             Main.Instance.Modules.Add(new A_AssignCrew());
 
-            //Area51 CheatEngine
+            //Trinity CheatEngine
             Main.Instance.Modules.Add(new GetTriggerList());
             Main.Instance.Modules.Add(new GetUdonEventList());
             Main.Instance.Modules.Add(new CustomTriggerEvent());
@@ -255,8 +260,8 @@ namespace Area51.SDK
             Main.Instance.Modules.Add(new ButtonsBlue());
             Main.Instance.Modules.Add(new ButtonsRed());
             Main.Instance.Modules.Add(new ButtonsMagenta());
-            //targetmenu 
 
+            //targetmenu
             Main.Instance.Modules.Add(new AvatSelected());
             Main.Instance.Modules.Add(new DownloadVRCSelected());
             Main.Instance.Modules.Add(new ForceClone());
@@ -264,6 +269,10 @@ namespace Area51.SDK
             Main.Instance.Modules.Add(new UserIDSelected());
             Main.Instance.Modules.Add(new TargetOrbitch());
             Main.Instance.Modules.Add(new VoiceIM());
+
+            //targetmenu>Movie&Chill+
+            Main.Instance.Modules.Add(new TargetMCLag());
+            Main.Instance.Modules.Add(new TargetMCTeleport());
 
             //targetmenu>SafetySettings
             Main.Instance.Modules.Add(new TargetAntiPhoton());
@@ -317,26 +326,26 @@ namespace Area51.SDK
                 {
                     if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key)))
                     {
-                        LogHandler.Log(LogHandler.Colors.Yellow, "[Area51] Logged Out", false, false); 
+                        LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Logged Out", false, false); 
                     }
                     else
                     {
-                        LogHandler.Log(LogHandler.Colors.Red, "[Area51] Failed To Logged Out!", false, false); 
+                        LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed To Logged Out!", false, false); 
                     }
                 }
                 catch (Exception EX) { }
             });
             try { Alien.Carousel_Banners(false); } catch { }
-            Alien.QM_Text("Area51 - Dev Version"); Console.Clear(); LogHandler.DisplayLogo();
+            Alien.QM_Text("Trinity - Dev Version"); Console.Clear(); LogHandler.DisplayLogo();
             //auth
             try
             {
                 if (File.Exists(SecurityCheck.key) && SecurityCheck.GetServerInfo(File.ReadAllText(SecurityCheck.key)))
                 {
                     //200
-                    LogHandler.Log(LogHandler.Colors.Green, "[Area51] Successful Relogin, Have Fun :)", false, false);
+                    LogHandler.Log(LogHandler.Colors.Green, "[Trinity] Successful Relogin, Have Fun :)", false, false);
                 }
-                else { LogHandler.Log(LogHandler.Colors.Red, "[Area51] Unsuccessful Relogin, please contact owner!", false, false); }
+                else { LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Unsuccessful Relogin, please contact owner!", false, false); }
             }
             catch (Exception EX)
             {

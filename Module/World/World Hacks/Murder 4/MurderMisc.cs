@@ -1,4 +1,4 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace Area51.Module.World.World_Hacks.Murder_4
+namespace Trinity.Module.World.World_Hacks.Murder_4
 {
     public static class MurderMisc
     {

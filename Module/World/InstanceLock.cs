@@ -1,7 +1,7 @@
-﻿using Area51.Events;
+﻿using Trinity.Events;
 using Photon.Realtime;
 
-namespace Area51.Module.Exploit
+namespace Trinity.Module.Exploit
 {
     class InstanceLock : BaseModule, OnSendOPEvent
     {

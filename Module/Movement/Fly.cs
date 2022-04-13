@@ -1,11 +1,11 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using System;
 using UnityEngine;
 using UnityEngine.XR;
 using VRC.Animation;
 
-namespace Area51.Module.Movement
+namespace Trinity.Module.Movement
 {
     class Fly : BaseModule, OnUpdateEvent
     {

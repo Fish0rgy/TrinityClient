@@ -1,9 +1,9 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using UnhollowerBaseLib;
 using UnityEngine;
 using VRC.SDK3.Avatars.Components;
 
-namespace Area51.Module.Settings.Preformance
+namespace Trinity.Module.Settings.Preformance
 {
     class HideChairs : BaseModule
     {

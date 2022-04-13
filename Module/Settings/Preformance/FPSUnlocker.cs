@@ -1,7 +1,7 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using UnityEngine;
 
-namespace Area51.Module.Player
+namespace Trinity.Module.Player
 {
     class FPSUnlocker : BaseModule
     {

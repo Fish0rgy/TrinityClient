@@ -1,5 +1,5 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using System;
 using System.Collections;
 using System.Net;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
 
-namespace Area51.Module.Settings.Logging
+namespace Trinity.Module.Settings.Logging
 {
     class VCRALogger : BaseModule, OnPlayerJoinEvent
     {
@@ -40,7 +40,7 @@ namespace Area51.Module.Settings.Logging
         {
             using (var wc = new WebClient { Headers = { "User-Agent: Other" } })
             {
-                wc.DownloadFileAsync(new Uri(player.prop_ApiAvatar_0.assetUrl), "Area51/VRCA/" + player.prop_ApiAvatar_0.name);
+                wc.DownloadFileAsync(new Uri(player.prop_ApiAvatar_0.assetUrl), "Trinity/VRCA/" + player.prop_ApiAvatar_0.name);
                 SDK.LogHandler.Log(SDK.LogHandler.Colors.Grey, $"Yeeted -> {player.prop_VRCPlayerApi_0.displayName}'s Avatar.", false, false);
             }
             yield return new WaitForSecondsRealtime(0.1f);

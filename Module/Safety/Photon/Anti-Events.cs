@@ -1,9 +1,9 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using ExitGames.Client.Photon;
 using System.Collections.Generic;
 
-namespace Area51.Module.Safety.Photon
+namespace Trinity.Module.Safety.Photon
 {
     class PhotonProtection : BaseModule, OnEventEvent
     {

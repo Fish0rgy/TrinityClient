@@ -1,9 +1,9 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 
 using UnityEngine;
 using VRC.Udon;
 
-namespace Area51.Module.World.World_Hacks.ZombieTag
+namespace Trinity.Module.World.World_Hacks.ZombieTag
 {
     class PrisionMisc
     {

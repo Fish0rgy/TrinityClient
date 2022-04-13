@@ -1,5 +1,5 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VRC.SDKBase;
 
-namespace Area51.Module.World
+namespace Trinity.Module.World
 {
     class FreezeItems : BaseModule, OnUpdateEvent
 	{

@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace Area51.Module.Settings.Render
+namespace Trinity.Module.Settings.Render
 {
     class TriggerESP : BaseModule
     {

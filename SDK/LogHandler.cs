@@ -1,4 +1,4 @@
-﻿using Area51.Module.Settings.Render;
+﻿using Trinity.Module.Settings.Render;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using VRC.Core;
 
-namespace Area51.SDK
+namespace Trinity.SDK
 {
     class LogHandler
     {
@@ -22,19 +22,19 @@ namespace Area51.SDK
         {
             VRChat = FindWindow(null, "VRChat");
             APIUser currentUser = APIUser.CurrentUser;
-            string fileVersion = FileVersionInfo.GetVersionInfo("Area51/DLL/Area51.dll").FileVersion;
-            Console.Title = $"Area 51 Client | Fish's Dev Version";
+            string fileVersion = FileVersionInfo.GetVersionInfo("Trinity/DLL/Trinity.dll").FileVersion;
+            Console.Title = $"Trinity || v{fileVersion}";
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("========================================================================================================================");
             Console.WriteLine("                                                                                                                        ");
             Console.WriteLine("                                                                                                                        ");
-            Console.WriteLine("                                     █████╗ ██████╗ ███████╗ █████╗     ███████╗ ██╗                                    ");
-            Console.WriteLine("                                    ██╔══██╗██╔══██╗██╔════╝██╔══██╗    ██╔════╝███║                                    ");
-            Console.WriteLine("                                    ███████║██████╔╝█████╗  ███████║    ███████╗╚██║                                    ");
-            Console.WriteLine("                                    ██╔══██║██╔══██╗██╔══╝  ██╔══██║    ╚════██║ ██║                                    ");
-            Console.WriteLine("                                    ██║  ██║██║  ██║███████╗██║  ██║    ███████║ ██║                                    ");
-            Console.WriteLine("                                    ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚══════╝ ╚═╝                                    ");
+            Console.WriteLine("                                  ████████╗██████╗ ██╗███╗   ██╗██╗████████╗██╗   ██╗                                   ");
+            Console.WriteLine("                                  ╚══██╔══╝██╔══██╗██║████╗  ██║██║╚══██╔══╝╚██╗ ██╔╝                                   ");
+            Console.WriteLine("                                     ██║   ██████╔╝██║██╔██╗ ██║██║   ██║    ╚████╔╝                                    ");
+            Console.WriteLine("                                     ██║   ██╔══██╗██║██║╚██╗██║██║   ██║     ╚██╔╝                                     ");
+            Console.WriteLine("                                     ██║   ██║  ██║██║██║ ╚████║██║   ██║      ██║                                      ");
+            Console.WriteLine("                                     ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝                                      ");
             Console.WriteLine("                                                                                                                        ");
             Console.WriteLine("                                                                                                                        ");
             Console.WriteLine("========================================================================================================================\n");

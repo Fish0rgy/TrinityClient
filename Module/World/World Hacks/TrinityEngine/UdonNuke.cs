@@ -8,9 +8,9 @@ using UnityEngine;
 using MelonLoader;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
-using Area51.SDK;
+using Trinity.SDK;
 
-namespace Area51.Module.Exploit.UdonExploits
+namespace Trinity.Module.Exploit.UdonExploits
 {
     class UdonNuke : BaseModule
     {

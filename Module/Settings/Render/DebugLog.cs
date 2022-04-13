@@ -1,4 +1,4 @@
-﻿using Area51.SDK.ButtonAPI;
+﻿using Trinity.SDK.ButtonAPI;
 using MelonLoader;
 using System;
 using System.Collections;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Area51.Module.Settings.Render
+namespace Trinity.Module.Settings.Render
 {
     class DebugLog : BaseModule
     {

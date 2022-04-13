@@ -1,6 +1,6 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 
-namespace Area51.Module.World
+namespace Trinity.Module.World
 {
     class JoinByID : BaseModule
     {

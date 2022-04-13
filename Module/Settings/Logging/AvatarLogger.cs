@@ -1,8 +1,8 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using VRC;
 
-namespace Area51.Module.Settings.Logging
+namespace Trinity.Module.Settings.Logging
 {
     class AvatarLogger : BaseModule, OnPlayerJoinEvent
     {

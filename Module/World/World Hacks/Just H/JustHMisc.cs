@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Area51.Module.World.World_Hacks.Just_H
+namespace Trinity.Module.World.World_Hacks.Just_H
 {
     class JustHMisc
     {

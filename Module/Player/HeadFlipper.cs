@@ -1,6 +1,6 @@
 ﻿using VRC.DataModel;
 
-namespace Area51.Module.Player
+namespace Trinity.Module.Player
 {
     class HeadFlipper : BaseModule
     {

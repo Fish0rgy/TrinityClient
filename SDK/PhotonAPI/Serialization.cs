@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Area51.SDK.Photon
+namespace Trinity.SDK.Photon
 {
     static class Serialization
     {

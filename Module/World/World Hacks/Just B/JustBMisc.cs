@@ -1,4 +1,4 @@
-﻿using Area51.SDK;
+﻿using Trinity.SDK;
 using MelonLoader;
 using System;
 using System.Collections;
@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using VRC;
 
-namespace Area51.Module.World.World_Hacks.Just_B
+namespace Trinity.Module.World.World_Hacks.Just_B
 {
     class JustBMisc
     {

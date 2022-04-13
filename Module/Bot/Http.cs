@@ -1,7 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Net;
 
-namespace Area51.Module.Bot
+namespace Trinity.Module.Bot
 {
     class Http
     {

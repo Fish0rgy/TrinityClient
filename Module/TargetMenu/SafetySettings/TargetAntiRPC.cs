@@ -1,6 +1,6 @@
-﻿using Area51.Events;
-using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.Events;
+using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks; 
 using VRC.SDKBase;
 
-namespace Area51.Module.TargetMenu.SafetySettings
+namespace Trinity.Module.TargetMenu.SafetySettings
 {
     class TargetAntiRPC : BaseModule, OnRPCEvent
     {

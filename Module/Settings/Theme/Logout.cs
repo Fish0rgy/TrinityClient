@@ -1,11 +1,11 @@
-﻿using Area51.SDK;
-using Area51.SDK.ButtonAPI;
-using Area51.SDK.Security;
+﻿using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
+using Trinity.SDK.Security;
 using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Area51.Module.Settings.Theme
+namespace Trinity.Module.Settings.Theme
 {
     class Logout : BaseModule
     {
@@ -15,10 +15,10 @@ namespace Area51.Module.Settings.Theme
         {
             try
             {
-                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key))) { LogHandler.Log(LogHandler.Colors.Yellow, "[Area51] Logged Out", false, false); Process.GetCurrentProcess().Kill(); }
+                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key))) { LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Logged Out", false, false); Process.GetCurrentProcess().Kill(); }
                 else
                 {
-                    LogHandler.Log(LogHandler.Colors.Red, "[Area51] Failed To logout", false, false); 
+                    LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed To logout", false, false); 
                 }
             }
             catch (Exception EX) { }

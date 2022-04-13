@@ -1,9 +1,9 @@
-﻿using Area51.Events;
-using Area51.SDK;
+﻿using Trinity.Events;
+using Trinity.SDK;
 using System;
 using System.Collections.Generic;
 
-namespace Area51.Module.Settings.Render
+namespace Trinity.Module.Settings.Render
 {
     internal class CustomNameplates : BaseModule, OnPlayerJoinEvent
     {

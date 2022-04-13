@@ -1,4 +1,4 @@
-﻿namespace Area51.Modules.Events
+﻿namespace Trinity.Modules.Events
 {
     interface OnUIEvent
     {

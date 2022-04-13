@@ -1,6 +1,6 @@
-﻿using Area51.Module.World.World_Hacks.Murder_4;
-using Area51.SDK;
-using Area51.SDK.ButtonAPI;
+﻿using Trinity.Module.World.World_Hacks.Murder_4;
+using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VRC.Core;
 
-namespace Area51.Module.TargetMenu.Murder4_Settings
+namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     class BystanderAssignTarget : BaseModule
     {
