@@ -1,3 +1,4 @@
+using Trinity.Utilities;
 using UnityEngine;
 using VRC.SDKBase;
 using EvilEye.Events;

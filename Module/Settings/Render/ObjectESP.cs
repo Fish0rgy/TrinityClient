@@ -1,4 +1,5 @@
-﻿using UnhollowerBaseLib;
+using Trinity.Utilities;
+using UnhollowerBaseLib;
 using UnityEngine;
 using VRC.SDKBase;
 

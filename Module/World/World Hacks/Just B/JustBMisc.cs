@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using MelonLoader;
 using System;
 using System.Collections;
@@ -39,49 +40,49 @@ namespace Trinity.Module.World.World_Hacks.Just_B
                         if (gameobjects[i].gameObject.name.Contains($"Bedroom {roomNum}"))
                         {
                             gameobjects[i].gameObject.SetActive(true);
-                            PlayerWrapper.TeleportLocation(-223.5937f, -11.2542f, 150.3761f);
+                            PU.TeleportLocation(-223.5937f, -11.2542f, 150.3761f);
                         }
                         break;
                     case 2:
                         if (gameobjects[i].gameObject.name.Contains($"Bedroom {roomNum}"))
                         {
                             gameobjects[i].gameObject.SetActive(true);
-                            PlayerWrapper.TeleportLocation(-211.4728f, 55.7458f, -90.8525f);
+                            PU.TeleportLocation(-211.4728f, 55.7458f, -90.8525f);
                         }
                         break;
                     case 3:
                         if (gameobjects[i].gameObject.name.Contains($"Bedroom {roomNum}"))
                         {
                             gameobjects[i].gameObject.SetActive(true);
-                            PlayerWrapper.TeleportLocation(-124.5334f, -11.2542f, 149.8945f);
+                            PU.TeleportLocation(-124.5334f, -11.2542f, 149.8945f);
                         }
                         break;
                     case 4:
                         if (gameobjects[i].gameObject.name.Contains($"Bedroom {roomNum}"))
                         {
                             gameobjects[i].gameObject.SetActive(true);
-                            PlayerWrapper.TeleportLocation(-111.3594f, 55.7385f, -90.4229f);
+                            PU.TeleportLocation(-111.3594f, 55.7385f, -90.4229f);
                         }
                         break;
                     case 5:
                         if (gameobjects[i].gameObject.name.Contains($"Bedroom {roomNum}"))
                         {
                             gameobjects[i].gameObject.SetActive(true);
-                            PlayerWrapper.TeleportLocation(-24.5131f, -11.2542f, 149.9625f);
+                            PU.TeleportLocation(-24.5131f, -11.2542f, 149.9625f);
                         }
                         break;
                     case 6:
                         if (gameobjects[i].gameObject.name.Contains($"Bedroom {roomNum}"))
                         {
                             gameobjects[i].gameObject.SetActive(true);
-                            PlayerWrapper.TeleportLocation(-11.2326f, 55.7458f, -90.5274f);
+                            PU.TeleportLocation(-11.2326f, 55.7458f, -90.5274f);
                         }
                         break;
                     case 7: //vip
                         if (gameobjects[i].gameObject.name.Contains("Bedroom VIP"))
                         {
                             gameobjects[i].gameObject.SetActive(true);
-                            PlayerWrapper.TeleportLocation(56.8751f, 62.8633f, -0.0431f);
+                            PU.TeleportLocation(56.8751f, 62.8633f, -0.0431f);
                         }
                         break;
                 }

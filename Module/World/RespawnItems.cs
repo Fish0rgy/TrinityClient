@@ -1,4 +1,5 @@
-﻿using Area51.Module.World.World_Hacks.Murder_4;
+using Trinity.Utilities;
+using Area51.Module.World.World_Hacks.Murder_4;
 using Area51.SDK;
 using System;
 using System.Collections.Generic;

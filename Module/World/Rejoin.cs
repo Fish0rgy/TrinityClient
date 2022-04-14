@@ -1,10 +1,11 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 
 namespace Trinity.Module.World
 {
     class Rejoin : BaseModule
     {
-        public Rejoin() : base("Rejoin", "Rejoin the World", Main.Instance.WorldButton, SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Serpent.satlte), false, false) { }
+        public Rejoin() : base("Rejoin", "Rejoin the World", Main.Instance.WorldButton, SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.satltePath), false, false) { }
 
         public override void OnEnable()
         {

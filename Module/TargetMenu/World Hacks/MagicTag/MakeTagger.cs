@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 
 using System;
@@ -12,14 +13,14 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MagicTag
 {
     class MakeTagger : BaseModule
     {
-        public MakeTagger() : base("Assign Tagger", "Assigns Tagger", Main.Instance.MagicTagSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
+        public MakeTagger() : base("Assign Tagger", "Assigns Tagger", Main.Instance.MagicTagSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), false, false) { }
 
         public override void OnEnable()
         {
             try
             {
                 UdonExploitManager.udonsend("AssignTagger", "target");
-                APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"{SelectedPlayer.displayName} Forcefully Assigned Tagger", false, false);
                 LogHandler.LogDebug($"{SelectedPlayer.displayName} Assigned Tagger"); 
             }

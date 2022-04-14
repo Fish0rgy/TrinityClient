@@ -1,4 +1,5 @@
-﻿using Trinity.SDK.ButtonAPI;
+using Trinity.Utilities;
+using Trinity.SDK.ButtonAPI;
 using System;
 using UnityEngine;
 
@@ -46,7 +47,7 @@ namespace Trinity.Module
         {
             if (isToggle)
             {
-                QMToggleButton qMToggleButton = new QMToggleButton(category.menuTransform, name, discription, new Action<bool>((bool state) =>
+                new QMToggleButton(category.menuTransform, name, discription, new Action<bool>((bool state) =>
                 {
                     this.toggled = state;
                     if (state)
@@ -57,24 +58,8 @@ namespace Trinity.Module
                     {
                         OnDisable();
                     }
-                    Main.Instance.OnEventEventArray = Main.Instance.OnEventEvents.ToArray();
-                    Main.Instance.OnPlayerJoinEventArray = Main.Instance.OnPlayerJoinEvents.ToArray();
-                    Main.Instance.OnPlayerLeaveEventArray = Main.Instance.OnPlayerLeaveEvents.ToArray();
-                    Main.Instance.OnRPCEventArray = Main.Instance.OnRPCEvents.ToArray();
-                    Main.Instance.OnSendOPEventArray = Main.Instance.OnSendOPEvents.ToArray();
-                    Main.Instance.OnUdonEventArray = Main.Instance.OnUdonEvents.ToArray();
-                    Main.Instance.OnUpdateEventArray = Main.Instance.OnUpdateEvents.ToArray();
-                    Main.Instance.OnAssetBundleLoadEventArray = Main.Instance.OnAssetBundleLoadEvents.ToArray();
-                    Main.Instance.OnNetworkSanityArray = Main.Instance.OnNetworkSanityEvents.ToArray();
                
                 }));
-                if (save)
-                {
-                    if (Main.Instance.Config.getConfigBool(name))
-                    {
-                    
-                    }
-                }
             }
             else
             {

@@ -1,6 +1,9 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using VRC.Core;
+using Trinity.Utilities;
+
 
 namespace Trinity.Module.TargetMenu
 {
@@ -8,14 +11,14 @@ namespace Trinity.Module.TargetMenu
     {
         //list form lucy aka owner from latenight
 
-        public UnityEngine.GameObject localPlayer = PlayerWrapper.LocalPlayer.gameObject;
-        public UnityEngine.GameObject playerMirrFix = PlayerWrapper.GetPlayerMirrFix();
-        public UnityEngine.GameObject playerMirrFix2 = PlayerWrapper.GetPlayerMirrFix2();
-        public ForceLewd() : base("Force Lewd", "Removes Players Cloths", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Serpent.copy), false, false) { }
+        public UnityEngine.GameObject localPlayer = PU.GetPlayer().gameObject;
+        public UnityEngine.GameObject playerMirrFix = PU.GetPlayerMirrFix();
+        public UnityEngine.GameObject playerMirrFix2 = PU.GetPlayerMirrFix2();
+        public ForceLewd() : base("Force Lewd", "Removes Players Cloths", Main.Instance.Targetbutton, QMButtonIcons.LoadSpriteFromFile(Serpent.copyPath), false, false) { }
 
         public override void OnEnable()
         {
-            APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+            APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
             if (SelectedPlayer.id != "")
             { 
                 localPlayer.Lewdify();

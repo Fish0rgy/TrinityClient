@@ -1,19 +1,22 @@
-﻿using Trinity.Events;
+﻿using System;
+using System.IO;
+using UnityEngine;
+using System.Reflection;
+using System.Diagnostics;
+using UnhollowerRuntimeLib;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
+using MelonLoader;
+using Trinity.Events;
 using Trinity.Module;
 using Trinity.Module.World;
+
 using Trinity.SDK;
-using Trinity.SDK.ButtonAPI;
 using Trinity.SDK.Patching;
 using Trinity.SDK.Security;
-using MelonLoader;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Threading.Tasks;
-using UnhollowerRuntimeLib;
-using UnityEngine;
+using Trinity.SDK.ButtonAPI;
+
 
 namespace Trinity
 {
@@ -82,21 +85,6 @@ namespace Trinity
         public List<OnNetworkSanityEvent> OnNetworkSanityEvents { get; set; } = new List<OnNetworkSanityEvent>();
         public List<OnObjectInstantiatedEvent> OnObjectInstantiatedEvents { get; set; } = new List<OnObjectInstantiatedEvent>();
         public List<OnPhotonPeerEvent> OnPhotonPeerEvents { get; set; } = new List<OnPhotonPeerEvent>();
-
-        public OnPhotonPeerEvent[] OnPhotonPeerEventArray { get; set; } = new OnPhotonPeerEvent[0];
-        public OnPlayerJoinEvent[] OnPlayerJoinEventArray { get; set; } = new OnPlayerJoinEvent[0];
-        public OnAssetBundleLoadEvent[] OnAssetBundleLoadEventArray { get; set; } = new OnAssetBundleLoadEvent[0];
-        public OnPlayerLeaveEvent[] OnPlayerLeaveEventArray { get; set; } = new OnPlayerLeaveEvent[0];
-        public OnUpdateEvent[] OnUpdateEventArray { get; set; } = new OnUpdateEvent[0];
-        public OnUdonEvent[] OnUdonEventArray { get; set; } = new OnUdonEvent[0];
-        public OnEventEvent[] OnEventEventArray { get; set; } = new OnEventEvent[0];
-        public OnAvatarLoadedEvent[] OnAvatarLoadEventArray { get; set; } = new OnAvatarLoadedEvent[0];
-        public OnRPCEvent[] OnRPCEventArray { get; set; } = new OnRPCEvent[0];
-        public OnSendOPEvent[] OnSendOPEventArray { get; set; } = new OnSendOPEvent[0];
-        public OnSceneLoadedEvent[] OnSceneLoadedEventArray { get; set; } = new OnSceneLoadedEvent[0];
-        public OnWorldInitEvent[] OnWorldInitEventArray { get; set; } = new OnWorldInitEvent[0];
-        public OnNetworkSanityEvent[] OnNetworkSanityArray { get; set; } = new OnNetworkSanityEvent[0];
-        public OnObjectInstantiatedEvent[] OnObjectInstantiatedArray { get; set; } = new OnObjectInstantiatedEvent[0];
         
         public static void OnGUI() { }
 
@@ -114,7 +102,7 @@ namespace Trinity
         }
         public static void OnUpdate()
         {
-            for (int i = 0; i < Instance.OnUpdateEventArray.Length; i++) { Instance.OnUpdateEventArray[i].OnUpdate(); }
+            for (int i = 0; i < Instance.OnUpdateEvents.Count; i++) Instance.OnUpdateEvents[i].OnUpdate();
 
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt))
             {
@@ -134,15 +122,15 @@ namespace Trinity
         }
         public static void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
-            for (int i = 0; i < Instance.OnSceneLoadedEventArray.Length; i++)
+            for (int i = 0; i < Instance.OnSceneLoadedEvents.Count; i++)
             {
-                Instance.OnSceneLoadedEventArray[i].OnSceneWasLoadedEvent(buildIndex, sceneName);
+                Instance.OnSceneLoadedEvents[i].OnSceneWasLoadedEvent(buildIndex, sceneName);
             }
         }
         [Obfuscation(Exclude = true)]
         public static void OnUIInit()
         {
-            try { MelonCoroutines.Start(MenuUI.StartUI()); LogHandler.Log(LogHandler.Colors.Green, "[On_UI_INIT]Client UI Initialized.", true, false); } catch (Exception ERROR) { LogHandler.Log(LogHandler.Colors.Red, ERROR.Message, true, false); }
+            try { MelonCoroutines.Start(MenuUI.StartUI()); LogHandler.Log(LogHandler.Colors.Green, "Client UI Initialized.", true, false); } catch (Exception ERROR) { LogHandler.Log(LogHandler.Colors.Red, ERROR.Message, true, false); }
         }
         public static void OnApplicationQuit()
         {

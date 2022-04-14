@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,14 @@ namespace Trinity.Module.TargetMenu.World_Hacks.JustB
 {
     class ForceRespawn : BaseModule
     {
-        public ForceRespawn() : base("Force Respawn", "Forcefully Respawn's Player", Main.Instance.JubstBSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.Movment), false, false) { }
+        public ForceRespawn() : base("Force Respawn", "Forcefully Respawn's Player", Main.Instance.JubstBSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.MovmentPath), false, false) { }
 
         public override void OnEnable()
         {
             try
             {
                 UdonExploitManager.udonsend("StartTimerWithCooldown", "target");
-                APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Force Respawned {SelectedPlayer.displayName}", false, false);
                 LogHandler.LogDebug($"Force Respawned -> {SelectedPlayer.displayName}");
             }

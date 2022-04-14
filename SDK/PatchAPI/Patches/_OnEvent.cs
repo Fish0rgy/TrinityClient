@@ -1,4 +1,5 @@
-﻿using ExitGames.Client.Photon;
+using Trinity.Utilities;
+using ExitGames.Client.Photon;
 using HarmonyLib;
 using Photon.Realtime;
 using System.Collections.Generic;
@@ -32,15 +33,15 @@ namespace Trinity.SDK.Patching.Patches
         private static bool OnEvent(EventData __0)
         {
             if (__0 == null) { return false; }
-            for (int i = 0; i < Main.Instance.OnEventEventArray.Length; i++) { if (!Main.Instance.OnEventEventArray[i].OnEvent(__0)) return false; }
+            for (int i = 0; i < Main.Instance.OnEventEvents.Count; i++) { if (!Main.Instance.OnEventEvents[i].OnEvent(__0)) return false; }
             return true;
         }
 
         [Obfuscation(Exclude = true)]
         private static bool OpRaiseEvent(byte __0, Il2CppSystem.Object __1, RaiseEventOptions __2)
         {
-            for (int i = 0; i < Main.Instance.OnSendOPEventArray.Length; i++)
-                if (!Main.Instance.OnSendOPEventArray[i].OnSendOP(__0, ref __1, ref __2))
+            for (int i = 0; i < Main.Instance.OnSendOPEvents.Count; i++)
+                if (!Main.Instance.OnSendOPEvents[i].OnSendOP(__0, ref __1, ref __2))
                     return false;
 
             return true;
@@ -49,8 +50,8 @@ namespace Trinity.SDK.Patching.Patches
         [Obfuscation(Exclude = true)]
         private static bool OnRPC(VRC.Player __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
         {
-            for (int i = 0; i < Main.Instance.OnRPCEventArray.Length; i++)
-                if (!Main.Instance.OnRPCEventArray[i].OnRPC(__0, __1, __2, __3, __4))
+            for (int i = 0; i < Main.Instance.OnRPCEvents.Count; i++)
+                if (!Main.Instance.OnRPCEvents[i].OnRPC(__0, __1, __2, __3, __4))
                     return false;
 
             return true;

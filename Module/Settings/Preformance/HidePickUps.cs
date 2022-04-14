@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using System.Linq;
 using UnityEngine;
 using VRC.SDK3.Components;

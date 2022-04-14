@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+using Trinity.Utilities;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net;
+using Trinity.WebAPI;
 using VRC.Core;
 
 namespace Trinity.SDK.Security
@@ -21,16 +23,7 @@ namespace Trinity.SDK.Security
         public static readonly string ClientFolder = $"{AppDomain.CurrentDomain.BaseDirectory}\\Trinity";
         public static readonly string API = "https://api.basementgames.us/";
         //photon
-        public static int Eventnine { get; set; }
-        public static string Earrape { get; set; }
-        //avatars
-        public static string CAB { get; set; }
-        public static string GameClose { get; set; }
-        public static string AudioCrash { get; set; }
-        public static string Corrupted_PC { get; set; }
-        public static string Quest_GAmeClose { get; set; }
-        public static string VoidBypass { get; set; }
-        public static string keyString { get; set; }
+        public static ServerInfoResp ExploitData { get; set; }
 
         #endregion
 
@@ -40,23 +33,14 @@ namespace Trinity.SDK.Security
             {
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; }; // SSL Windows 10 Issue Fix
                 #region Hidden - ( Resonse API + PATH + KEY )
-                Response = wc.DownloadString(API + "api/v1/user?key=" + key);
+                Response = wc.DownloadString(API + "api/v1/serverinfo?key=" + key);
                 #endregion               
-                ResponseSplit = Response.Split('|');
-                if (ResponseSplit[0].Contains("True"))
-                {
-                    Eventnine = Convert.ToInt32(ResponseSplit[1]); //1
-                    Earrape = ResponseSplit[2]; //2
-                    CAB = ResponseSplit[3] ?? "NULL"; 
-                    GameClose = ResponseSplit[4] ?? "NULL";
-                    AudioCrash = ResponseSplit[5] ?? "NULL";
-                    Corrupted_PC = ResponseSplit[6] ?? "NULL";
-                    Quest_GAmeClose = ResponseSplit[7] ?? "NULL";
-                    VoidBypass = ResponseSplit[8] ?? "NULL";
-                    keyString = key;                   
-                    return true;
-                }
-                return false;
+
+                if (Response.Contains("451")) return false;
+
+                ExploitData = JsonConvert.DeserializeObject<ServerInfoResp>(Response);
+
+                return true;
             }
         }
 

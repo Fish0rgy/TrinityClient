@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
@@ -26,7 +27,7 @@ namespace Trinity.Module.Settings.Theme
                 }
                 else
                 {
-                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.CreateSpriteFromBase64(bgImage);
+                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.LoadSpriteFromFile(bgImage);
                 }
                
             }

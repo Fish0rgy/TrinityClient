@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Trinity.Module.World.World_Hacks.TrinityEngine
 {
     class GetTriggerList : BaseModule
     {
-        public GetTriggerList() : base("Trigger Table", "Gets List Of Sendable Trigger Events", Main.Instance.udonexploitbutton, QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.EventTable), false, false) { }
+        public GetTriggerList() : base("Trigger Table", "Gets List Of Sendable Trigger Events", Main.Instance.udonexploitbutton, QMButtonIcons.LoadSpriteFromFile(Serpent.EventTablePath), false, false) { }
 
         public override void OnEnable()
         {

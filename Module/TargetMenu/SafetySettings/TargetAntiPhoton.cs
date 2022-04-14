@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using ExitGames.Client.Photon;
@@ -14,12 +15,12 @@ namespace Trinity.Module.TargetMenu.SafetySettings
     {
         public static int target;
         public static string targetname;
-        public TargetAntiPhoton() : base("Anti RPC", "Targeted Anti RPC", Main.Instance.SafetyTargetButton, QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket), true, true) { }
+        public TargetAntiPhoton() : base("Anti RPC", "Targeted Anti RPC", Main.Instance.SafetyTargetButton, QMButtonIcons.LoadSpriteFromFile(Serpent.rocketPath), true, true) { }
 
         public override void OnEnable()
         {
-            target = PlayerWrapper.GetPhotonID(PlayerWrapper.SelectedVRCPlayer());
-            targetname = PlayerWrapper.SelectedVRCPlayer().name;
+            target = PU.GetPhotonID(PU.SelectedVRCPlayer());
+            targetname = PU.SelectedVRCPlayer().name;
             Main.Instance.OnEventEvents.Add(this);
         }
         public override void OnDisable()
@@ -32,7 +33,7 @@ namespace Trinity.Module.TargetMenu.SafetySettings
         public bool OnEvent(EventData eventData)
         {
             int id = eventData.Sender;
-            var LocalPlayer = PlayerWrapper.GetActorNumber(PlayerWrapper.LocalPlayer);
+            var LocalPlayer = PU.GetActorNumber(PU.GetPlayer());
             byte code = eventData.Code; 
             switch (code)
             {

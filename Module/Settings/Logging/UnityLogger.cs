@@ -1,4 +1,5 @@
-﻿namespace Trinity.Module.Settings.Logging
+using Trinity.Utilities;
+namespace Trinity.Module.Settings.Logging
 {
     class UnityLogger : BaseModule
     {

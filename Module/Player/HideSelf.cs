@@ -1,3 +1,4 @@
+using Trinity.Utilities;
 using Trinity.SDK;
 using UnityEngine;
 using VRC.Core;
@@ -9,14 +10,14 @@ namespace Trinity.Module.Exploit
         public HideSelf() : base("Hide Self", "Unloads your Avatar", Main.Instance.PlayerButton, null, true, false) { }
         public override void OnDisable()
         {
-            PlayerWrapper.ClearAssets();
-            PlayerWrapper.ShowSelf(true);
-            PlayerWrapper.ChangeAvatar(PlayerWrapper.backupID);
+            PU.ClearAssets();
+            PU.ShowSelf(true);
+            PU.ChangeAvatar(PU.backupID);
         }
         public override void OnEnable()
         {
-            PlayerWrapper.backupID = APIUser.CurrentUser.avatarId;
-            PlayerWrapper.ShowSelf(false); 
+            PU.backupID = APIUser.CurrentUser.avatarId;
+            PU.ShowSelf(false); 
         }
     }
 }

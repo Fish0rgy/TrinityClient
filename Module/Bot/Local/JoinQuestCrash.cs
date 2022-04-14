@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,9 @@ namespace Trinity.Module.Bot.Local
             {
                 if (!Directory.Exists(@"\Trinity\Bot\Trinity.exe"))
                 {
-                    string worldID = PlayerWrapper.GetWorldID;
-                    string instanceID = PlayerWrapper.GetinstanceID;
-                    string userID = PlayerWrapper.GetUserID;
+                    string worldID = PU.GetPlayer().GetAPIUser().worldId;
+                    string instanceID = PU.GetPlayer().GetAPIUser().instanceId;
+                    string userID = PU.GetPlayer().GetAPIUser().id;
                     string path = AppDomain.CurrentDomain.BaseDirectory + @"\Trinity\Bot\";
                     string Region = GetRegion(GetWorldRegion);
                     LogHandler.Log(LogHandler.Colors.Red, worldID + "\n" + userID + "\n" + path + "\n", false, false);

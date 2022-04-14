@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using Photon.Realtime;
 using UnityEngine;
@@ -11,18 +12,18 @@ namespace Trinity.Module.Settings.Render
 
         public override void OnEnable()
         {
-            for (int i = 0; i < PlayerWrapper.GetAllPlayers().Length; i++)
+            for (int i = 0; i < PU.GetAllPlayers().Length; i++)
             {
-                CapsuleEsp.HighlightPlayer(PlayerWrapper.GetAllPlayers()[i], true);
+                CapsuleEsp.HighlightPlayer(PU.GetAllPlayers()[i], true);
             }
             Main.Instance.OnPlayerJoinEvents.Add(this);
         }
 
         public override void OnDisable()
         {
-            for (int i = 0; i < PlayerWrapper.GetAllPlayers().Length; i++)
+            for (int i = 0; i < PU.GetAllPlayers().Length; i++)
             {
-                CapsuleEsp.HighlightPlayer(PlayerWrapper.GetAllPlayers()[i], false);
+                CapsuleEsp.HighlightPlayer(PU.GetAllPlayers()[i], false);
             }
             Main.Instance.OnPlayerJoinEvents.Remove(this);
         }

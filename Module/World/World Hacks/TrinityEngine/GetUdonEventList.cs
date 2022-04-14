@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Trinity.Module.Player
     class GetUdonEventList : BaseModule
     {
         private static List<string> UdonList = new List<string>();
-        public GetUdonEventList() : base("Udon\n Event Table", "Gets List Of Sendable Udon Events", Main.Instance.udonexploitbutton, QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.EventTable), false, false) { }
+        public GetUdonEventList() : base("Udon\n Event Table", "Gets List Of Sendable Udon Events", Main.Instance.udonexploitbutton, QMButtonIcons.LoadSpriteFromFile(Serpent.EventTablePath), false, false) { }
 
         public override void OnEnable()
         {

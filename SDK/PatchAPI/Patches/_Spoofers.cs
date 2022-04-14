@@ -1,4 +1,5 @@
-﻿using AmplitudeSDKWrapper;
+using Trinity.Utilities;
+using AmplitudeSDKWrapper;
 using MelonLoader;
 using System;
 using System.Linq;

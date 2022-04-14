@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using System;
 using UnityEngine;
@@ -58,7 +59,7 @@ namespace Trinity.Module.Movement
 
                 if (LocalPlayer == null || CameraTransform == null)
                 {
-                    LocalPlayer = PlayerWrapper.LocalPlayer;
+                    LocalPlayer = PU.GetPlayer();
                     CameraTransform = Camera.main.transform;
                 }
                 if (XRDevice.isPresent)

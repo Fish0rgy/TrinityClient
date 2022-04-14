@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using ExitGames.Client.Photon;
 
 namespace Trinity.Module.Safety

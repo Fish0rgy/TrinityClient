@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
@@ -13,11 +14,11 @@ namespace Trinity.Module.TargetMenu.SafetySettings
     class TargetAntiRPC : BaseModule, OnRPCEvent
     {
         public static VRCPlayer target;
-        public TargetAntiRPC() : base("Anti RPC", "Targeted Anti RPC", Main.Instance.SafetyTargetButton, QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket), true, true) { }
+        public TargetAntiRPC() : base("Anti RPC", "Targeted Anti RPC", Main.Instance.SafetyTargetButton, QMButtonIcons.LoadSpriteFromFile(Serpent.rocketPath), true, true) { }
 
         public override void OnEnable()
         {
-            target = PlayerWrapper.SelectedVRCPlayer().prop_VRCPlayer_0;
+            target = PU.SelectedVRCPlayer().prop_VRCPlayer_0;
             Main.Instance.OnRPCEvents.Add(this);
         }
         public override void OnDisable()
@@ -27,7 +28,7 @@ namespace Trinity.Module.TargetMenu.SafetySettings
         }
         public bool OnRPC(VRC.Player sender, VRC_EventHandler.VrcEvent vrcEvent, VRC_EventHandler.VrcBroadcastType vrcBroadcastType, int instagatorId, float fastforward)
         {
-            if(sender == PlayerWrapper.LocalPlayer)
+            if(sender == PU.GetPlayer())
             {
                 return false;
             }

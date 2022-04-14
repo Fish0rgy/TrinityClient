@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using ExitGames.Client.Photon;
 using System;
@@ -31,7 +32,7 @@ namespace Trinity.Module.Settings.Logging
         {
             try
             {
-                int Sender = eventData.sender; VRC.Player player = PlayerWrapper.GetPlayerByActorID(Sender);
+                int Sender = eventData.sender; VRC.Player player = PU.GetPlayerByActorID(Sender);
                 string LocalPlayer = player != null ? player.prop_APIUser_0.displayName : "VRC Server";
                 NonAllocDictionary<byte, Il2CppSystem.Object> parameters = eventData.Parameters;
                 if (eventData.Code != 1)

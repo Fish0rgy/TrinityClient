@@ -1,4 +1,5 @@
-﻿using System;
+using Trinity.Utilities;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
