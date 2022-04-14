@@ -117,7 +117,7 @@ namespace Trinity
             if (Input.GetKey(KeyCode.K))
             {
                 MelonCoroutines.Start(Keybinds.udonNukeKeyBind());
-                LogHandler.Log(LogHandler.Colors.Green, "[Keybind] Nuking World...", true, false);
+                LogHandler.Log(LogHandler.Colors.Green, "[Keybind] Nuking World..", true, false);
             }
         }
         public static void OnSceneWasLoaded(int buildIndex, string sceneName)
