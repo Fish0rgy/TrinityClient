@@ -20,28 +20,19 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MovieAndChill
         {
             try
             {
-                MelonLoader.MelonCoroutines.Start(gay());
                 APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"{SelectedPlayer.displayName} Is Lagging", false, false);
-                LogHandler.LogDebug($"{SelectedPlayer.displayName} Is Lagging"); 
+                LogHandler.LogDebug($"{SelectedPlayer.displayName} Is Lagging");
+                for (int i = 0; i < 10; i++)
+                {
+                    UdonExploitManager.udonsend("OnObjectRootPickupUseDown", "target");
+
+                }
             }
             catch (Exception ex)
             {
                 LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
-        }
-        public override void OnDisable()
-        {
-            MelonLoader.MelonCoroutines.Stop(gay());
-        }
-        IEnumerator gay()
-        {
-            while (toggled)
-            {
-                UdonExploitManager.udonsend("OnObjectRootPickupUseDown", "target");
-                yield return new WaitForSecondsRealtime(0.2f);
-            }
-            yield break;
-        }
+        } 
     }
 }
