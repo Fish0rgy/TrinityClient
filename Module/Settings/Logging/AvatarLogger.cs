@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using VRC;
 
@@ -24,7 +25,7 @@ namespace Trinity.Module.Settings.Logging
             SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"AvatarID: {player.prop_ApiAvatar_0.id}", true, false);
             SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"URL:  {player.prop_ApiAvatar_0.assetUrl}", true, false);
             SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"SIZE_LIMIT:  {ValidationHelpers.CONTENT_AVATAR_ASSET_BUNDLE_SIZE_LIMIT_PC}", true, false);
-            SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"FileSize:  {PlayerWrapper.IsAssetBundleFileTooLarge(player)}", true, false);
+            SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, $"FileSize:  {PU.IsAssetBundleFileTooLarge(player)}", true, false);
             SDK.LogHandler.LogDebug($"[Avatar Logger] User: {player.prop_VRCPlayerApi_0.displayName}");
         }
     }

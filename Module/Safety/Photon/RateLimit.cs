@@ -1,4 +1,5 @@
-﻿using Area51.Events;
+using Trinity.Utilities;
+using Area51.Events;
 using Area51.Module.Safety.Photon.NetworkSanity.Core;
 using Area51.Module.Safety.Photon.Sanitizers;
 using Area51.SDK;

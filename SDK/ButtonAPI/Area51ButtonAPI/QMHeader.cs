@@ -1,4 +1,5 @@
-﻿using TMPro;
+using Trinity.Utilities;
+using TMPro;
 using UnityEngine;
 
 namespace Area51.SDK.ButtonAPI

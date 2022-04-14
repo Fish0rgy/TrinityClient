@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
 using TMPro;
@@ -76,7 +77,7 @@ namespace Trinity.Module
             
             frames = player._playerNet.field_Private_Byte_0;
             ping = player._playerNet.field_Private_Byte_1;
-            UserID = PlayerWrapper.GetUserID;
+            UserID = PU.GetPlayer().GetAPIUser().id;
             stafftext.text = "";
             Nameplatext.text = "";
 

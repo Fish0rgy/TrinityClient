@@ -1,15 +1,16 @@
-﻿using Trinity.SDK;
-using Trinity.SDK.ButtonAPI;
-using Trinity.SDK.Security;
 using System;
 using System.Diagnostics;
 using System.IO;
+using Trinity.SDK;
+using Trinity.SDK.ButtonAPI;
+using Trinity.SDK.Security;
+using Trinity.Utilities;
 
 namespace Trinity.Module.Bot.Local
 {
-     class CuddleBot1 : BaseModule
+    class CuddleBot1 : BaseModule
     {
-        public CuddleBot1() : base("Start\nBot One", "Bots Join World", Main.Instance.Privatebotbutton, Trinity.SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo)) { } //Button
+        public CuddleBot1() : base("Start\nBot One", "Bots Join World", Main.Instance.Privatebotbutton, Trinity.SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath)) { } //Button
         public static string[] Regions { get { return new[] { "usw", "eu", "jp" }; } } //Creates world region strings
         public static string GetWorldRegion => RoomManager.field_Internal_Static_ApiWorldInstance_0.region.ToString(); //Grabs World region from RoomManager
         private static string GetRegion(string input) { switch (input) { case "Europe": return "eu"; case "US_East": return "us"; case "US_West": return "usw"; default: return "usw"; } } //Gets world region extention from input
@@ -21,10 +22,10 @@ namespace Trinity.Module.Bot.Local
                 var BotCheck = BotExists;
                 if (BotCheck) //checks if bot directory exists
                 {
-                    var getWorldID = PlayerWrapper.GetWorldID;             //WorldID
-                    var getinstanceID = PlayerWrapper.GetinstanceID;          //InstanceID
-                    var getUserID = PlayerWrapper.GetUserID;              //UserID
-                    var getClientID = SecurityCheck.keyString; 
+                    var getWorldID = PU.GetPlayer().GetAPIUser().worldId;             //WorldID
+                    var getinstanceID = PU.GetPlayer().GetAPIUser().instanceId;          //InstanceID
+                    var getUserID = PU.GetPlayer().GetAPIUser().id;              //UserID
+                    var getClientID = SecurityCheck.ExploitData.Key;
                     var botDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\Trinity\\Bot\\"; //makes string for bot directory
                     var exeExists = File.Exists(botDirectory + "Trinity.exe"); //creates flag for Trinity.exe exsistence
                     var exeCheck = exeExists;
@@ -52,4 +53,4 @@ namespace Trinity.Module.Bot.Local
             process.Start();
         }
     }
-} 
+}

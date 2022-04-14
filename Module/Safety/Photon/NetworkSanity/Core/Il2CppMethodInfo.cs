@@ -1,4 +1,5 @@
-﻿using System;
+using Trinity.Utilities;
+using System;
 using System.Runtime.InteropServices;
 using UnhollowerBaseLib.Runtime;
 

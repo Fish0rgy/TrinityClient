@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System.Diagnostics;
 using VRC.Core;
@@ -11,7 +12,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class ReUploadAvatar : BaseModule
     {
-        public ReUploadAvatar() : base("ReUpload", "Opens reuploader's folder.", Main.Instance.AvatarSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.Clone), false, false) { }
+        public ReUploadAvatar() : base("ReUpload", "Opens reuploader's folder.", Main.Instance.AvatarSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.ClonePath), false, false) { }
         public override void OnEnable()
         {
              try

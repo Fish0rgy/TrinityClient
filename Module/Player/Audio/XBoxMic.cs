@@ -1,4 +1,5 @@
-﻿namespace Trinity.Module.Player
+using Trinity.Utilities;
+namespace Trinity.Module.Player
 {
     class XBoxMic : BaseModule
     {

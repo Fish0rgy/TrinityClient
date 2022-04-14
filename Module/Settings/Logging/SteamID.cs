@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 
 namespace Trinity.Module.Settings.Logging
 {

@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>0</WarningLevel>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
@@ -33,7 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -789,7 +789,6 @@
     <Compile Include="SDK\ButtonAPI\QMPanel.cs" />
     <Compile Include="SDK\ButtonAPI\QMButtonIcons.cs" />
     <Compile Include="SDK\Config.cs" />
-    <Compile Include="SDK\Extra Icons.cs" />
     <Compile Include="SDK\Keybinds.cs" />
     <Compile Include="SDK\LogHandler.cs" />
     <Compile Include="SDK\MenuUI.cs" />
@@ -804,12 +803,15 @@
     <Compile Include="SDK\PatchAPI\AlienPatch.cs" />
     <Compile Include="SDK\PhotonAPI\PhotonExtensions.cs" />
     <Compile Include="SDK\PhotonAPI\Serialization.cs" />
-    <Compile Include="SDK\PlayerWrapper.cs" />
-    <Compile Include="SDK\Alien.cs" />
+    <Compile Include="Utilities\PU.cs" />
+    <Compile Include="SDK\Serpent.cs" />
     <Compile Include="SDK\SecurityAPI\Client.cs" />
     <Compile Include="SDK\UdonExploitManager.cs" />
     <Compile Include="SDK\WorldWrapper.cs" />
     <Compile Include="Sockets\ClientServer.cs" />
+    <Compile Include="Utilities\UIU.cs" />
+    <Compile Include="Utilities\WU.cs" />
+    <Compile Include="WebAPI\ServerInfoResp.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Module\World\World Hacks\MidNight\" />

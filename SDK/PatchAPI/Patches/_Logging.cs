@@ -1,4 +1,5 @@
-﻿using Trinity.Module.Settings.Logging;
+using Trinity.Utilities;
+using Trinity.Module.Settings.Logging;
 using HarmonyLib;
 using System.Linq;
 using System.Reflection;

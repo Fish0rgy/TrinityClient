@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using Trinity.SDK.Photon;
 using ExitGames.Client.Photon;
@@ -35,7 +36,7 @@ namespace Trinity.Module.Settings.Spoofer
                 switch (code)
                 {
                     case 7:
-                        byte[] viewIDOut = BitConverter.GetBytes(int.Parse($"{PlayerWrapper.LocalPlayer.GetActorNumber()}00001"));
+                        byte[] viewIDOut = BitConverter.GetBytes(int.Parse($"{PU.GetPlayer().GetActorNumber()}00001"));
                         byte[] movementData = eventData.customData.Cast<Il2CppStructArray<byte>>();
                         Buffer.BlockCopy(viewIDOut, 0, movementData, 0, 4);
                         Buffer.BlockCopy(ping, 0, movementData, 68, 2);

@@ -1,4 +1,5 @@
-﻿using Trinity.Module.World.World_Hacks.Murder_4;
+using Trinity.Utilities;
+using Trinity.Module.World.World_Hacks.Murder_4;
 using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
@@ -12,13 +13,13 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     internal class BringRevolverTarget : BaseModule
     {
-        public BringRevolverTarget() : base("Bring Revolver", "Brings Revolver", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
+        public BringRevolverTarget() : base("Bring Revolver", "Brings Revolver", Main.Instance.MurderSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), false, false) { }
 
         public override void OnEnable()
         {
             try
             {
-                APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Brought Revolver {SelectedPlayer.displayName}'s Position", false, false);
                 LogHandler.LogDebug($"Brought Revolver {SelectedPlayer.displayName}'s Position");
                 MurderMisc.MurderTargetGive("Revolver");

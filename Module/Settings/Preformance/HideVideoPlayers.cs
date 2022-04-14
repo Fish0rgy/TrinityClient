@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using UnhollowerBaseLib;
 using UnityEngine;
 using VRC.SDK3.Video.Components;

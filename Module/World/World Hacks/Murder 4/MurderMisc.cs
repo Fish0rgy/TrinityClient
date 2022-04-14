@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
             {
                 if (player.name != playernode.name)
                 {
-                    player.gameObject.udonsend(udonevent, PlayerWrapper.SelectedVRCPlayer(), false);
+                    player.gameObject.udonsend(udonevent, PU.SelectedVRCPlayer(), false);
                 }
             }
         }
@@ -50,7 +51,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
             {
                 if (!componetcheck)
                 {
-                    if (player == PlayerWrapper.SelectedVRCPlayer())
+                    if (player == PU.SelectedVRCPlayer())
                     {
                         component.SendCustomEvent(udonEvent);
                         return;
@@ -69,7 +70,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
             {
                 if (transform.name != gameObject.name)
                 {
-                    udonsend(transform.gameObject, udonevent, PlayerWrapper.LocalVRCPlayer._player, false);
+                    udonsend(transform.gameObject, udonevent, PU.GetVRCPlayer()._player, false);
                 }
             }
         }
@@ -103,8 +104,8 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
                 bool GameLogic = gameObject.name.Contains(ObjectName);
                 if (GameLogic)
                 {
-                    Networking.SetOwner(PlayerWrapper.SelectedVRCPlayer().field_Private_VRCPlayerApi_0, gameObject);
-                    gameObject.transform.position = PlayerWrapper.SelectedVRCPlayer().transform.position + new Vector3(0f, 0.1f, 0f);
+                    Networking.SetOwner(PU.SelectedVRCPlayer().field_Private_VRCPlayerApi_0, gameObject);
+                    gameObject.transform.position = PU.SelectedVRCPlayer().transform.position + new Vector3(0f, 0.1f, 0f);
                 }
             }
         }

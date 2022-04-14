@@ -1,8 +1,10 @@
-﻿using HarmonyLib;
+using Trinity.Utilities;
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using VRC.Core;
+using Trinity.Utilities;
 
 namespace Trinity.SDK.Patching.Patches
 {
@@ -29,17 +31,17 @@ namespace Trinity.SDK.Patching.Patches
 
             private static void OnPlayerJoin(VRC.Player player)
             {
-                if (player == PlayerWrapper.LocalPlayer) { WorldWrapper.Init(); }
-                for (int i = 0; i < Main.Instance.OnPlayerJoinEventArray.Length; i++)
-                    Main.Instance.OnPlayerJoinEventArray[i].OnPlayerJoin(player);
-                if (PlayerWrapper.PlayersActorID.ContainsKey(player.GetActorNumber()))
+                if (player == PU.GetPlayer()) { WorldWrapper.Init(); }
+                for (int i = 0; i < Main.Instance.OnPlayerJoinEvents.Count; i++)
+                    Main.Instance.OnPlayerJoinEvents[i].OnPlayerJoin(player);
+                if (PU.PlayersActorID.ContainsKey(player.GetActorNumber()))
                 {
-                    PlayerWrapper.PlayersActorID.Remove(player.GetActorNumber());
-                    PlayerWrapper.PlayersActorID.Add(player.GetActorNumber(), player);
+                    PU.PlayersActorID.Remove(player.GetActorNumber());
+                    PU.PlayersActorID.Add(player.GetActorNumber(), player);
                 }
                 else
                 {
-                    PlayerWrapper.PlayersActorID.Add(player.GetActorNumber(), player);
+                    PU.PlayersActorID.Add(player.GetActorNumber(), player);
                 }
 
             }
@@ -50,9 +52,9 @@ namespace Trinity.SDK.Patching.Patches
                 {
                     return;
                 }
-                for (int i = 0; i < Main.Instance.OnPlayerLeaveEventArray.Length; i++)
-                    Main.Instance.OnPlayerLeaveEventArray[i].PlayerLeave(player);
-                PlayerWrapper.PlayersActorID.Remove(player.GetActorNumber());
+                for (int i = 0; i < Main.Instance.OnPlayerLeaveEvents.Count; i++)
+                    Main.Instance.OnPlayerLeaveEvents[i].PlayerLeave(player);
+                PU.PlayersActorID.Remove(player.GetActorNumber());
             }
         }
     }

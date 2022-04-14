@@ -1,4 +1,5 @@
-﻿using EvilEye.SDK;
+using Trinity.Utilities;
+using EvilEye.SDK;
 using System;
 using System.Diagnostics;
 using System.IO;

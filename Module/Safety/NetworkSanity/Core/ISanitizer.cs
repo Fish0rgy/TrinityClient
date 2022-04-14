@@ -1,4 +1,5 @@
-﻿using ExitGames.Client.Photon;
+using Trinity.Utilities;
+using ExitGames.Client.Photon;
 using Photon.Realtime;
 
 namespace Area51.Module.Safety.Photon.NetworkSanity.Core

@@ -1,4 +1,5 @@
-﻿using VRC.DataModel;
+using Trinity.Utilities;
+using VRC.DataModel;
 
 namespace Trinity.Module.Player
 {

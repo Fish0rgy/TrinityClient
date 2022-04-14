@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,14 @@ namespace Trinity.Module.TargetMenu.World_Hacks.JustB
 {
     class LockPlayerMovement : BaseModule
     {
-        public LockPlayerMovement() : base("Lock Movement", "Forcefully Tags Player", Main.Instance.JubstBSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), true, true) { }
+        public LockPlayerMovement() : base("Lock Movement", "Forcefully Tags Player", Main.Instance.JubstBSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), true, true) { }
 
         public override void OnEnable()
         {
             try
             {
                 UdonExploitManager.udonsend("OnDesktopTopDownViewStart", "target");
-                APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Locked {SelectedPlayer.displayName}'s Movement", false, false);
                 LogHandler.LogDebug($"Locked {SelectedPlayer.displayName}'s Movement"); 
             }
@@ -32,7 +33,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.JustB
             try
             {
                 UdonExploitManager.udonsend("OnPutDownCueLocally", "target");
-                APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Unlocked {SelectedPlayer.displayName}'s Movement", false, false);
                 LogHandler.LogDebug($"Unlocked {SelectedPlayer.displayName}'s Movement");
             }

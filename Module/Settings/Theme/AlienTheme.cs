@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
@@ -12,7 +13,7 @@ namespace Trinity.Module.Settings.Theme
 {
     class SerpentTheme : BaseModule, OnUpdateEvent
     {
-        public SerpentTheme() : base("Space\nTheme", "Enable Trinity Theme", Main.Instance.SettingsButtonTheme, QMButtonIcons.CreateSpriteFromBase64(Serpent.SpaceShip), true, false) { }
+        public SerpentTheme() : base("Space\nTheme", "Enable Trinity Theme", Main.Instance.SettingsButtonTheme, QMButtonIcons.LoadSpriteFromFile(Serpent.SpaceShipPath), true, false) { }
         private bool SetTheme = false;
         public Sprite Background = null;
         public bool BGSet = false;
@@ -21,7 +22,7 @@ namespace Trinity.Module.Settings.Theme
             try
             {
                 if (Background == null) Background = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().activeSprite;
-                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.CreateSpriteFromBase64(Serpent.BG);
+                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.LoadSpriteFromFile(Serpent.BGPath);
                 Main.Instance.OnUpdateEvents.Add(this);
 
             }
@@ -73,7 +74,7 @@ namespace Trinity.Module.Settings.Theme
 
                 if (GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer02").GetComponent<Image>().color != Color.white)
                 {
-                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.CreateSpriteFromBase64(SDK.Serpent.BG);
+                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.LoadSpriteFromFile(SDK.Serpent.BGPath);
                     GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer02").GetComponent<Image>().color = Color.white;
                     GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer02").active = false;
                     GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Background_QM_PagePanel").GetComponent<Image>().color = Color.white;
@@ -130,7 +131,7 @@ namespace Trinity.Module.Settings.Theme
                     GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title").GetComponent<TextMeshProUGUI>().color = Color.black;
                     GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickLinks/LeftItemContainer/Text_Title").active = false;
                     GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions/LeftItemContainer/Text_Title").active = false;
-                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMNotificationsArea/Header_StreamerMode/Header/LeftItemContainer/Icon").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(SDK.Serpent.clientLogo);
+                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMNotificationsArea/Header_StreamerMode/Header/LeftItemContainer/Icon").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(SDK.Serpent.clientLogoPath);
                 }
             }
         }

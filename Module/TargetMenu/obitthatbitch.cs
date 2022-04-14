@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using VRC.Core;
 using Trinity.Events;
 using UnityEngine;
@@ -13,28 +14,28 @@ namespace Trinity.Module.TargetMenu
     {
 
         private GameObject puppet;
-        public VRC.Player GetSelectedUser() => PlayerWrapper.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0);
+        public VRC.Player GetSelectedUser() => PU.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0);
 
         public TargetOrbitch() : base("Items orbit", "Teleports items to selected user.", Main.Instance.Targetbutton, null, true, false) { }
 
         public override void OnEnable()
         {
             MelonLoader.MelonCoroutines.Start(ItemRotate());
-            LogHandler.LogDebug($"[Info] -> Items Orbitting -> {PlayerWrapper.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0.displayName}");
+            LogHandler.LogDebug($"[Info] -> Items Orbitting -> {PU.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0.displayName}");
         }
 
         public override void OnDisable()
         {
             MelonLoader.MelonCoroutines.Stop(ItemRotate());
      
-            LogHandler.LogDebug($"[Info] -> Items removed -> {PlayerWrapper.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0.displayName}");
+            LogHandler.LogDebug($"[Info] -> Items removed -> {PU.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0.displayName}");
         }
 
 
 
         public IEnumerator ItemRotate()
         {
-            var setplay = PlayerWrapper.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0);
+            var setplay = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0);
             if (this.puppet == null)
             {
                 this.puppet = new GameObject();

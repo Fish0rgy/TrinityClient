@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using System;
 using System.Collections.Generic;
@@ -61,9 +62,9 @@ namespace Trinity.Module.Settings.Render
             try
             {
 
-                for (int i = 0; i < PlayerWrapper.GetAllPlayers().Length; i++)
+                for (int i = 0; i < PU.GetAllPlayers().Length; i++)
                 {
-                    VRC.Player player = PlayerWrapper.GetAllPlayers()[i];
+                    VRC.Player player = PU.GetAllPlayers()[i];
                     CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
                     nameplate.player = player;
                     var userid = player.prop_APIUser_0.id;
@@ -74,7 +75,7 @@ namespace Trinity.Module.Settings.Render
                     }
                     Users.Add(userid);
                   //  LogHandler.Log(LogHandler.Colors.Green, "User:" + player.prop_APIUser_0.displayName + "\nUserID:" + player.prop_APIUser_0.id + "\nUpdated Player Info");
-                    if (i >= PlayerWrapper.GetAllPlayers().Length)
+                    if (i >= PU.GetAllPlayers().Length)
                     {
                         break;
                     }

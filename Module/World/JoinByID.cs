@@ -1,16 +1,30 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using System;
+using VRC.SDKBase;
+using UnityEngine;
+using UnityEngine.UI;
+
+using Trinity.SDK;
+using Trinity.Utilities;
+
 
 namespace Trinity.Module.World
 {
     class JoinByID : BaseModule
     {
-        public JoinByID() : base("Force Join", "Make Sure To Copy A World ID To Your Clipboard Before Clicking", Main.Instance.WorldButton, SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket), false, false) { }
+        public JoinByID() : base("Force Join", "Make Sure To Copy A World ID To Your Clipboard Before Clicking", Main.Instance.WorldButton, SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.rocketPath), false, false) { }
 
         public override void OnEnable()
         {
-            string Negro = Misc.GetClipboard();
-            string[] Nigger = Negro.Split(new char[] { ':' }); bool fat = Nigger.Length != 2;
-            VRCFlowManager.prop_VRCFlowManager_0.Method_Public_Void_String_WorldTransitionInfo_Action_1_String_Boolean_0(Nigger[0] + ":" + Nigger[1]);
+            Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) =>
+            {
+                if (string.IsNullOrWhiteSpace(str)) return;
+
+                Networking.GoToRoom(str);
+
+            });
+
+            UIU.OpenKeyboardPopup("Force Join", "Enter Instance ID...", keyboardAction);
         }
     }
 }

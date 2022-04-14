@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+using Trinity.Utilities;
+using HarmonyLib;
 using System;
 using System.Reflection;
 using VRC.Networking;

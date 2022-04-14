@@ -1,4 +1,5 @@
-﻿using Il2CppSystem.Collections.Generic;
+using Trinity.Utilities;
+using Il2CppSystem.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;

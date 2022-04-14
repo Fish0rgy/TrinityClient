@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using ExitGames.Client.Photon;
 using UnhollowerBaseLib;
@@ -25,7 +26,7 @@ namespace Trinity.Module.Safety
         {
             if (eventData.Code == 210)
             {
-                VRC.Player player = PlayerWrapper.GetPlayerWithPlayerID(eventData.sender);
+                VRC.Player player = PU.GetPlayerWithPlayerID(eventData.sender);
                 if (player == null)
                 {
                     LogHandler.Log(LogHandler.Colors.Red,"Blocked Invalid 210", false,false);

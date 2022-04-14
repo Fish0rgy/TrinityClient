@@ -1,4 +1,5 @@
-﻿using System;
+using Trinity.Utilities;
+using System;
 using System.Collections;
 using Trinity.Events;
 using Trinity.SDK;
@@ -33,10 +34,10 @@ namespace Trinity.Module.World.World_Hacks.Just_B
             try
             {
                 if (!state) return;
-                if (PlayerWrapper.LocalPlayer.field_Private_APIUser_0._displayName_k__BackingField != "Blue-kun")
+                if (PU.GetPlayer().field_Private_APIUser_0._displayName_k__BackingField != "Blue-kun")
                 {
                     MelonLoader.MelonCoroutines.Start(JustBMisc.spoofVIP());
-                    PlayerWrapper.SpoofDisplayname("Blue-kun");
+                    PU.GetPlayer().field_Private_APIUser_0._displayName_k__BackingField = "Blue-kun";
                 }
             } catch{}
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using Trinity.Utilities;
+using UnityEngine;
 using VRC.Udon;
 
 namespace Trinity.Module.World.World_Hacks.Among_Us

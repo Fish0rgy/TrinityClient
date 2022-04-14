@@ -1,4 +1,5 @@
-﻿using Area51.SDK;
+using Trinity.Utilities;
+using Area51.SDK;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

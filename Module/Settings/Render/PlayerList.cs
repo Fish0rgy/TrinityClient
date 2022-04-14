@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using MelonLoader;
@@ -68,7 +69,7 @@ namespace Trinity.Module.Settings.Render
 
         public override void OnUIInit()
         {
-            playerList = new QMLable(GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left").transform, -207.1015f, -2.14f, "PlayerList");
+            playerList = new QMLable(UIU.UserInterface.transform.Find("Canvas_QuickMenu(Clone)/Container/Window/Wing_Left"), -207.1015f, -2.14f, "PlayerList");
             base.OnUIInit();
         }
         
@@ -79,9 +80,9 @@ namespace Trinity.Module.Settings.Render
                 try
                 {
                     string info = "";         
-                    for (int i = 0; i < PlayerWrapper.GetAllPlayers().Length; i++)
+                    for (int i = 0; i < PU.GetAllPlayers().Length; i++)
                     {
-                        VRC.Player player = PlayerWrapper.GetAllPlayers()[i];
+                        VRC.Player player = PU.GetAllPlayers()[i];
                         info += $"[ID] {player.GetActorNumber()}";
                         //info += $"[PH] {player.GetPhotonID()}";
                         if (player.GetIsMaster() == true)

@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+using Trinity.Utilities;
+using HarmonyLib;
 using System;
 using System.Reflection;
 using UnhollowerBaseLib;
@@ -44,8 +45,8 @@ namespace Trinity.SDK.Patching.Patches
                 return true;
             }
             string avatarId = gameObject.GetComponent<PipelineManager>().blueprintId;
-            for (int i = 0; i < Main.Instance.OnAssetBundleLoadEventArray.Length; i++)
-                if (!Main.Instance.OnAssetBundleLoadEventArray[i].OnAvatarAssetBundleLoad(gameObject, avatarId))
+            for (int i = 0; i < Main.Instance.OnAssetBundleLoadEvents.Count; i++)
+                if (!Main.Instance.OnAssetBundleLoadEvents[i].OnAvatarAssetBundleLoad(gameObject, avatarId))
                     return false;
 
             return true;
