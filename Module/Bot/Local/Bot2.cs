@@ -10,7 +10,7 @@ namespace Trinity.Module.Bot.Local
 {
     class CuddleBot2 : BaseModule
     {
-        public CuddleBot2() : base("Start\nBot Two", "Bots Join World", Main.Instance.Privatebotbutton, Trinity.SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath)) { } //Button
+        public CuddleBot2() : base("Start\nBot Two", "Bots Join World", Main.Instance.Privatebotbutton, Trinity.SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.bot2)) { } //Button
         public static string[] Regions { get { return new[] { "usw", "eu", "jp" }; } } //Creates world region strings
         public static string GetWorldRegion => RoomManager.field_Internal_Static_ApiWorldInstance_0.region.ToString(); //Grabs World region from RoomManager
         private static string GetRegion(string input) { switch (input) { case "Europe": return "eu"; case "US_East": return "us"; case "US_West": return "usw"; default: return "usw"; } } //Gets world region extention from input

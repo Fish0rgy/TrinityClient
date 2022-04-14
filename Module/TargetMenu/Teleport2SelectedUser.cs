@@ -7,7 +7,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class Tel2User : BaseModule
     {
-        public Tel2User() : base("Teleport", "Teleports to selected user.", Main.Instance.Targetbutton, QMButtonIcons.LoadSpriteFromFile(Serpent.MovmentPath), false, false) { }
+        public Tel2User() : base("Teleport", "Teleports to selected user.", Main.Instance.Targetbutton, QMButtonIcons.LoadSpriteFromFile(Serpent.TeleportPath), false, false) { }
 
         public override void OnEnable()
         {

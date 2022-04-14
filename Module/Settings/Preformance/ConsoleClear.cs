@@ -6,7 +6,7 @@ namespace Trinity.Module.Settings.Preformance
 {
     class ConsoleClear : BaseModule
     {
-        public ConsoleClear() : base("Clear Console", "Clears Melon Loader Console", Main.Instance.SettingsButtonpreformance, QMButtonIcons.LoadSpriteFromFile(Serpent.ToggleOffPath), false, false)
+        public ConsoleClear() : base("Clear Console", "Clears Melon Loader Console", Main.Instance.SettingsButtonpreformance, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), false, false)
         {
         }
         public override void OnEnable()
