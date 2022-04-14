@@ -117,7 +117,7 @@ namespace Trinity
             if (Input.GetKey(KeyCode.K))
             {
                 MelonCoroutines.Start(Keybinds.udonNukeKeyBind());
-                LogHandler.Log(LogHandler.Colors.Green, "[Keybind] Nuking World..", true, false);
+                LogHandler.Log(LogHandler.Colors.Green, "[Keybind] Nuking World...", true, false);
             }
         }
         public static void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -137,7 +137,7 @@ namespace Trinity
             try
             {
                 foreach (BaseModule module in Instance.Modules) { if (module.save) { Instance.Config.setConfigBool(module.name, module.toggled); } }
-                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key)) == true) { LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Shutting down, GoodBye......!", false, false); Process.GetCurrentProcess().Kill(); }
+                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key)) == true) { LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Shutting down, GoodBye!", false, false); Process.GetCurrentProcess().Kill(); }
                 else
                 {
                     Process.GetCurrentProcess().Kill();
