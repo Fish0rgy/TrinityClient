@@ -10,7 +10,7 @@ namespace Trinity.Module.Bot.Local
 {
     class KIllBots : BaseModule
     {
-        public KIllBots() : base("Bots Leave", "Tells Bots To Disconnect", Main.Instance.Privatebotbutton, QMButtonIcons.LoadSpriteFromFile(Serpent.skipPath), false) { }
+        public KIllBots() : base("Bots Leave", "Tells Bots To Disconnect", Main.Instance.Privatebotbutton, QMButtonIcons.LoadSpriteFromFile(Serpent.stopbots), false) { }
         
         public override void OnEnable()
         {
