@@ -1,4 +1,5 @@
-﻿using Trinity.SDK.Patching;
+using Trinity.Utilities;
+using Trinity.SDK.Patching;
 using Harmony; 
 using MelonLoader;
 using System;
@@ -132,8 +133,8 @@ namespace Trinity.SDK.PatchAPI.Patches
             }
             bool containsPrefabName = potentialAvatar.name.StartsWith("prefab");
             IntPtr result = originalInstantiateDelegate(assetPtr, pos, rot, allowCustomShaders, isUI, validate, nativeMethodPointer);
-            for (int i = 0; i < Main.Instance.OnObjectInstantiatedArray.Length; i++)
-                if (Main.Instance.OnObjectInstantiatedArray[i].OnObjectInstantiatedPatch(assetPtr, pos, rot, allowCustomShaders, isUI, validate, nativeMethodPointer, originalInstantiateDelegate))
+            for (int i = 0; i < Main.Instance.OnObjectInstantiatedEvents.Count; i++)
+                if (Main.Instance.OnObjectInstantiatedEvents[i].OnObjectInstantiatedPatch(assetPtr, pos, rot, allowCustomShaders, isUI, validate, nativeMethodPointer, originalInstantiateDelegate))
                     return result;
             return result;
         }

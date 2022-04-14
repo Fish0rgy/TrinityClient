@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using Trinity.Utilities;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;

@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using Trinity.SDK.Security;
 using System;
@@ -12,7 +13,7 @@ namespace Trinity.Module.Settings.Preformance
 {
     class ReLogin : BaseModule
     {
-        public ReLogin() : base("Re-Login", "Failed To Login? Press Me To Try Again!", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Serpent.refresh), false, false)
+        public ReLogin() : base("Re-Login", "Failed To Login? Press Me To Try Again!", Main.Instance.SettingsButtonpreformance, QMButtonIcons.LoadSpriteFromFile(Serpent.refreshPath), false, false)
         {
         }
         public override void OnEnable()

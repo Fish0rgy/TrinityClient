@@ -1,24 +1,35 @@
-﻿using System;
+using Trinity.Utilities;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VRC.UI.Core.Styles;
 
 namespace Trinity.SDK.ButtonAPI
 {
     public class QMSingleButton
     {
+
+        public Button mainButton;
+
+        private TMP_Text textCom;
+        private Image badge;
+        private Image icon;
+
         public QMSingleButton(Transform parent, string text, string toolTip, Sprite Icon, Action action)
         {
             GameObject singleButton = UnityEngine.Object.Instantiate<GameObject>( Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Emojis").gameObject, parent);     
             singleButton.transform.parent = parent;
             singleButton.name = text + "_Trinity_Button";         
             singleButton.transform.Find("Text_H4").gameObject.GetComponent<TextMeshProUGUI>().text = text;
-            singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>().faceColor = Color.green;
+            textCom = singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>();
+            badge = singleButton.transform.Find("Badge_MMJump").GetComponent<Image>();
+            icon = singleButton.transform.Find("Icon").GetComponent<Image>();
             singleButton.transform.Find("Background").GetComponent<Image>().color = Color.black;
             singleButton.transform.Find("Badge_MMJump").gameObject.active = true; 
             if (Icon != null)
             {
-                singleButton.transform.Find("Icon").GetComponent<Image>().sprite = Icon;
+                icon.sprite = Icon;
 
             }
             else
@@ -26,10 +37,15 @@ namespace Trinity.SDK.ButtonAPI
                 UnityEngine.Object.Destroy(singleButton.transform.Find("Icon").GetComponent<Image>());
             }
             singleButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = toolTip;
-            Button button = singleButton.GetComponent<Button>();
-            button.StartColorTween(Color.green, true);
-            button.onClick = new Button.ButtonClickedEvent();
-            button.onClick.AddListener(action);
+            mainButton = singleButton.GetComponent<Button>();
+            mainButton.onClick = new Button.ButtonClickedEvent();
+            mainButton.onClick.AddListener(action);
+            badge.color = new(1f, 0.8234f, 0f, 1f);
+            icon.color = new(1f, 0.8234f, 0f, 1f);
+            textCom.color = new(0.7189f, 0.5634f, 0f, 1f);
+            badge.gameObject.GetComponent<StyleElement>().enabled = false;
+            icon.gameObject.GetComponent<StyleElement>().enabled = false;
+            textCom.gameObject.GetComponent<StyleElement>().enabled = false;
             singleButton.SetActive(true);
         }
     }

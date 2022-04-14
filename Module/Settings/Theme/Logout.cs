@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using Trinity.SDK.Security;
 using System;
@@ -9,7 +10,7 @@ namespace Trinity.Module.Settings.Theme
 {
     class Logout : BaseModule
     {
-        public Logout() : base("Logout", "This logs you our and exist vrchat.", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Serpent.powerbutton), false, false) { }
+        public Logout() : base("Logout", "This logs you our and exist vrchat.", Main.Instance.SettingsButtonpreformance, QMButtonIcons.LoadSpriteFromFile(Serpent.powerbuttonPath), false, false) { }
 
         public override void OnEnable()
         {

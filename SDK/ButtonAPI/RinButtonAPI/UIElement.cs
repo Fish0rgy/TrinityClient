@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using Trinity.Utilities;
+using UnityEngine;
 
 namespace QuickMenuLib
 {

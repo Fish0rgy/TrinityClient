@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
 using System.Collections;
@@ -13,13 +14,13 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MovieAndChill
 {
     class TargetMCTeleport : BaseModule
     {
-        public TargetMCTeleport() : base("Respawn Loop", "Targeted Teleport", Main.Instance.MoveAndChillSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), true, true) { }
+        public TargetMCTeleport() : base("Respawn Loop", "Targeted Teleport", Main.Instance.MoveAndChillSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), true, true) { }
         public override void OnEnable()
         {
             try
             {
                 MelonLoader.MelonCoroutines.Start(gay());
-                APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Force Respawned {SelectedPlayer.displayName}", false, false);
                 LogHandler.LogDebug($"{SelectedPlayer.displayName} Respawn Loop");
             }

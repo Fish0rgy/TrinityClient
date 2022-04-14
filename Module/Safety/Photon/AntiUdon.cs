@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Trinity.Module.Safety
         }
         public bool OnUdon(string __0, VRC.Player __1)
         {
-            if(__1.field_Private_APIUser_0.id == PlayerWrapper.LocalPlayer.prop_APIUser_0.id)
+            if(__1.field_Private_APIUser_0.id == PU.GetPlayer().prop_APIUser_0.id)
             {
                 return true;
             }

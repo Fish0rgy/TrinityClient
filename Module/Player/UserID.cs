@@ -1,16 +1,17 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 
 namespace Trinity.Module.World
 {
     class CopyUserID : BaseModule
     {
-        public CopyUserID() : base("Get User ID", "Copy the UserID to clipboard", Main.Instance.PlayerButton, SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Serpent.copy), false, false) { }
+        public CopyUserID() : base("Get User ID", "Copy the UserID to clipboard", Main.Instance.PlayerButton, SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.copyPath), false, false) { }
 
         public override void OnEnable()
         {
-            if (PlayerWrapper.GetUserID != "")
-                Misc.SetClipboard(PlayerWrapper.GetUserID);
-            LogHandler.Log(LogHandler.Colors.Green, "User ID: " + PlayerWrapper.GetUserID + " Copied to clipboard.", false, false);
+            if (PU.GetPlayer().GetAPIUser().id != "")
+                Misc.SetClipboard(PU.GetPlayer().GetAPIUser().id);
+            LogHandler.Log(LogHandler.Colors.Green, "User ID: " + PU.GetPlayer().GetAPIUser().id + " Copied to clipboard.", false, false);
         }
 
     }

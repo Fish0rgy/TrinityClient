@@ -1,4 +1,5 @@
-﻿using Trinity.Module.World.World_Hacks.Murder_4;
+using Trinity.Utilities;
+using Trinity.Module.World.World_Hacks.Murder_4;
 using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
@@ -7,18 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VRC.Core;
+using Trinity.Utilities;
 
 namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     class BringItemsTarget : BaseModule
     {
-        public BringItemsTarget() : base("Bring Items", "Brings All Items", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
+        public BringItemsTarget() : base("Bring Items", "Brings All Items", Main.Instance.MurderSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), false, false) { }
 
         public override void OnEnable()
         {
             try
             {
-                APIUser SelectedPlayer = PlayerWrapper.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Brought All Items To {SelectedPlayer.displayName}'s Position", false, false);
                 LogHandler.LogDebug($"Brought All Items To {SelectedPlayer.displayName}'s Position");
                 MurderMisc.MurderTargetGive("Smoke");

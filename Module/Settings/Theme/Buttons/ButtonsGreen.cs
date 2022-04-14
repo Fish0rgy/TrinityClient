@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
@@ -12,7 +13,7 @@ namespace Trinity.Module.Settings.Theme
 {
     internal class ButtonsGreen : BaseModule, OnUpdateEvent
     {
-        public ButtonsGreen() : base("Buttons\nGreen", "Enable Green Buttons", Main.Instance.SettingsButtonTheme, QMButtonIcons.CreateSpriteFromBase64(Serpent.SpaceShip), true, false) { }
+        public ButtonsGreen() : base("Buttons\nGreen", "Enable Green Buttons", Main.Instance.SettingsButtonTheme, QMButtonIcons.LoadSpriteFromFile(Serpent.SpaceShipPath), true, false) { }
         private bool SetTheme, QMTheme = false;
         public Sprite Background = null;
         public bool BGSet = false;
@@ -109,7 +110,7 @@ namespace Trinity.Module.Settings.Theme
                     GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title").GetComponent<TextMeshProUGUI>().color = Color.black;
                     GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickLinks/LeftItemContainer/Text_Title").active = false;
                     GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions/LeftItemContainer/Text_Title").active = false;
-                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMNotificationsArea/Header_StreamerMode/Header/LeftItemContainer/Icon").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(SDK.Serpent.clientLogo);
+                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMNotificationsArea/Header_StreamerMode/Header/LeftItemContainer/Icon").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(SDK.Serpent.clientLogoPath);
                 }
             }
 

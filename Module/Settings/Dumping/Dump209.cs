@@ -1,4 +1,5 @@
-﻿using Area51.Events;
+using Trinity.Utilities;
+using Area51.Events;
 using Area51.SDK.Photon;
 using ExitGames.Client.Photon;
 using Newtonsoft.Json;

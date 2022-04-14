@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using ExitGames.Client.Photon;
 
@@ -22,7 +23,7 @@ namespace Trinity.Module.Safety
 
         public bool OnEvent(EventData eventData)
         {
-            VRC.Player player = PlayerWrapper.GetPlayerByActorID(eventData.Sender);
+            VRC.Player player = PU.GetPlayerByActorID(eventData.Sender);
             bool EventCodes = eventData.Code == 6 || eventData.Code == 9 || eventData.Code == 209 || eventData.Code == 210;
             if (EventCodes)
             {
@@ -32,7 +33,7 @@ namespace Trinity.Module.Safety
                     {  
                       return false;
                     }
-                    if (player == PlayerWrapper.LocalPlayer)
+                    if (player == PU.GetPlayer())
                         return true;
                 }
                

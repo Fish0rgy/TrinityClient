@@ -1,25 +1,36 @@
-﻿using Trinity.SDK;
-using Trinity.SDK.ButtonAPI;
+using Trinity.Utilities;
 using System;
-using System.Collections.Generic;
+using UnityEngine;
 using System.Linq;
 using System.Text;
+using UnityEngine.UI;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+
+using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK.ButtonAPI;
 
 namespace Trinity.Module.Player
 {
     class SendEvent : BaseModule
     {
-        public SendEvent() : base("Send Event", "Sends Custom udon event from clipboard", Main.Instance.WorldhacksTargetButton, QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.udonManager), false, false) { }
+        public SendEvent() : base("Send Event", "Sends Custom udon event from clipboard", Main.Instance.WorldhacksTargetButton, QMButtonIcons.LoadSpriteFromFile(Serpent.udonManagerPath), false, false) { }
 
         public override void OnEnable()
         {
-            string payload = Misc.GetClipboard();
-            for (int j = 0; j < WorldWrapper.udonBehaviours.Length; j++)
+
+            Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) => 
             {
-                UdonExploitManager.udonsend(payload, "target");
-                LogHandler.Log(LogHandler.Colors.Green, $"[Custom Udon Event] Event Name: {payload} | Object Name: {WorldWrapper.udonBehaviours[j].gameObject.name}", false, false);
-            }
+                for (int j = 0; j < WorldWrapper.udonBehaviours.Length; j++)
+                {
+                    UdonExploitManager.udonsend(str, "target");
+                    LogHandler.Log(LogHandler.Colors.Green, $"[Custom Udon Event] Event Name: {str} | Object Name: {WorldWrapper.udonBehaviours[j].gameObject.name}", false, false);
+                }
+            });
+
+            UIU.OpenKeyboardPopup("Send Udon Event", "Enter Event Name...", keyboardAction);
+            
         }
     }
 }

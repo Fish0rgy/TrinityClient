@@ -1,4 +1,5 @@
-﻿using Trinity.Module.Settings.Render;
+using Trinity.Utilities;
+using Trinity.Module.Settings.Render;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

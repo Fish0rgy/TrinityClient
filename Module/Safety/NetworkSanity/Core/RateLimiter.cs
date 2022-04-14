@@ -1,4 +1,5 @@
-﻿using System;
+using Trinity.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine.SceneManagement;

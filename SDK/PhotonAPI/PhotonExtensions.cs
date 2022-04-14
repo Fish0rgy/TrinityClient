@@ -1,4 +1,5 @@
-﻿using ExitGames.Client.Photon;
+using Trinity.Utilities;
+using ExitGames.Client.Photon;
 using Il2CppSystem.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;

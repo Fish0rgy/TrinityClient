@@ -1,4 +1,5 @@
-﻿using System.IO;
+using Trinity.Utilities;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Trinity.SDK.Photon

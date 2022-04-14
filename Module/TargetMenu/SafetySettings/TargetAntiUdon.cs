@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
@@ -12,11 +13,11 @@ namespace Trinity.Module.TargetMenu.SafetySettings
     class TargetAntiUdon : BaseModule, OnUdonEvent
     {
         public static string targetid;
-        public TargetAntiUdon() : base("Anti Udon", "Targeted Anti Udon", Main.Instance.SafetyTargetButton, QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket), true, true) { }
+        public TargetAntiUdon() : base("Anti Udon", "Targeted Anti Udon", Main.Instance.SafetyTargetButton, QMButtonIcons.LoadSpriteFromFile(Serpent.rocketPath), true, true) { }
 
         public override void OnEnable()
         {
-            targetid = PlayerWrapper.SelectedVRCPlayer().field_Private_APIUser_0.id;
+            targetid = PU.SelectedVRCPlayer().field_Private_APIUser_0.id;
             Main.Instance.OnUdonEvents.Add(this);
         }
 
@@ -28,7 +29,7 @@ namespace Trinity.Module.TargetMenu.SafetySettings
 
         public bool OnUdon(string __0, VRC.Player __1)
         {
-            if (__1.field_Private_APIUser_0.id == PlayerWrapper.LocalPlayer.prop_APIUser_0.id)
+            if (__1.field_Private_APIUser_0.id == PU.GetPlayer().prop_APIUser_0.id)
             {
                 return true;
             }

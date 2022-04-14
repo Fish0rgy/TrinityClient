@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+using Trinity.Utilities;
+using System.Collections.Specialized;
 using System.Net;
 
 namespace Trinity.Module.Bot

@@ -1,3 +1,4 @@
+using Trinity.Utilities;
 using Il2CppSystem.Threading;
 using System;
 using System.Collections;

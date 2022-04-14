@@ -1,4 +1,5 @@
-﻿using TMPro;
+using Trinity.Utilities;
+using TMPro;
 using UnityEngine;
 
 namespace Trinity.SDK.ButtonAPI

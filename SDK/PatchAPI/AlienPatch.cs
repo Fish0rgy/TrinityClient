@@ -1,4 +1,5 @@
-﻿using Trinity.SDK.PatchAPI.Patches;
+using Trinity.Utilities;
+using Trinity.SDK.PatchAPI.Patches;
 using Trinity.SDK.Patching.Patches;
 using HarmonyLib;
 using System;

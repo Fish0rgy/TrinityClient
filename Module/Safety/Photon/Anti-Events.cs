@@ -1,4 +1,5 @@
-﻿using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.Events;
 using Trinity.SDK;
 using ExitGames.Client.Photon;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Trinity.Module.Safety.Photon
 
         public bool OnEvent(EventData eventData)
         {
-            var LocalPlayer = PlayerWrapper.GetActorNumber(PlayerWrapper.LocalPlayer); 
+            var LocalPlayer = PU.GetActorNumber(PU.GetPlayer()); 
             byte code = eventData.Code;
 
             switch (code)

@@ -1,4 +1,5 @@
-﻿using System;
+using Trinity.Utilities;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;

@@ -1,4 +1,5 @@
-﻿using Trinity.SDK;
+using Trinity.Utilities;
+using Trinity.SDK;
 using Trinity.SDK.ButtonAPI;
 using System;
 using System.Diagnostics;
@@ -9,7 +10,7 @@ namespace Trinity.Module.Bot.Local
 {
     class KIllBots : BaseModule
     {
-        public KIllBots() : base("Bots Leave", "Tells Bots To Disconnect", Main.Instance.Privatebotbutton, QMButtonIcons.CreateSpriteFromBase64(Serpent.skip), false) { }
+        public KIllBots() : base("Bots Leave", "Tells Bots To Disconnect", Main.Instance.Privatebotbutton, QMButtonIcons.LoadSpriteFromFile(Serpent.skipPath), false) { }
         
         public override void OnEnable()
         {

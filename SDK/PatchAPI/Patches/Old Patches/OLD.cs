@@ -1,4 +1,5 @@
-﻿//using AmplitudeSDKWrapper;
+using Trinity.Utilities;
+//using AmplitudeSDKWrapper;
 //using Area51.Module.Settings.Logging;
 //using Area51.SDK;
 //using ExitGames.Client.Photon;
