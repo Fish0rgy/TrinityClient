@@ -130,7 +130,7 @@ namespace Trinity
         [Obfuscation(Exclude = true)]
         public static void OnUIInit()
         {
-            try { MelonCoroutines.Start(MenuUI.StartUI()); LogHandler.Log(LogHandler.Colors.Green, "Client UI Initialized.", true, false); } catch (Exception ERROR) { LogHandler.Log(LogHandler.Colors.Red, ERROR.Message, true, false); }
+            try { MelonCoroutines.Start(MenuUI.StartUI()); LogHandler.Log(LogHandler.Colors.Green, "Client UI Initialized!", true, false); } catch (Exception ERROR) { LogHandler.Log(LogHandler.Colors.Red, ERROR.Message, true, false); }
         }
         public static void OnApplicationQuit()
         {
