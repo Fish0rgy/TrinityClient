@@ -14,7 +14,7 @@ namespace Trinity.Module.TargetMenu.SafetySettings
     {
         public static int target;
         public static string targetname;
-        public TargetAntiPhoton() : base("Anti RPC", "Targeted Anti RPC", Main.Instance.SafetyTargetButton, QMButtonIcons.CreateSpriteFromBase64(Alien.rocket), true, true) { }
+        public TargetAntiPhoton() : base("Anti RPC", "Targeted Anti RPC", Main.Instance.SafetyTargetButton, QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket), true, true) { }
 
         public override void OnEnable()
         {

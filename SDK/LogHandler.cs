@@ -16,11 +16,9 @@ namespace Trinity.SDK
         private static string lastMsg = "";
         [DllImport("user32.dll", EntryPoint = "FindWindow")]
         public static extern System.IntPtr FindWindow(System.String className, System.String windowName);
-        static IntPtr VRChat = IntPtr.Zero;
 
         public static void DisplayLogo()
         {
-            VRChat = FindWindow(null, "VRChat");
             APIUser currentUser = APIUser.CurrentUser;
             string fileVersion = FileVersionInfo.GetVersionInfo("Trinity/DLL/Trinity.dll").FileVersion;
             Console.Title = $"Trinity || v{fileVersion}";
@@ -75,7 +73,7 @@ namespace Trinity.SDK
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("[");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(DateTime.Now.ToString(" HH:mm.fff "));
+                Console.Write(DateTime.Now.ToString("HH:mm:ss.fff"));
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("] ");
             }
@@ -87,7 +85,6 @@ namespace Trinity.SDK
             Console.Write("]");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(" ~> ");
-            Console.ForegroundColor = ConsoleColor.White;
             Console.ForegroundColor = LogHandler.getColor(color);
             Console.Write(message + "\n");
             Console.ForegroundColor = ConsoleColor.White;

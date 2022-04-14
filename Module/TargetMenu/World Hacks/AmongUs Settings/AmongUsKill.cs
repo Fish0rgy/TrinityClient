@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.AmongUs_Settings
 {
     class AmongUsKill : BaseModule
     {
-        public AmongUsKill() : base("Kill Player", "Targeted Udon Event That Kills Player", Main.Instance.AmongUsSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public AmongUsKill() : base("Kill Player", "Targeted Udon Event That Kills Player", Main.Instance.AmongUsSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

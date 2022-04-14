@@ -4,7 +4,7 @@ namespace Trinity.Module.World
 {
     class JoinByID : BaseModule
     {
-        public JoinByID() : base("Force Join", "Make Sure To Copy A World ID To Your Clipboard Before Clicking", Main.Instance.WorldButton, SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Alien.rocket), false, false) { }
+        public JoinByID() : base("Force Join", "Make Sure To Copy A World ID To Your Clipboard Before Clicking", Main.Instance.WorldButton, SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket), false, false) { }
 
         public override void OnEnable()
         {

@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.AmongUs_Settings
 {
     class AssignImposter : BaseModule
     {
-        public AssignImposter() : base("Assign Imposter", "Forcefully Assigns Player As Imposter", Main.Instance.AmongUsSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public AssignImposter() : base("Assign Imposter", "Forcefully Assigns Player As Imposter", Main.Instance.AmongUsSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

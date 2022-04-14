@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Trinity.SDK.Patching
 {
-    class AlienPatch
+    class SerpentPatch
     {
         public new static HarmonyLib.Harmony Harmony { get; set; }
         public static HarmonyLib.Harmony Instance = new HarmonyLib.Harmony("Trinity");

@@ -18,8 +18,8 @@ namespace Trinity.SDK.ButtonAPI
             singleButton.transform.Find("Text_H4").gameObject.GetComponent<TextMeshProUGUI>().text = text;
             singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>().faceColor = Color.green;
             singleButton.transform.Find("Background").GetComponent<Image>().color = Color.black;
-            singleButton.transform.Find("Icon_On").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Alien.ToggleOn);
-            singleButton.transform.Find("Icon_Off").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Alien.ToggleOff);
+            singleButton.transform.Find("Icon_On").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Serpent.ToggleOn);
+            singleButton.transform.Find("Icon_Off").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Serpent.ToggleOff);
             singleButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = toolTip;
             toggleButton = singleButton.GetComponent<Toggle>();
             toggleButton.onValueChanged = new Toggle.ToggleEvent();

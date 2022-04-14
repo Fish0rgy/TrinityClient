@@ -5,7 +5,7 @@ namespace Trinity.Module.Player
 { 
     class DrippedOut : BaseModule
     {
-        public DrippedOut() : base("Drippedout", "Don't be a bitch, press it nigga!", Main.Instance.PlayerButton, QMButtonIcons.CreateSpriteFromBase64(Alien.drippedout), false, false) { }
+        public DrippedOut() : base("Drippedout", "Don't be a bitch, press it nigga!", Main.Instance.PlayerButton, QMButtonIcons.CreateSpriteFromBase64(Serpent.drippedout), false, false) { }
 
         public override void OnEnable()
         {

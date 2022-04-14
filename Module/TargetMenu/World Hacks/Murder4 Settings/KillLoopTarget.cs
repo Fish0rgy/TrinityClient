@@ -15,7 +15,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     class KillLoopTarget : BaseModule
     {
-        public KillLoopTarget() : base("Murder Kill Loop", "Kill Someone In Murder 4", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), true, true) { }
+        public KillLoopTarget() : base("Murder Kill Loop", "Kill Someone In Murder 4", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), true, true) { }
 
         public override void OnEnable()
         {

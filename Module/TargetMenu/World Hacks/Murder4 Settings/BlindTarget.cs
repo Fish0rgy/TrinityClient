@@ -13,7 +13,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
      class BlindTarget : BaseModule
     {
-        public BlindTarget() : base("Blind Target", "Blind Someone In Murder 4", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public BlindTarget() : base("Blind Target", "Blind Someone In Murder 4", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

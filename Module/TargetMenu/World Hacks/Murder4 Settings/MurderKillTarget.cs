@@ -13,7 +13,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class MurderKillTarget : BaseModule
     {
-        public MurderKillTarget() : base("Murder Kill", "Kill Someone In Murder 4", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public MurderKillTarget() : base("Murder Kill", "Kill Someone In Murder 4", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

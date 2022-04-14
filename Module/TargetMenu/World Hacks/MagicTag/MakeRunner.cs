@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MagicTag
 {
     class MakeRunner : BaseModule
     {
-        public MakeRunner() : base("Assign Runner", "Assigns Runner", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public MakeRunner() : base("Assign Runner", "Assigns Runner", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

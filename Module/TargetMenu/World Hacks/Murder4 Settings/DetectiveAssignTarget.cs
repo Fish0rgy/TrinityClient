@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     class DetectiveAssignTarget : BaseModule
     {
-        public DetectiveAssignTarget() : base("Assign Detective", "Assigns Player As Detective", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public DetectiveAssignTarget() : base("Assign Detective", "Assigns Player As Detective", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

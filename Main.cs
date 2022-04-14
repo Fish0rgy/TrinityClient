@@ -22,7 +22,7 @@ namespace Trinity
         public static Main Instance { get; set; }
 
         public Config Config { get; set; } = new Config();
-        public Alien QuickMenuStuff { get; set; }
+        public Serpent QuickMenuStuff { get; set; }
         public QMNestedButton PlayerButton { get; set; }
         public QMNestedButton JustHButton { get; set; }
         public QMNestedButton MoveAndChillSettings { get; set; }
@@ -109,7 +109,7 @@ namespace Trinity
             MelonCoroutines.Start(Misc.LoadingMusic());
             Task.Run(() =>
             {
-                AlienPatch.InitPatches();
+                SerpentPatch.InitPatches();
             });
         }
         public static void OnUpdate()
@@ -153,7 +153,7 @@ namespace Trinity
                 else
                 {
                     Process.GetCurrentProcess().Kill();
-                    LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed to logout, please contact owner!", false, false);
+                    LogHandler.Log(LogHandler.Colors.Red, "Failed to logout, please contact owner!", false, false);
                 }
             }
             catch (Exception EX) { LogHandler.Log(LogHandler.Colors.Red, EX.StackTrace, true, false); }

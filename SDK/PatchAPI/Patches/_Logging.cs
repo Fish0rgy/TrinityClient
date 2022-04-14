@@ -13,9 +13,9 @@ namespace Trinity.SDK.Patching.Patches
         {
             try
             {
-                AlienPatch.Instance.Patch(typeof(Debug).GetMethods().First(x => x.Name == "Log" && x.GetParameters().Length == 1), new HarmonyMethod(AccessTools.Method(typeof(_Logging), nameof(Debug))));
-                AlienPatch.Instance.Patch(typeof(Debug).GetMethods().First(x => x.Name == "LogError" && x.GetParameters().Length == 1), new HarmonyMethod(AccessTools.Method(typeof(_Logging), nameof(DebugError))));
-                AlienPatch.Instance.Patch(typeof(Debug).GetMethods().First(x => x.Name == "LogWarning" && x.GetParameters().Length == 1), new HarmonyMethod(AccessTools.Method(typeof(_Logging), nameof(DebugWarning))));
+                SerpentPatch.Instance.Patch(typeof(Debug).GetMethods().First(x => x.Name == "Log" && x.GetParameters().Length == 1), new HarmonyMethod(AccessTools.Method(typeof(_Logging), nameof(Debug))));
+                SerpentPatch.Instance.Patch(typeof(Debug).GetMethods().First(x => x.Name == "LogError" && x.GetParameters().Length == 1), new HarmonyMethod(AccessTools.Method(typeof(_Logging), nameof(DebugError))));
+                SerpentPatch.Instance.Patch(typeof(Debug).GetMethods().First(x => x.Name == "LogWarning" && x.GetParameters().Length == 1), new HarmonyMethod(AccessTools.Method(typeof(_Logging), nameof(DebugWarning))));
                 SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, "[Patch] Logger", false, false);
             }
             catch { SDK.LogHandler.Log(SDK.LogHandler.Colors.Red, "[Patch] [Error] Logger", false, false); }          

@@ -19,9 +19,9 @@ namespace Trinity.SDK.Patching.Patches
         {
             try
             {
-                AlienPatch.Instance.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyMethod(AccessTools.Method(typeof(_Spoofers), nameof(FakeHWID))));
-                AlienPatch.Instance.Patch(typeof(AmplitudeWrapper).GetMethod("PostEvents"), new HarmonyMethod(AccessTools.Method(typeof(_Spoofers), nameof(VoidPatch))));
-                AlienPatch.Instance.Patch(typeof(AmplitudeWrapper).GetMethods().First((MethodInfo x) => x.Name == "LogEvent" && x.GetParameters().Length == 4), new HarmonyMethod(AccessTools.Method(typeof(_Spoofers), nameof(VoidPatch))));
+                SerpentPatch.Instance.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyMethod(AccessTools.Method(typeof(_Spoofers), nameof(FakeHWID))));
+                SerpentPatch.Instance.Patch(typeof(AmplitudeWrapper).GetMethod("PostEvents"), new HarmonyMethod(AccessTools.Method(typeof(_Spoofers), nameof(VoidPatch))));
+                SerpentPatch.Instance.Patch(typeof(AmplitudeWrapper).GetMethods().First((MethodInfo x) => x.Name == "LogEvent" && x.GetParameters().Length == 4), new HarmonyMethod(AccessTools.Method(typeof(_Spoofers), nameof(VoidPatch))));
                 LogHandler.Log(LogHandler.Colors.Green, "[Patch] Analystics", false, false);
             }
             catch (Exception ERROR)

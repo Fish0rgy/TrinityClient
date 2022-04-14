@@ -11,7 +11,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class ReUploadAvatar : BaseModule
     {
-        public ReUploadAvatar() : base("ReUpload", "Opens reuploader's folder.", Main.Instance.AvatarSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.Clone), false, false) { }
+        public ReUploadAvatar() : base("ReUpload", "Opens reuploader's folder.", Main.Instance.AvatarSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.Clone), false, false) { }
         public override void OnEnable()
         {
              try

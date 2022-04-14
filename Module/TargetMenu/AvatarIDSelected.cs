@@ -6,7 +6,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class AvatSelected : BaseModule
     {
-        public AvatSelected() : base("AvatarID", "Grabs avatarid from selected user", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Alien.copy), false, false) { }
+        public AvatSelected() : base("AvatarID", "Grabs avatarid from selected user", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Serpent.copy), false, false) { }
 
         public override void OnEnable()
         {

@@ -8,7 +8,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class CopyData : BaseModule
     {
-        public CopyData() : base("Copy Info", "This gives you the name, asseturl & imageurl.", Main.Instance.AvatarSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.copy), false, false) { }
+        public CopyData() : base("Copy Info", "This gives you the name, asseturl & imageurl.", Main.Instance.AvatarSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.copy), false, false) { }
 
         public override void OnEnable()
         {

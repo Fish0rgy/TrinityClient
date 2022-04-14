@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.SafetySettings
     class TargetAntiUdon : BaseModule, OnUdonEvent
     {
         public static string targetid;
-        public TargetAntiUdon() : base("Anti Udon", "Targeted Anti Udon", Main.Instance.SafetyTargetButton, QMButtonIcons.CreateSpriteFromBase64(Alien.rocket), true, true) { }
+        public TargetAntiUdon() : base("Anti Udon", "Targeted Anti Udon", Main.Instance.SafetyTargetButton, QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket), true, true) { }
 
         public override void OnEnable()
         {

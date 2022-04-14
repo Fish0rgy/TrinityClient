@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MagicTag
 {
     class MakeTagger : BaseModule
     {
-        public MakeTagger() : base("Assign Tagger", "Assigns Tagger", Main.Instance.MagicTagSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public MakeTagger() : base("Assign Tagger", "Assigns Tagger", Main.Instance.MagicTagSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {
