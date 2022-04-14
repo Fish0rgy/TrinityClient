@@ -6,7 +6,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class UserIDSelected : BaseModule
     {
-        public UserIDSelected() : base("UserID", "Grabs userid from selected user", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Alien.copy), false, false) { }
+        public UserIDSelected() : base("UserID", "Grabs userid from selected user", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Serpent.copy), false, false) { }
 
         public override void OnEnable()
         {

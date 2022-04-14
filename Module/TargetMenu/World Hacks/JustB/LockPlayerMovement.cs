@@ -11,7 +11,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.JustB
 {
     class LockPlayerMovement : BaseModule
     {
-        public LockPlayerMovement() : base("Lock Movement", "Forcefully Tags Player", Main.Instance.JubstBSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), true, true) { }
+        public LockPlayerMovement() : base("Lock Movement", "Forcefully Tags Player", Main.Instance.JubstBSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), true, true) { }
 
         public override void OnEnable()
         {

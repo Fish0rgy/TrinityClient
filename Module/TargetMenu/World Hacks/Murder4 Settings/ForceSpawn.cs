@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     class ForceSpawn : BaseModule
     {
-        public ForceSpawn() : base("Force Spawn", "Forcefully Spawned", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public ForceSpawn() : base("Force Spawn", "Forcefully Spawned", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

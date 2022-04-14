@@ -13,8 +13,8 @@ namespace Trinity.SDK.Patching.Patches
         {
             try
             {
-                AlienPatch.Instance.Patch(typeof(AssetManagement).GetMethod("Method_Public_Static_Object_Object_Boolean_Boolean_Boolean_0"), new HarmonyMethod(AccessTools.Method(typeof(_AvatarAssetBundleLoad), nameof(OnAvatarAssetBundleLoad))));
-                //AlienPatch.Instance.Patch(typeof(AssetManagement).GetMethod("Method_Public_Static_Object_Object_Vector3_Quaternion_Boolean_Boolean_Boolean_0"), new HarmonyMethod(AccessTools.Method(typeof(_AvatarAssetBundleLoad), nameof(OnAssetRequestDownload))));
+                SerpentPatch.Instance.Patch(typeof(AssetManagement).GetMethod("Method_Public_Static_Object_Object_Boolean_Boolean_Boolean_0"), new HarmonyMethod(AccessTools.Method(typeof(_AvatarAssetBundleLoad), nameof(OnAvatarAssetBundleLoad))));
+                //SerpentPatch.Instance.Patch(typeof(AssetManagement).GetMethod("Method_Public_Static_Object_Object_Vector3_Quaternion_Boolean_Boolean_Boolean_0"), new HarmonyMethod(AccessTools.Method(typeof(_AvatarAssetBundleLoad), nameof(OnAssetRequestDownload))));
 
                 SDK.LogHandler.Log(SDK.LogHandler.Colors.Green, "[Patch] AssetBundle", false, false);
             }

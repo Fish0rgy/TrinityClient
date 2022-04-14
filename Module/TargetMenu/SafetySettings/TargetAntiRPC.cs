@@ -13,7 +13,7 @@ namespace Trinity.Module.TargetMenu.SafetySettings
     class TargetAntiRPC : BaseModule, OnRPCEvent
     {
         public static VRCPlayer target;
-        public TargetAntiRPC() : base("Anti RPC", "Targeted Anti RPC", Main.Instance.SafetyTargetButton, QMButtonIcons.CreateSpriteFromBase64(Alien.rocket), true, true) { }
+        public TargetAntiRPC() : base("Anti RPC", "Targeted Anti RPC", Main.Instance.SafetyTargetButton, QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket), true, true) { }
 
         public override void OnEnable()
         {

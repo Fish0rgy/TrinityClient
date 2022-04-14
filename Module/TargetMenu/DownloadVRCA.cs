@@ -8,7 +8,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class DownloadVRCSelected : BaseModule
     {
-        public DownloadVRCSelected() : base("VRCA", "Download Users VRCA", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Alien.Save), false, false) { }
+        public DownloadVRCSelected() : base("VRCA", "Download Users VRCA", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Serpent.Save), false, false) { }
 
         public override void OnEnable()
         {

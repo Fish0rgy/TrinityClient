@@ -6,7 +6,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class ForceClone : BaseModule
     {
-        public ForceClone() : base("ForceClone", "Clones public\\Cloneable avatars.", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Alien.Clone), false, false) { }
+        public ForceClone() : base("ForceClone", "Clones public\\Cloneable avatars.", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Serpent.Clone), false, false) { }
 
         public override void OnEnable()
         {

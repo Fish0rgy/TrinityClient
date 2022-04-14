@@ -13,7 +13,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MovieAndChill
 {
     class TargetMCTeleport : BaseModule
     {
-        public TargetMCTeleport() : base("Respawn Loop", "Targeted Teleport", Main.Instance.MoveAndChillSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), true, true) { }
+        public TargetMCTeleport() : base("Respawn Loop", "Targeted Teleport", Main.Instance.MoveAndChillSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), true, true) { }
         public override void OnEnable()
         {
             try

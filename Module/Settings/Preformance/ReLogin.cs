@@ -12,7 +12,7 @@ namespace Trinity.Module.Settings.Preformance
 {
     class ReLogin : BaseModule
     {
-        public ReLogin() : base("Re-Login", "Failed To Login? Press Me To Try Again!", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Alien.refresh), false, false)
+        public ReLogin() : base("Re-Login", "Failed To Login? Press Me To Try Again!", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Serpent.refresh), false, false)
         {
         }
         public override void OnEnable()

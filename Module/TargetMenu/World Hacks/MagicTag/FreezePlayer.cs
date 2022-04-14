@@ -11,7 +11,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MagicTag
 {
     class FreezePlayer : BaseModule
     {
-        public FreezePlayer() : base("Force Tag", "Forcefully Tags Player", Main.Instance.MagicTagSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public FreezePlayer() : base("Force Tag", "Forcefully Tags Player", Main.Instance.MagicTagSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

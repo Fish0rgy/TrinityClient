@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.AmongUs_Settings
 {
     class AssignCrew : BaseModule
     {
-        public AssignCrew() : base("Assign Crew", "Forcefully Assigns Player As Crew", Main.Instance.AmongUsSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public AssignCrew() : base("Assign Crew", "Forcefully Assigns Player As Crew", Main.Instance.AmongUsSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

@@ -13,7 +13,7 @@ namespace Trinity.Module.Settings.Theme
 {
     class RetroTheme : BaseModule, OnUpdateEvent
     {
-        public RetroTheme() : base("Retro\nTheme", "Enable Trinity Theme", Main.Instance.SettingsButtonTheme, QMButtonIcons.CreateSpriteFromBase64(Alien.SpaceShip), true, false) { }
+        public RetroTheme() : base("Retro\nTheme", "Enable Trinity Theme", Main.Instance.SettingsButtonTheme, QMButtonIcons.CreateSpriteFromBase64(Serpent.SpaceShip), true, false) { }
         private bool SetTheme, QMTheme = false;
         public Sprite Background = null;
         public bool BGSet = false;
@@ -24,7 +24,7 @@ namespace Trinity.Module.Settings.Theme
             try
             {
                 if (Background == null) Background = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().activeSprite;
-                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.CreateSpriteFromBase64(Alien.Retro);
+                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.CreateSpriteFromBase64(Serpent.Retro);
                 Main.Instance.OnUpdateEvents.Add(this);
 
             }
@@ -132,7 +132,7 @@ namespace Trinity.Module.Settings.Theme
                         GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title").GetComponent<TextMeshProUGUI>().color = Color.black;
                         GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickLinks/LeftItemContainer/Text_Title").active = false;
                         GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions/LeftItemContainer/Text_Title").active = false;
-                        GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMNotificationsArea/Header_StreamerMode/Header/LeftItemContainer/Icon").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(SDK.Alien.clientLogo);
+                        GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMNotificationsArea/Header_StreamerMode/Header/LeftItemContainer/Icon").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(SDK.Serpent.clientLogo);
                     }
                 }
            
