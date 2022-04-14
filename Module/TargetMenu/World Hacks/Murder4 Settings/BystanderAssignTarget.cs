@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     class BystanderAssignTarget : BaseModule
     {
-        public BystanderAssignTarget() : base("Assign Bystander", "Assigns Player As Bystander", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public BystanderAssignTarget() : base("Assign Bystander", "Assigns Player As Bystander", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

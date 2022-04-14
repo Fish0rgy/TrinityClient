@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     class BringItemsTarget : BaseModule
     {
-        public BringItemsTarget() : base("Bring Items", "Brings All Items", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public BringItemsTarget() : base("Bring Items", "Brings All Items", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

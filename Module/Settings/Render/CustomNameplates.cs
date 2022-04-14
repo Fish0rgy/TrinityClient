@@ -10,7 +10,7 @@ namespace Trinity.Module.Settings.Render
         public VRC.Player player = new VRC.Player();
         public static List<string> Users = new List<string>();
         public static List<string> Staff = new List<string>();
-        public static List<string> Aliens = new List<string>();
+        public static List<string> Serpents = new List<string>();
         
         public CustomNameplates() : base("Nameplates", "Cool Kids Nameplate", Main.Instance.SettingsButtonrender, null, true, false)
         {

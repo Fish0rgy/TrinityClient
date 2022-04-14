@@ -13,7 +13,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MovieAndChill
 {
     class TargetMCLag : BaseModule
     {
-        public TargetMCLag() : base("Target Lag", "Targeted Item/Trigger Lagger", Main.Instance.MoveAndChillSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), true, true) { }
+        public TargetMCLag() : base("Target Lag", "Targeted Item/Trigger Lagger", Main.Instance.MoveAndChillSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), true, true) { }
 
         public override void OnEnable()
         {

@@ -11,7 +11,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.JustB
 {
     class ForceRespawn : BaseModule
     {
-        public ForceRespawn() : base("Force Respawn", "Forcefully Respawn's Player", Main.Instance.JubstBSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.Movment), false, false) { }
+        public ForceRespawn() : base("Force Respawn", "Forcefully Respawn's Player", Main.Instance.JubstBSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.Movment), false, false) { }
 
         public override void OnEnable()
         {

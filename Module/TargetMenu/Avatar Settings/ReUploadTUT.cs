@@ -11,7 +11,7 @@ namespace Trinity.Module.TargetMenu
 {
     internal class ReUploadTUT : BaseModule
     {
-        public ReUploadTUT() : base("Tutorial", "Opens the tutorial textfile.", Main.Instance.AvatarSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public ReUploadTUT() : base("Tutorial", "Opens the tutorial textfile.", Main.Instance.AvatarSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
         public override void OnEnable()
         {
             try

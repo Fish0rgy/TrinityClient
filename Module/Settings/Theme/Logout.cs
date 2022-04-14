@@ -9,7 +9,7 @@ namespace Trinity.Module.Settings.Theme
 {
     class Logout : BaseModule
     {
-        public Logout() : base("Logout", "This logs you our and exist vrchat.", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Alien.powerbutton), false, false) { }
+        public Logout() : base("Logout", "This logs you our and exist vrchat.", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Serpent.powerbutton), false, false) { }
 
         public override void OnEnable()
         {

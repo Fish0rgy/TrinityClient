@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
     internal class BringRevolverTarget : BaseModule
     {
-        public BringRevolverTarget() : base("Bring Revolver", "Brings Revolver", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo), false, false) { }
+        public BringRevolverTarget() : base("Bring Revolver", "Brings Revolver", Main.Instance.MurderSettings, QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo), false, false) { }
 
         public override void OnEnable()
         {

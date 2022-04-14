@@ -9,7 +9,7 @@ namespace Trinity.Module.Settings.Preformance
 {
     class QuickRestart : BaseModule
     {
-        public QuickRestart() : base("Quick Restart", "Restart VRChat can also be triggerd by pressing \nctrl alt backspace", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Alien.refresh),false, false)
+        public QuickRestart() : base("Quick Restart", "Restart VRChat can also be triggerd by pressing \nctrl alt backspace", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Serpent.refresh),false, false)
         {
         }
         public override void OnEnable()

@@ -4,7 +4,7 @@ namespace Trinity.Module.World
 {
     class CopyUserID : BaseModule
     {
-        public CopyUserID() : base("Get User ID", "Copy the UserID to clipboard", Main.Instance.PlayerButton, SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Alien.copy), false, false) { }
+        public CopyUserID() : base("Get User ID", "Copy the UserID to clipboard", Main.Instance.PlayerButton, SDK.ButtonAPI.QMButtonIcons.CreateSpriteFromBase64(Serpent.copy), false, false) { }
 
         public override void OnEnable()
         {

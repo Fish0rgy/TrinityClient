@@ -11,7 +11,7 @@ namespace Trinity.Module.Settings.Preformance
 {
 	internal class RestartAndRejoin : BaseModule
 	{
-		public RestartAndRejoin() : base("Restart\nReJoin", "Restart VRChat can also be triggerd by pressing \nctrl alt backspace", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Alien.rocket), false, false)
+		public RestartAndRejoin() : base("Restart\nReJoin", "Restart VRChat can also be triggerd by pressing \nctrl alt backspace", Main.Instance.SettingsButtonpreformance, QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket), false, false)
 		{
 		}
 		public override void OnEnable()

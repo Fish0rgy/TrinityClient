@@ -11,7 +11,7 @@ namespace Trinity.Module.TargetMenu
         public UnityEngine.GameObject localPlayer = PlayerWrapper.LocalPlayer.gameObject;
         public UnityEngine.GameObject playerMirrFix = PlayerWrapper.GetPlayerMirrFix();
         public UnityEngine.GameObject playerMirrFix2 = PlayerWrapper.GetPlayerMirrFix2();
-        public ForceLewd() : base("Force Lewd", "Removes Players Cloths", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Alien.copy), false, false) { }
+        public ForceLewd() : base("Force Lewd", "Removes Players Cloths", Main.Instance.Targetbutton, QMButtonIcons.CreateSpriteFromBase64(Serpent.copy), false, false) { }
 
         public override void OnEnable()
         {

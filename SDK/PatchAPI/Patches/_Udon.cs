@@ -11,7 +11,7 @@ namespace Trinity.SDK.Patching.Patches
         {
             try
             {
-                AlienPatch.Instance.Patch(typeof(UdonSync).GetMethod("UdonSyncRunProgramAsRPC"), new HarmonyMethod(AccessTools.Method(typeof(_Udon), nameof(OnUdon))));
+                SerpentPatch.Instance.Patch(typeof(UdonSync).GetMethod("UdonSyncRunProgramAsRPC"), new HarmonyMethod(AccessTools.Method(typeof(_Udon), nameof(OnUdon))));
                 LogHandler.Log(LogHandler.Colors.Green, "[Patch] Udon", false, false);
             }
             catch (Exception ex)

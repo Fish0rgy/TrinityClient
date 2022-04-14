@@ -48,47 +48,47 @@ namespace Trinity.SDK
         {
             var pos = new Vector3(272, 964, 0);
             Console.Title = $"Trinity Private Client | User: {APIUser.CurrentUser.displayName}";
-            Main.Instance.QuickMenuStuff = new Alien();
-            QMTab mainTab = new QMTab("Trinity Client", "", "What's a client!", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
-            Alien.Spacer(mainTab.menuTransform);
+            Main.Instance.QuickMenuStuff = new Serpent();
+            QMTab mainTab = new QMTab("Trinity Client", "", "What's a client!", QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo));
+            Serpent.Spacer(mainTab.menuTransform);
 
-            Main.Instance.WorldButton = new QMNestedButton(mainTab.menuTransform, "World", QMButtonIcons.CreateSpriteFromBase64(Alien.earth));
-            Main.Instance.WorldhacksButton = new QMNestedButton(Main.Instance.WorldButton.menuTransform, "World Hacks", QMButtonIcons.CreateSpriteFromBase64(Alien.WorldHacksIcon));
+            Main.Instance.WorldButton = new QMNestedButton(mainTab.menuTransform, "World", QMButtonIcons.CreateSpriteFromBase64(Serpent.earth));
+            Main.Instance.WorldhacksButton = new QMNestedButton(Main.Instance.WorldButton.menuTransform, "World Hacks", QMButtonIcons.CreateSpriteFromBase64(Serpent.WorldHacksIcon));
             Main.Instance.udonexploitbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Area-51 Engine", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.udonManager));
             Main.Instance.Zombiebutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Zombie Tag", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.zombie));
             Main.Instance.Amongusbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Among Us", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.amogus));
             Main.Instance.Murderbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Murder 4", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.murder4));
             Main.Instance.Justbbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Just B", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.justb));
-            Main.Instance.JustHButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Just H", QMButtonIcons.CreateSpriteFromBase64(Alien.earth));
+            Main.Instance.JustHButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Just H", QMButtonIcons.CreateSpriteFromBase64(Serpent.earth));
             Main.Instance.Magictagbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Magic Tag", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.MGK));
-            Main.Instance.MovieAndChillButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Movie & Chill", QMButtonIcons.CreateSpriteFromBase64(Alien.earth));
-            Main.Instance.PlayerButton = new QMNestedButton(mainTab.menuTransform, "Player", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
-            Main.Instance.AudioButton = new QMNestedButton(Main.Instance.PlayerButton.menuTransform, "Audio Settings", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
-            Main.Instance.MovementButton = new QMNestedButton(mainTab.menuTransform, "Movement", QMButtonIcons.CreateSpriteFromBase64(Alien.Movment));
-            Main.Instance.ExploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits", QMButtonIcons.CreateSpriteFromBase64(Alien.raygun));
-            Main.Instance.Eventexploitbutton = new QMNestedButton(Main.Instance.ExploistButton.menuTransform, "Event Exploits", QMButtonIcons.CreateSpriteFromBase64(Alien.satlte));
-            Main.Instance.Avatarexploitbutton = new QMNestedButton(Main.Instance.ExploistButton.menuTransform, "Avatar Exploits", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
-            Main.Instance.SafetyButton = new QMNestedButton(mainTab.menuTransform, "Safety", QMButtonIcons.CreateSpriteFromBase64(Alien.satlte));
-            Main.Instance.Networkbutton = new QMNestedButton(Main.Instance.SafetyButton.menuTransform, "Network Saftey", QMButtonIcons.CreateSpriteFromBase64(Alien.satlte));
-            Main.Instance.Avatarbutton = new QMNestedButton(Main.Instance.SafetyButton.menuTransform, "Avatar Saftey", QMButtonIcons.CreateSpriteFromBase64(Alien.AvatarExploit));
-            Main.Instance.BotButton = new QMNestedButton(mainTab.menuTransform, "Bot", QMButtonIcons.CreateSpriteFromBase64(Alien.TheBots));
-            Main.Instance.Privatebotbutton = new QMNestedButton(Main.Instance.BotButton.menuTransform, "Local handler", QMButtonIcons.CreateSpriteFromBase64(Alien.PlayerIcon));
-            Main.Instance.SettingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", QMButtonIcons.CreateSpriteFromBase64(Alien.SettingsIcon));
-            Main.Instance.SettingsButtonpreformance = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Preformance", QMButtonIcons.CreateSpriteFromBase64(Alien.rocket));
-            Main.Instance.SettingsButtonrender = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Render", QMButtonIcons.CreateSpriteFromBase64(Alien.render));
-            Main.Instance.SettingsButtonLoggging = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Logging", QMButtonIcons.CreateSpriteFromBase64(Alien.logging));
-            //Main.Instance.SettingsButtonDumping = new QMNestedButton(Main.Instance.SettingsButtonLoggging.menuTransform, "Event\nDumping",  QMButtonIcons.CreateSpriteFromBase64(Alien.Save));
-            Main.Instance.SettingsButtonTheme = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Theme", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
+            Main.Instance.MovieAndChillButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Movie & Chill", QMButtonIcons.CreateSpriteFromBase64(Serpent.earth));
+            Main.Instance.PlayerButton = new QMNestedButton(mainTab.menuTransform, "Player", QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo));
+            Main.Instance.AudioButton = new QMNestedButton(Main.Instance.PlayerButton.menuTransform, "Audio Settings", QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo));
+            Main.Instance.MovementButton = new QMNestedButton(mainTab.menuTransform, "Movement", QMButtonIcons.CreateSpriteFromBase64(Serpent.Movment));
+            Main.Instance.ExploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits", QMButtonIcons.CreateSpriteFromBase64(Serpent.raygun));
+            Main.Instance.Eventexploitbutton = new QMNestedButton(Main.Instance.ExploistButton.menuTransform, "Event Exploits", QMButtonIcons.CreateSpriteFromBase64(Serpent.satlte));
+            Main.Instance.Avatarexploitbutton = new QMNestedButton(Main.Instance.ExploistButton.menuTransform, "Avatar Exploits", QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo));
+            Main.Instance.SafetyButton = new QMNestedButton(mainTab.menuTransform, "Safety", QMButtonIcons.CreateSpriteFromBase64(Serpent.satlte));
+            Main.Instance.Networkbutton = new QMNestedButton(Main.Instance.SafetyButton.menuTransform, "Network Saftey", QMButtonIcons.CreateSpriteFromBase64(Serpent.satlte));
+            Main.Instance.Avatarbutton = new QMNestedButton(Main.Instance.SafetyButton.menuTransform, "Avatar Saftey", QMButtonIcons.CreateSpriteFromBase64(Serpent.AvatarExploit));
+            Main.Instance.BotButton = new QMNestedButton(mainTab.menuTransform, "Bot", QMButtonIcons.CreateSpriteFromBase64(Serpent.TheBots));
+            Main.Instance.Privatebotbutton = new QMNestedButton(Main.Instance.BotButton.menuTransform, "Local handler", QMButtonIcons.CreateSpriteFromBase64(Serpent.PlayerIcon));
+            Main.Instance.SettingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", QMButtonIcons.CreateSpriteFromBase64(Serpent.SettingsIcon));
+            Main.Instance.SettingsButtonpreformance = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Preformance", QMButtonIcons.CreateSpriteFromBase64(Serpent.rocket));
+            Main.Instance.SettingsButtonrender = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Render", QMButtonIcons.CreateSpriteFromBase64(Serpent.render));
+            Main.Instance.SettingsButtonLoggging = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Logging", QMButtonIcons.CreateSpriteFromBase64(Serpent.logging));
+            //Main.Instance.SettingsButtonDumping = new QMNestedButton(Main.Instance.SettingsButtonLoggging.menuTransform, "Event\nDumping",  QMButtonIcons.CreateSpriteFromBase64(Serpent.Save));
+            Main.Instance.SettingsButtonTheme = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Theme", QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo));
             //targetmenu
-            Main.Instance.Targetbutton = new QMNestedButton(Main.Instance.QuickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/").transform, "Trinity", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
-            Main.Instance.AvatarSettings = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Avatar", QMButtonIcons.CreateSpriteFromBase64(Alien.clientLogo));
-            Main.Instance.SafetyTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Safety Settings", QMButtonIcons.CreateSpriteFromBase64(Alien.satlte));
-            Main.Instance.WorldhacksTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "World Exploits", QMButtonIcons.CreateSpriteFromBase64(Alien.earth));
+            Main.Instance.Targetbutton = new QMNestedButton(Main.Instance.QuickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/").transform, "Trinity", QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo));
+            Main.Instance.AvatarSettings = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Avatar", QMButtonIcons.CreateSpriteFromBase64(Serpent.clientLogo));
+            Main.Instance.SafetyTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Safety Settings", QMButtonIcons.CreateSpriteFromBase64(Serpent.satlte));
+            Main.Instance.WorldhacksTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "World Exploits", QMButtonIcons.CreateSpriteFromBase64(Serpent.earth));
             Main.Instance.MurderSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Murder 4 Menu", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.murder4));
             Main.Instance.AmongUsSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Among Us Menu", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.amogus));
             Main.Instance.MagicTagSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Magic Tag Menu", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.MGK));
             Main.Instance.JubstBSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Just B Menu", QMButtonIcons.CreateSpriteFromBase64(Extra_Icons.justb));
-            Main.Instance.MoveAndChillSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Movie&Chill+ Menu", QMButtonIcons.CreateSpriteFromBase64(Alien.earth));
+            Main.Instance.MoveAndChillSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Movie&Chill+ Menu", QMButtonIcons.CreateSpriteFromBase64(Serpent.earth));
 
             //world
             Main.Instance.Modules.Add(new JoinByID());
@@ -252,7 +252,7 @@ namespace Trinity.SDK
             Main.Instance.Modules.Add(new ObjectESP());
             Main.Instance.Modules.Add(new CapsuleEsp());
             //Theme
-            Main.Instance.Modules.Add(new AlienTheme());
+            Main.Instance.Modules.Add(new SerpentTheme());
             Main.Instance.Modules.Add(new RetroTheme());
             Main.Instance.Modules.Add(new munchen());
             Main.Instance.Modules.Add(new CustomBGImage());
@@ -320,7 +320,7 @@ namespace Trinity.SDK
             foreach (BaseModule module in Main.Instance.Modules) module.OnUIInit();
 
             //logout
-            new QMSingleButton(mainTab.menuTransform, "Logout", "Alien Logout Button", QMButtonIcons.CreateSpriteFromBase64(Alien.powerbutton), delegate ()
+            new QMSingleButton(mainTab.menuTransform, "Logout", "Serpent Logout Button", QMButtonIcons.CreateSpriteFromBase64(Serpent.powerbutton), delegate ()
             {
                 try
                 {
@@ -335,8 +335,8 @@ namespace Trinity.SDK
                 }
                 catch (Exception EX) { }
             });
-            try { Alien.Carousel_Banners(false); } catch { }
-            Alien.QM_Text("Trinity - Dev Version"); Console.Clear(); LogHandler.DisplayLogo();
+            try { Serpent.Carousel_Banners(false); } catch { }
+            Serpent.QM_Text("Trinity - Dev Version"); Console.Clear(); LogHandler.DisplayLogo();
             //auth
             try
             {
