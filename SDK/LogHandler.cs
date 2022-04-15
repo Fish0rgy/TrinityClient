@@ -21,7 +21,7 @@ namespace Trinity.SDK
         public static void DisplayLogo()
         {
             APIUser currentUser = APIUser.CurrentUser;
-            string fileVersion = FileVersionInfo.GetVersionInfo("Trinity/DLL/Trinity.dll").FileVersion;
+            string fileVersion = "1.0.0.3";
             Console.Title = $"Trinity || v{fileVersion}";
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using TMPro;
 using Trinity.Module;
 using Trinity.Module.Bot.Local;
 using Trinity.Module.Exploit;
@@ -51,6 +52,8 @@ namespace Trinity.SDK
     class MenuUI
     {
 
+        public static List<TextMeshProUGUI> logs = new List<TextMeshProUGUI>();
+
         public static IEnumerator StartUI()
         {
             var pos = new Vector3(272, 964, 0);
@@ -58,6 +61,66 @@ namespace Trinity.SDK
             Main.Instance.QuickMenuStuff = new Serpent();
             QMTab mainTab = new QMTab("Trinity Client", "", "What's a client!", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath));
             Serpent.Spacer(mainTab.menuTransform);
+
+            Transform buttonContainer = mainTab.menu.menuContents;
+            GameObject menuObj = mainTab.menu.menuObj;
+
+            Transform vLG = menuObj.transform.Find("Scrollrect/Viewport/VerticalLayoutGroup");
+
+            GameObject btnObj = GameObject.Instantiate(buttonContainer.GetComponentInChildren<Button>().gameObject, vLG);
+
+            foreach (Image i in btnObj.GetComponentsInChildren<Image>())
+            {
+                GameObject.Destroy(i.gameObject);
+            }
+            UnityEngine.Object.Destroy(btnObj.GetComponent<Button>());
+
+            btnObj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+
+            GameObject consoleObj = GameObject.Instantiate(buttonContainer.GetComponentInChildren<Button>().gameObject, btnObj.transform);
+
+            foreach (Image i in consoleObj.GetComponentsInChildren<Image>())
+            {
+                GameObject.Destroy(i.gameObject);
+            }
+            UnityEngine.Object.Destroy(consoleObj.GetComponent<Button>());
+            UnityEngine.Object.Destroy(consoleObj.GetComponent<LayoutElement>());
+            UnityEngine.Object.Destroy(consoleObj.GetComponent<CanvasGroup>());
+            UnityEngine.Object.Destroy(consoleObj.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>());
+            GameObject.Destroy(consoleObj.transform.Find("Text_H4").gameObject);
+
+            Image img = consoleObj.AddComponent<Image>();
+            img.sprite = QMButtonIcons.LoadSpriteFromFile("Trinity\\Icons\\ConsoleBack.png");
+
+            RectTransform trans = consoleObj.GetComponent<RectTransform>();
+            trans.anchoredPosition = new(512, 35);
+            trans.sizeDelta = new(900, 450);
+
+            VerticalLayoutGroup conVLG = consoleObj.AddComponent<VerticalLayoutGroup>();
+            conVLG.childControlHeight = false;
+            conVLG.childScaleHeight = false;
+            conVLG.childForceExpandHeight = false;
+
+            conVLG.childControlWidth = true;
+            conVLG.childScaleWidth = false;
+            conVLG.childForceExpandWidth = true;
+
+            conVLG.padding = new(10, 0, 5, 0);
+
+            for (int i = 0; i < 20; ++i)
+            {
+                GameObject newEntry = new($"Entry{i}");
+                TextMeshProUGUI txt = newEntry.AddComponent<TextMeshProUGUI>();
+                txt.fontSize = 28;
+                txt.text = "Fuck off yeah?";
+                newEntry.transform.SetParent(consoleObj.transform, false);
+                logs.Add(txt);
+            }
+
+            logs[0].text = "<color=red>Bozo</color> shit";
+
+
 
             Main.Instance.WorldButton = new QMNestedButton(mainTab.menuTransform, "World", QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath));
             Main.Instance.WorldhacksButton = new QMNestedButton(Main.Instance.WorldButton.menuTransform, "World Hacks", QMButtonIcons.LoadSpriteFromFile(Serpent.WorldHacksIconPath));
@@ -149,7 +212,10 @@ namespace Trinity.SDK
                         LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed To Logged Out!", false, false);
                     }
                 }
-                catch (Exception EX) { }
+                catch (Exception EX) 
+                {
+
+                }
             });
             try { Serpent.Carousel_Banners(false); } catch { }
             Serpent.QM_Text("Trinity");

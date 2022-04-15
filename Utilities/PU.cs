@@ -30,7 +30,7 @@ namespace Trinity.Utilities
         public static Player[] GetAllPlayers() => PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0;
 
         public static Player GetByUsrID(string usrID) => GetAllPlayers().First(x => x.prop_APIUser_0.id == usrID);
-        public static Player SelectedVRCPlayer() => GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>().field_Private_IUser_0.prop_String_0.ReturnUserID();
+        public static Player SelectedVRCPlayer() => UIU.UserInterface.transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>().field_Private_IUser_0.prop_String_0.ReturnUserID();
 
         public static void TeleportLocation(float x, float y, float z) => GetVRCPlayer().transform.position = new Vector3(x, y, z);
 
@@ -83,8 +83,7 @@ namespace Trinity.Utilities
         {
             foreach (GameObject objectName in WU.GetAllGameObjects())
             {
-                bool IsMirror = objectName.name.StartsWith("_AvatarMirrorClone");
-                if (IsMirror)
+                if (objectName.name.StartsWith("_AvatarMirrorClone"))
                 {
                     return objectName;
                 }
@@ -96,8 +95,7 @@ namespace Trinity.Utilities
         {
             foreach (GameObject objectName in WU.GetAllGameObjects())
             {
-                bool IsAvatar = objectName.name.StartsWith("_AvatarShadowClone");
-                if (IsAvatar)
+                if (objectName.name.StartsWith("_AvatarShadowClone"))
                 {
                     return objectName;
                 }
@@ -286,19 +284,28 @@ namespace Trinity.Utilities
         public static string LogRPC(VRC.Player sender, VRC_EventHandler.VrcEvent vrcEvent, VRC_EventHandler.VrcBroadcastType vrcBroadcastType)
         {
             string output = "[RPC] ";
-            if (sender != null) { output += sender.prop_APIUser_0.displayName + " sended "; } else { output += " INVISABLE sended "; }
-            output += vrcBroadcastType + " ";
-            output += vrcEvent.Name + " ";
-            output += vrcEvent.EventType + " ";
+            if (sender != null)
+            {
+                output += $"{sender.prop_APIUser_0.displayName} sended"; 
+            } 
+            else
+            {
+                output += " INVISABLE sended "; 
+            }
+
+            output += $"{vrcBroadcastType} " +
+                $"{vrcEvent.Name} " +
+                $"{vrcEvent.EventType}";
 
             if (vrcEvent.ParameterObject != null)
             {
-                output += vrcEvent.ParameterObject.name + " ";
-                output += vrcEvent.ParameterBool + " ";
-                output += vrcEvent.ParameterBoolOp + " ";
-                output += vrcEvent.ParameterFloat + " ";
-                output += vrcEvent.ParameterInt + " ";
-                output += vrcEvent.ParameterString + " ";
+                output += $"{vrcEvent.ParameterObject.name} " +
+                    $"{vrcEvent.ParameterBool} " +
+                    $"{vrcEvent.ParameterBool} " +
+                    $"{vrcEvent.ParameterBoolOp} " +
+                    $"{vrcEvent.ParameterFloat} " +
+                    $"{vrcEvent.ParameterInt} " +
+                    $"{vrcEvent.ParameterString}";
             }
 
             if (vrcEvent.ParameterObjects != null) { for (int i = 0; i < vrcEvent.ParameterObjects.Length; i++) { output += vrcEvent.ParameterObjects[i].name + " "; } }

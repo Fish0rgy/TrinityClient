@@ -15,16 +15,21 @@ namespace Trinity.SDK.ButtonAPI
         public UIPage page;
         public Transform menuContents;
 
+        public GameObject menuObj;
+
         public QMMenu(string menuName, string pageTitle, bool root = true, bool backButton = true)
         {
-            GameObject menu = UnityEngine.Object.Instantiate<GameObject>( Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_DevTools").gameObject, Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent"));
-            menu.name = "Menu_" + menuName;
-            menu.transform.SetSiblingIndex(5);
-            menu.SetActive(false);
+            VRC.UI.Elements.QuickMenu qm = Main.Instance.QuickMenuStuff.quickMenu;
+            GameObject origObj = qm.transform.Find("Container/Window/QMParent/Menu_DevTools").gameObject;
 
-            UnityEngine.Object.Destroy(menu.GetComponent<DevMenu>());
+            menuObj = GameObject.Instantiate(origObj, origObj.transform.parent);
+            menuObj.name = "Menu_" + menuName;
+            menuObj.transform.SetSiblingIndex(5);
+            menuObj.SetActive(false);
 
-            page = menu.AddComponent<UIPage>();
+            UnityEngine.Object.Destroy(menuObj.GetComponent<DevMenu>());
+
+            page = menuObj.AddComponent<UIPage>();
             page.field_Public_String_0 = menuName;
             page.field_Private_Boolean_1 = true;
             page.field_Protected_MenuStateController_0 = Main.Instance.QuickMenuStuff.menuStateController;
@@ -35,10 +40,10 @@ namespace Trinity.SDK.ButtonAPI
                 page.field_Public_Boolean_0 = true;
                 try
                 {
-                    menu.transform.Find("Scrollrect/Scrollbar").gameObject.SetActive(true);
-                    menu.transform.Find("Scrollrect").GetComponent<ScrollRect>().enabled = true;
-                    menu.transform.Find("Scrollrect").GetComponent<ScrollRect>().verticalScrollbar = menu.transform.Find("Scrollrect/Scrollbar").GetComponent<Scrollbar>();
-                    menu.transform.Find("Scrollrect").GetComponent<ScrollRect>().verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
+                    menuObj.transform.Find("Scrollrect/Scrollbar").gameObject.SetActive(true);
+                    menuObj.transform.Find("Scrollrect").GetComponent<ScrollRect>().enabled = true;
+                    menuObj.transform.Find("Scrollrect").GetComponent<ScrollRect>().verticalScrollbar = menuObj.transform.Find("Scrollrect/Scrollbar").GetComponent<Scrollbar>();
+                    menuObj.transform.Find("Scrollrect").GetComponent<ScrollRect>().verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
                 }
                 catch { }
             }
@@ -49,14 +54,14 @@ namespace Trinity.SDK.ButtonAPI
                 list.Add(page);
                 Main.Instance.QuickMenuStuff.menuStateController.field_Public_ArrayOf_UIPage_0 = list.ToArray();
             }
-            TextMeshProUGUI pageTitleText = menu.GetComponentInChildren<TextMeshProUGUI>(true);
+            TextMeshProUGUI pageTitleText = menuObj.GetComponentInChildren<TextMeshProUGUI>(true);
             pageTitleText.text = pageTitle;
-            menuContents = menu.transform.Find("Scrollrect/Viewport/VerticalLayoutGroup/Buttons");
+            menuContents = menuObj.transform.Find("Scrollrect/Viewport/VerticalLayoutGroup/Buttons");
             for (int i = 0; i < menuContents.transform.childCount; i++)
                 GameObject.Destroy(menuContents.transform.GetChild(i).gameObject);
             if (backButton)
             {
-                GameObject backButtonGameObject = menu.transform.Find("Header_DevTools/LeftItemContainer/Button_Back").gameObject;
+                GameObject backButtonGameObject = menuObj.transform.Find("Header_DevTools/LeftItemContainer/Button_Back").gameObject;
                 backButtonGameObject.SetActive(true);
                 backButtonGameObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
                 backButtonGameObject.GetComponent<Button>().onClick.AddListener(new Action(() =>

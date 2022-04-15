@@ -18,6 +18,8 @@ namespace Trinity.Module.Movement
         public static float FlySpeed = 7f;
         public static bool IsFly, IsRunning = false;
 
+        public static Vector3 origGrav = new();
+
 
         public Fly() : base("Fly", "Fly high", Main.Instance.MovementButton, null, true, false)
         {
@@ -26,34 +28,24 @@ namespace Trinity.Module.Movement
         public override void OnEnable()
         {
             IsFly = true;
-            vrcMotionState = VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<VRCMotionState>();
             VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = false;
-            Main.Instance.OnUpdateEvents.Add(this);         
+            origGrav = Physics.gravity;
+            Physics.gravity = Vector3.zero;
+            Main.Instance.OnUpdateEvents.Add(this);
         }
 
         public override void OnDisable()
         {
             IsFly = false;
-            vrcMotionState.Method_Public_Void_0();
             VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = true;
-            
-        }
-
-
-       public static bool ToggleFly()
-        {
-            if (IsFly != true)
-            {
-                IsFly = true;
-                return IsFly;
-            }
-            IsFly = false;
-            return IsFly;
+            Physics.gravity = origGrav;
+            Main.Instance.OnUpdateEvents.Remove(this);
         }
 
         public void OnUpdate()
         {
-           if (IsFly == true)
+
+           if (IsFly)
             {
                 if (RoomManager.field_Internal_Static_ApiWorld_0 == null) return;
 
@@ -62,25 +54,9 @@ namespace Trinity.Module.Movement
                     LocalPlayer = PU.GetPlayer();
                     CameraTransform = Camera.main.transform;
                 }
-                if (XRDevice.isPresent)
-                {
 
-                    if (Math.Abs(Input.GetAxis("Vertical")) != 0f) LocalPlayer.transform.position += CameraTransform.forward * 7f * Time.deltaTime * Input.GetAxis("Vertical");
-                    if (Math.Abs(Input.GetAxis("Horizontal")) != 0f) LocalPlayer.transform.position += CameraTransform.right * 5f * Time.deltaTime * Input.GetAxis("Horizontal");
-                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f) LocalPlayer.transform.position += CameraTransform.up * 5f * Time.deltaTime * Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f) LocalPlayer.transform.position += CameraTransform.up * 5f * Time.deltaTime * Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                }
-                else
-                {
-                    if (Input.GetKeyDown(KeyCode.LeftShift)) FlySpeed *= FlySpeed  ;
-                    if (Input.GetKeyUp(KeyCode.LeftShift)) FlySpeed /= FlySpeed;
-                    if (Input.GetKey(KeyCode.E)) LocalPlayer.transform.position += CameraTransform.up * 5f * Time.deltaTime;
-                    if (Input.GetKey(KeyCode.Q)) LocalPlayer.transform.position += CameraTransform.up * -1f * 5f * Time.deltaTime;
-                    if (Input.GetKey(KeyCode.W)) LocalPlayer.transform.position += CameraTransform.forward * 5f * Time.deltaTime;
-                    if (Input.GetKey(KeyCode.A)) LocalPlayer.transform.position += CameraTransform.right * -1f * 5f * Time.deltaTime;
-                    if (Input.GetKey(KeyCode.D)) LocalPlayer.transform.position += CameraTransform.right * 5f * Time.deltaTime;
-                    if (Input.GetKey(KeyCode.S)) LocalPlayer.transform.position += CameraTransform.forward * -1f * 7f * Time.deltaTime;
-                }
+                if (Input.GetAxis("Vertical") != 0f) LocalPlayer.transform.position += CameraTransform.forward * 7f * Time.deltaTime * Input.GetAxis("Vertical");
+                if (Input.GetAxis("Horizontal") != 0f) LocalPlayer.transform.position += CameraTransform.right * 5f * Time.deltaTime * Input.GetAxis("Horizontal");
             }
         }
     }

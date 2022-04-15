@@ -70,7 +70,8 @@ namespace Trinity
         public QMNestedButton MagicTagSettings { get; set; }
         public QMNestedButton udonexploitbutton { get; set; }
 
-        internal List<BaseModule> Modules { get; set; } = new List<BaseModule>();
+        public List<BaseModule> Modules { get; set; } = new List<BaseModule>();
+        public BaseModule FlyModule = null;
         public List<OnPlayerJoinEvent> OnPlayerJoinEvents { get; set; } = new List<OnPlayerJoinEvent>();
         public List<OnAssetBundleLoadEvent> OnAssetBundleLoadEvents { get; set; } = new List<OnAssetBundleLoadEvent>();
         public List<OnPlayerLeaveEvent> OnPlayerLeaveEvents { get; set; } = new List<OnPlayerLeaveEvent>();
@@ -102,6 +103,14 @@ namespace Trinity
         }
         public static void OnUpdate()
         {
+
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+            {
+                BaseModule mod = Instance.FlyModule;
+                if (mod == null) return;
+                mod.toggleButton.Toggle(!mod.toggled);
+            }
+
             for (int i = 0; i < Instance.OnUpdateEvents.Count; i++) Instance.OnUpdateEvents[i].OnUpdate();
 
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt))
@@ -130,7 +139,19 @@ namespace Trinity
         [Obfuscation(Exclude = true)]
         public static void OnUIInit()
         {
-            try { MelonCoroutines.Start(MenuUI.StartUI()); LogHandler.Log(LogHandler.Colors.Green, "Client UI Initialized!", true, false); } catch (Exception ERROR) { LogHandler.Log(LogHandler.Colors.Red, ERROR.Message, true, false); }
+            try 
+            { 
+                MelonCoroutines.Start(MenuUI.StartUI());
+                for (int i = 0; i < Instance.Modules.Count; ++i)
+                {
+                    if (Instance.Modules[i].name == "Fly") Instance.FlyModule = Instance.Modules[i];
+                }
+                LogHandler.Log(LogHandler.Colors.Green, "Client UI Initialized!", true, false); 
+            } 
+            catch (Exception ex) 
+            { 
+                LogHandler.Log(LogHandler.Colors.Red, ex.Message, true, false); 
+            }
         }
         public static void OnApplicationQuit()
         {

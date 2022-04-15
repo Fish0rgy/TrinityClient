@@ -1,13 +1,15 @@
-using Trinity.Utilities;
-using Trinity.Events;
-using Trinity.SDK;
-using Trinity.SDK.ButtonAPI;
+using System;
+using UnityEngine;
 using MelonLoader;
 using Photon.Realtime;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+
+using Trinity.SDK;
+using Trinity.Events;
+using Trinity.Utilities;
+using Trinity.SDK.ButtonAPI;
+
 
 namespace Trinity.Module.Settings.Render
 {
@@ -26,7 +28,7 @@ namespace Trinity.Module.Settings.Render
                 playerList.lable.SetActive(true);
                 playerList.text.alignment = TMPro.TextAlignmentOptions.Right;
 
-                if (GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer").activeSelf)
+                if (UIU.UserInterface.transform.Find("Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer").gameObject.activeSelf)
                     playerList.lable.transform.localPosition = new Vector3(-526.6402f, -341.6801f, 0);
 
                 else
@@ -40,7 +42,7 @@ namespace Trinity.Module.Settings.Render
             {
 
             }
-            catch (Exception ERROR)
+            catch (Exception ex)
             {
 
             }

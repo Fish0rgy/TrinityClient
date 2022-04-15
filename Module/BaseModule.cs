@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Trinity.Module
 {
-    abstract class BaseModule
+    public abstract class BaseModule
     {
         public string name;
         public bool toggled;
@@ -15,6 +15,9 @@ namespace Trinity.Module
         QMNestedButton category;
         bool isToggle;
         Sprite image;
+
+        public QMToggleButton toggleButton;
+        public QMSingleButton singleButton;
 
         public BaseModule(string name, string discription, QMNestedButton category, Sprite image = null, bool isToggle = false, bool save = false)
         {
@@ -47,7 +50,7 @@ namespace Trinity.Module
         {
             if (isToggle)
             {
-                new QMToggleButton(category.menuTransform, name, discription, new Action<bool>((bool state) =>
+                toggleButton = new QMToggleButton(category.menuTransform, name, discription, new Action<bool>((bool state) =>
                 {
                     this.toggled = state;
                     if (state)
@@ -63,7 +66,7 @@ namespace Trinity.Module
             }
             else
             {
-                new QMSingleButton(category.menuTransform, name, discription, image, delegate
+                singleButton = new QMSingleButton(category.menuTransform, name, discription, image, delegate
                 {
                     OnEnable();
                 });
