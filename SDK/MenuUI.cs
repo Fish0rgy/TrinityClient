@@ -113,7 +113,8 @@ namespace Trinity.SDK
                 GameObject newEntry = new($"Entry{i}");
                 TextMeshProUGUI txt = newEntry.AddComponent<TextMeshProUGUI>();
                 txt.fontSize = 28;
-                txt.text = "Fuck off yeah?";
+                txt.text = "Test";
+                txt.transform.rotation = Quaternion.identity;
                 newEntry.transform.SetParent(consoleObj.transform, false);
                 logs.Add(txt);
             }
