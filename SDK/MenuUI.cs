@@ -1,4 +1,4 @@
-using MelonLoader;
+﻿using MelonLoader;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,7 +52,25 @@ namespace Trinity.SDK
     class MenuUI
     {
 
-        public static List<TextMeshProUGUI> logs = new List<TextMeshProUGUI>();
+        public static List<ConsoleEntry> logs = new List<ConsoleEntry>();
+
+        public static GameObject consoleObj;
+
+        public static void Log(string txt, bool plainText = false)
+        {
+            int logCount = logs.Count;
+
+            ConsoleEntry oldEntry = logs[0];
+            logs.Remove(oldEntry);
+            GameObject.Destroy(oldEntry.mainObj);
+
+            if (!plainText) txt = $"[<color=#00ff00ff>{DateTime.Now.ToString("h:mm tt")}</color>] " + txt;
+
+            ConsoleEntry newEntry = new(txt);
+            newEntry.mainObj.transform.SetParent(consoleObj.transform, false);
+            logs.Add(newEntry);
+
+        }
 
         public static IEnumerator StartUI()
         {
@@ -78,7 +96,7 @@ namespace Trinity.SDK
             btnObj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
 
-            GameObject consoleObj = GameObject.Instantiate(buttonContainer.GetComponentInChildren<Button>().gameObject, btnObj.transform);
+            consoleObj = GameObject.Instantiate(buttonContainer.GetComponentInChildren<Button>().gameObject, btnObj.transform);
 
             foreach (Image i in consoleObj.GetComponentsInChildren<Image>())
             {
@@ -106,20 +124,33 @@ namespace Trinity.SDK
             conVLG.childScaleWidth = false;
             conVLG.childForceExpandWidth = true;
 
+            conVLG.spacing = 0;
             conVLG.padding = new(10, 0, 5, 0);
 
-            for (int i = 0; i < 20; ++i)
+            for (int c = 0; c < consoleObj.transform.GetChildCount(); ++c)
             {
-                GameObject newEntry = new($"Entry{i}");
-                TextMeshProUGUI txt = newEntry.AddComponent<TextMeshProUGUI>();
-                txt.fontSize = 28;
-                txt.text = "Fuck off yeah?";
-                newEntry.transform.SetParent(consoleObj.transform, false);
-                logs.Add(txt);
+                GameObject.Destroy(consoleObj.transform.GetChild(c).gameObject);
             }
 
-            logs[0].text = "<color=red>Bozo</color> shit";
-
+            for (int i = 0; i < 13; ++i)
+            {
+                ConsoleEntry newEntry = new("");
+                newEntry.mainObj.transform.SetParent(consoleObj.transform, false);
+                logs.Add(newEntry);
+            }
+            Log($"", true);
+            Log($"", true);
+            Log($"<color=#cf9700>        Welcome to Trinity               </color>", true);
+            Log($"", true);
+            Log($"<color=#cf9700>           Enjoy your stay!                </color>", true);
+            Log($"", true);
+            Log($"", true);
+            Log($"", true);
+            Log($"", true);
+            Log($"", true);
+            Log($"", true);
+            Log($"", true);
+            Log($"", true);
 
 
             Main.Instance.WorldButton = new QMNestedButton(mainTab.menuTransform, "World", QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath));

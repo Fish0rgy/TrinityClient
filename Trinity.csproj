@@ -779,6 +779,7 @@
     <Compile Include="Module\World\World Hacks\Murder 4\StartGame.cs" />
     <Compile Include="Module\World\World Hacks\PrisionEscape\PrisionMisc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SDK\ButtonAPI\ConsoleEntry.cs" />
     <Compile Include="SDK\ButtonAPI\QMButtonGroup.cs" />
     <Compile Include="SDK\ButtonAPI\QMHeader.cs" />
     <Compile Include="SDK\ButtonAPI\QMLable.cs" />

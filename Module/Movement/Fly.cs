@@ -32,6 +32,7 @@ namespace Trinity.Module.Movement
             origGrav = Physics.gravity;
             Physics.gravity = Vector3.zero;
             Main.Instance.OnUpdateEvents.Add(this);
+            MenuUI.Log("Fly: <color=green>ON</color>");
         }
 
         public override void OnDisable()
@@ -40,6 +41,7 @@ namespace Trinity.Module.Movement
             VRCPlayer.field_Internal_Static_VRCPlayer_0.GetComponent<CharacterController>().enabled = true;
             Physics.gravity = origGrav;
             Main.Instance.OnUpdateEvents.Remove(this);
+            MenuUI.Log("Fly: <color=red>OFF</color>");
         }
 
         public void OnUpdate()
