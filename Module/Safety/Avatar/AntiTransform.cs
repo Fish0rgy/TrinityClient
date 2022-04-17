@@ -18,11 +18,13 @@ namespace Trinity.Module.Safety.Avatar
         }
         public override void OnEnable()
         {
+            MenuUI.Log("SAFETY: <color=green>Anti Transformers Enabled</color>");
             Main.Instance.OnObjectInstantiatedEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("SAFETY: <color=red>Anti Transformers Disabled</color>");
             Main.Instance.OnObjectInstantiatedEvents.Remove(this);
         }
 

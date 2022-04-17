@@ -19,16 +19,15 @@ namespace Trinity.Module.Settings.Render
 
         public override void OnEnable()
         {
-          
+            MenuUI.Log("NAMEPLATES: <color=green>Custom Nameplates On</color>");
             Main.Instance.OnPlayerJoinEvents.Add(this);
             UpdatePlayerlistInfo();
         }
 
         public override void OnDisable()
         {
-          
+            MenuUI.Log("NAMEPLATES: <color=red>Custom Nameplates Off</color>");
             Main.Instance.OnPlayerJoinEvents.Remove(this);
-
         }
 
         public void OnPlayerJoin(VRC.Player player)

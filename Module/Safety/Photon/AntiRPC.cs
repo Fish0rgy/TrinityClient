@@ -11,11 +11,13 @@ namespace Trinity.Module.Safety.Photon
 
         public override void OnEnable()
         {
+            MenuUI.Log("SAFETY: <color=green>Anti RPC Enabled</color>");
             Main.Instance.OnRPCEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("SAFETY: <color=red>Anti RPC Disabled</color>");
             Main.Instance.OnRPCEvents.Remove(this);
         }
 

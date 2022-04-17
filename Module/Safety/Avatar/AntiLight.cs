@@ -18,11 +18,13 @@ namespace Trinity.Module.Safety.Avatar
         }
         public override void OnEnable()
         {
+            MenuUI.Log("SAFETY: <color=green>Anti Light Sources Enabled</color>");
             Main.Instance.OnObjectInstantiatedEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("SAFETY: <color=red>Anti Light Sources Disabled</color>");
             Main.Instance.OnObjectInstantiatedEvents.Remove(this);
         }
 

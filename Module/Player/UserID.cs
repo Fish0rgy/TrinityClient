@@ -12,6 +12,7 @@ namespace Trinity.Module.World
             if (PU.GetPlayer().GetAPIUser().id != "")
                 Misc.SetClipboard(PU.GetPlayer().GetAPIUser().id);
             LogHandler.Log(LogHandler.Colors.Green, "User ID: " + PU.GetPlayer().GetAPIUser().id + " Copied to clipboard.", false, false);
+            MenuUI.Log("PLAYER: <color=green>Copied User ID To Clip Board</color>");
         }
 
     }

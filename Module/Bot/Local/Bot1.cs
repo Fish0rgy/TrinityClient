@@ -18,6 +18,7 @@ namespace Trinity.Module.Bot.Local
         {
             try
             {
+                MenuUI.Log("BOT: <color=green>Started Bot 1</color>");
                 var BotExists = !Directory.Exists("\\Trinity\\Bot\\"); //flags for bot directory
                 var BotCheck = BotExists;
                 if (BotCheck) //checks if bot directory exists

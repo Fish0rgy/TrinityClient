@@ -20,6 +20,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
         {
             try
             {
+                MenuUI.Log("MURDER: <color=green>Assigned Bystander To Target</color>");
                 APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Assigned {SelectedPlayer.displayName} As Bystander", false, false);
                 LogHandler.LogDebug($"Assigned {SelectedPlayer.displayName} As Bystander");

@@ -10,12 +10,14 @@ namespace Trinity.Module.Player
 
         public override void OnEnable()
         {
+            MenuUI.Log("FPS: <color=green>FPS Cap Unlocked</color>");
             LogHandler.Log(LogHandler.Colors.Green, "Application Framerate Set To 140", false, false);
             Application.targetFrameRate = 140;
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("FPS: <color=red>FPS Cap Reset</color>");
             LogHandler.Log(LogHandler.Colors.Green, "Application Framerate Set To 90", false, false);
             Application.targetFrameRate = 90;
         }

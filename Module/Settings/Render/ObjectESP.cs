@@ -1,3 +1,4 @@
+using Trinity.SDK;
 using Trinity.Utilities;
 using UnhollowerBaseLib;
 using UnityEngine;
@@ -11,11 +12,13 @@ namespace Trinity.Module.Settings.Render
 
         public override void OnEnable()
         {
+            MenuUI.Log("OBJECTS: <color=green>Item ESP On</color>");
             PickupESP(true);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("OBJECTS: <color=red>Item ESP Off</color>");
             PickupESP(false);
         }
         internal static void PickupESP(bool state)

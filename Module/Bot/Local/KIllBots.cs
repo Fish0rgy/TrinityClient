@@ -16,11 +16,13 @@ namespace Trinity.Module.Bot.Local
         {
             try
             {
+                MenuUI.Log("BOT: <color=green>Started Bot 1</color>");
                 Console.Clear();
                 LogHandler.DisplayLogo();
                 foreach (var p in Process.GetProcessesByName("Trinity")) { p.Kill(); };
                 LogHandler.Log(LogHandler.Colors.Green, "Bots Killed!", false, false);
-                LogHandler.LogDebug("Bots Killed!");
+                LogHandler.LogDebug("Bots Killed!"); 
+                MenuUI.Log("BOT: <color=red>Stoping All Bots</color>");
             }
             catch (Exception ex)
             {

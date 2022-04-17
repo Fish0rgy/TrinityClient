@@ -11,11 +11,13 @@ namespace Trinity.Module.Settings.Logging
       
         public override void OnEnable()
         {
+            MenuUI.Log("LOGGING: <color=green>RPC Logger On</color>");
             Main.Instance.OnRPCEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("LOGGING: <color=red>RPC Logger Off</color>");
             Main.Instance.OnRPCEvents.Remove(this);
         }
 

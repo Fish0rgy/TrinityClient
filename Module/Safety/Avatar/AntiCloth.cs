@@ -18,11 +18,13 @@ namespace Trinity.Module.Safety.Avatar
         }
         public override void OnEnable()
         {
+            MenuUI.Log("SAFETY: <color=green>Anti Cloth Enabled</color>");
             Main.Instance.OnObjectInstantiatedEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("SAFETY: <color=red>Anti Cloth Disabled</color>");
             Main.Instance.OnObjectInstantiatedEvents.Remove(this);
         }
 

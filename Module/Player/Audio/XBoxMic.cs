@@ -1,3 +1,4 @@
+using Trinity.SDK;
 using Trinity.Utilities;
 namespace Trinity.Module.Player
 {
@@ -9,12 +10,13 @@ namespace Trinity.Module.Player
 
         public override void OnEnable()
         {
+            MenuUI.Log("AUDIO: <color=green>Set Bit Rate To 8k</color>");
             VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_USpeaker_0.field_Public_BitRate_0 = BitRate.BitRate_8K;
         }
 
         public override void OnDisable()
         {
-
+            MenuUI.Log("AUDIO: <color=red>Reset Audio Bit Rate</color>");
             VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_USpeaker_0.field_Public_BitRate_0 = BitRate.BitRate_24K;
         }
     }

@@ -15,12 +15,14 @@ namespace Trinity.Module.Settings.Preformance
 
         public override void OnEnable()
         {
+            MenuUI.Log("URLS: <color=green>VideoPlayers Hidden</color>");
             SetAllObjectsOfTypeVideoPlayers(false);
             LogHandler.LogDebug($"Video Players Hidden");
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("URLS: <color=red>VideoPlayers UnHidden</color>");
             SetAllObjectsOfTypeVideoPlayers(true);
             LogHandler.LogDebug($"Video Players UnHidden");
         }

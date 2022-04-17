@@ -15,11 +15,13 @@ namespace Trinity.Module.Settings.Logging
 
         public override void OnEnable()
         {
+            MenuUI.Log("LOGGING: <color=green>OPSendLogger Logger On</color>");
             Main.Instance.OnSendOPEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("LOGGING: <color=red>OPSendLogger Logger Off</color>");
             Main.Instance.OnSendOPEvents.Remove(this);
         }
 

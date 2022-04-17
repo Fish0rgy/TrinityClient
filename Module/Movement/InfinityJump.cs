@@ -1,6 +1,7 @@
 using Trinity.Utilities;
 using Trinity.Events;
 using VRC.SDKBase;
+using Trinity.SDK;
 
 namespace Trinity.Module.World
 {
@@ -22,11 +23,13 @@ namespace Trinity.Module.World
 
         public override void OnEnable()
         {
+            MenuUI.Log("JUMP: <color=green>Infinite Jump On</color>");
             Main.Instance.OnUpdateEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("JUMP: <color=red>Infinite Jump Off</color>");
             Main.Instance.OnUpdateEvents.Remove(this);
         }
     }

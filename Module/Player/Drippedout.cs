@@ -10,9 +10,7 @@ namespace Trinity.Module.Player
 
         public override void OnEnable()
         {
-          
-                PU.ChangeAvatar("avtr_1c727bf4-77b7-4b20-888b-4b81fc88d37e");
-                LogHandler.LogDebug("[Swag] -> Good Job fag, shouldn't of ran that exe ;) jk");
+            PU.ChangeAvatar("avtr_1c727bf4-77b7-4b20-888b-4b81fc88d37e");
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Trinity.Module.Settings.Render
 
         public override void OnEnable()
         {
+            MenuUI.Log("ESP: <color=green>Player ESP On</color>");
             for (int i = 0; i < PU.GetAllPlayers().Length; i++)
             {
                 CapsuleEsp.HighlightPlayer(PU.GetAllPlayers()[i], true);
@@ -21,6 +22,7 @@ namespace Trinity.Module.Settings.Render
 
         public override void OnDisable()
         {
+            MenuUI.Log("ESP: <color=red>Player ESP Off</color>");
             for (int i = 0; i < PU.GetAllPlayers().Length; i++)
             {
                 CapsuleEsp.HighlightPlayer(PU.GetAllPlayers()[i], false);

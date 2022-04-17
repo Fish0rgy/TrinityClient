@@ -1,3 +1,4 @@
+using Trinity.SDK;
 using Trinity.Utilities;
 using UnhollowerBaseLib;
 using UnityEngine;
@@ -11,11 +12,13 @@ namespace Trinity.Module.Settings.Render
 
         public override void OnEnable()
         {
+            MenuUI.Log("TRIGGERS: <color=green>Trigger ESP On</color>");
             triggeresp(true);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("TRIGGERS: <color=red>Trigger ESP Off</color>");
             triggeresp(false);
         }
 

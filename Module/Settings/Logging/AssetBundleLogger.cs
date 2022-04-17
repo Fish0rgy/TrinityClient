@@ -13,11 +13,13 @@ namespace Trinity.Module.Settings.Logging
 
         public override void OnEnable()
         {
+            MenuUI.Log("LOGGING: <color=green>AssetBundle Logger On</color>");
             Main.Instance.OnAssetBundleLoadEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("LOGGING: <color=red>AssetBundle Logger Off</color>");
             Main.Instance.OnAssetBundleLoadEvents.Remove(this);
         }
 

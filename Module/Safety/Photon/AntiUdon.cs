@@ -17,11 +17,13 @@ namespace Trinity.Module.Safety
 
         public override void OnEnable()
         {
+            MenuUI.Log("SAFETY: <color=green>Anti Udon Enabled</color>");
             Main.Instance.OnUdonEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("SAFETY: <color=red>Anti Udon Disabled</color>");
             Main.Instance.OnUdonEvents.Remove(this);
         }
         public bool OnUdon(string __0, VRC.Player __1)

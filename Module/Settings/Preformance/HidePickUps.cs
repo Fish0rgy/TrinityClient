@@ -15,12 +15,14 @@ namespace Trinity.Module.Settings.Preformance
 
         public override void OnEnable()
         {
+            MenuUI.Log("PICKUPS: <color=green>Pickup Triggers Hidden</color>");
             pickupHIDE(false);
             LogHandler.LogDebug($"Pickups Hidden");
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("PICKUPS: <color=red>Pickup Triggers UnHidden</color>");
             pickupHIDE(true);
             LogHandler.LogDebug($"Pickups UnHidden");
         }

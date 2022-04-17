@@ -14,12 +14,14 @@ namespace Trinity.Module.Settings.Preformance
 
         public override void OnEnable()
         {
+            MenuUI.Log("CHAIRS: <color=green>Chair Triggers Hidden</color>");
             SetAllObjectsOfTypeChairs(false);
             LogHandler.LogDebug($"Chairs Hidden");
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("CHAIRS: <color=red>Chair Triggers UnHidden</color>");
             SetAllObjectsOfTypeChairs(true);
             LogHandler.LogDebug($"Chairs UnHidden");
         }

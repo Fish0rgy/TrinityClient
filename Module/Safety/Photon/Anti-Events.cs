@@ -16,11 +16,13 @@ namespace Trinity.Module.Safety.Photon
 
         public override void OnEnable()
         {
+            MenuUI.Log("SAFETY: <color=green>Anti Photon Enabled</color>");
             Main.Instance.OnEventEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("SAFETY: <color=red>Anti Photon Disabled</color>");
             Main.Instance.OnEventEvents.Remove(this);
         }
 

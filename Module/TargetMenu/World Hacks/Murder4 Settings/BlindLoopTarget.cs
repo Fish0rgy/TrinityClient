@@ -22,6 +22,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
         {
             try
             {
+                MenuUI.Log("MURDER: <color=green>Blind Loop Target</color>");
                 APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Blinding {SelectedPlayer.displayName}", false, false);
                 LogHandler.LogDebug($"Blinding {SelectedPlayer.displayName}");

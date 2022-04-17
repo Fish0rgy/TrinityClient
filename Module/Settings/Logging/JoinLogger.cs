@@ -13,12 +13,14 @@ namespace Trinity.Module.Settings.Logging
 
         public override void OnEnable()
         {
+            MenuUI.Log("LOGGING: <color=green>Join/Leave Logger On</color>");
             Main.Instance.OnPlayerJoinEvents.Add(this);
             Main.Instance.OnPlayerLeaveEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("LOGGING: <color=red>Join/Leave Logger Off</color>");
             Main.Instance.OnPlayerJoinEvents.Remove(this);
             Main.Instance.OnPlayerLeaveEvents.Remove(this);
         }

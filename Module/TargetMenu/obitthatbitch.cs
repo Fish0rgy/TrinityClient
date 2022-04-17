@@ -20,14 +20,15 @@ namespace Trinity.Module.TargetMenu
 
         public override void OnEnable()
         {
+            MenuUI.Log("ITEMS: <color=green>Items Orbiting Target On</color>");
             MelonLoader.MelonCoroutines.Start(ItemRotate());
             LogHandler.LogDebug($"[Info] -> Items Orbitting -> {PU.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0.displayName}");
         }
 
         public override void OnDisable()
         {
-            MelonLoader.MelonCoroutines.Stop(ItemRotate());
-     
+            MenuUI.Log("ITEMS: <color=red>Items Orbiting Target Off</color>");
+            MelonLoader.MelonCoroutines.Stop(ItemRotate()); 
             LogHandler.LogDebug($"[Info] -> Items removed -> {PU.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0.displayName}");
         }
 

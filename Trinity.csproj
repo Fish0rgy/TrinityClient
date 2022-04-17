@@ -696,7 +696,6 @@
     <Compile Include="Module\Player\HideSelf.cs" />
     <Compile Include="Module\Player\LoudMic.cs" />
     <Compile Include="Module\Player\UserID.cs" />
-    <Compile Include="Module\Player\XBoxMic.cs" />
     <Compile Include="Module\Settings\Render\CapsuleESP.cs" />
     <Compile Include="Module\Settings\Render\CustomNameplates.cs" />
     <Compile Include="Module\Settings\Render\ObjectESP.cs" />

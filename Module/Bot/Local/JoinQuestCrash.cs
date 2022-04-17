@@ -20,6 +20,7 @@ namespace Trinity.Module.Bot.Local
         {
             try
             {
+                MenuUI.Log("BOT: <color=green>Crashing Quest Players</color>");
                 if (!Directory.Exists(@"\Trinity\Bot\Trinity.exe"))
                 {
                     string worldID = PU.GetPlayer().GetAPIUser().worldId;

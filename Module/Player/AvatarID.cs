@@ -7,8 +7,9 @@ namespace Trinity.Module.Player
     {
         public AvatarID() : base("Change Avatar By ID", "copy an avatarid into your clipboard then click change. ", Main.Instance.PlayerButton, SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), false, false) { }
         public override void OnEnable()
-        {
+        { 
             if (Misc.GetClipboard().StartsWith("avtr")) { PU.ChangeAvatar(Misc.GetClipboard()); }
+            MenuUI.Log("AVATAR: <color=green>Copied ID To Cilp Board</color>");
         }
     }
 }

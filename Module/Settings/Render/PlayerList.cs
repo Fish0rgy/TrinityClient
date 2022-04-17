@@ -25,6 +25,7 @@ namespace Trinity.Module.Settings.Render
 
             try
             {
+                MenuUI.Log("DEBUG: <color=green>Player Room List On</color>");
                 playerList.lable.SetActive(true);
                 playerList.text.alignment = TMPro.TextAlignmentOptions.Right;
 
@@ -54,6 +55,7 @@ namespace Trinity.Module.Settings.Render
 
             try
             {
+                MenuUI.Log("DEBUG: <color=red>Player Room List Off</color>");
                 MelonCoroutines.Stop(OnUpdate());
                 playerList.lable.SetActive(false);
                 Main.Instance.OnPlayerJoinEvents.Remove(this);

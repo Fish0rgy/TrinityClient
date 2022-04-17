@@ -2,6 +2,7 @@ using Trinity.Utilities;
 using Trinity.Events;
 using Trinity.SDK.Photon;
 using ExitGames.Client.Photon;
+using Trinity.SDK;
 
 namespace Trinity.Module.TargetMenu
 {
@@ -13,11 +14,13 @@ namespace Trinity.Module.TargetMenu
 
         public override void OnEnable()
         {
+            MenuUI.Log("VOICE: <color=green>Starting Imitation On Target</color>");
             Main.Instance.OnEventEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("VOICE: <color=red>Stopped Imitating Target</color>");
             Main.Instance.OnEventEvents.Remove(this);
         }
 

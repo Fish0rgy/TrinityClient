@@ -14,6 +14,7 @@ namespace Trinity.Module.Settings.Preformance
             Console.Clear();        
             LogHandler.DisplayLogo();         
             LogHandler.Log(LogHandler.Colors.White, "Cleared Console!", false, false);
+            MenuUI.Log("CONSOLE: <color=green>Cleard Melonloader Console</color>");
         }
     }
 }

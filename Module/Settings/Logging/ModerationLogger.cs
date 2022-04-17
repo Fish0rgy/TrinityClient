@@ -19,11 +19,13 @@ namespace Trinity.Module.Settings.Logging
 
         public override void OnEnable()
         {
+            MenuUI.Log("LOGGING: <color=green>Moderation Logger On</color>");
             Main.Instance.OnEventEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("LOGGING: <color=red>Moderation Logger Off</color>");
             Main.Instance.OnEventEvents.Remove(this);
         }
 

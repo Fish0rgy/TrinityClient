@@ -23,9 +23,12 @@ namespace Trinity.Module.Settings.Preformance
                 if (File.Exists(SecurityCheck.key) && SecurityCheck.GetServerInfo(File.ReadAllText(SecurityCheck.key)))
                 {
                     //200
+                    MenuUI.Log("API: <color=green>Successful Relogin</color>");
                     LogHandler.Log(LogHandler.Colors.Green, "[Trinity] Successful Relogin", false, false);
                 }
-                else { LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Unsuccessful Relogin", false, false); }
+                else { LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Unsuccessful Relogin", false, false);
+                    MenuUI.Log("API: <color=red>Unsuccessful Relogin</color>");
+                }
             }
             catch (Exception EX)
             {

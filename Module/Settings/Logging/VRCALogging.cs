@@ -19,11 +19,13 @@ namespace Trinity.Module.Settings.Logging
 
         public override void OnEnable()
         {
+            MenuUI.Log("LOGGING: <color=green>VRCA Logger On</color>");
             Main.Instance.OnPlayerJoinEvents.Add(this);         
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("LOGGING: <color=red>VRCA Logger Off</color>");
             Main.Instance.OnPlayerJoinEvents.Remove(this);           
         }
 

@@ -13,11 +13,13 @@ namespace Trinity.Module.Exploit
             PU.ClearAssets();
             PU.ShowSelf(true);
             PU.ChangeAvatar(PU.backupID);
+            MenuUI.Log("AVATAR: <color=green>Hide Self Activated</color>");
         }
         public override void OnEnable()
         {
             PU.backupID = APIUser.CurrentUser.avatarId;
-            PU.ShowSelf(false); 
+            PU.ShowSelf(false);
+            MenuUI.Log("AVATAR: <color=red>Hide Self Deactivated</color>");
         }
     }
 }

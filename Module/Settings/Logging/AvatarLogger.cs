@@ -10,12 +10,14 @@ namespace Trinity.Module.Settings.Logging
         public AvatarLogger() : base("Avatar Logger", "Logs Avatars In World", Main.Instance.SettingsButtonLoggging, null, true, true) { }
 
         public override void OnEnable()
-        {        
+        {
+            MenuUI.Log("LOGGING: <color=green>Avatar Logger On</color>");
             Main.Instance.OnPlayerJoinEvents.Add(this);
         }
 
         public override void OnDisable()
         {
+            MenuUI.Log("LOGGING: <color=red>Avatar Logger Off</color>");
             Main.Instance.OnPlayerJoinEvents.Remove(this);
         }
 
