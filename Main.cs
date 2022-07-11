@@ -140,34 +140,7 @@ namespace Trinity
 
         public override void OnApplicationStart() 
         {
-            if (Environment.GetCommandLineArgs().Contains("--trinity-bot"))
-            {
-                Console.Clear();
-                LogHandler.Log(LogHandler.Colors.Yellow, @"
-                ████████╗██████╗░██╗███╗░░██╗██╗████████╗██╗░░░██╗  ██████╗░░█████╗░████████╗
-                ╚══██╔══╝██╔══██╗██║████╗░██║██║╚══██╔══╝╚██╗░██╔╝  ██╔══██╗██╔══██╗╚══██╔══╝
-                ░░░██║░░░██████╔╝██║██╔██╗██║██║░░░██║░░░░╚████╔╝░  ██████╦╝██║░░██║░░░██║░░░
-                ░░░██║░░░██╔══██╗██║██║╚████║██║░░░██║░░░░░╚██╔╝░░  ██╔══██╗██║░░██║░░░██║░░░
-                ░░░██║░░░██║░░██║██║██║░╚███║██║░░░██║░░░░░░██║░░░  ██████╦╝╚█████╔╝░░░██║░░░
-                ░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚══╝╚═╝░░░╚═╝░░░░░░╚═╝░░░  ╚═════╝░░╚════╝░░░░╚═╝░░░
-");
-                LogHandler.Log(LogHandler.Colors.Green, "Bot Client Started!");
-                IsApplicationBot = true;
-                wse.Connect();
-                LogHandler.Log(LogHandler.Colors.Green, "Connected to Server!");
-                wse.OnMessage += delegate (object s, MessageEventArgs e)
-                {
-                    LogHandler.Log(LogHandler.Colors.DarkBlue, "[Bot Client] Received " + e.Data.ToString());
-                    int num = e.Data.ToString().IndexOf(" ");
-                    string CMD = e.Data.ToString().Substring(0, num);
-                    string Parameters = e.Data.ToString().Substring(num + 1);
-                    Main.HandleActionOnMainThread(delegate
-                    {
-                        Trinity.Bot.Commands.Commands.Cmd[CMD](Parameters);
-                    });
-                };
-                return;
-            }
+            PlayerExtensions.CheckBotStatus();
             WebSocketServ.StartServer();
             wse.Connect();
             Instance = new Main();

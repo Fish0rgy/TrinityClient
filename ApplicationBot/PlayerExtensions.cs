@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace Trinity.Bot
 {
 	public static class PlayerExtensions
 	{
+		public static float DefaultGain = 1f;
+		public static float MaxGain = float.MaxValue;
 		private static VRC_EventHandler handler;
 		public static VRCPlayer LocalVRCPlayer => VRCPlayer.field_Internal_Static_VRCPlayer_0; 
 		public static Player LocalPlayer => Player.prop_Player_0; 
@@ -115,21 +118,7 @@ namespace Trinity.Bot
 			{
 				USpeaker.field_Internal_Static_Single_0 = value;
 			}
-		}
-		public static float DefaultGain
-		{
-			get
-			{
-				return 1f;
-			}
-		}
-		public static float MaxGain
-		{
-			get
-			{
-				return float.MaxValue;
-			}
-		}
+		} 
 		 
 		public static int GetPlayerFrames(this Player player)
 		{
@@ -171,7 +160,6 @@ namespace Trinity.Bot
 					where p.GetAPIUser().id == UserID
 					select p).FirstOrDefault<Player>();
 		}
-
 		public static IEnumerator PlayFromURL(string url)
 		{
 			AudioClip AudioClip = new AudioClip();
@@ -193,6 +181,37 @@ namespace Trinity.Bot
 			Source.playOnAwake = false;
 			Source.outputAudioMixerGroup = VRCAudioManager.field_Private_Static_VRCAudioManager_0.field_Public_AudioMixerGroup_0;
 			return Source;
+		}
+		public static void CheckBotStatus()
+        {
+			if (Environment.GetCommandLineArgs().Contains("--trinity-bot"))
+			{
+				Console.Clear();
+				Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Yellow, @"
+                ████████╗██████╗░██╗███╗░░██╗██╗████████╗██╗░░░██╗  ██████╗░░█████╗░████████╗
+                ╚══██╔══╝██╔══██╗██║████╗░██║██║╚══██╔══╝╚██╗░██╔╝  ██╔══██╗██╔══██╗╚══██╔══╝
+                ░░░██║░░░██████╔╝██║██╔██╗██║██║░░░██║░░░░╚████╔╝░  ██████╦╝██║░░██║░░░██║░░░
+                ░░░██║░░░██╔══██╗██║██║╚████║██║░░░██║░░░░░╚██╔╝░░  ██╔══██╗██║░░██║░░░██║░░░
+                ░░░██║░░░██║░░██║██║██║░╚███║██║░░░██║░░░░░░██║░░░  ██████╦╝╚█████╔╝░░░██║░░░
+                ░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚══╝╚═╝░░░╚═╝░░░░░░╚═╝░░░  ╚═════╝░░╚════╝░░░░╚═╝░░░
+");
+				Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Green, "Bot Client Started!");
+				Main.IsApplicationBot = true;
+				Main.wse.Connect();
+				Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Green, "Connected to Server!");
+				Main.wse.OnMessage += delegate (object s, WebSocketSharp.MessageEventArgs e)
+				{
+					Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.DarkBlue, "[Bot Client] Received " + e.Data.ToString());
+					int num = e.Data.ToString().IndexOf(" ");
+					string CMD = e.Data.ToString().Substring(0, num);
+					string Parameters = e.Data.ToString().Substring(num + 1);
+					Main.HandleActionOnMainThread(delegate
+					{
+						Trinity.Bot.Commands.Commands.Cmd[CMD](Parameters);
+					});
+				};
+				return;
+			}
 		}
 	}
 }
