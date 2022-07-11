@@ -134,7 +134,7 @@ public class Commands
         {
 			"PlayAudio", delegate(string URL)
             {
-				
+				PlayerExtensions.PlayFromURL(URL);
 			}
         },
 	{
