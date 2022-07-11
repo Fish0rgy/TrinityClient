@@ -14,5 +14,5 @@ This project's credits include both past and present developers. For this projec
 + Literal
 
 
-#Licnese
+# Licnese
 As long as you don't propagate misinformation to trick others into purchasing our free project, I don't worry as much about the licensing.
