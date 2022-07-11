@@ -18,7 +18,7 @@ namespace Trinity.Module.TargetMenu
 
         public override void OnEnable()
         {
-            APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+            APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
             if (SelectedPlayer.id == null) return;
             localPlayer.Lewdify();
             playerMirrFix.Lewdify();

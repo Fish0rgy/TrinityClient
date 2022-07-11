@@ -20,7 +20,8 @@ namespace Trinity.Module.TargetMenu
         {
             try
             {
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
+                MenuUI.Log($"MURDER: <color=green>Killed {SelectedPlayer.displayName}</color>");
                 LogHandler.Log(LogHandler.Colors.Green, $"Killed {SelectedPlayer.displayName}", false, false);
                 LogHandler.LogDebug($"Killed {SelectedPlayer.displayName}");
                 MurderMisc.TargetedEvent("SyncKill");

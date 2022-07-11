@@ -2,6 +2,6 @@
 {
     public interface OnPlayerJoinEvent
     {
-        void OnPlayerJoin(VRC.Player player);       
+        void OnPlayerJoin(VRC.Player __0);       
     }
 }

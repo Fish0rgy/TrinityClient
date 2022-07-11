@@ -24,7 +24,7 @@ namespace Trinity.Module.Player
 
                 for (int j = 0; j < WorldWrapper.udonBehaviours.Length; j++)
                 {
-                    UdonExploitManager.udonsend(str, "everyone");
+                    UW.udonsend(str, EventTarget.Everyone);
                     LogHandler.Log(LogHandler.Colors.Green, $"[Custom Udon Event] Event Name: {str} | Object Name: {WorldWrapper.udonBehaviours[j].gameObject.name}", false, false);
                 }
             });

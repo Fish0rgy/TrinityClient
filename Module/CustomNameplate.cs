@@ -9,6 +9,7 @@ namespace Trinity.Module
 {
     class CustomNameplate : MonoBehaviour
     {
+        public static bool disable = false;
         public VRC.Player player;
         private TextMeshProUGUI Nameplatext, stafftext;
         
@@ -46,7 +47,8 @@ namespace Trinity.Module
             Staff.localScale = new Vector3(1f, 1f, 2f);
             Staff.gameObject.SetActive(true);
             stafftext = Staff.Find("Trust Text").GetComponent<TextMeshProUGUI>();
-          //  stafftext.color = Color.green;
+            // stafftext.color = Color.green;
+            stafftext.text = "";
             stafftext.fontStyle = FontStyles.Subscript;
             
 
@@ -57,11 +59,13 @@ namespace Trinity.Module
             ClientInfo.localScale = new Vector3(1f, 1f, 2f);
             ClientInfo.gameObject.SetActive(true);
             Nameplatext = ClientInfo.Find("Trust Text").GetComponent<TextMeshProUGUI>();
+             
+            Nameplatext.text = "";
             Nameplatext.color = Color.white;
             Nameplatext.fontStyle = FontStyles.Subscript;
 
-            Nameplatext.isOverlay = true;
-            stafftext.isOverlay = true;
+            Nameplatext.isOverlay = false;
+            stafftext.isOverlay = false;
 
             ClientInfo.Find("Trust Icon").gameObject.SetActive(false);
             ClientInfo.Find("Performance Icon").gameObject.SetActive(false);
@@ -77,66 +81,60 @@ namespace Trinity.Module
             
             frames = player._playerNet.field_Private_Byte_0;
             ping = player._playerNet.field_Private_Byte_1;
-            UserID = PU.GetPlayer().GetAPIUser().id;
-            stafftext.text = "";
-            Nameplatext.text = "";
+            UserID = PU.GetPlayer().GetAPIUser().id; 
 
 
         }
 
         void Update()
         {
-           
-                if (frames == player._playerNet.field_Private_Byte_0 && ping == player._playerNet.field_Private_Byte_1)
+
+            if (frames == player._playerNet.field_Private_Byte_0 && ping == player._playerNet.field_Private_Byte_1)
+                noUpdateCount++;
+            else
+                noUpdateCount = 0;
+            
+            frames = player._playerNet.field_Private_Byte_0;
+            ping = player._playerNet.field_Private_Byte_1;
+
+            string status = "<color=green>Stable</color>";
+
+            if (noUpdateCount > 35)
+                status = "<color=yellow>Lagging</color>";
+            if (noUpdateCount > 375)
+                status = "<color=red>Crashed</color>"; 
+
+
+
+            bool clientchecker = Trinity.Module.Settings.Render.CustomNameplates.Munchen.Contains(player.prop_APIUser_0.id) || Trinity.Module.Settings.Render.CustomNameplates.Arctic.Contains(player.prop_APIUser_0.id) || Trinity.Utilities.PU.ClientUserIDs.Contains(player.prop_APIUser_0.id);
+            try
+            {
+                if (player.GetIsMaster() == true && Trinity.Utilities.PU.ClientUserIDs.Contains(player.prop_APIUser_0.id))
                 {
-                    noUpdateCount++;
+                    Nameplatext.text = $"[<color=blue>Host</color>] [<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
+                    stafftext.text = $"<color=red>Client User</color>";
+                }
+                else if (clientchecker == true)
+                {
+                    Nameplatext.text = $"[<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
+                    stafftext.text = $"<color=red>Client User</color>";
+                }
+                else if (player.GetIsMaster() == true && Trinity.Module.Settings.Render.CustomNameplates.Munchen.Contains(player.prop_APIUser_0.id) == false)
+                {
+                    Nameplatext.text = $"[<color=blue>Host</color>] [<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
+                    stafftext.gameObject.SetActive(false);
                 }
                 else
                 {
-                    noUpdateCount = 0;
+                    Nameplatext.text = $"[<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
+                    stafftext.gameObject.SetActive(false);
                 }
-                frames = player._playerNet.field_Private_Byte_0;
-                ping = player._playerNet.field_Private_Byte_1;
-
-                string status = "<color=green>Stable</color>";
-
-                if (noUpdateCount > 35)
-                    status = "<color=yellow>Lagging</color>";
-                if (noUpdateCount > 375)
-                    status = "<color=red>Crashed</color>";
-
-      
-            try
-                {
-                    if (player.GetIsMaster() == true && Trinity.Module.Settings.Render.CustomNameplates.Staff.Contains(player.prop_APIUser_0.id))
-                    {
-                        Nameplatext.text = $"[<color=blue>Host</color>] [<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
-                        stafftext.text = $" Trinity STAFF ";
-                    }
-                    else if (Trinity.Module.Settings.Render.CustomNameplates.Staff.Contains(player.prop_APIUser_0.id))
-                    {
-                        Nameplatext.text = $"[<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
-                        stafftext.text = $" Trinity STAFF ";
-                    }
-                    else if (player.GetIsMaster() == true && Trinity.Module.Settings.Render.CustomNameplates.Staff.Contains(player.prop_APIUser_0.id) == false)
-                    {
-                        Nameplatext.text = $"[<color=blue>Host</color>] [<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
-                        stafftext.text = " <color=#BF40BF>VRC USER</color> ";
-                }
-                    else
-                    {
-                        Nameplatext.text = $"[<color=green>{player.GetPlatform()}</color>] | [{status}] |<color=white>FPS:</color> {player.GetFramesColord()} |<color=white>Ping</color>: {player.GetPingColord()}";
-
-                    stafftext.text = " <color=#BF40BF>VRC USER</color> ";
-
-                    }
-
+                PU.ClientDetect(player);
             }
-                catch (Exception ERROR)
-                {
-                    LogHandler.Log(LogHandler.Colors.Green, ERROR.Message, false, false);
-                }
-          
-        } 
+            catch (Exception ERROR)
+            {
+                LogHandler.Log(LogHandler.Colors.Green, ERROR.Message, false, false);
+            } 
+        }
     }
 }

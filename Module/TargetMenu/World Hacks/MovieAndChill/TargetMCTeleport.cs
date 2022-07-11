@@ -20,9 +20,10 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MovieAndChill
             try
             {
                 MelonLoader.MelonCoroutines.Start(gay());
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Force Respawned {SelectedPlayer.displayName}", false, false);
                 LogHandler.LogDebug($"{SelectedPlayer.displayName} Respawn Loop");
+                MenuUI.Log($"MOVIE: <color=green>{SelectedPlayer.displayName} Is In A Respawn Loop</color>");
             }
             catch (Exception ex)
             {
@@ -36,8 +37,8 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MovieAndChill
         IEnumerator gay()
         {
             while (toggled)
-            {
-                UdonExploitManager.ObjectEvent("Door Room 1 OPEN", "Teleport", 1);
+            { 
+                UW.ObjectEvent("Cube", "Teleport", EventTarget.Targeted);
                 yield return new WaitForSecondsRealtime(0.2f);
             }
             yield break;

@@ -18,10 +18,11 @@ namespace Trinity.Module.TargetMenu.World_Hacks.JustB
         {
             try
             {
-                UdonExploitManager.udonsend("StartTimerWithCooldown", "target");
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                UW.udonsend("StartTimerWithCooldown", EventTarget.Targeted);
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Force Respawned {SelectedPlayer.displayName}", false, false);
                 LogHandler.LogDebug($"Force Respawned -> {SelectedPlayer.displayName}");
+                MenuUI.Log($"JUSTB: <color=green>Force Respawned {SelectedPlayer.displayName}</color>");
             }
             catch (Exception ex)
             {

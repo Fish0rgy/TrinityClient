@@ -20,13 +20,15 @@ namespace Trinity.Module.TargetMenu.SafetySettings
         public override void OnEnable()
         {
             target = PU.GetPhotonID(PU.SelectedVRCPlayer());
-            targetname = PU.SelectedVRCPlayer().name;
+            targetname = PU.SelectedVRCPlayer().name; 
+            MenuUI.Log($"SAFETY: <color=green>Target Anti Photon On</color>");
             Main.Instance.OnEventEvents.Add(this);
         }
         public override void OnDisable()
         {
             targetname = null;
             target = 0;
+            MenuUI.Log($"SAFETY: <color=red>Target Anti Photon Off</color>");
             Main.Instance.OnEventEvents.Remove(this);
         }
 
@@ -57,6 +59,7 @@ namespace Trinity.Module.TargetMenu.SafetySettings
                 default:
                     return true;
             }
+             
         }
     }
 }

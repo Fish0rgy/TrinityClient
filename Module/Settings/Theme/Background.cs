@@ -20,40 +20,23 @@ namespace Trinity.Module.Settings.Theme
             try
             {
                 if (Background == null) Background = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().activeSprite;
-                string bgImage = SDK.Misc.GetBase64StringForImage(AppDomain.CurrentDomain.BaseDirectory + "//Trinity//Background//custom.png");
-                if (!System.IO.File.Exists(AppDomain.CurrentDomain.BaseDirectory + "//Trinity//Background//custom.png"))
-                {
-                    LogHandler.Log(LogHandler.Colors.Red, bgImage + "\n[Trinity] Failed to locate custom.png in VRChat/Background/custom.png!", false, false);
-                }
-                else
-                {
-                    GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.LoadSpriteFromFile(bgImage);
-                }
-               
+                GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = QMButtonIcons.LoadSpriteFromFile(Serpent.RetroPath);
+                 
             }
-            catch (NullReferenceException Error)
+            catch (Exception Error)
             {
-                if (Error.Message.Contains("not set to an instance"))
-                {
-                   
-                }
-
+                if (Error.Message.Contains("Object reference not set to an instance of an object")) { }
             }
         }
-
         public override void OnDisable()
         {
             try
             {
                 GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/BackgroundLayer01").GetComponent<Image>().sprite = Background;
             }
-            catch (NullReferenceException Error)
+            catch (Exception Error)
             {
-                if (Error.Message.Contains("not set to an instance"))
-                {
-                  
-                }
-
+                if (Error.Message.Contains("Object reference not set to an instance of an object")) { }
             }
         }
     }

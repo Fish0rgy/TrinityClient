@@ -21,7 +21,7 @@ namespace Trinity.Module.World.World_Hacks.Just_B
             try
             {
                 LogHandler.Log(LogHandler.Colors.Green, "Blinded Everyones Vision", false, false);
-                UdonExploitManager.udonsend("OnDesktopTopDownViewStart", "everyone");
+                UW.udonsend("OnDesktopTopDownViewStart", EventTarget.Everyone);
             }
             catch (Exception ex)
             {
@@ -32,7 +32,7 @@ namespace Trinity.Module.World.World_Hacks.Just_B
         {
             try
             {
-                UdonExploitManager.udonsend("OnPutDownCueLocally", "everyone");
+                UW.udonsend("OnPutDownCueLocally", EventTarget.Everyone);
                 LogHandler.Log(LogHandler.Colors.Green, "UnBlinded Everyones Vision", false, false);
             }
             catch (Exception ex)

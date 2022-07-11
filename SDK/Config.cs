@@ -2,16 +2,46 @@ using Trinity.Utilities;
 using System;
 using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Trinity.SDK
 {
     public class Config
     {
+        private static string XpPfprL5Fn = string.Empty;
+        private static string t5afLIB1A2 = string.Empty;
+        public static Config Instance;
         public Config()
         {
          
         }
+        internal void SaveConfig()
+        {
+            string value = JsonConvert.SerializeObject(this, (Formatting)1);
+            File.WriteAllText("Trinity/Config2.json", value);
+        }
+        internal static Config Load()
+        {
+            //string fileName = Process.GetCurrentProcess().MainModule.FileName;
+            //int length = fileName.LastIndexOf('\\');
+            //Config.XpPfprL5Fn = fileName.Substring(0, length) + "\\" + Config.bJmcmpUa48() + "\\";
+            //Config.t5afLIB1A2 = Config.XpPfprL5Fn + "\\Config\\";
 
+            bool exist = !File.Exists("Trinity/Config2.json");
+            Config contentresult;
+            if (exist)
+            {
+                contentresult = new Config();
+            }
+            else
+            {
+                Config.Instance = JsonConvert.DeserializeObject<Config>(File.ReadAllText("Trinity/Config2.json"));
+                contentresult = Config.Instance;
+            }
+            return contentresult;
+        }
         public int getConfigInt(string key, int defaultVal)
         {
          
@@ -51,14 +81,17 @@ namespace Trinity.SDK
 
         public bool getConfigBool(string key)
         {
-            if (File.ReadAllText("Trinity/Config.json").Contains(key))
+            if (File.ReadAllText("Trinity/Config2.json").Contains(key))
             {
-                string[] arrLine = File.ReadAllLines("Trinity/Config.json");
+                string[] arrLine = File.ReadAllLines("Trinity/Config2.json");
                 for (int i = 0; i < arrLine.Length; i++)
                 {
                     if (arrLine[i].Contains(key))
                     {
-                        return arrLine[i].Split('=')[1] == "True";
+                        if (arrLine[i].Split('=')[1] == "True")
+                            return true;
+                        else
+                            return false;
                     }
                 }
 
@@ -255,6 +288,34 @@ namespace Trinity.SDK
             "Magic3000/RGB-Glitch",
             "NEK0/Screen/Fade Screen v1",
             "VoidyShaders/Cave"
-        };
+        }; 
+        public bool GB_FeetColliders = true;
+        public bool GB_HandColliders = true;
+        public bool GB_HipBones = true;
+        public bool GB_ChestBones = true;
+        public bool GB_HeadBones = true;
+        public bool GB_Friends = true;
+        public bool GB_Spine = false;
+        public bool GB_line = false;
+        public static bool ItemOrbit = false;
+        public static bool LowBotFPS = true;
+        public static List<DynamicBone> currentWorldDynamicBones = new List<DynamicBone>();
+        public static List<DynamicBoneCollider> currentWorldDynamicBoneColliders = new List<DynamicBoneCollider>();
+        public static bool itemOrbit;
+        public static bool SpoofPing;
+        public static bool SpoofFps;
+        public static float FPSSpoof = 144f;
+        public static float FPSSpoof1 = 144f;
+        public static float FPSSpoof2 = 144f;
+        public static float FPSSpoof3 = 144f;
+        public static float FPSSpoof4 = 144f;
+        public static float PingSpoof = 2f;
+        public static float PingSpoof1 = 2f;
+        public static float PingSpoof2 = 2f;
+        public static float PingSpoof3 = 2f;
+        public static float PingSpoof4 = 2f;
+        internal static bool AntiE1;
+
+        public static bool Munchen { get; internal set; }
     }
 }

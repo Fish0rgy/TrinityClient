@@ -12,20 +12,19 @@ namespace Trinity.SDK.Patching.Patches
         {
             try
             {
-                SerpentPatch.Instance.Patch(typeof(UdonSync).GetMethod("UdonSyncRunProgramAsRPC"), new HarmonyMethod(AccessTools.Method(typeof(_Udon), nameof(OnUdon))));
+                SerpentPatch.Instance.Patch(typeof(UdonSync).GetMethod("UdonSyncRunProgramAsRPC"), new HarmonyMethod(AccessTools.Method(typeof(_Udon), nameof(OnUdon)))); 
                 LogHandler.Log(LogHandler.Colors.Green, "[Patch] Udon", false, false);
             }
             catch (Exception ex)
             {
                 SDK.LogHandler.Log(SDK.LogHandler.Colors.Red, "[Patch] Could not patch Udon failed\n" + ex, false, false);
             }
-        }
-
+        } 
         [Obfuscation(Exclude = true)]
-        private static bool OnUdon(string __0, VRC.Player __1)
+        private static bool OnUdon(string __0, VRC.Player __1, UdonSync __instance)
         {
             for (int i = 0; i < Main.Instance.OnUdonEvents.Count; i++)
-                if (!Main.Instance.OnUdonEvents[i].OnUdon(__0, __1))
+                if (!Main.Instance.OnUdonEvents[i].OnUdon(__0, __1, __instance))
                     return false;
             return true;
         }

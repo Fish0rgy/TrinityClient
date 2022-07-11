@@ -22,24 +22,30 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
         public override void OnEnable()
         {
             try
-            {
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
-                LogHandler.Log(LogHandler.Colors.Green, "Killed {SelectedPlayer.displayName}", false, false);
-                LogHandler.LogDebug("Killed {SelectedPlayer.displayName}");
+            { 
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
+                LogHandler.Log(LogHandler.Colors.Green, $"Killed {SelectedPlayer.displayName}", false, false); 
+                MenuUI.Log($"MURDER: <color=green>Killed {SelectedPlayer.displayName}</color>");
+                LogHandler.LogDebug($"Killed {SelectedPlayer.displayName}");
                 MelonCoroutines.Start(KillingLoop());
             }
             catch (Exception ex)
             {
                 LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
-        } 
+        }
+        public override void OnDisable()
+        {
+            MelonCoroutines.Stop(KillingLoop());
+        }
         public IEnumerator KillingLoop()
         {
-
+            GameObject frag = GameObject.Find("Game Logic/Weapons/Unlockables/Frag (0)");
             while (toggled)
             {
                 MurderMisc.TargetedEvent("SyncKill");
-                yield return new WaitForSeconds(0.1f);
+                MurderMisc.TargetedEvent("SyncAssignB");
+                yield return new WaitForSeconds(0.7f);
             }
             yield break;
         }

@@ -2,6 +2,6 @@
 {
     public interface OnPlayerLeaveEvent
     {
-        void PlayerLeave(VRC.Player player);
+        void PlayerLeave(VRC.Player __0);
     }
 }

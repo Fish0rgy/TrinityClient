@@ -22,6 +22,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
             {
                 LogHandler.Log(LogHandler.Colors.Green, "Blinded Everyone In The Lobby", false, false);
                 LogHandler.LogDebug("Blinded Everyone In The Lobby");
+                MurderMisc.antiblind();
                 MelonCoroutines.Start(FlashLooping());
             }
             catch (Exception ex)

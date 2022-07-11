@@ -19,8 +19,8 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MagicTag
         {
             try
             {
-                UdonExploitManager.udonsend("AssignTagger", "target");
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                UW.udonsend("AssignTagger", EventTarget.Targeted);
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"{SelectedPlayer.displayName} Forcefully Assigned Tagger", false, false);
                 LogHandler.LogDebug($"{SelectedPlayer.displayName} Assigned Tagger"); 
             }

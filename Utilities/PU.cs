@@ -1,10 +1,17 @@
-﻿using System;
+﻿using ExitGames.Client.Photon;
+using MelonLoader;
+using Newtonsoft.Json;
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
+using Trinity.SDK;
+using Trinity.SDK.Photon;
+using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
@@ -24,53 +31,63 @@ namespace Trinity.Utilities
         //converted all the bs to one lines to clean the class
 
         public static Player GetPlayer() => Player.prop_Player_0;
-        public static Player GetPlayer(int ActorNumber) => (from p in AllPlayers where p.GetActorNumber2() == ActorNumber select p).FirstOrDefault<Player>();
+        public static Player GetPlayer(int ActorNumber) => (from p in AllPlayers2().Array.ToList() where p.GetActorNumber2() == ActorNumber select p).FirstOrDefault<Player>();
         public static VRCPlayer GetVRCPlayer() => VRCPlayer.field_Internal_Static_VRCPlayer_0;
-
-        public static Player[] GetAllPlayers() => PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0;
-
-        public static Player GetByUsrID(string usrID) => GetAllPlayers().First(x => x.prop_APIUser_0.id == usrID);
+        public static Player[] GetAllPlayers() => PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
+        public static Player GetByUsrID(string usrID) => GetAllPlayers().ToList().First(x => x.prop_APIUser_0.id == usrID); 
         public static Player SelectedVRCPlayer() => UIU.UserInterface.transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>().field_Private_IUser_0.prop_String_0.ReturnUserID();
-
-        public static void TeleportLocation(float x, float y, float z) => GetVRCPlayer().transform.position = new Vector3(x, y, z);
-
+        public static IUser SelectedIUserPlayer() => UIU.UserInterface.transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>().field_Private_IUser_0;
+        public static void TeleportLocation(float x, float y, float z) => GetVRCPlayer().transform.position = new Vector3(x, y, z); 
         private static GameObject avatarPreviewBase => GameObject.Find("UserInterface/MenuContent/Screens/Avatar/AvatarPreviewBase");
-        private static GameObject playernode;
-
+        private static GameObject playernode; 
         private static int noUpdateCount = 0;
         public static string backupID = "";
         public static bool isRestored = false;
         public static bool GetIsMaster(this Player Instance) => Instance.GetVRCPlayerApi().isMaster;
         public static USpeaker GetUspeaker(this Player player) => player.prop_USpeaker_0;
         public static int GetActorNumber2(this Player player) => player.GetVRCPlayerApi().playerId;
-        public static string GetName(this Player player) => player.GetAPIUser().displayName;
-
+        public static string GetName(this Player player) => player.GetAPIUser().displayName; 
         public static Dictionary<int, VRC.Player> PlayersActorID = new Dictionary<int, VRC.Player>();
-
-        public static void Teleport(this Player player) => GetVRCPlayer().transform.position = player.prop_VRCPlayer_0.transform.position;
-
+        public static List<string> ClientUserIDs = new List<string>();
+        public static void Teleport(this Player player) => GetVRCPlayer().transform.position = player.prop_VRCPlayer_0.transform.position; 
         public static APIUser GetAPIUser(this VRC.Player player) => player.prop_APIUser_0;
         public static short GetPing(this Player player) => player._playerNet.field_Private_Int16_0;
         public static bool ZeroPingFPS(this Player player) => player.GetPing() <= 0 && player.GetFrames() <= 0 && player.GetFrames() <= -1;
         public static bool VectorZero(this Player player) => player.GetPing() <= 0 && player.GetFrames() <= 0 || player.transform.position == Vector3.zero;
         public static IUser GetSelectedUser(this SelectedUserMenuQM selectMenu) => selectMenu.field_Private_IUser_0;
         public static Player GetPlayer(this VRCPlayer player) => player.prop_Player_0;
-
+        public static Player[] GetPlayers(this PlayerManager playerManager) => playerManager.field_Private_List_1_Player_0.ToArray(); 
         public static int GetPhotonID(this VRC.Player player) => player.prop_Int32_0;
         public static Color GetTrustColor(this VRC.Player player) => VRCPlayer.Method_Public_Static_Color_APIUser_0(player.GetAPIUser());
         public static APIUser GetAPIUser(this VRCPlayer Instance) => Instance.GetPlayer().GetAPIUser();
         public static VRCPlayerApi GetVRCPlayerApi(this Player Instance) => Instance?.prop_VRCPlayerApi_0;
-        public static List<Player> AllPlayers => PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0.ToList<Player>();
+        public static VRC.Core.Pool.PooledArray<Player> AllPlayers2() => PlayerManager.prop_PlayerManager_0.prop_PooledArray_1_Player_0;
+        public static VRCPlayer GetVRCPlayer(this Player Instance) => (Instance == null) ? null : Instance._vrcplayer; 
+        public static VRCAvatarManager GetAvatarManager(this VRCPlayer Instance) =>  Instance.prop_VRCAvatarManager_0;
+        public static GameObject GetAvatar(this Player Instance) => Instance.GetVRCPlayer().GetAvatarManager().transform.gameObject;
+        public static void ReloadAvatar(this VRCPlayer Instance) => VRCPlayer.Method_Public_Static_Void_APIUser_0(Instance.GetAPIUser());
+        public static void ReloadAvatar(this Player Instance) => Instance.GetVRCPlayer().ReloadAvatar();
         public static int GetActorNumber(this Player player) => player.GetVRCPlayerApi() != null ? player.GetVRCPlayerApi().playerId : -1;
         public static void SetHide(this Player Instance, bool State) { Instance.transform.Find("ForwardDirection").gameObject.active = !State; }
-
-
+        public static bool GetIsFriend(this APIUser Instance) =>  Instance.isFriend || APIUser.IsFriendsWith(Instance.id) || APIUser.CurrentUser.friendIDs.Contains(Instance.id); 
         public static float GetFrames(this Player player) => (player._playerNet.prop_Byte_0 != 0) ? Mathf.Floor(1000f / (float)player._playerNet.prop_Byte_0) : -1f;
         public static bool IsBot(this Player player) => player.GetPing() <= 0 && player.GetFrames() <= 0 || player.GetFrames() <= -1 || player.transform.position == Vector3.zero;
+        internal static int PlayerbyteValue(VRC.Player player) => (int)(1000f / (float)player.prop_PlayerNet_0.field_Private_Byte_0);
 
 
 
+        public static Player GetPlayer(this PlayerManager playerManager, int actorNr)
+        {
+            foreach (var player in playerManager.GetPlayers())
+            {
+                if (player == null)
+                    continue;
+                if (player.prop_Int32_0 == actorNr)
+                    return player;
+            }
 
+            return null;
+        }
         public static void ShowSelf(bool state)
         {
             backupID = APIUser.CurrentUser.avatarId;
@@ -78,7 +95,70 @@ namespace Trinity.Utilities
             GetVRCPlayer().prop_VRCAvatarManager_0.gameObject.SetActive(state);
             AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0.gameObject.SetActive(state);
         }
+        internal static PI GetLocalPlayerInformation()
+        {
+            if (PlayerUtils.localPlayerInfo == null)
+            {
+                if (PlayerUtils.playerCachingList.ContainsKey(APIUser.CurrentUser.displayName) == true)
+                {
+                    PlayerUtils.localPlayerInfo = PlayerUtils.playerCachingList[APIUser.CurrentUser.displayName];
 
+                    return PlayerUtils.playerCachingList[APIUser.CurrentUser.displayName];
+                }
+
+                return null;
+            }
+
+            return PlayerUtils.localPlayerInfo;
+        }
+        internal static PI GetPlayerInformation(Player player)
+        {
+            string displayName = string.Empty;
+
+            if (player != null)
+            {
+                if (player.prop_APIUser_0 != null)
+                {
+                    displayName = player.prop_APIUser_0.displayName;
+                }
+                else if (player.prop_VRCPlayerApi_0 != null)
+                {
+                    displayName = player.prop_VRCPlayerApi_0.displayName;
+                }
+            }
+
+            if (displayName == string.Empty)
+            {
+                return null;
+            }
+
+            if (displayName == APIUser.CurrentUser.displayName)
+            {
+                return GetLocalPlayerInformation();
+            }
+
+            if (PlayerUtils.playerCachingList.ContainsKey(displayName) == true)
+            {
+                return PlayerUtils.playerCachingList[displayName];
+            }
+
+            return null;
+        }
+        internal static void Delay(float del, Action action) => MelonCoroutines.Start(DelayFunc(del, action));
+        private static System.Collections.IEnumerator DelayFunc(float del, Action action)
+        {
+            yield return new WaitForSeconds(del);
+            action.Invoke();
+            yield break;
+        }
+        internal static string Params2JSON(ParameterDictionary paramDict)
+        {
+            var p = new Dictionary<byte, object>();
+            foreach (var kvp in paramDict)
+                p[kvp.Key] = Serialization.FromIL2CPPToManaged<object>(kvp.Value);
+
+            return JsonConvert.SerializeObject(p);
+        }
         public static GameObject GetPlayerMirrFix()
         {
             foreach (GameObject objectName in WU.GetAllGameObjects())
@@ -101,8 +181,22 @@ namespace Trinity.Utilities
                 }
             }
             return new GameObject();
+        } 
+        internal static void ReloadAllAvatars()
+        {
+            bool LocalCheck = VRCPlayer.field_Internal_Static_VRCPlayer_0 == null;
+            if (!LocalCheck)
+            {
+                foreach (Player player in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0)
+                {
+                    bool NullCheck = player != null && player.prop_APIUser_0 != null;
+                    if (NullCheck)
+                    {
+                        player.ReloadAvatar();
+                    }
+                }
+            }
         }
-
         public static void ClearAssets()
         {
             AssetBundleDownloadManager.field_Private_Static_AssetBundleDownloadManager_0.field_Private_Cache_0.ClearCache();
@@ -134,7 +228,7 @@ namespace Trinity.Utilities
 
         public static int IsAssetBundleFileTooLarge(VRC.Player player)
         {
-            VRC.ValidationHelpers.CheckIfAssetBundleFileTooLarge(VRC.ContentType.Avatar, player.prop_ApiAvatar_0.assetUrl, out int fileSize);
+            VRC.ValidationHelpers.CheckIfAssetBundleFileTooLarge(VRC.ContentType.Avatar, player.prop_ApiAvatar_0.assetUrl, out int fileSize , false);
             return fileSize;
         }
         public static byte[] SerializeArray(Il2CppSystem.Object customdata)
@@ -158,11 +252,10 @@ namespace Trinity.Utilities
             }
             return results;
         }
-        public static int CrashDetected(this Player player)
+        public static string CrashDetected(this Player player)
         {
-            byte frames = player._playerNet.field_Private_Byte_0;
-            byte ping = player._playerNet.field_Private_Byte_1;
-
+            float frames = player._playerNet.field_Private_Byte_0;
+            short ping = player._playerNet.field_Private_Byte_1;
             if (frames == player._playerNet.field_Private_Byte_0 && ping == player._playerNet.field_Private_Byte_1)
             {
                 noUpdateCount++;
@@ -171,10 +264,20 @@ namespace Trinity.Utilities
             {
                 noUpdateCount = 0;
             }
+            frames = player._playerNet.field_Private_Byte_0;
+            ping = player._playerNet.field_Private_Byte_1;
 
-            return noUpdateCount;
-        }
+            string status = "<color=green>Stable</color>";
 
+            if (noUpdateCount > 35)
+                return status = "<color=yellow>Lagging</color>";
+            if (noUpdateCount > 375)
+                return status = "<color=red>Crashed</color>";
+            return status;
+
+        } 
+
+         
         public static void Tele2MousePos()
         {
             Ray posF = new Ray(Camera.main.transform.position, Camera.main.transform.forward); //pos, directon 
@@ -192,22 +295,85 @@ namespace Trinity.Utilities
             else
                 return "<color=red>" + fps + "</color>";
         }
-
-        public static string ClientDetect(this Player player)
+        public static void AddClientUsers()
         {
+            var lines = System.IO.File.ReadLines($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt");
+            foreach (var line in lines)
+            {
+                ClientUserIDs.Add(line);
+            }
+        }
+        public static bool ClientDetect(this Player player)
+        {
+            bool checkfile = System.IO.File.ReadLines($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt").Any(line => line.Contains(player.prop_APIUser_0.id));
             float fps = player.GetFrames();
             short ping = player.GetPing();
-            if (ping > 665)
-                return " <color=red>ClientUser</color>";
-            else if (ping < -2)
-                return " <color=red>ClientUser</color>";
-            else if (fps > 140)
-                return " <color=red>ClientUser</color>";
-            else if (fps < -2)
-                return " <color=red>ClientUser</color>";
-            return "";
+            bool redFlags = ping > 300 || ping < -2 || fps > 100 || fps < -2 || ControllerCheck(player.GetVRCPlayer()) == true || player.transform.localPosition.y < -10 ||  FakeFreezeServerTime(player) == true;
+            if (redFlags == true)
+            {
+                if (!ClientUserIDs.Contains(player.prop_APIUser_0.id))
+                {
+                    if (player.prop_APIUser_0.IsOnMobile == true)
+                        return false;
+                    ClientUserIDs.Add(player.prop_APIUser_0.id);
+                    MenuUI.Log($"DETECTOR: <color=green>{player.prop_APIUser_0.displayName} Is A Client User</color>");
+                    if(!checkfile)
+                        System.IO.File.AppendAllText($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt", $"{player.prop_APIUser_0.id}{Environment.NewLine}"); 
+                }
+                return true;
+            }
+            else
+                return false;
         }
+        public static bool FakeFreezeServerTime(Player player)
+        {
+            try
+            {
+                float frames = player._playerNet.field_Private_Byte_0;
+                short ping = player._playerNet.field_Private_Byte_1;
+                float pos = player.transform.localPosition.x;
 
+                if (player == null) return false;
+                if (frames == player._playerNet.field_Private_Byte_0 && ping == player._playerNet.field_Private_Byte_1 && pos != player.transform.localPosition.x)
+                    noUpdateCount++;
+                else
+                    noUpdateCount = 0;
+
+                if (noUpdateCount > 200)
+                    return true;
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
+             
+        }
+        public static void BlockStateChanged(object player, bool isBlocked)
+        {
+            if (isBlocked)
+            {
+
+            }
+        }
+        public static bool ControllerCheck(VRCPlayer player)
+        {
+            try
+            {
+                if (player.GetComponent<CharacterController>().enabled == false)
+                    return true;
+            }
+            catch
+            {
+                return false;
+            } 
+            return false;
+        }
+        public static void MuteStateChanged(object player, bool isMuted)
+        {
+
+        }
         public static string GetPingColord(this Player player)
         {
             short ping = player.GetPing();
@@ -239,9 +405,9 @@ namespace Trinity.Utilities
         {
             for (int i = 0; i < GetAllPlayers().Length; i++)
             {
-                if (GetAllPlayers()[i].prop_VRCPlayerApi_0.playerId == playerID)
+                if (GetAllPlayers().ToList()[i].prop_VRCPlayerApi_0.playerId == playerID)
                 {
-                    return GetAllPlayers()[i];
+                    return GetAllPlayers().ToList()[i];
                 }
             }
             return null;
@@ -279,8 +445,42 @@ namespace Trinity.Utilities
             return player;
         }
 
+        public static string LogTagRPC(VRC.Player sender, VRC_EventHandler.VrcEvent vrcEvent, VRC_EventHandler.VrcBroadcastType vrcBroadcastType)
+        {
+            string output = "[TAG] ";
 
+            if (vrcEvent.ParameterObject != null)
+            {
+                output += $"{vrcEvent.ParameterString}";
+            }
 
+            if (vrcEvent.ParameterObjects != null) { for (int i = 0; i < vrcEvent.ParameterObjects.Length; i++) { output += vrcEvent.ParameterObjects[i].name + " "; } }
+            try
+            {
+                var objects = Networking.DecodeParameters(vrcEvent.ParameterBytes);
+                for (int i = 0; i < objects.Length; i++) { output += Il2CppSystem.Convert.ToString(objects[i]) + " "; }
+            }
+            catch { for (int i = 0; i < vrcEvent.ParameterBytes.Length; i++) { output += vrcEvent.ParameterBytes[i] + " "; } }
+
+            return output;
+        }
+        internal static Solution Il2CppConverter(int ByteArray)
+        {
+            using (Dictionary<string, Solution>.Enumerator enumerator = ConvertedArray.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    KeyValuePair<string, Solution> eventKey = enumerator.Current;
+                    if (eventKey.Value.NTB.prop_Int32_0 == ByteArray)
+                        return eventKey.Value;
+                }
+                goto returnNull;
+            }
+            Solution result;
+            return result;
+        returnNull:
+            return null;
+        }
         public static string LogRPC(VRC.Player sender, VRC_EventHandler.VrcEvent vrcEvent, VRC_EventHandler.VrcBroadcastType vrcBroadcastType)
         {
             string output = "[RPC] ";
@@ -317,8 +517,190 @@ namespace Trinity.Utilities
             catch { for (int i = 0; i < vrcEvent.ParameterBytes.Length; i++) { output += vrcEvent.ParameterBytes[i] + " "; } }
 
             return output;
+        } 
+        public static void ProcessDynamicBones(GameObject avatarObject, APIUser user)
+        {
+            bool flag = (SDK.Config.Instance.GB_Friends && !user.GetIsFriend() && user.id != APIUser.CurrentUser.id);
+            if (!flag)
+            {
+                bool gb_HeadBones = SDK.Config.Instance.GB_HeadBones;
+                if (gb_HeadBones)
+                {
+                    foreach (DynamicBone item in avatarObject.GetComponentInChildren<Animator>().GetBoneTransform((HumanBodyBones)10).GetComponentsInChildren<DynamicBone>())
+                    {
+                        SDK.Config.currentWorldDynamicBones.Add(item);
+                    }
+                }
+                bool gb_ChestBones =SDK.Config.Instance.GB_ChestBones;
+                if (gb_ChestBones)
+                {
+                    foreach (DynamicBone item2 in avatarObject.GetComponentInChildren<Animator>().GetBoneTransform((HumanBodyBones)8).GetComponentsInChildren<DynamicBone>())
+                    {
+                        SDK.Config.currentWorldDynamicBones.Add(item2);
+                    }
+                }
+                bool gb_HipBones = SDK.Config.Instance.GB_HipBones;
+                if (gb_HipBones)
+                {
+                    foreach (DynamicBone item3 in avatarObject.GetComponentInChildren<Animator>().GetBoneTransform(0).GetComponentsInChildren<DynamicBone>())
+                    {
+                        SDK.Config.currentWorldDynamicBones.Add(item3);
+                    }
+                }
+                bool gb_HandColliders = SDK.Config.Instance.GB_HandColliders;
+                if (gb_HandColliders)
+                {
+                    foreach (DynamicBoneCollider dynamicBoneCollider in avatarObject.GetComponentInChildren<Animator>().GetBoneTransform((HumanBodyBones)17).GetComponentsInChildren<DynamicBoneCollider>())
+                    {
+                        bool flag2 = dynamicBoneCollider.m_Bound != null;
+                        if (flag2)
+                        {
+                            SDK.Config.currentWorldDynamicBoneColliders.Add(dynamicBoneCollider);
+                        }
+                    }
+                    foreach (DynamicBoneCollider dynamicBoneCollider2 in avatarObject.GetComponentInChildren<Animator>().GetBoneTransform((HumanBodyBones)18).GetComponentsInChildren<DynamicBoneCollider>())
+                    {
+                        bool flag3 = dynamicBoneCollider2.m_Bound != null;
+                        if (flag3)
+                        {
+                            SDK.Config.currentWorldDynamicBoneColliders.Add(dynamicBoneCollider2);
+                        }
+                    }
+                }
+                bool gb_FeetColliders = SDK.Config.Instance.GB_FeetColliders;
+                if (gb_FeetColliders)
+                {
+                    foreach (DynamicBoneCollider dynamicBoneCollider3 in avatarObject.GetComponentInChildren<Animator>().GetBoneTransform((HumanBodyBones)5).GetComponentsInChildren<DynamicBoneCollider>())
+                    {
+                        bool flag4 = dynamicBoneCollider3.m_Bound != null;
+                        if (flag4)
+                        {
+                            SDK.Config.currentWorldDynamicBoneColliders.Add(dynamicBoneCollider3);
+                        }
+                    }
+                    foreach (DynamicBoneCollider dynamicBoneCollider4 in avatarObject.GetComponentInChildren<Animator>().GetBoneTransform((HumanBodyBones)6).GetComponentsInChildren<DynamicBoneCollider>())
+                    {
+                        bool flag5 = dynamicBoneCollider4.m_Bound != null;
+                        if (flag5)
+                        {
+                            SDK.Config.currentWorldDynamicBoneColliders.Add(dynamicBoneCollider4);
+                        }
+                    }
+                }
+                foreach (DynamicBone dynamicBone in SDK.Config.currentWorldDynamicBones.ToList<DynamicBone>())
+                {
+                    bool flag6 = dynamicBone == null;
+                    if (flag6)
+                    {
+                        SDK.Config.currentWorldDynamicBones.Remove(dynamicBone);
+                    }
+                    else
+                    {
+                        foreach (DynamicBoneCollider dynamicBoneCollider5 in SDK.Config.currentWorldDynamicBoneColliders.ToList<DynamicBoneCollider>())
+                        {
+                            bool flag7 = dynamicBoneCollider5 == null;
+                            if (flag7)
+                            {
+                                SDK.Config.currentWorldDynamicBoneColliders.Remove(dynamicBoneCollider5);
+                            }
+                            bool flag8 = dynamicBone.m_Colliders.IndexOf(dynamicBoneCollider5) == -1;
+                            if (flag8)
+                            {
+                                dynamicBone.m_Colliders.Add(dynamicBoneCollider5);
+                            }
+                        }
+                    }
+                }
+            }
         }
-
+        public static void AddFakeColliders(Player selectedPlayer)
+        {
+            Animator componentInChildren = selectedPlayer.GetComponentInChildren<Animator>();
+            Transform boneTransform = componentInChildren.GetBoneTransform((HumanBodyBones)17);
+            Transform boneTransform2 = componentInChildren.GetBoneTransform((HumanBodyBones)18);
+            bool flag = boneTransform == null || boneTransform2 == null;
+            if (!flag)
+            {
+                bool flag2 = boneTransform.GetComponent<DynamicBoneCollider>() != null || boneTransform2.GetComponent<DynamicBoneCollider>() != null;
+                if (!flag2)
+                {
+                    Transform boneTransform3 = componentInChildren.GetBoneTransform((HumanBodyBones)32);
+                    Transform boneTransform4 = componentInChildren.GetBoneTransform((HumanBodyBones)47);
+                    Transform boneTransform5 = componentInChildren.GetBoneTransform((HumanBodyBones)24);
+                    Transform boneTransform6 = componentInChildren.GetBoneTransform((HumanBodyBones)48);
+                    float height = 0.007f;
+                    float height2 = 0.007f;
+                    float num = 0.0009f;
+                    float num2 = (float)Math.Pow(10.0, 2.0);
+                    bool flag3 = boneTransform5 != null && boneTransform6 != null;
+                    if (flag3)
+                    {
+                        num = Mathf.Floor(Vector3.Distance(boneTransform5.position, boneTransform6.position) * num2) / num2 / 1000f;
+                        num += num / 4f;
+                    }
+                    bool flag4 = boneTransform3 != null;
+                    if (flag4)
+                    {
+                        height = Mathf.Floor(Vector3.Distance(boneTransform.position, boneTransform3.position) * num2) / num2 / 100f + num * 4f;
+                    }
+                    bool flag5 = boneTransform4 != null;
+                    if (flag5)
+                    {
+                        height2 = Mathf.Floor(Vector3.Distance(boneTransform2.position, boneTransform4.position) * num2) / num2 / 100f + num * 4f;
+                    } 
+                    SDK.LogHandler.Log(SDK.LogHandler.Colors.Yellow, $"[DynamicBones] Collider stats: {height.ToString()}, {height2.ToString()}, {num.ToString()}", false,false);
+                    DynamicBoneCollider dynamicBoneCollider = boneTransform.gameObject.AddComponent<DynamicBoneCollider>();
+                    DynamicBoneCollider dynamicBoneCollider2 = boneTransform2.gameObject.AddComponent<DynamicBoneCollider>();
+                    dynamicBoneCollider.m_Radius = num * 12f;
+                    dynamicBoneCollider.m_Height = height;
+                    dynamicBoneCollider.m_Center = new Vector3(0f, 0f, 0f);
+                    dynamicBoneCollider.m_Bound = 0;
+                    dynamicBoneCollider2.m_Radius = num * 12f;
+                    dynamicBoneCollider2.m_Height = height2;
+                    dynamicBoneCollider2.m_Center = new Vector3(0f, 0f, 0f);
+                    dynamicBoneCollider2.m_Bound = 0; 
+                    SDK.LogHandler.Log(SDK.LogHandler.Colors.Yellow, $"[DynamicBones] Added fake colliders to {selectedPlayer.GetAPIUser().displayName}", false, false);
+                }
+            }
+        }
+        public static void RemoveDynamicBones(GameObject avatarObject, APIUser user)
+        {
+            bool flag = (SDK.Config.Instance.GB_Friends && !user.GetIsFriend() && user.id != APIUser.CurrentUser.id);
+            if (!flag)
+            {
+                List<DynamicBone> list = new List<DynamicBone>();
+                Il2CppSystem.Collections.Generic.List<DynamicBoneCollider> list2 = new Il2CppSystem.Collections.Generic.List<DynamicBoneCollider>();
+                foreach (DynamicBone dynamicBone in avatarObject.GetComponentInChildren<Animator>().GetComponentsInChildren<DynamicBone>())
+                {
+                    list.Add(dynamicBone);
+                }
+                foreach (DynamicBoneCollider dynamicBoneCollider in avatarObject.GetComponentInChildren<Animator>().GetComponentsInChildren<DynamicBoneCollider>())
+                {
+                    bool flag2 = dynamicBoneCollider.m_Bound != null;
+                    if (flag2)
+                    {
+                        list2.Add(dynamicBoneCollider);
+                    }
+                }
+                foreach (DynamicBone dynamicBone2 in list)
+                {
+                    bool flag3 = dynamicBone2 == null;
+                    if (!flag3)
+                    {
+                        SDK.Config.currentWorldDynamicBones.Remove(dynamicBone2);
+                        dynamicBone2.m_Colliders = list2;
+                    }
+                }
+                foreach (DynamicBoneCollider dynamicBoneCollider2 in list2)
+                {
+                    bool flag4 = dynamicBoneCollider2 != null;
+                    if (flag4)
+                    {
+                        SDK.Config.currentWorldDynamicBoneColliders.Remove(dynamicBoneCollider2);
+                    }
+                }
+            }
+        }
         public delegate void ResetLastPositionAction(InputStateController @this);
         public delegate void ResetAction(VRCMotionState @this);
 
@@ -384,7 +766,8 @@ namespace Trinity.Utilities
 
             }
 
-        }
+        } 
+        internal static readonly Dictionary<string, Solution> ConvertedArray;
 
         public static List<string> Oldlist = new List<string>
         {
@@ -415,4 +798,9 @@ namespace Trinity.Utilities
             "holysuit", "nipplecovers"
         };
     }
+}
+class Solution
+{
+
+    internal VRCNetworkBehaviour NTB;
 }

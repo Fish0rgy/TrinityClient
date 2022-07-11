@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using VRC.Core;
+using Trinity.Module.World.World_Hacks.Murder_4;
 
 namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
@@ -21,11 +22,12 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
             try
             {
                 MenuUI.Log("MURDER: <color=green>Blinded Target</color>");
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Blinded {SelectedPlayer.displayName}", false, false);
                 LogHandler.LogDebug($"Blinded {SelectedPlayer.displayName}");
-                UdonExploitManager.udonsend("OnLocalPlayerBlinded", "target");
-                UdonExploitManager.udonsend("OnLocalPlayerFlashbanged","target");
+                MurderMisc.antiblind();
+                UW.udonsend("OnLocalPlayerBlinded", EventTarget.Targeted);
+                UW.udonsend("OnLocalPlayerFlashbanged", EventTarget.Targeted);
             }
             catch (Exception ex)
             {

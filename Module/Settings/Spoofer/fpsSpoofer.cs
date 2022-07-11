@@ -3,27 +3,30 @@ using Trinity.Events;
 using Trinity.SDK.Photon;
 using Photon.Realtime;
 using UnhollowerBaseLib;
+using UnityEngine;
+using Trinity.SDK;
+using System;
 
 namespace Trinity.Module.Settings.Spoofer
 {
-    internal class FPSSpoofer : BaseModule, OnSendOPEvent
-    {
-        byte fps;
+    internal class FPSSpoofer : BaseModule 
+    { 
         public FPSSpoofer() : base("FPS Spoof", "Spoofes FPS to 51", Main.Instance.SettingsButtonspoofer, null, true)
         {
-            fps = 0x33; //should be 51 convert to hex if i my mem is right lol
+             
         }
-
-        public bool OnSendOP(byte opCode, ref Il2CppSystem.Object parameters, ref RaiseEventOptions raiseEventOptions)
+        public override void OnEnable()
         {
-            if (opCode == 7)
-            {
-                byte[] movementData = parameters.Cast<Il2CppStructArray<byte>>();
-                movementData[71] = fps;
-                parameters = Serialization.FromManagedToIL2CPP<Il2CppSystem.Object>(movementData);
-            }
-
-            return true;
+            Config.SpoofFps = true;
+            Config.FPSSpoof = 0;
+            Config.FPSSpoof1 = -12340;
+            Config.FPSSpoof2 = 20232;
+            Config.FPSSpoof3 = -10;
+            Config.FPSSpoof4 = 300;
+        }
+        public override void OnDisable()
+        {
+            Config.SpoofFps = false;
         }
     }
 }

@@ -1,14 +1,17 @@
 ﻿using MelonLoader;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using TMPro;
 using Trinity.Module;
-using Trinity.Module.Bot.Local;
+using Trinity.Module.Bot; 
 using Trinity.Module.Exploit;
 using Trinity.Module.Exploit.Photon_Exploit;
 using Trinity.Module.Exploit.UdonExploits;
@@ -40,6 +43,9 @@ using Trinity.Module.World.World_Hacks.Murder_4;
 using Trinity.Module.World.World_Hacks.TrinityEngine;
 using Trinity.Modules.Exploits;
 using Trinity.SDK.ButtonAPI;
+using Trinity.SDK.ButtonAPI.AVI_FAV;
+using Trinity.SDK.ButtonAPI.PopUp;
+using Trinity.SDK.Patching.Patches;
 using Trinity.SDK.Security;
 using Trinity.Utilities;
 using Trinity.Utilities;
@@ -51,40 +57,42 @@ namespace Trinity.SDK
 {
     class MenuUI
     {
-
         public static List<ConsoleEntry> logs = new List<ConsoleEntry>();
-
-        public static GameObject consoleObj;
-
-        public static void Log(string txt, bool plainText = false)
-        {
-            int logCount = logs.Count;
-
-            ConsoleEntry oldEntry = logs[0];
-            logs.Remove(oldEntry);
-            GameObject.Destroy(oldEntry.mainObj);
-
-            if (!plainText) txt = $"[<color=#00ff00ff>{DateTime.Now.ToString("h:mm tt")}</color>] " + txt;
-
-            ConsoleEntry newEntry = new(txt);
-            newEntry.mainObj.transform.SetParent(consoleObj.transform, false);
-            logs.Add(newEntry);
-
-        }
+        public static GameObject consoleObj; 
 
         public static IEnumerator StartUI()
         {
             var pos = new Vector3(272, 964, 0);
-            Console.Title = $"Trinity Private Client | User: {APIUser.CurrentUser.displayName}";
+            Console.Title = $"Trinity | User: {APIUser.CurrentUser.displayName}";
             Main.Instance.QuickMenuStuff = new Serpent();
-            QMTab mainTab = new QMTab("Trinity Client", "", "What's a client!", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath));
+            QMTab mainTab = new QMTab("TrinityClient", "", "Made By Fish.#0002", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath));
             Serpent.Spacer(mainTab.menuTransform);
+            Main.Instance.WorldButton = new QMNestedButton(mainTab.menuTransform, "World", QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath));
+            HackedGames();
+            Main.Instance.PlayerButton = new QMNestedButton(mainTab.menuTransform, "Player", QMButtonIcons.LoadSpriteFromFile(Serpent.PlayerIconPath));
+            PlayerMenu();
+            Main.Instance.MovementButton = new QMNestedButton(mainTab.menuTransform, "Movement", QMButtonIcons.LoadSpriteFromFile(Serpent.MovmentPath));
+            Main.Instance.ExploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.AvatarExploitPath));
+            ExploitMenu();
+            Main.Instance.SafetyButton = new QMNestedButton(mainTab.menuTransform, "Safety", QMButtonIcons.LoadSpriteFromFile(Serpent.SafetyIconPath));
+            SafetyMenu();
+            Main.Instance.BotButton = new QMNestedButton(mainTab.menuTransform, "Bot", QMButtonIcons.LoadSpriteFromFile(Serpent.TheBotsPath));
+            BotMenu();
+            Main.Instance.SettingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", QMButtonIcons.LoadSpriteFromFile(Serpent.SettingsIconPath));
+            SettingsMenu();
+            TargetMenu();
+            new QMSingleButton(mainTab.menuTransform, "Clear Console", "Serpent Logout Button", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), delegate () {
+                Console.Clear();
+                LogHandler.DisplayLogo();
+                LogHandler.Log(LogHandler.Colors.White, "Cleared Console!", false, false);
+                MenuUI.Log("CONSOLE: <color=green>Cleard Melonloader Console</color>");
+            });
 
             Transform buttonContainer = mainTab.menu.menuContents;
             GameObject menuObj = mainTab.menu.menuObj;
 
-            Transform vLG = menuObj.transform.Find("Scrollrect/Viewport/VerticalLayoutGroup");
-
+            Transform vLG = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_TrinityClient").transform.Find("Scrollrect/Viewport/VerticalLayoutGroup");
+            //LogHandler.Log(LogHandler.Colors.Green,$"{vLG.name}",false,false);
             GameObject btnObj = GameObject.Instantiate(buttonContainer.GetComponentInChildren<Button>().gameObject, vLG);
 
             foreach (Image i in btnObj.GetComponentsInChildren<Image>())
@@ -142,53 +150,18 @@ namespace Trinity.SDK
             Log($"", true);
             Log($"<color=#cf9700>        Welcome to Trinity               </color>", true);
             Log($"", true);
-            Log($"<color=#cf9700>           Enjoy your stay!                </color>", true);
+            Log($"<color=#cf9700>           Made By Fish                </color>", true);
             Log($"", true);
-            Log($"", true);
-            Log($"", true);
-            Log($"", true);
-            Log($"", true);
-            Log($"", true);
-            Log($"", true);
-            Log($"", true);
+            Log($"<color=#cf9700>[Spoofer] PC Name: {SystemInfo.deviceName} </color>", true);
+            Log($"<color=#cf9700>[Spoofer] Model: {SystemInfo.deviceModel}</color>", true);
+            Log($"<color=#cf9700>[Spoofer] PBU: {SystemInfo.graphicsDeviceName}</color>", true);
+            Log($"<color=#cf9700>[Spoofer] CPU: {SystemInfo.processorType}</color>", true);
+            Log($"<color=#cf9700>[Spoofer] PBU ID: {SystemInfo.graphicsDeviceID.ToString()}</color>", true);
+            Log($"<color=#cf9700>[Spoofer] OS:{SystemInfo.operatingSystem}</color>", true);
+            Log($"<color=#cf9700>[Spoofer] HWID: {_Spoofers.newHWID}</color>", true);
 
+             
 
-            Main.Instance.WorldButton = new QMNestedButton(mainTab.menuTransform, "World", QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath));
-            Main.Instance.WorldhacksButton = new QMNestedButton(Main.Instance.WorldButton.menuTransform, "World Hacks", QMButtonIcons.LoadSpriteFromFile(Serpent.WorldHacksIconPath));
-            Main.Instance.udonexploitbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Trinity Engine", QMButtonIcons.LoadSpriteFromFile(Serpent.udonManagerPath));
-            Main.Instance.Zombiebutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Zombie Tag", QMButtonIcons.LoadSpriteFromFile(Serpent.zombiePath));
-            Main.Instance.Amongusbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Among Us", QMButtonIcons.LoadSpriteFromFile(Serpent.amogusPath));
-            Main.Instance.Murderbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Murder 4", QMButtonIcons.LoadSpriteFromFile(Serpent.murder4Path));
-            Main.Instance.Justbbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Just B", QMButtonIcons.LoadSpriteFromFile(Serpent.justbPath));
-            Main.Instance.JustHButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Just H", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
-            Main.Instance.Magictagbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Magic Tag", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
-            Main.Instance.MovieAndChillButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Movie & Chill", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
-            Main.Instance.PlayerButton = new QMNestedButton(mainTab.menuTransform, "Player", QMButtonIcons.LoadSpriteFromFile(Serpent.PlayerIconPath));
-            Main.Instance.AudioButton = new QMNestedButton(Main.Instance.PlayerButton.menuTransform, "Audio Settings", QMButtonIcons.LoadSpriteFromFile(Serpent.AudioPath));
-            Main.Instance.MovementButton = new QMNestedButton(mainTab.menuTransform, "Movement", QMButtonIcons.LoadSpriteFromFile(Serpent.MovmentPath));
-            Main.Instance.ExploistButton = new QMNestedButton(mainTab.menuTransform, "Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.AvatarExploitPath));
-            Main.Instance.Eventexploitbutton = new QMNestedButton(Main.Instance.ExploistButton.menuTransform, "Event Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.satltePath));
-            Main.Instance.Avatarexploitbutton = new QMNestedButton(Main.Instance.ExploistButton.menuTransform, "Avatar Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.AvatarPath));
-            Main.Instance.SafetyButton = new QMNestedButton(mainTab.menuTransform, "Safety", QMButtonIcons.LoadSpriteFromFile(Serpent.SafetyIconPath));
-            Main.Instance.Networkbutton = new QMNestedButton(Main.Instance.SafetyButton.menuTransform, "Network Saftey", QMButtonIcons.LoadSpriteFromFile(Serpent.satltePath));
-            Main.Instance.Avatarbutton = new QMNestedButton(Main.Instance.SafetyButton.menuTransform, "Avatar Saftey", QMButtonIcons.LoadSpriteFromFile(Serpent.SafetyIconPath));
-            Main.Instance.BotButton = new QMNestedButton(mainTab.menuTransform, "Bot", QMButtonIcons.LoadSpriteFromFile(Serpent.TheBotsPath));
-            Main.Instance.Privatebotbutton = new QMNestedButton(Main.Instance.BotButton.menuTransform, "Local handler", QMButtonIcons.LoadSpriteFromFile(Serpent.PlayerIconPath));
-            Main.Instance.SettingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", QMButtonIcons.LoadSpriteFromFile(Serpent.SettingsIconPath));
-            Main.Instance.SettingsButtonpreformance = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Preformance", QMButtonIcons.LoadSpriteFromFile(Serpent.preformancePath));
-            Main.Instance.SettingsButtonrender = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Render", QMButtonIcons.LoadSpriteFromFile(Serpent.renderPath));
-            Main.Instance.SettingsButtonLoggging = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Logging", QMButtonIcons.LoadSpriteFromFile(Serpent.loggingPath));
-            Main.Instance.SettingsButtonTheme = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Theme", QMButtonIcons.LoadSpriteFromFile(Serpent.ThemePath));
-            //targetmenu
-            Main.Instance.Targetbutton = new QMNestedButton(Main.Instance.QuickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/").transform, "Trinity", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath));
-            Main.Instance.AvatarSettings = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Avatar", QMButtonIcons.LoadSpriteFromFile(Serpent.AvatarPath));
-            Main.Instance.SafetyTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Safety Settings", QMButtonIcons.LoadSpriteFromFile(Serpent.satltePath));
-            Main.Instance.WorldhacksTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "World Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath));
-            Main.Instance.MurderSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Murder 4 Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.murder4Path));
-            Main.Instance.AmongUsSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Among Us Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
-            Main.Instance.MagicTagSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Magic Tag Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
-            Main.Instance.JubstBSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Just B Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.justbPath));
-            Main.Instance.MoveAndChillSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Movie&Chill+ Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.movieandchill));
 
             Assembly assm = Assembly.GetExecutingAssembly();
 
@@ -216,7 +189,7 @@ namespace Trinity.SDK
             pasteButtonTrans.anchoredPosition = new(450, 160);
             pasteButtonTrans.sizeDelta = new(165, 98.8f);
 
-            pasteButtonObj.GetComponentInChildren<Text>().text = "<<< Paste";
+            pasteButtonObj.GetComponentInChildren<Text>().text = "Paste";
 
             Button pasteButton = pasteButtonObj.GetComponent<Button>();
 
@@ -227,57 +200,54 @@ namespace Trinity.SDK
 
             pasteButton.onClick = new Button.ButtonClickedEvent();
             pasteButton.onClick.AddListener(pasteAction);
-
-
-            //logout
-            new QMSingleButton(mainTab.menuTransform, "Logout", "Serpent Logout Button", QMButtonIcons.LoadSpriteFromFile(Serpent.powerbuttonPath), delegate ()
-            {
-                try
-                {
-                    if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key)))
-                    {
-                        LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Logged Out", false, false);
-                    }
-                    else
-                    {
-                        LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed To Logged Out!", false, false);
-                    }
-                }
-                catch (Exception EX) 
-                {
-
-                }
-            });
+              
+             
             try { Serpent.Carousel_Banners(false); } catch { }
             Serpent.QM_Text("Trinity");
             Console.Clear();
             LogHandler.DisplayLogo();
-            //auth
+            //QMCustomNoti.SetUp();
+            //MelonCoroutines.Start(Misc.nameplates());
+            //LogHandler.Popup("Trinity", "Client Done Creating Buttons!");
             try
             {
-                if (File.Exists(SecurityCheck.key) && SecurityCheck.GetServerInfo(File.ReadAllText(SecurityCheck.key)))
-                {
-                    //200
-                    LogHandler.Log(LogHandler.Colors.Green, "[Trinity] Successful Relogin, Have Fun :)", false, false);
-                }
-                else { LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Unsuccessful Relogin, please contact owner!", false, false); }
+                avatarFav.UI();
             }
-            catch (Exception EX)
+            catch (Exception e)
             {
-                Console.WriteLine(EX.Message);
+                LogHandler.Error(e);
             }
+
             yield return new WaitForSecondsRealtime(0.1f);
         }
-
         private static List<string> moduleArray = new()
         {
-            "JoinByID",
+            "PingSpoofer",
+            "Copydata",
+            "FPSSpoofer", //
+            "JoinByID", 
+            "GlobalBones",
+            "Bfriends",
+            "Bhead",
+            "Bchest",
+            "Bhand",
+            "Bhip",
+            "Bfeet",
+            "Breload",
+            "MeshESP",
+            "PickupSteal",
             "Rejoin",
+            "TKill",
+            "TGiveMoney", 
+            "ResetClues",
             "CopyWID",
             "InstanceLock",
             "FreezeItems",
             "BlindPeople",
             "VIPSpoofer",
+            "STDMoney",
+            "STDHealth",
+            "MurderGoBoomBoom",
             "Room1",
             "Room2",
             "Room3",
@@ -293,19 +263,22 @@ namespace Trinity.SDK
             "AbortGame",
             "BystanderWin",
             "MurderWin",
+            "NoReload",
             "KillAll",
             "KillLoop",
+            "FloorDrop",
+            "NoCollidersForDoors",
+            "FloorDrop",
             "BlindAll",
             "FlashLoop",
-            "ForcePickup",
-            "w BringItems",
-            "BringKnife",
-            "BringRevolver",
-            "w BringSmoke",
-            " CloseDoors",
+            "ForcePickup",    
+            "CloseDoors",
             "LockDoors",
-            "w ShoveDoors",
+            "NoReload",
+            "ShoveDoors",
             "OpenDoors",
+            "SetFPSpoof",
+            "SetPingSpoof",
             "GiveTagger",
             "GiveRunner",
             "Unfreeze",
@@ -319,6 +292,10 @@ namespace Trinity.SDK
             "A_SkipVote",
             "A_KillAll",
             "A_TaskDone",
+            "AddClientList",
+            "RemoveClientList",
+            "ReflectDamage",
+            "ShoveDoors",
             "A_AssignImposter",
             "A_AssignCrew",
             "GetTriggerList",
@@ -342,21 +319,19 @@ namespace Trinity.SDK
             "_24k",
             "_512k",
             "Speed",
+            "ModerationLogger",
+            "AntiEvent1",
             "Fly",
             "InfinityJump",
-            "USpeakEarRape",
+            "AntiLockInstance",
+            "NaziItems",
             "Freecam",
             "SendRPCDebug",
             "ItemLag",
             "FakeLag",
             "FakeLagMic",
-            "FreezePlayers",
-            "AudioCrash",
-            "VoidBypass",
-            "ew EthosBypass",
+            "FreezePlayers",  
             "CorreuptPC",
-            "AssetBundleCrash",
-            "GameClose",
             "QuestCrash",
             "VRCA",
             "VRCW",
@@ -373,10 +348,7 @@ namespace Trinity.SDK
             "AntiColliders",
             "AntiLight",
             "AntiParticles",
-            "AntiMatirials",
-            "CuddleBot1",
-            "CuddleBot2",
-            "KIllBots",
+            "AntiMatirials", 
             "OPSendLogger",
             "AssetBundleLogger",
             "AvatarLogger",
@@ -387,8 +359,8 @@ namespace Trinity.SDK
             "UnityLogger",
             "JoinLogger",
             "ConsoleClear",
-            "ReLogin",
-            "Logout",
+            //"ReLogin",
+            //"Logout",
             "HideVideoPlayers",
             "HideChairs",
             "HidePickUps",
@@ -400,14 +372,20 @@ namespace Trinity.SDK
             "TriggerESP",
             "ObjectESP",
             "CapsuleEsp",
-            "SerpentTheme",
-            "RetroTheme",
+            //ghost
+            "AvatSelected",
+            "GiveCurrency", 
+            "KillHumans",
+            "GodMode",
+            "UnlockRoom",
+            "GhostWin",
+            "HumansWin",
+            "ClaimClues",
+            "StartMatch",
+            "CraftAllGuns",
             "munchen",
             "CustomBGImage",
-            "ButtonsGreen",
-            "ButtonsBlue",
-            "ButtonsRed",
-            "ButtonsMagenta",
+            "ButtonColor",
             "AvatSelected",
             "DownloadVRCSelected",
             "ForceClone",
@@ -431,20 +409,82 @@ namespace Trinity.SDK
             "AForceSpawn",
             "AmongUsKill",
             "MurderAssignTarget",
+            "DeboBootyHole",
             "DetectiveAssignTarget",
             "BystanderAssignTarget",
             "KillLoopTarget",
             "MurderKillTarget",
             "BlindTarget",
+            //"SpectateMode",
             "BlindLoopTarget",
             "BringItemsTarget",
             "BringKnifeTarget",
             "BringRevolverTarget",
-            "ForceSpawn",
-            "ReUploadTUT",
-            "ReUploadAvatar",
-            "CopyData",
+            "ForceSpawn", 
+            "ReUploadAvatar", 
         };
+        public static void Log(string txt, bool plainText = false)
+        {
+            int logCount = logs.Count;
 
+            ConsoleEntry oldEntry = logs[0];
+            logs.Remove(oldEntry);
+            GameObject.Destroy(oldEntry.mainObj);
+
+            if (!plainText) txt = $"[<color=#00ff00ff>{DateTime.Now.ToString("h:mm tt")}</color>] " + txt;
+
+            ConsoleEntry newEntry = new(txt);
+            newEntry.mainObj.transform.SetParent(consoleObj.transform, false);
+            logs.Add(newEntry);
+        }
+
+        public static void SafetyMenu(){
+            Main.Instance.Networkbutton = new QMNestedButton(Main.Instance.SafetyButton.menuTransform, "Network Saftey", QMButtonIcons.LoadSpriteFromFile(Serpent.satltePath));
+            Main.Instance.Avatarbutton = new QMNestedButton(Main.Instance.SafetyButton.menuTransform, "Avatar Saftey", QMButtonIcons.LoadSpriteFromFile(Serpent.SafetyIconPath));
+        }
+        public static void ExploitMenu(){
+            Main.Instance.Eventexploitbutton = new QMNestedButton(Main.Instance.ExploistButton.menuTransform, "Event Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.satltePath));
+            Main.Instance.Avatarexploitbutton = new QMNestedButton(Main.Instance.ExploistButton.menuTransform, "Avatar Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.AvatarPath));
+        }
+        public static void PlayerMenu(){
+            Main.Instance.DynamicBonesButton = new QMNestedButton(Main.Instance.PlayerButton.menuTransform, "Dynamic Bones", QMButtonIcons.LoadSpriteFromFile(Serpent.BonesPath));
+            Main.Instance.MiscButton = new QMNestedButton(Main.Instance.PlayerButton.menuTransform, "Misc", QMButtonIcons.LoadSpriteFromFile(Serpent.CustomPath));
+            Main.Instance.AudioButton = new QMNestedButton(Main.Instance.PlayerButton.menuTransform, "Audio Settings", QMButtonIcons.LoadSpriteFromFile(Serpent.AudioPath));
+        }
+        public static void HackedGames(){
+            Main.Instance.WorldhacksButton = new QMNestedButton(Main.Instance.WorldButton.menuTransform, "World Hacks", QMButtonIcons.LoadSpriteFromFile(Serpent.WorldHacksIconPath));
+            Main.Instance.udonexploitbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Trinity Engine", QMButtonIcons.LoadSpriteFromFile(Serpent.udonManagerPath));
+            Main.Instance.Zombiebutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Zombie Tag", QMButtonIcons.LoadSpriteFromFile(Serpent.zombiePath));
+            Main.Instance.Amongusbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Among Us", QMButtonIcons.LoadSpriteFromFile(Serpent.amogusPath));
+            Main.Instance.Murderbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Murder 4", QMButtonIcons.LoadSpriteFromFile(Serpent.murder4Path));
+            Main.Instance.Justbbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Just B", QMButtonIcons.LoadSpriteFromFile(Serpent.justbPath));
+            Main.Instance.JustHButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Just H", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
+            Main.Instance.Magictagbutton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Magic Tag", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
+            Main.Instance.MovieAndChillButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Movie & Chill", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
+            Main.Instance.GhostButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "Ghost", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
+            Main.Instance.STDButton = new QMNestedButton(Main.Instance.WorldhacksButton.menuTransform, "STD", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
+        }
+        public static void TargetMenu(){
+            Main.Instance.Targetbutton = new QMNestedButton(Main.Instance.QuickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/").transform, "Trinity", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath));
+            Main.Instance.AvatarSettings = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Avatar", QMButtonIcons.LoadSpriteFromFile(Serpent.AvatarPath));
+            Main.Instance.SafetyTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Safety Settings", QMButtonIcons.LoadSpriteFromFile(Serpent.satltePath));
+            Main.Instance.WorldhacksTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "World Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath)); 
+            Main.Instance.MurderSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Murder 4 Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.murder4Path));
+            Main.Instance.AmongUsSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Among Us Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
+            Main.Instance.MagicTagSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Magic Tag Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
+            Main.Instance.JubstBSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Just B Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.justbPath));
+            Main.Instance.GhostTargetButton = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Ghost Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
+            Main.Instance.MoveAndChillSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Movie&Chill+ Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.movieandchill));
+        }
+        public static void BotMenu(){
+            Main.Instance.Privatebotbutton = new QMNestedButton(Main.Instance.BotButton.menuTransform, "Local handler", QMButtonIcons.LoadSpriteFromFile(Serpent.PlayerIconPath));
+        }
+        public static void SettingsMenu(){
+            Main.Instance.SettingsButtonpreformance = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Preformance", QMButtonIcons.LoadSpriteFromFile(Serpent.preformancePath));
+            Main.Instance.SettingsButtonrender = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Render", QMButtonIcons.LoadSpriteFromFile(Serpent.renderPath));
+            Main.Instance.SettingsButtonLoggging = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Logging", QMButtonIcons.LoadSpriteFromFile(Serpent.loggingPath));
+            Main.Instance.SettingsButtonTheme = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Theme", QMButtonIcons.LoadSpriteFromFile(Serpent.ThemePath));
+            Main.Instance.SettingsButtonspoofer = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Spoofer", QMButtonIcons.LoadSpriteFromFile(Serpent.SafetyIconPath));
+        }
     }
 }

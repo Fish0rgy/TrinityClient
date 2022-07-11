@@ -18,7 +18,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
             try
             {
                 LogHandler.Log(LogHandler.Colors.Green, "Lock All Doors", false, false);
-                LogHandler.LogDebug("Lock All Doors");
+                LogHandler.LogDebug("Lock All Doors"); 
                 MurderMisc.ObjectInteract("Interact lock");
             }
             catch (Exception ex)

@@ -20,8 +20,10 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 		{
             try
             {
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Assigned {SelectedPlayer.displayName} As Murder", false, false);
+
+                MenuUI.Log($"MURDER: <color=green>Assigned {SelectedPlayer.displayName} As Murder</color>");
                 LogHandler.LogDebug($"Assigned {SelectedPlayer.displayName} As Murder");
                 MurderMisc.TargetedEvent("SyncAssignM");
             }

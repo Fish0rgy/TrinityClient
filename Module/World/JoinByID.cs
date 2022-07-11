@@ -18,10 +18,10 @@ namespace Trinity.Module.World
         {
             Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) =>
             {
-                if (string.IsNullOrWhiteSpace(str)) return;
+                if (string.IsNullOrWhiteSpace(str)) return; 
 
+                MenuUI.Log("WORLD: <color=green>Force Joined World</color>");
                 Networking.GoToRoom(str);
-
             });
 
             UIU.OpenKeyboardPopup("Force Join", "Enter Instance ID...", keyboardAction);

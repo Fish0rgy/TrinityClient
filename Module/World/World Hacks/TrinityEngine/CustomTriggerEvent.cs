@@ -24,7 +24,7 @@ namespace Trinity.Module.World.World_Hacks
 
                 for (int j = 0; j < WorldWrapper.udonBehaviours.Length; j++)
                 {
-                    UdonExploitManager.trigersend(str);
+                    UW.trigersend(str);
                     LogHandler.Log(LogHandler.Colors.Green, $"[Custom Udon Event] Event Name: {str} | Object Name: {WorldWrapper.udonBehaviours[j].gameObject.name}", false, false);
                 }
             });

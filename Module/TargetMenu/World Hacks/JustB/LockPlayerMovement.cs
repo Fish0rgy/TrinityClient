@@ -18,10 +18,11 @@ namespace Trinity.Module.TargetMenu.World_Hacks.JustB
         {
             try
             {
-                UdonExploitManager.udonsend("OnDesktopTopDownViewStart", "target");
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                UW.udonsend("OnDesktopTopDownViewStart", EventTarget.Targeted);
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Locked {SelectedPlayer.displayName}'s Movement", false, false);
-                LogHandler.LogDebug($"Locked {SelectedPlayer.displayName}'s Movement"); 
+                LogHandler.LogDebug($"Locked {SelectedPlayer.displayName}'s Movement");
+                MenuUI.Log($"JUSTB: <color=green>Locked {SelectedPlayer.displayName}'s Movement</color>");
             }
             catch (Exception ex)
             {
@@ -32,9 +33,10 @@ namespace Trinity.Module.TargetMenu.World_Hacks.JustB
         {
             try
             {
-                UdonExploitManager.udonsend("OnPutDownCueLocally", "target");
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                UW.udonsend("OnPutDownCueLocally", EventTarget.Targeted);
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Unlocked {SelectedPlayer.displayName}'s Movement", false, false);
+                MenuUI.Log($"JUSTB: <color=green>Unlocked {SelectedPlayer.displayName}'s Movement</color>");
                 LogHandler.LogDebug($"Unlocked {SelectedPlayer.displayName}'s Movement");
             }
             catch (Exception ex)

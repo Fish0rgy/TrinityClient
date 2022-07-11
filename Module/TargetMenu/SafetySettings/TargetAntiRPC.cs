@@ -19,11 +19,13 @@ namespace Trinity.Module.TargetMenu.SafetySettings
         public override void OnEnable()
         {
             target = PU.SelectedVRCPlayer().prop_VRCPlayer_0;
+            MenuUI.Log($"SAFETY: <color=green>Target Anti RPC On</color>");
             Main.Instance.OnRPCEvents.Add(this);
         }
         public override void OnDisable()
         {
             target = null;
+            MenuUI.Log($"SAFETY: <color=red>Target Anti RPC Off</color>");
             Main.Instance.OnRPCEvents.Remove(this);
         }
         public bool OnRPC(VRC.Player sender, VRC_EventHandler.VrcEvent vrcEvent, VRC_EventHandler.VrcBroadcastType vrcBroadcastType, int instagatorId, float fastforward)

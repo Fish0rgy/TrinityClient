@@ -11,10 +11,9 @@ namespace Trinity.Module.TargetMenu
 
         public override void OnEnable()
         {
-            MenuUI.Log("LOCATION: <color=green>Teleported To Target</color>");
-            APIUser SelectedPlayer = PU.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
-                PU.Teleport(PU.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0));
-                LogHandler.LogDebug($"[Info] -> Teleported To: {SelectedPlayer.displayName}");
+            MenuUI.Log("LOCATION: <color=green>Teleported To Target</color>"); 
+            PU.Teleport(PU.SelectedVRCPlayer());
+            LogHandler.LogDebug($"[Info] -> Teleported To: {PU.SelectedVRCPlayer().prop_APIUser_0.displayName}");
         }
     }
 }

@@ -19,10 +19,10 @@ namespace Trinity.Module.TargetMenu.World_Hacks.AmongUs_Settings
         {
             try
             {
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"{SelectedPlayer.displayName} Assigned As Imposter", false, false);
                 LogHandler.LogDebug($"{SelectedPlayer.displayName} Assigned As Imposter");
-                UdonExploitManager.udonsend("SyncAssignM","target");
+                UW.udonsend("SyncAssignM", EventTarget.Targeted);
             }
             catch (Exception ex)
             {

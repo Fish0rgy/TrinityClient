@@ -47,6 +47,6 @@ namespace Trinity.SDK.ButtonAPI
             icon.gameObject.GetComponent<StyleElement>().enabled = false;
             textCom.gameObject.GetComponent<StyleElement>().enabled = false;
             singleButton.SetActive(true);
-        }
+        } 
     }
 }

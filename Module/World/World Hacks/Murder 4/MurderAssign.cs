@@ -19,7 +19,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
             {
                 LogHandler.Log(LogHandler.Colors.Green, "Assigned You The Murder Role", false, false);
                 LogHandler.LogDebug("Assigned You The Murder Role");
-                MurderMisc.RoleAssign("SyncAssignM");
+                UW.udonsend("SyncAssignM", EventTarget.Local);
             }
             catch (Exception ex)
             {

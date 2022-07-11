@@ -22,7 +22,7 @@ namespace Trinity.SDK.ButtonAPI
         {
             mainObj = new($"NewEntry");
             txtCom = mainObj.AddComponent<TextMeshProUGUI>();
-            txtCom.fontSize = 28;
+            txtCom.fontSize = 26;
             txtCom.text = txt;
             txtCom.autoSizeTextContainer = false;
             mainObj.GetComponent<RectTransform>().sizeDelta = new(890, 32.5f);

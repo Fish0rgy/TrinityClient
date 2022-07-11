@@ -19,11 +19,13 @@ namespace Trinity.Module.World
 		public override void OnEnable()
 		{
 			Main.Instance.OnUpdateEvents.Add(this);
+			MenuUI.Log("PICKUPS: <color=green>All Pickups Are Frozen</color>");
 		}
 
 		public override void OnDisable()
 		{
 			Main.Instance.OnUpdateEvents.Remove(this);
+			MenuUI.Log("PICKUPS: <color=red>All Pickups Are Un-Frozen</color>");
 		}
 
 		public void OnUpdate()

@@ -44,6 +44,10 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
                 }
             }
         }
+        public static void antiblind()
+        {
+            try { GameObject.Find("Flashbang HUD Anim").SetActive(false); GameObject.Find("Blind HUD Anim").SetActive(false); } catch { } 
+        }
         public static void TargetedEvent2(this GameObject gameObject, string udonEvent, VRC.Player player = null, bool componetcheck = false)
         {
             UdonBehaviour component = gameObject.GetComponent<UdonBehaviour>();
@@ -70,7 +74,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
             {
                 if (transform.name != gameObject.name)
                 {
-                    udonsend(transform.gameObject, udonevent, PU.GetVRCPlayer()._player, false);
+                    UW.PathEvent(transform.gameObject, udonevent, EventTarget.Local);
                 }
             }
         }
@@ -95,6 +99,22 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
                     Networking.SetOwner(VRCPlayer.field_Internal_Static_VRCPlayer_0.field_Private_VRCPlayerApi_0, gameObject);
                     gameObject.transform.position = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position + new Vector3(0f, 0.1f, 0f);
                 }
+            }
+        }
+        public static void TargetBoomBoom()
+        {
+            GameObject frag = GameObject.Find("Game Logic/Weapons/Unlockables/Frag (0)");
+            MoveObjLocation(frag, PU.SelectedVRCPlayer());
+            UW.PathEvent(frag, "Explode", EventTarget.Targeted);
+        }
+        public static void MoveObjLocation(GameObject obj, VRC.Player player)
+        {
+            foreach (VRC_Pickup vrc_Pickup in Object.FindObjectsOfType<VRC_Pickup>())
+            {
+                Transform FragObj = obj.transform;
+                Networking.LocalPlayer.TakeOwnership(FragObj.gameObject);
+                Transform FragTransform = FragObj.transform;
+                FragTransform.transform.position = player.transform.position;
             }
         }
         public static void MurderTargetGive(string ObjectName)
@@ -217,6 +237,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
             }
             return doors;
         }
+         
     }
 }
 /* list of udon events for murder 4 so you can add more features 

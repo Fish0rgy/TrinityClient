@@ -1,6 +1,7 @@
 using Trinity.Utilities;
 using Trinity.Events;
 using Photon.Realtime;
+using Trinity.SDK;
 
 namespace Trinity.Module.Exploit
 {
@@ -13,11 +14,13 @@ namespace Trinity.Module.Exploit
         public override void OnEnable()
         {
             Main.Instance.OnSendOPEvents.Add(this);
+            MenuUI.Log("WORLD: <color=green>Instance Is Locked</color>");
         }
 
         public override void OnDisable()
         {
             Main.Instance.OnSendOPEvents.Remove(this);
+            MenuUI.Log("WORLD: <color=red>Instance Is Unlocked</color>");
         }
 
         public bool OnSendOP(byte opCode, ref Il2CppSystem.Object parameters, ref RaiseEventOptions raiseEventOptions)

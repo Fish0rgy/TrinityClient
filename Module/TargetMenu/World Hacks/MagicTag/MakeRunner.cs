@@ -19,10 +19,10 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MagicTag
         {
             try
             {
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"{SelectedPlayer.displayName} Forcefully Assigned Runner", false, false);
                 LogHandler.LogDebug($"{SelectedPlayer.displayName} Assigned Runner");
-                UdonExploitManager.udonsend("AssignRunner","local");
+                UW.udonsend("AssignRunner", EventTarget.Local);
             }
             catch (Exception ex)
             {

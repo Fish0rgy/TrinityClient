@@ -10,16 +10,44 @@ using System.IO;
 
 namespace Trinity.Module.TargetMenu
 {
-    internal class ReUploadAvatar : BaseModule
+    public  class ReUploadAvatar : BaseModule
     {
         public ReUploadAvatar() : base("ReUpload", "Opens reuploader's folder.", Main.Instance.AvatarSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.ClonePath), false, false) { }
         public override void OnEnable()
         {
-             try
+            ApiAvatar avatar = PU.SelectedVRCPlayer().prop_ApiAvatar_0;
+            var name = avatar.name;
+            var url = avatar.assetUrl;
+            var img = avatar.imageUrl; 
+            var FolderPath = AppDomain.CurrentDomain.BaseDirectory + "\\Trinity\\Reuploader\\"; //makes string for bot directory
+            var LoginPath = AppDomain.CurrentDomain.BaseDirectory + "\\Trinity\\Reuploader\\Login.txt"; //makes string for bot directory
+            try
             {
-                Process.Start($"{Directory.GetCurrentDirectory()}\\Trinity\\Reuploader");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("[");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("Trinity");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("]");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(" ~> ");
+                Console.ForegroundColor = LogHandler.getColor(LogHandler.Colors.Blue);
+                Console.Write("Enter username:password: ");
+                Console.ForegroundColor = ConsoleColor.White;
+                var UserPass = Console.ReadLine(); 
                 LogHandler.Log(LogHandler.Colors.Green, $"[Re-Uploader] Lunching ReUploader\n", false, false);
-            }catch (Exception ERROR) { }
+                startReuploader(FolderPath + "CloudyBoop.exe", string.Concat(UserPass, "|", name, "|", url, "|", img));
+            }
+            catch (Exception ERROR) { }
+        }
+        public void startReuploader(string fileName, string arguments)
+        {
+            var File = fileName == "" || arguments == "";
+            var checkFile = File;
+            if (checkFile) LogHandler.Log(LogHandler.Colors.Green, "Reupload files unfound\n", true);
+            var process = new Process { StartInfo = { FileName = fileName, Arguments = arguments } };
+            process.Start();
         }
     }
+    
 }

@@ -38,6 +38,6 @@ namespace Trinity.SDK
                 }
                 yield break;
             }
-        }
+        } 
     }
 }

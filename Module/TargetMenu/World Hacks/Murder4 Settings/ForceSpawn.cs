@@ -18,8 +18,9 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
         public override void OnEnable()
         {
             try
-            {
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+            { 
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
+                MenuUI.Log($"MURDER: <color=green>Force Respawned {SelectedPlayer.displayName}</color>");
                 LogHandler.Log(LogHandler.Colors.Green, $"{SelectedPlayer.displayName} Forcefully Spawned", false, false);
                 LogHandler.LogDebug($"{SelectedPlayer.displayName} Forcefully Spawned");
                 MurderMisc.TargetedEvent("SyncAssignB");

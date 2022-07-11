@@ -14,6 +14,7 @@ namespace Trinity.SDK
     class WorldWrapper
     {
         public static VRC_Pickup[] vrc_Pickups;
+        
         public static UdonBehaviour[] udonBehaviours;
         public static VRC_Trigger[] vrc_Triggers; 
         public static string GetInstance() => PU.GetAPIUser(PU.GetPlayer()).instanceId;//  CurrentWorldInstance().instanceId;

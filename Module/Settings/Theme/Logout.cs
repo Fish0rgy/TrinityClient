@@ -14,15 +14,15 @@ namespace Trinity.Module.Settings.Theme
 
         public override void OnEnable()
         {
-            try
-            {
-                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key))) { LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Logged Out", false, false); Process.GetCurrentProcess().Kill(); }
-                else
-                {
-                    LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed To logout", false, false); 
-                }
-            }
-            catch (Exception EX) { }
+            //try
+            //{
+            //    if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key))) { LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Logged Out", false, false); Process.GetCurrentProcess().Kill(); }
+            //    else
+            //    {
+            //        LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed To logout", false, false); 
+            //    }
+            //}
+            //catch (Exception EX) { }
         }
     }
 }

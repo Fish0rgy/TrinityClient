@@ -33,7 +33,9 @@ namespace Trinity.Module
         {
 
         }
-
+        public virtual void SocialMenuInitialized()
+        {
+        }
         public virtual void OnDisable()
         {
 
@@ -44,33 +46,44 @@ namespace Trinity.Module
         public virtual void OnPreferencesSaved()
         {
 
-        }
-
+        } 
         public virtual void OnUIInit()
         {
             if (isToggle)
             {
-                toggleButton = new QMToggleButton(category.menuTransform, name, discription, new Action<bool>((bool state) =>
+                QMToggleButton qMToggleButton = new QMToggleButton(category.menuTransform, name, discription, new Action<bool>((bool state) =>
                 {
                     this.toggled = state;
-                    if (state)
+                    switch (state)
                     {
-                        OnEnable();
+                        case true: 
+                            {
+                                OnEnable();
+                            }
+                            break;
+                        case false:
+                            {
+                                OnDisable();
+                            }
+                            break;
                     }
-                    else
-                    {
-                        OnDisable();
-                    }
-               
                 }));
+                if (save) 
+                {
+                    //if(Trinity.SDK.Config.getConfigBool(name) == true)
+                    //    OnEnable();
+                    //else
+                    //    OnDisable();
+                }
             }
             else
             {
-                singleButton = new QMSingleButton(category.menuTransform, name, discription, image, delegate
+                new QMSingleButton(category.menuTransform, name, discription, image, delegate
                 {
                     OnEnable();
                 });
             }
         }
+         
     }
 }

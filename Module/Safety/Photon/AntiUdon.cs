@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VRC.Networking;
 
 namespace Trinity.Module.Safety
 {
@@ -26,7 +27,7 @@ namespace Trinity.Module.Safety
             MenuUI.Log("SAFETY: <color=red>Anti Udon Disabled</color>");
             Main.Instance.OnUdonEvents.Remove(this);
         }
-        public bool OnUdon(string __0, VRC.Player __1)
+        public bool OnUdon(string __0, VRC.Player __1, UdonSync __instance)
         {
             if(__1.field_Private_APIUser_0.id == PU.GetPlayer().prop_APIUser_0.id)
             {

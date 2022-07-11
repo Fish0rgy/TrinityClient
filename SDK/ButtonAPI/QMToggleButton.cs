@@ -15,7 +15,7 @@ namespace Trinity.SDK.ButtonAPI
 
         public QMToggleButton(Transform parent, string text, string toolTip, Action<bool> action)
         {
-            GameObject singleButton = UnityEngine.Object.Instantiate<GameObject>( Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo").gameObject, parent);
+            GameObject singleButton = UnityEngine.Object.Instantiate<GameObject>(Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo").gameObject, parent);
             singleButton.transform.parent = parent;
             singleButton.name = text + "_Trinity_ToggleButton";
 
@@ -31,9 +31,11 @@ namespace Trinity.SDK.ButtonAPI
             singleButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = toolTip;
             toggleButton = singleButton.GetComponent<Toggle>();
             toggleAction = action;
+            toggleButton.isOn = false;
             toggleButton.onValueChanged = new Toggle.ToggleEvent();
             toggleButton.onValueChanged.AddListener(toggleAction);
             singleButton.SetActive(true);
+
         }
 
         public void Toggle(bool state)

@@ -23,6 +23,9 @@ namespace Trinity.SDK.Patching.Patches
                 SerpentPatch.Instance.Patch(typeof(SystemInfo).GetProperty("deviceUniqueIdentifier").GetGetMethod(), new HarmonyMethod(AccessTools.Method(typeof(_Spoofers), nameof(FakeHWID))));
                 SerpentPatch.Instance.Patch(typeof(AmplitudeWrapper).GetMethod("PostEvents"), new HarmonyMethod(AccessTools.Method(typeof(_Spoofers), nameof(VoidPatch))));
                 SerpentPatch.Instance.Patch(typeof(AmplitudeWrapper).GetMethods().First((MethodInfo x) => x.Name == "LogEvent" && x.GetParameters().Length == 4), new HarmonyMethod(AccessTools.Method(typeof(_Spoofers), nameof(VoidPatch))));
+                SerpentPatch.Instance.Patch(typeof(ExitGames.Client.Photon.PhotonPeer).GetProperty("RoundTripTime").GetGetMethod(), prefix: new HarmonyMethod(typeof(_Spoofers).GetMethod(nameof(PatchPing), BindingFlags.NonPublic | BindingFlags.Static)));
+                SerpentPatch.Instance.Patch(typeof(Time).GetProperty("smoothDeltaTime").GetGetMethod(), prefix: new HarmonyMethod(typeof(_Spoofers).GetMethod(nameof(PatchFPS), BindingFlags.NonPublic | BindingFlags.Static)));
+                SafetyPatch();
                 LogHandler.Log(LogHandler.Colors.Green, "[Patch] Analystics", false, false);
             }
             catch (Exception ERROR)
@@ -50,42 +53,42 @@ namespace Trinity.SDK.Patching.Patches
                     byte b = x;
                     return b.ToString("x2");}).Aggregate((string x, string y) => x + y);
 
-                LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] HWID New: {newHWID}", false, false);               
+                //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] HWID New: {newHWID}", false, false);
             }
             __result = newHWID;
             return false;
         }
 
 
-        //public unsafe static void SafetyPatch()
-        //{
+        public unsafe static void SafetyPatch()
+        {
 
-        //    //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] PC Name New: {SystemInfo.deviceName}", false, false);
-        //    //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] Model New: {SystemInfo.deviceModel}", false, false);
-        //    //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] PBU New: {SystemInfo.graphicsDeviceName}", false, false);
-        //    //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] CPU New: {SystemInfo.processorType}", false, false);
-        //    //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] PBU ID New: {SystemInfo.graphicsDeviceID.ToString()}", false, false);
-        //    //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] OS New:{SystemInfo.operatingSystem}", false, false);
-        //    IntPtr intPtr2 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetDeviceModel");
-        //    MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr2)), AccessTools.Method(typeof(_Spoofers), "FakeModel", null, null).MethodHandle.GetFunctionPointer());
-        //    IntPtr intPtr3 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetDeviceName");
-        //    MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr3)), AccessTools.Method(typeof(_Spoofers), "FakeName", null, null).MethodHandle.GetFunctionPointer());
-        //    IntPtr intPtr4 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetGraphicsDeviceName");
-        //    MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr4)), AccessTools.Method(typeof(_Spoofers), "FakeGBU", null, null).MethodHandle.GetFunctionPointer());
-        //    IntPtr intPtr5 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetGraphicsDeviceID");
-        //    MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr5)), AccessTools.Method(typeof(_Spoofers), "FakeGBUID", null, null).MethodHandle.GetFunctionPointer());
-        //    IntPtr intPtr6 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetProcessorType");
-        //    MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr6)), AccessTools.Method(typeof(_Spoofers), "FakeProcessor", null, null).MethodHandle.GetFunctionPointer());
-        //    IntPtr intPtr7 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetOperatingSystem");
-        //    MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr7)), AccessTools.Method(typeof(_Spoofers), "FakeOS", null, null).MethodHandle.GetFunctionPointer());
-        //}
+            //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] PC Name New: {SystemInfo.deviceName}", false, false);
+            //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] Model New: {SystemInfo.deviceModel}", false, false);
+            //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] PBU New: {SystemInfo.graphicsDeviceName}", false, false);
+            //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] CPU New: {SystemInfo.processorType}", false, false);
+            //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] PBU ID New: {SystemInfo.graphicsDeviceID.ToString()}", false, false);
+            //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] OS New:{SystemInfo.operatingSystem}", false, false);
+            IntPtr intPtr2 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetDeviceModel");
+            MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr2)), AccessTools.Method(typeof(_Spoofers), "FakeModel", null, null).MethodHandle.GetFunctionPointer());
+            IntPtr intPtr3 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetDeviceName");
+            MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr3)), AccessTools.Method(typeof(_Spoofers), "FakeName", null, null).MethodHandle.GetFunctionPointer());
+            IntPtr intPtr4 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetGraphicsDeviceName");
+            MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr4)), AccessTools.Method(typeof(_Spoofers), "FakeGBU", null, null).MethodHandle.GetFunctionPointer());
+            IntPtr intPtr5 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetGraphicsDeviceID");
+            MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr5)), AccessTools.Method(typeof(_Spoofers), "FakeGBUID", null, null).MethodHandle.GetFunctionPointer());
+            IntPtr intPtr6 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetProcessorType");
+            MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr6)), AccessTools.Method(typeof(_Spoofers), "FakeProcessor", null, null).MethodHandle.GetFunctionPointer());
+            IntPtr intPtr7 = IL2CPP.il2cpp_resolve_icall("UnityEngine.SystemInfo::GetOperatingSystem");
+            MelonUtils.NativeHookAttach((IntPtr)((void*)(&intPtr7)), AccessTools.Method(typeof(_Spoofers), "FakeOS", null, null).MethodHandle.GetFunctionPointer());
+        }
 
-        //public static IntPtr FakeModel() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(Motherboards[new System.Random().Next(0, Motherboards.Length)])).Pointer;
-        //public static IntPtr FakeName() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp("DESKTOP-" + Misc.RandomString(7))).Pointer;
-        //public static IntPtr FakeGBU() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(PBU[new System.Random().Next(0, PBU.Length)])).Pointer;
-        //public static IntPtr FakeGBUID() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(Misc.RandomString(12))).Pointer;
-        //public static IntPtr FakeProcessor() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(CPU[new System.Random().Next(0, CPU.Length)])).Pointer;
-        //public static IntPtr FakeOS() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(OS[new System.Random().Next(0, OS.Length)])).Pointer;
+        public static IntPtr FakeModel() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(Motherboards[new System.Random().Next(0, Motherboards.Length)])).Pointer;
+        public static IntPtr FakeName() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp("DESKTOP-" + Misc.RandomString(7))).Pointer;
+        public static IntPtr FakeGBU() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(PBU[new System.Random().Next(0, PBU.Length)])).Pointer;
+        public static IntPtr FakeGBUID() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(Misc.RandomString(12))).Pointer;
+        public static IntPtr FakeProcessor() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(CPU[new System.Random().Next(0, CPU.Length)])).Pointer;
+        public static IntPtr FakeOS() => new UnityEngine.Object(IL2CPP.ManagedStringToIl2Cpp(OS[new System.Random().Next(0, OS.Length)])).Pointer;
 
 
 
@@ -108,7 +111,23 @@ namespace Trinity.SDK.Patching.Patches
             __result = false;
             return false;
         }
+        // The patch for spoofing FPS
+        private static bool PatchFPS(ref float __result)
+        {
+            // Run original getter if spoofing is disabled
+            if (!Config.SpoofFps) return true;
+            __result = 1f / (Config.FPSSpoof + Main.VarianceFPS);
+            return false;
+        }
 
+        // The patch for spoofing ping
+        private static bool PatchPing(ref int __result)
+        {
+            // Run original getter if spoofing is disabled
+            if (!Config.SpoofPing) return true;
+            __result = (int)(Config.PingSpoof + Main.VariancePing);
+            return false;
+        }
         private static string[] PBU = new string[]
         {
             "MSI Radeon RX 6900 XT GAMING Z TRIO 16GB",

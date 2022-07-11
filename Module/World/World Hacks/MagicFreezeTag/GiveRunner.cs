@@ -19,7 +19,7 @@ namespace Trinity.Module.World.World_Hacks.MagicFreezeTag
             {
                 LogHandler.Log(LogHandler.Colors.Green, "Assigned you as the runner", false, false);
                 LogHandler.LogDebug("Your The Runner!");
-                UdonExploitManager.udonsend("AssignRunner","local");
+                UW.udonsend("AssignRunner", EventTarget.Local);
             }
             catch (Exception ex)
             {

@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using ExitGames.Client.Photon;
+using Il2CppSystem; 
+using UnhollowerBaseLib;
 
 namespace Trinity.Module.Settings.Logging
 {
@@ -36,72 +40,69 @@ namespace Trinity.Module.Settings.Logging
             {
                 int Sender = eventData.sender; VRC.Player player = PU.GetPlayerByActorID(Sender);
                 string LocalPlayer = player != null ? player.prop_APIUser_0.displayName : "VRC Server";
-                NonAllocDictionary<byte, Il2CppSystem.Object> parameters = eventData.Parameters;
-                if (eventData.Code != 1)
+                Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object> parameters = eventData.Parameters[eventData.CustomDataKey].Cast<Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>>();
+                byte b = parameters[0].Unbox<byte>();
+                if (b != 2)
                 {
-                    if (eventData.Code == 33)
+                    if (b != 8)
                     {
-                        foreach (Il2CppSystem.Collections.Generic.KeyValuePair<byte, Il2CppSystem.Object> s in parameters)
+                        if (b == 21)
                         {
-                            Console.WriteLine(parameters.keys.ToString());
-                           
-                            if (parameters.ContainsKey(0))
+                            if (parameters.Count == 4)
                             {
-                                if (parameters.ContainsKey(1))
+                                bool Blocked = parameters[10].Unbox<bool>();
+                                bool isMuted = parameters[11].Unbox<bool>();
+                                //Solution tbHL1exsXB9TuqoNijN = LSybw88J0X3ZGflYdO7.X1J8xhXukb(dictionary[1].Unbox<int>());
+                                if (Moderations.ContainsKey(1))
+                                if (Blocked)
                                 {
-                                    if (parameters.ContainsKey(10))
+                                    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} Blocked You", false, false);
+                                    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} Blocked You");
+                                }
+                                if (isMuted)
+                                {
+                                    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} Muted You", false, false);
+                                    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} Muted You");
+                                }
+                            }
+                            else if (parameters.Count == 3)
+                            {
+                                Il2CppStructArray<int> CppArray = parameters[10].Cast<Il2CppStructArray<int>>();
+                                Il2CppStructArray<int> CppArray2 = parameters[11].Cast<Il2CppStructArray<int>>();
+                                for (int i = 0; i < CppArray.Count; i++)
+                                {
+                                    Solution DataType = PU.Il2CppConverter((CppArray)[i]);
+                                    if (DataType != null)
                                     {
-                                        if (parameters.ContainsKey(11))
-                                        {
-                                            bool ReverseMod = (bool)parameters.ContainsKey(1);
-                                            bool Blocked = (bool)parameters.ContainsKey(10);
-                                            bool Muted = (bool)parameters.ContainsKey(11);
-                                            if (Moderations.ContainsKey(1))
-                                            {
-                                                bool UnBlock = (bool)Moderations[Convert.ToInt32(ReverseMod)][10];
-                                                bool UnMuted = (bool)Moderations[Convert.ToInt32(ReverseMod)][11];
-                                                if (Blocked && !UnBlock)
-                                                {
-                                                    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} Blocked You", false, false);
-                                                    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} Blocked You");
-                                                }
-                                                if (UnBlock && !Blocked)
-                                                {
-                                                    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} UnBlocked You", false, false);
-                                                    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} UnBlocked You");
-                                                }
-                                                if (Muted && !UnMuted)
-                                                {
-                                                    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} Muted You", false, false);
-                                                    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} Muted You");
-                                                }
-                                                if (UnMuted && !Muted)
-                                                {
-                                                    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} UnMuted You", false, false);
-                                                    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} UnMuted You");
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (Blocked)
-                                                {
-                                                    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} Blocked You", false, false);
-                                                    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} Blocked You");
-                                                }
-                                                if (Muted)
-                                                {
-                                                    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} Muted You", false, false);
-                                                    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} Muted You");
-                                                }
-                                            }
-                                        }
+                                        PU.BlockStateChanged(DataType, true);
                                     }
                                 }
+                                for (int j = 0; j < CppArray2.Count; j++)
+                                {
+                                    Solution MuteType = PU.Il2CppConverter(CppArray2[j]);
+                                    if (MuteType != null)
+                                    {
+                                        PU.MuteStateChanged(MuteType, true);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                //if (Blocked)
+                                //{
+                                //    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} Blocked You", false, false);
+                                //    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} Blocked You");
+                                //}
+                                //if (Muted)
+                                //{
+                                //    LogHandler.Log(LogHandler.Colors.Green, $"[Moderation] -> {LocalPlayer} Muted You", false, false);
+                                //    LogHandler.LogDebug($"[Moderation] -> {LocalPlayer} Muted You");
+                                //}
                             }
                         }
                     }
                 }
-            }
+            } 
             catch (UnhollowerBaseLib.Il2CppException ERROR) { LogHandler.Log(LogHandler.Colors.Yellow, ERROR.StackTrace, false, false); }
 
             return true;

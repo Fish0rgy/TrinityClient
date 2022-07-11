@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using VRC.Core;
+using Trinity.Module.World.World_Hacks.Murder_4;
 
 namespace Trinity.Module.TargetMenu.Murder4_Settings
 {
@@ -23,9 +24,10 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
             try
             {
                 MenuUI.Log("MURDER: <color=green>Blind Loop Target</color>");
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Blinding {SelectedPlayer.displayName}", false, false);
                 LogHandler.LogDebug($"Blinding {SelectedPlayer.displayName}");
+                MurderMisc.antiblind();
                 MelonCoroutines.Start(BlindingLoop());
             }
             catch (Exception ex)
@@ -38,9 +40,8 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
 
             while (toggled)
             {
-                UdonExploitManager.udonsend("OnLocalPlayerBlinded","target");
-                yield return new WaitForSeconds(0.2f);
-                UdonExploitManager.udonsend("OnLocalPlayerFlashbanged","target");
+                UW.udonsend("OnLocalPlayerBlinded", EventTarget.Targeted); 
+                UW.udonsend("OnLocalPlayerFlashbanged", EventTarget.Targeted);
                 yield return new WaitForSeconds(0.2f);
             }
             yield break;

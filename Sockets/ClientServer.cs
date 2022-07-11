@@ -16,7 +16,7 @@ namespace Trinity.Sockets.BotServer
         private static List<Socket> ServerHandlers = new List<Socket>();
         public static void SendCommandToClients(string Command)
         {
-            LogHandler.Log(LogHandler.Colors.Yellow, "$[{DateTime.Now}] Phoning Home: {Command}", false, false);
+            LogHandler.Log(LogHandler.Colors.Yellow, $"[{DateTime.Now}] Phoning Home: {Command}", false, false);
             (from s in BotServer.ServerHandlers
              where s != null
              select s).ToList<Socket>().ForEach(delegate (Socket s)
@@ -60,7 +60,7 @@ namespace Trinity.Sockets.BotServer
 
                     for (int i = 0; i < BotServer.botCount; i++)
                     {
-                        LogHandler.Log(LogHandler.Colors.Yellow, $"Awaiting response from mothership -> Code {BotServer.botCount}!", false, false);
+                        LogHandler.Log(LogHandler.Colors.Yellow, $"Awaiting response from bots -> {BotServer.botCount}!", false, false);
                         BotServer.ServerHandlers.Add(socket.Accept());
                         
                     }
@@ -72,13 +72,10 @@ namespace Trinity.Sockets.BotServer
             }
         }
 
-
-
         public static void Client()
         {
             Task.Run(new Action(BotServer.HandleClient));
         }
-
 
         private static void HandleClient()
         {
@@ -92,39 +89,35 @@ namespace Trinity.Sockets.BotServer
                 {
                     try
                     {
-                       
                         socket.Connect(remoteEP);
-                        LogHandler.Log(LogHandler.Colors.Yellow, $"Socetet connected to {socket.RemoteEndPoint.ToString()}", false, false);                        
+                        LogHandler.Log(LogHandler.Colors.Yellow, $"Socket connected to {socket.RemoteEndPoint.ToString()}", false, false);                        
                         for (; ; )
                         {
                             int count = socket.Receive(array);
-                            BotServer.OnClientReceiveCommand(Encoding.ASCII.GetString(array, 0, count)); 
+                            BotServer.OnClientReceiveCommand(Encoding.ASCII.GetString(array, 0, count));
                         }
                     }
                     catch (ArgumentNullException ex)
                     {
-                        LogHandler.Log(LogHandler.Colors.Yellow, $"SocketException : {ex.ToString()}", false, false);
+                        LogHandler.Log(LogHandler.Colors.Yellow, $"Socket Exception : {ex.ToString()}", false, false);
                        
                     }
                     catch (SocketException ex2)
                     {
-                        LogHandler.Log(LogHandler.Colors.Yellow, $"SocketException : {ex2.ToString()}", false, false);
+                        LogHandler.Log(LogHandler.Colors.Yellow, $"Socket Exception : {ex2.ToString()}", false, false);
                        
                     }
                     catch (Exception ex3)
                     {
-                        LogHandler.Log(LogHandler.Colors.Yellow, $"SocketException : {ex3.ToString()}", false, false);
+                        LogHandler.Log(LogHandler.Colors.Yellow, $"Socket Exception : {ex3.ToString()}", false, false);
                        
                     }
                 }
             }
             catch (Exception ex4)
             {
-                LogHandler.Log(LogHandler.Colors.Yellow, $"SocketException : {ex4.ToString()}", false, false);
+                LogHandler.Log(LogHandler.Colors.Yellow, $"Socket Exception : {ex4.ToString()}", false, false);
             }
         }
-    
-
-
     }
 }

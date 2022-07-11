@@ -8,11 +8,18 @@ using System.Windows.Forms;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Microsoft.Win32;
+using System.Collections.Generic;
+using Trinity.SDK.ButtonAPI;
+using MelonLoader;
+using Trinity.SDK.ButtonAPI.PopUp;
+using VRC.SDKBase;
+using Trinity.Module;
 
 namespace Trinity.SDK
 {
     public static class Misc
-    {
+    { 
         public static string RandomString(int length)
         {
             string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!§$%&/()=?";
@@ -96,11 +103,116 @@ namespace Trinity.SDK
             audiosource2.clip = audiofile;
             audiosource2.Stop();
             audiosource2.Play();
+            try
+            {
+                GameObject.Find("UserInterface/MenuContent/Backdrop/Backdrop/Background").active = false;
+                //GameObject.Find("UserInterface/MenuContent/Backdrop/Backdrop/Background").GetComponent<Image>().color = Color.magenta;
+                MelonCoroutines.Start(QMLoadingScreen.LoadingScreen());
+            }
+            catch
+            {
+            }
+            //MelonCoroutines.Start(QMLoadingScreen.loadparticles());
 
         }
-    
+        public static void reset(GameObject gameobject)
+        {
+            gameobject.transform.localPosition = new Vector3(0, 0, 0);
+            gameobject.transform.localRotation = new Quaternion(0, 0, 0, 0);
+            gameobject.transform.localScale = new Vector3(1, 1, 1);
+        }
+        public static IEnumerator nameplates()
+        {
+            foreach (var bg in Resources.FindObjectsOfTypeAll<ImageThreeSlice>())
+            {
+                if (bg.name == "Background" && bg.transform.parent.name == "Main")
+                    MelonCoroutines.Start(Misc.loadImageThreeSlice(bg, "https://nocturnal-client.xyz/cl/Download/Media/Nameplate.png"));
+            }
+            yield break;
+        }
+        public static void SetToggleState(BaseModule module, bool toggleOn, bool shouldInvoke = false)
+        { 
+            //module.SetToggleState(toggleOn);
+            //module.SetToggleState(!toggleOn);
 
-    internal class BufferRW
+            //try
+            //{
+            //    if (toggleOn == true && shouldInvoke == true)
+            //    {
+            //        btnOnAction.Invoke();
+
+            //        showWhenOn.ForEach(x => x.SetActive(true));
+            //        hideWhenOn.ForEach(x => x.SetActive(false));
+            //    }
+            //    else if (toggleOn == false && shouldInvoke == true)
+            //    {
+            //        btnOffAction.Invoke();
+
+            //        showWhenOn.ForEach(x => x.SetActive(false));
+            //        hideWhenOn.ForEach(x => x.SetActive(true));
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    LogHandler.Error(e);
+            //}
+        }
+        public static void StartEnumerator(this IEnumerator e)
+        {
+            MelonCoroutines.Start(e);
+        }
+        public static string GetMachineGuid()
+        {
+            string location = @"SOFTWARE\Microsoft\Cryptography";
+            string name = "MachineGuid";
+
+            using (RegistryKey localMachineX64View =
+                RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+            {
+                using (RegistryKey rk = localMachineX64View.OpenSubKey(location))
+                {
+                    if (rk == null)
+                        throw new KeyNotFoundException(
+                            string.Format("Key Not Found: {0}", location));
+
+                    object machineGuid = rk.GetValue(name);
+                    if (machineGuid == null)
+                        throw new IndexOutOfRangeException(
+                            string.Format("Index Not Found: {0}", name));
+
+                    return machineGuid.ToString();
+                }
+            }
+        }
+        public static IEnumerator loadspriterest(Image Instance, string url)
+        {
+
+            var www = UnityWebRequestTexture.GetTexture(url);
+            _ = www.downloadHandler;
+            var asyncOperation = www.SendWebRequest();
+            Func<bool> func = () => asyncOperation.isDone;
+            yield return new WaitUntil(func);
+            if (www.isHttpError || www.isNetworkError)
+            {
+                //Style.Consoles.consolelogger("Error4 : " + www.error);
+                LogHandler.Log(LogHandler.Colors.Red,www.error,false,false);
+                yield break;
+            }
+
+            var content = DownloadHandlerTexture.GetContent(www);
+            var sprite2 = Instance.sprite = Sprite.CreateSprite(content,
+                new Rect(0f, 0f, content.width, content.height), new Vector2(0f, 0f), 100000f, 1000u,
+                SpriteMeshType.FullRect, Vector4.zero, false);
+
+            if (sprite2 != null) Instance.sprite = sprite2;
+        }
+        public static IEnumerator WaitForLocalPlayer()
+        {
+            while (VRCPlayer.field_Internal_Static_VRCPlayer_0 == null)
+                yield return null;
+            QMCustomNoti.SetUp();
+        }
+        internal class BufferRW
         {
             public static byte[] Vector3ToBytes(Vector3 vector3)
             {
@@ -118,6 +230,25 @@ namespace Trinity.SDK
                 var z = BitConverter.ToSingle(buffer, index + 8);
                 return new Vector3(x, y, z);
             }
-        } 
+        }
+        public static IEnumerator loadImageThreeSlice(ImageThreeSlice Instance, string url)
+        {
+            var www = UnityWebRequestTexture.GetTexture(url);
+            _ = www.downloadHandler;
+            var asyncOperation = www.SendWebRequest();
+            Func<bool> func = () => asyncOperation.isDone;
+            yield return new WaitUntil(func);
+            if (www.isHttpError || www.isNetworkError)
+            {
+                LogHandler.Log(LogHandler.Colors.Red, www.error,false, false);
+                yield break;
+            }
+
+            var content = DownloadHandlerTexture.GetContent(www);
+            var sprite2 = Instance._sprite = Sprite.CreateSprite(content,
+                new Rect(0f, 0f, content.width, content.height), new Vector2(0f, 0f), 100000f, 1000u,
+                SpriteMeshType.FullRect, new Vector4(255, 0, 255, 0), false);
+            if (sprite2 != null) Instance._sprite = sprite2;
+        }
     }
 }

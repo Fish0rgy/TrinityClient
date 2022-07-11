@@ -7,6 +7,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using VRC.Core;
+using Trinity.SDK.ButtonAPI.PopUp;
+using MelonLoader;
+using UnityEngine.UI;
 
 namespace Trinity.SDK
 {
@@ -14,15 +17,14 @@ namespace Trinity.SDK
     {
         private static List<string> DebugLogs = new List<string>();
         private static int duplicateCount = 1;
-        private static string lastMsg = "";
+        private static string lastMsg = ""; 
         [DllImport("user32.dll", EntryPoint = "FindWindow")]
         public static extern System.IntPtr FindWindow(System.String className, System.String windowName);
 
         public static void DisplayLogo()
         {
-            APIUser currentUser = APIUser.CurrentUser;
-            string fileVersion = "1.0.0.3";
-            Console.Title = $"Trinity || v{fileVersion}";
+            APIUser currentUser = APIUser.CurrentUser; 
+            Console.Title = $"Trinity || v{Main.fileVersion}";
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("========================================================================================================================");
@@ -65,8 +67,39 @@ namespace Trinity.SDK
             DebugLog.debugLog.text.verticalAlignment = TMPro.VerticalAlignmentOptions.Top;
             DebugLog.debugLog.text.color = Color.white;
         }
+        public static void Popup(string title, string content)
+        {
+            List<TContent> toastcontent = new List<TContent>(){new TContent{
+            Title = title, Content = content}};
+            MelonCoroutines.Start(SendNoti());
+        } 
+        private static System.Collections.IEnumerator SendNoti()
+        {
+            for (; ; )
+            {
+                if (TContent.toastcontent.Count != 0)
+                {
+                    var toastvalues = TContent.toastcontent.First();
+                    QMCustomNoti.Msg.text = toastvalues.Content;
+                    TContent.toastcontent.Remove(toastvalues);
+                    yield return QMCustomNoti.Fade(QMCustomNoti.leCanvasGroup, 0f, 1f, QMCustomNoti.DurationOfFade);
+                    yield return new WaitForSeconds(QMCustomNoti.DurationOnScreen);
+                    yield return QMCustomNoti.Fade(QMCustomNoti.leCanvasGroup, 1f, 0f, QMCustomNoti.DurationOfFade);
+                }
 
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        public static void Error(Exception ex)
+        {
+            string stack = ex.StackTrace;
+            string source = ex.Source;
+            string message = ex.Message;
+            string LF = Environment.NewLine;
 
+            Popup("Error", ex.Message);
+            LogHandler.Log(LogHandler.Colors.Red, $"\n============ERROR============ \nTIME: {DateTime.Now.ToString("HH:mm.fff", System.Globalization.CultureInfo.InvariantCulture)} \nERROR MESSAGE: {message} \nLAST INSTRUCTIONS: {stack} \nFULL ERROR: {ex.ToString()} \n=============END=============\n", true, true);
+        }
         public static void Log(LogHandler.Colors color, string message, bool timeStamp = false, bool logToRpc = false)
         {
             if (timeStamp)
@@ -74,7 +107,7 @@ namespace Trinity.SDK
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("[");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(DateTime.Now.ToString("HH:mm:ss.fff"));
+                Console.Write(DateTime.Now.ToString("HH:mm.fff"));
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("] ");
             }

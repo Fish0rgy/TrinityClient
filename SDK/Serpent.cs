@@ -13,6 +13,7 @@ namespace Trinity.SDK
     public class Serpent
     {
         //Button IMAGES
+        public const string NameplatePath = "Trinity\\Icons\\Namplate.png";
         public const string BGPath = "Trinity\\Icons\\Background.png";
         public const string clientLogoPath = "Trinity\\Icons\\Logo.png";
         public const string AvatarPath = "Trinity\\Icons\\Avatar.png";
@@ -45,14 +46,16 @@ namespace Trinity.SDK
         public const string skipPath = "Trinity\\Icons\\Skip.png";
         public const string stopbots = "Trinity\\Icons\\Stop.png";
         public const string copyPath = "Trinity\\Icons\\Copy.png";
+        public const string CustomPath = "Trinity\\Icons\\Custom.png";
         public const string ClonePath = "Trinity\\Icons\\Clone.png";
         public const string MovmentPath = "Trinity\\Icons\\Force.png";
         public const string AvatarExploitPath = "Trinity\\Icons\\Exploits.png";
-        public const string RetroPath = "Trinity\\Icons\\Bot.png";
+        public const string RetroPath = "Trinity\\Icons\\customimg.png";
         public const string MimicPath = "Trinity\\Icons\\Mimic.png";
         public const string ThemePath = "Trinity\\Icons\\Theme.png";
         public const string TeleportPath = "Trinity\\Icons\\Teleport.png";
         public const string ReJoinPath = "Trinity\\Icons\\ReJoin.png";
+        public const string BonesPath = "Trinity\\Icons\\Bones.png";
 
         public const string zombiePath = "Trinity\\Icons\\Zombie.png";
         public const string udonManagerPath = "Trinity\\Icons\\Exploit Manager.png";

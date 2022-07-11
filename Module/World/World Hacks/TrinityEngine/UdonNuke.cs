@@ -33,8 +33,16 @@ namespace Trinity.Module.Exploit.UdonExploits
                         while (fatblackman.MoveNext())
                         {
                             Il2CppSystem.Collections.Generic.KeyValuePair<string, Il2CppSystem.Collections.Generic.List<uint>> name = fatblackman.current;
-                            udonobjects.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, name.Key);
-                            name = null;
+                            try
+                            { 
+                                udonobjects.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, name.Key);
+                                name = null;
+                            }
+                            catch (Exception ex)
+                            {
+                                LogHandler.Log(LogHandler.Colors.Red, $"Cant Send {name.Key}");
+                            }
+                             
                         }
                         fatblackman = null;
                     }

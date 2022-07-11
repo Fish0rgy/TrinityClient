@@ -19,7 +19,7 @@ namespace Trinity.Module.World.World_Hacks.MagicFreezeTag
             {
                 LogHandler.Log(LogHandler.Colors.Green, "Your Un Frozen", false, false);
                 LogHandler.LogDebug("Your Un Frozen");
-                UdonExploitManager.udonsend("Unfreeze", "local");
+                UW.udonsend("Unfreeze", EventTarget.Local);
             }
             catch (Exception ex)
             {

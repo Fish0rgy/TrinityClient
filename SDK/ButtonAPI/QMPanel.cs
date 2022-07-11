@@ -23,16 +23,7 @@ namespace Trinity.SDK.ButtonAPI
             Console.transform.localScale = new Vector3(4.88f, 1.98f, 1);
             Console.transform.TransformPoint(x, y, z);
             Console.AddComponent<RectMask2D>();   
-        }
-
-
-        //GameObject headershit = UnityEngine.Object.Instantiate<GameObject>(Console, Console.transform.parent);
-        //headershit.gameObject.name = "Trinity_Header";
-        //headershit.GetComponent<Image>().sprite = Header;
-        //headershit.GetComponent<Image>().overrideSprite = Header;
-        //headershit.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-        //headershit.transform.localPosition = new Vector3(0f, 406f, 0f);
-        //headershit.transform.localScale = new Vector3(0.65f, 0.2f, 0.2f);
+        } 
     }
 
 }

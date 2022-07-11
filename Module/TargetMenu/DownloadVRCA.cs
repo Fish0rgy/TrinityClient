@@ -16,7 +16,7 @@ namespace Trinity.Module.TargetMenu
             MenuUI.Log("AVATAR: <color=green>Downloading Targets VRCA</color>");
             using (var wc = new WebClient { Headers = { "User-Agent: Other" } })
             {
-                ApiAvatar avatar = PU.GetByUsrID( Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
+                ApiAvatar avatar = PU.SelectedVRCPlayer().prop_ApiAvatar_0;
                 wc.DownloadFileAsync(new Uri(avatar.assetUrl), "Trinity/VRCA/" + avatar.name + "_" + avatar.id + ".vrca");                            
                 LogHandler.Log(LogHandler.Colors.Grey, "Downloaded Selected User VRCA Completed", false, false);
                 LogHandler.LogDebug("[Ripper] -> Downloaded Selected User VRCA Completed!");

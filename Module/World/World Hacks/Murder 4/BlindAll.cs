@@ -15,9 +15,10 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
             try
             {
                 LogHandler.Log(LogHandler.Colors.Green, "Blinded Everyone In The Lobby", false, false);
-                LogHandler.LogDebug("Blinded Everyone In The Lobby"); 
-                UdonExploitManager.udonsend("OnLocalPlayerFlashbanged", "everyone");
-                UdonExploitManager.udonsend("OnLocalPlayerBlinded", "everyone");
+                LogHandler.LogDebug("Blinded Everyone In The Lobby");
+                MurderMisc.antiblind();
+                UW.udonsend("OnLocalPlayerFlashbanged", EventTarget.Everyone);
+                UW.udonsend("OnLocalPlayerBlinded", EventTarget.Everyone);
             }
             catch (Exception ex)
             {

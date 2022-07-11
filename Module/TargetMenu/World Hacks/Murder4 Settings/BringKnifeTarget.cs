@@ -21,7 +21,7 @@ namespace Trinity.Module.TargetMenu.Murder4_Settings
             try
             {
                 MenuUI.Log("MURDER: <color=green>Brought Knife To Target</color>");
-                APIUser SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_APIUser_0;
+                APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Brought All Knifes {SelectedPlayer.displayName}'s Position", false, false);
                 LogHandler.LogDebug($"Brought All Knifes {SelectedPlayer.displayName}'s Position"); 
                 MurderMisc.MurderTargetGive("Knife");

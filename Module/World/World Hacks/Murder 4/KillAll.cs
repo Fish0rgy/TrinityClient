@@ -33,19 +33,20 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
         }
         private void Kill()
         {
-            using (IEnumerator<UdonSync> EKill = Resources.FindObjectsOfTypeAll<UdonSync>().GetEnumerator())
-            {
-                Count = 0;
-                while (EKill.MoveNext())
-                {
-                    UdonSync US;
-                    if ((US = EKill.Current).gameObject.name.Contains("Player Node"))
-                    {
-                        Count++;
-                        Networking.RPC(0, US.gameObject, "UdonSyncRunProgramAsRPC", SyncKill);
-                    }
-                }
-            }
+            UW.udonsend("SyncKill", EventTarget.Everyone);
+            //using (IEnumerator<UdonSync> EKill = Resources.FindObjectsOfTypeAll<UdonSync>().GetEnumerator())
+            //{
+            //    Count = 0;
+            //    while (EKill.MoveNext())
+            //    {
+            //        UdonSync US;
+            //        if ((US = EKill.Current).gameObject.name.Contains("Player Node"))
+            //        {
+            //            Count++;
+            //            Networking.RPC(0, US.gameObject, "UdonSyncRunProgramAsRPC", SyncKill);
+            //        }
+            //    }
+            //}
         }
     }
 }

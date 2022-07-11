@@ -12,7 +12,7 @@ namespace Trinity.Module.TargetMenu
         public override void OnEnable()
         {
             MenuUI.Log("AVATAR: <color=green>Copied Targets Avatar ID</color>");
-            ApiAvatar SelectedPlayer = PU.GetByUsrID(Main.Instance.QuickMenuStuff.selectedUserMenuQM.GetSelectedUser().prop_String_0).prop_ApiAvatar_0;
+            ApiAvatar SelectedPlayer = PU.SelectedVRCPlayer().prop_ApiAvatar_0;
             if (SelectedPlayer.id != "")
                 SDK.Misc.SetClipboard(SelectedPlayer.id);
             LogHandler.LogDebug("[Info] -> Coppied AvatarID to clipboard.");

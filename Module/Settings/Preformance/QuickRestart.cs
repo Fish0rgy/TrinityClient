@@ -14,18 +14,9 @@ namespace Trinity.Module.Settings.Preformance
         {
         }
         public override void OnEnable()
-        {   
-            try
-            {
-                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key))) { LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Shutting down, GoodBye......!", false, false); Process.Start("vrchat.exe", Environment.CommandLine.ToString()); Process.GetCurrentProcess().Kill(); }
-                else
-                {
-                    LogHandler.Log(LogHandler.Colors.Red, "[Trinity] Failed to logout, please contact owner!", false, false);
-                    Process.Start("vrchat.exe", Environment.CommandLine.ToString());
-                    Process.GetCurrentProcess().Kill();
-                }
-            }
-            catch (Exception EX) { }
+        {
+            Process.Start("vrchat.exe", Environment.CommandLine.ToString());
+            Process.GetCurrentProcess().Kill();
         }
     }
 }

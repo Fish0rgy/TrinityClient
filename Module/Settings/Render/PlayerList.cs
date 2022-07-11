@@ -24,7 +24,7 @@ namespace Trinity.Module.Settings.Render
         {
 
             try
-            {
+            { 
                 MenuUI.Log("DEBUG: <color=green>Player Room List On</color>");
                 playerList.lable.SetActive(true);
                 playerList.text.alignment = TMPro.TextAlignmentOptions.Right;
@@ -95,8 +95,7 @@ namespace Trinity.Module.Settings.Render
                         }
                         info += " [<color=#FFB300>P</color>] " + player.GetPingColord();
                         info += " [<color=#FFB300>F</color>] " + player.GetFramesColord();                       
-                        info += " <color=#" + ColorUtility.ToHtmlStringRGB(player.GetTrustColor()) + ">" + player.GetAPIUser().displayName + "</color>";
-                        info += " <color=#" + ColorUtility.ToHtmlStringRGB(player.GetTrustColor()) + ">" + player.prop_APIUser_0.username + "</color>\n";
+                        info += " <color=#" + ColorUtility.ToHtmlStringRGB(player.GetTrustColor()) + ">" + player.GetAPIUser().displayName + "</color>\n"; 
                         
                     }
                     playerList.text.text = info;

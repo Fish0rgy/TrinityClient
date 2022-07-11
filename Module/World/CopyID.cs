@@ -9,9 +9,12 @@ namespace Trinity.Module.World
 
         public override void OnEnable()
         {
-            if (WorldWrapper.GetWorldID != "") { Misc.SetClipboard(PU.GetAPIUser(PU.GetPlayer()).location);          
-            LogHandler.Log(LogHandler.Colors.Green, "World ID: " + WorldWrapper.GetWorldID + " copied to clipboard.", false, false);
-            LogHandler.LogDebug($"Copied World ID To Clipboard!");
+            if (WorldWrapper.GetWorldID != null)
+            {
+                Misc.SetClipboard(PU.GetAPIUser(PU.GetPlayer()).location);
+                LogHandler.Log(LogHandler.Colors.Green, "World ID: " + WorldWrapper.GetWorldID + " copied to clipboard.", false, false);
+                LogHandler.LogDebug($"Copied World ID To Clipboard!");
+                MenuUI.Log("WORLD: <color=green>Copied World ID To Clipboard</color>");
             }
         }
     }

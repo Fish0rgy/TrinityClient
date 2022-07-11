@@ -5,28 +5,37 @@ using System.Reflection;
 using System.Diagnostics;
 using UnhollowerRuntimeLib;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-
+using System.Collections.Generic; 
 using MelonLoader;
 using Trinity.Events;
 using Trinity.Module;
-using Trinity.Module.World;
-
+using Trinity.Module.World; 
 using Trinity.SDK;
 using Trinity.SDK.Patching;
 using Trinity.SDK.Security;
 using Trinity.SDK.ButtonAPI;
-
+using System.Net;
+using VRC.Core; 
+using Newtonsoft.Json;
+using Trinity.SDK.ButtonAPI.AVI_FAV;
+using VRC.SDKBase;
+using Trinity.Utilities;
+using Trinity.Module.Exploit.MiscExploits;
 
 namespace Trinity
 {
-    public class Main
+    public class Main : MelonMod
     {
         public static Main Instance { get; set; }
 
         public Config Config { get; set; } = new Config();
         public Serpent QuickMenuStuff { get; set; }
         public QMNestedButton PlayerButton { get; set; }
+        public QMNestedButton DynamicBonesButton { get; set; }
+        public QMNestedButton MiscButton { get; set; }
+        public QMNestedButton GhostButton { get; set; }
+        public QMNestedButton STDButton { get; set; }
+        public QMNestedButton GhostTargetButton { get; set; }
         public QMNestedButton JustHButton { get; set; }
         public QMNestedButton MoveAndChillSettings { get; set; }
         public QMNestedButton MovieAndChillButton { get; set; }
@@ -62,16 +71,28 @@ namespace Trinity
         public QMNestedButton Zombiebutton { get; set; }
         public QMNestedButton EventQuickMenu { get; set; }
         public QMNestedButton WorldhacksTargetButton { get; set; }
+        public QMNestedButton MunchenAdminButton { get; set; }
         public QMNestedButton Magictagbutton { get; set; }
         public QMNestedButton AmongUsSettings { get; set; }
         public QMNestedButton AudioButton { get; set; }
         public QMNestedButton MidnightButton { get; set; }
         public QMNestedButton JubstBSettings { get; set; }
         public QMNestedButton MagicTagSettings { get; set; }
-        public QMNestedButton udonexploitbutton { get; set; }
+        public QMNestedButton udonexploitbutton { get; set; } 
 
         public List<BaseModule> Modules { get; set; } = new List<BaseModule>();
         public BaseModule FlyModule = null;
+        public BaseModule SpeedModule = null;
+        //Item Orbit
+        private static VRC_Pickup[] cachedItemPickups;
+        private static GameObject centerItemOrbit;
+        private static PI selectedPlayerToOrbit;
+
+        //Attach To Head
+        private static PI selectedPlayerToAttach;
+        private static HumanBodyBones attachmentPoint;
+        private static bool attachmentPointOffset;
+
         public List<OnPlayerJoinEvent> OnPlayerJoinEvents { get; set; } = new List<OnPlayerJoinEvent>();
         public List<OnAssetBundleLoadEvent> OnAssetBundleLoadEvents { get; set; } = new List<OnAssetBundleLoadEvent>();
         public List<OnPlayerLeaveEvent> OnPlayerLeaveEvents { get; set; } = new List<OnPlayerLeaveEvent>();
@@ -86,22 +107,32 @@ namespace Trinity
         public List<OnNetworkSanityEvent> OnNetworkSanityEvents { get; set; } = new List<OnNetworkSanityEvent>();
         public List<OnObjectInstantiatedEvent> OnObjectInstantiatedEvents { get; set; } = new List<OnObjectInstantiatedEvent>();
         public List<OnPhotonPeerEvent> OnPhotonPeerEvents { get; set; } = new List<OnPhotonPeerEvent>();
-        
-        public static void OnGUI() { }
+        public List<OnRoundTripEvent> OnRoundTripEvents { get; set; } = new List<OnRoundTripEvent>();
 
-        public static void OnApplicationStart()
+        public static float VarianceFPS = 0f;
+        public static int VariancePing = 0;
+        public static string fileVersion = "1.8.3.5";
+        public override void OnGUI() { }
+         
+         
+        public override void OnApplicationStart() 
         {
+             
             Instance = new Main();
+            Config.Instance = Config.Load();
             ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
             LogHandler.DisplayLogo();
+            SecurityCheck.CheckUpdate();
             Directory.CreateDirectory("Trinity\\LoadingScreenMusic");
             MelonCoroutines.Start(Misc.LoadingMusic());
+            PU.AddClientUsers();
+            //MelonCoroutines.Start(SpectateMode.VRChat_OnUiManagerInit());
             Task.Run(() =>
             {
                 SerpentPatch.InitPatches();
             });
         }
-        public static void OnUpdate()
+        public override void OnUpdate()
         {
 
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
@@ -121,15 +152,19 @@ namespace Trinity
                     OnApplicationQuit();
                 }
             }
-
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
+            {
+                LogHandler.Log(LogHandler.Colors.Red, $"FUCK WORLD CLIENT AND THERE DOG SHIT BUTTON API \n ps: love you blaze",false,false);
+            }
             // uDoneNuke.
-            if (Input.GetKey(KeyCode.K))
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.D))
             {
                 MelonCoroutines.Start(Keybinds.udonNukeKeyBind());
                 LogHandler.Log(LogHandler.Colors.Green, "[Keybind] Nuking World.....", true, false);
             }
+            
         }
-        public static void OnSceneWasLoaded(int buildIndex, string sceneName)
+        public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
             for (int i = 0; i < Instance.OnSceneLoadedEvents.Count; i++)
             {
@@ -137,35 +172,36 @@ namespace Trinity
             }
         }
         [Obfuscation(Exclude = true)]
-        public static void OnUIInit()
+        public static void InitMenu()
         {
-            try 
+            try
             { 
-                MelonCoroutines.Start(MenuUI.StartUI());
+                UIU.WaitBitch();
+                MelonCoroutines.Start(MenuUI.StartUI()); 
                 for (int i = 0; i < Instance.Modules.Count; ++i)
                 {
                     if (Instance.Modules[i].name == "Fly") Instance.FlyModule = Instance.Modules[i];
-                }
-                LogHandler.Log(LogHandler.Colors.Green, "Client UI Initialized!", true, false); 
+                    if (Instance.Modules[i].name == "Speed") Instance.SpeedModule = Instance.Modules[i];  
+                } 
+                LogHandler.Log(LogHandler.Colors.Green, "Client UI Initialized!", true, false);
             } 
             catch (Exception ex) 
             { 
                 LogHandler.Log(LogHandler.Colors.Red, ex.Message, true, false); 
             }
         }
-        public static void OnApplicationQuit()
+        public override void OnApplicationQuit()
         {
-            try
-            {
-                foreach (BaseModule module in Instance.Modules) { if (module.save) { Instance.Config.setConfigBool(module.name, module.toggled); } }
-                if (File.Exists(SecurityCheck.key) && SecurityCheck.CleanOnExit(File.ReadAllText(SecurityCheck.key)) == true) { LogHandler.Log(LogHandler.Colors.Yellow, "[Trinity] Shutting down, GoodBye!", false, false); Process.GetCurrentProcess().Kill(); }
-                else
-                {
-                    Process.GetCurrentProcess().Kill();
-                    LogHandler.Log(LogHandler.Colors.Red, "Failed to logout, please contact owner!", false, false);
-                }
-            }
-            catch (Exception EX) { LogHandler.Log(LogHandler.Colors.Red, EX.StackTrace, true, false); }
+            //try
+            //{
+            //    foreach (BaseModule module in Instance.Modules)
+            //    {
+            //        if (module.save)
+            //            Instance.Config.setConfigBool(module.name, module.toggled); 
+                    
+            //    }
+            //}
+            //catch (Exception EX) { LogHandler.Log(LogHandler.Colors.Red, EX.StackTrace, true, false); }
         }
     }
 }
