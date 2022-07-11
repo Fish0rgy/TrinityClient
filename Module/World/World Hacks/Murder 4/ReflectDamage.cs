@@ -26,7 +26,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
 
         public bool OnUdon(string __0, VRC.Player __1, UdonSync __instance)
         {
-            bool godmode = __0 == "SyncKill";
+            bool godmode = __0 == "SyncKill" || __1 != Trinity.Utilities.PU.GetPlayer();
             if (godmode)
             {
                 Trinity.SDK.UW.TargetedEvent(__0, __1.prop_VRCPlayer_0);
