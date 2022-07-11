@@ -178,8 +178,7 @@ namespace Trinity
                 }
             }
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
-            {
-                LogHandler.Log(LogHandler.Colors.Red, $"FUCK WORLD CLIENT AND THERE DOG SHIT BUTTON API \n ps: love you blaze",false,false);
+            { 
             }
             // uDoneNuke.
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.D))

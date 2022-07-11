@@ -168,7 +168,7 @@ namespace Trinity.Bot
 			AudioClip = www.GetAudioClip();
 			AudioSource source = CreateAudioSource(AudioClip, LocalPlayer.gameObject);;
 			source.Play();
-			Object.Destroy(source, AudioClip.length);
+            UnityEngine.Object.Destroy(source, AudioClip.length);
 			yield break;
 		}
 		public static AudioSource CreateAudioSource(AudioClip audio, GameObject obj)
