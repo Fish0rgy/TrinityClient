@@ -100,9 +100,9 @@ public class Commands
 		}
 	},
 		{
-			"PlayAudio", delegate(string URL)
+			"PlayAudio", delegate(string audioname)
 			{
-				PlayerExtensions.PlayFromURL(URL);
+				byte[] audioarray = File.ReadAllBytes("Trinity/Audios/" + audioname);
 			}
 		},
 	{

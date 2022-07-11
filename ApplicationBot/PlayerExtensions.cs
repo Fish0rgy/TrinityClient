@@ -159,29 +159,7 @@ namespace Trinity.Bot
 			return (from p in PlayerExtensions.AllPlayers
 					where p.GetAPIUser().id == UserID
 					select p).FirstOrDefault<Player>();
-		}
-		public static IEnumerator PlayFromURL(string url)
-		{
-			AudioClip AudioClip = new AudioClip();
-			WWW www = WWW.LoadFromCacheOrDownload(url, 0);
-			yield return www;
-			AudioClip = www.GetAudioClip();
-			AudioSource source = CreateAudioSource(AudioClip, LocalPlayer.gameObject);;
-			source.Play();
-            UnityEngine.Object.Destroy(source, AudioClip.length);
-			yield break;
-		}
-		public static AudioSource CreateAudioSource(AudioClip audio, GameObject obj)
-		{
-			AudioSource Source = obj.AddComponent<AudioSource>();
-			Source.clip = audio;
-			Source.spatialize = false;
-			Source.volume = 1f;
-			Source.loop = false;
-			Source.playOnAwake = false;
-			Source.outputAudioMixerGroup = VRCAudioManager.field_Private_Static_VRCAudioManager_0.field_Public_AudioMixerGroup_0;
-			return Source;
-		}
+		} 
 		public static void CheckBotStatus()
         {
 			if (Environment.GetCommandLineArgs().Contains("--trinity-bot"))
