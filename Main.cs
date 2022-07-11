@@ -147,7 +147,7 @@ namespace Trinity
             Config.Instance = Config.Load();
             ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
             LogHandler.DisplayLogo();
-            SecurityCheck.CheckUpdate();
+            //SecurityCheck.CheckUpdate();
             Directory.CreateDirectory("Trinity\\LoadingScreenMusic");
             MelonCoroutines.Start(Misc.LoadingMusic());
             PU.AddClientUsers();

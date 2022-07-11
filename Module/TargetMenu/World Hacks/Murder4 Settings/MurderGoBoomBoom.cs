@@ -13,9 +13,9 @@ using VRC.Core;
 
 namespace Trinity.Module.TargetMenu.World_Hacks.Murder4_Settings
 {
-    internal class MurderGoBoomBoom : BaseModule, OnUpdateEvent
+    internal class MurderGoBoomBoom : BaseModule
     {
-        public MurderGoBoomBoom() : base("Boom Boom", "Kill Someone In Murder 4", Main.Instance.MurderSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), true, false) { }
+        public MurderGoBoomBoom() : base("Boom Boom", "Kill Someone In Murder 4", Main.Instance.MurderSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), false, false) { }
 
         public override void OnEnable()
         {
@@ -24,24 +24,13 @@ namespace Trinity.Module.TargetMenu.World_Hacks.Murder4_Settings
                 APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"Boom Boom {SelectedPlayer.displayName}", false, false);
                 MenuUI.Log($"MURDER: <color=green>Boom Boom {SelectedPlayer.displayName}</color>");
-                LogHandler.LogDebug($"Boom Boom {SelectedPlayer.displayName}"); 
+                LogHandler.LogDebug($"Boom Boom {SelectedPlayer.displayName}");
+                MurderMisc.TargetBoomBoom();
             }
             catch (Exception ex)
             {
                 LogHandler.Log(LogHandler.Colors.Red, ex.ToString(), false, false);
             }
-        }
-        public override void OnDisable()
-        {
-             
-        }
-
-        public void OnUpdate()
-        {
-            while (true)
-            {
-                MurderMisc.TargetBoomBoom();
-            }
-        }
+        } 
     }
 }

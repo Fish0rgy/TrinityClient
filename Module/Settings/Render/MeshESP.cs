@@ -68,6 +68,11 @@ namespace Trinity.Module.Settings.Render
         }
         public void OnPlayerJoin(VRC.Player __0)
         {
+            if (__0 == PU.GetPlayer()) return;
+            if (PU.GetIsFriend(__0.prop_APIUser_0))
+                GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.yellow;
+            else
+                GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;
             foreach (Renderer renderer in __0._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>())
             {
                 HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(renderer, true);
@@ -81,13 +86,12 @@ namespace Trinity.Module.Settings.Render
                 for (int i = 0; i < PU.GetAllPlayers().Length; i++)
                 {
                     VRC.Player player = PU.GetAllPlayers()[i];
-                    if(player != PU.GetPlayer())
-                    {
-                        if (PU.GetIsFriend(player.prop_APIUser_0))
-                            GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.yellow;
-                        else
-                            GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;
-                    } 
+
+                    if (player == PU.GetPlayer()) return;
+                    if (PU.GetIsFriend(player.prop_APIUser_0))
+                        GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.yellow;
+                    else
+                        GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;
                     foreach (Renderer renderer in player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>())
                     {
                         HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(renderer, true);
