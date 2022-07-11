@@ -21,6 +21,10 @@ using Trinity.SDK.ButtonAPI.AVI_FAV;
 using VRC.SDKBase;
 using Trinity.Utilities;
 using Trinity.Module.Exploit.MiscExploits;
+using System.Linq;
+using WebSocketSharp;
+using Trinity.Sockets;
+using Trinity.Bot;
 
 namespace Trinity
 {
@@ -29,6 +33,7 @@ namespace Trinity
         public static Main Instance { get; set; }
 
         public Config Config { get; set; } = new Config();
+        public static WebSocket wse = new WebSocket("ws://127.0.0.1:9556/BasicWebsocketBehaviour", Array.Empty<string>());
         public Serpent QuickMenuStuff { get; set; }
         public QMNestedButton PlayerButton { get; set; }
         public QMNestedButton DynamicBonesButton { get; set; }
@@ -78,7 +83,21 @@ namespace Trinity
         public QMNestedButton MidnightButton { get; set; }
         public QMNestedButton JubstBSettings { get; set; }
         public QMNestedButton MagicTagSettings { get; set; }
-        public QMNestedButton udonexploitbutton { get; set; } 
+        public QMNestedButton udonexploitbutton { get; set; }
+
+        public static Action LastActionOnMainThread;
+
+        public static void HandleBotFunctions()
+        {
+            if (Trinity.Bot.Commands.Commands.OrbitTarget != null && PlayerExtensions.LocalVRCPlayer != null)
+            {
+                Physics.gravity = new Vector3(0f, 0f, 0f);
+                Trinity.Bot.Commands.Commands.alpha += Time.deltaTime * Trinity.Bot.Commands.Commands.OrbitSpeed;
+                PlayerExtensions.LocalPlayer.transform.position = new Vector3(Trinity.Bot.Commands.Commands.OrbitTarget.transform.position.x + Trinity.Bot.Commands.Commands.a * (float)Math.Cos((double)Trinity.Bot.Commands.Commands.alpha), Trinity.Bot.Commands.Commands.OrbitTarget.transform.position.y, Trinity.Bot.Commands.Commands.OrbitTarget.transform.position.z + Trinity.Bot.Commands.Commands.b * (float)Math.Sin((double)Trinity.Bot.Commands.Commands.alpha));
+            }
+        }
+
+        public static bool IsApplicationBot;
 
         public List<BaseModule> Modules { get; set; } = new List<BaseModule>();
         public BaseModule FlyModule = null;
@@ -113,11 +132,44 @@ namespace Trinity
         public static int VariancePing = 0;
         public static string fileVersion = "1.8.3.5";
         public override void OnGUI() { }
-         
-         
+        public static void HandleActionOnMainThread(Action action)
+        {
+            Main.LastActionOnMainThread = action;
+        }
+
+
         public override void OnApplicationStart() 
         {
-             
+            if (Environment.GetCommandLineArgs().Contains("--trinity-bot"))
+            {
+                Console.Clear();
+                LogHandler.Log(LogHandler.Colors.Yellow, @"
+                ████████╗██████╗░██╗███╗░░██╗██╗████████╗██╗░░░██╗  ██████╗░░█████╗░████████╗
+                ╚══██╔══╝██╔══██╗██║████╗░██║██║╚══██╔══╝╚██╗░██╔╝  ██╔══██╗██╔══██╗╚══██╔══╝
+                ░░░██║░░░██████╔╝██║██╔██╗██║██║░░░██║░░░░╚████╔╝░  ██████╦╝██║░░██║░░░██║░░░
+                ░░░██║░░░██╔══██╗██║██║╚████║██║░░░██║░░░░░╚██╔╝░░  ██╔══██╗██║░░██║░░░██║░░░
+                ░░░██║░░░██║░░██║██║██║░╚███║██║░░░██║░░░░░░██║░░░  ██████╦╝╚█████╔╝░░░██║░░░
+                ░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═╝░░╚══╝╚═╝░░░╚═╝░░░░░░╚═╝░░░  ╚═════╝░░╚════╝░░░░╚═╝░░░
+");
+                LogHandler.Log(LogHandler.Colors.Green, "Bot Client Started!");
+                IsApplicationBot = true;
+                wse.Connect();
+                LogHandler.Log(LogHandler.Colors.Green, "Connected to Server!");
+                wse.OnMessage += delegate (object s, MessageEventArgs e)
+                {
+                    LogHandler.Log(LogHandler.Colors.DarkBlue, "[Bot Client] Received " + e.Data.ToString());
+                    int num = e.Data.ToString().IndexOf(" ");
+                    string CMD = e.Data.ToString().Substring(0, num);
+                    string Parameters = e.Data.ToString().Substring(num + 1);
+                    Main.HandleActionOnMainThread(delegate
+                    {
+                        Trinity.Bot.Commands.Commands.Cmd[CMD](Parameters);
+                    });
+                };
+                return;
+            }
+            WebSocketServ.StartServer();
+            wse.Connect();
             Instance = new Main();
             Config.Instance = Config.Load();
             ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
@@ -134,7 +186,7 @@ namespace Trinity
         }
         public override void OnUpdate()
         {
-
+            Trinity.Bot.Commands.Commands.UpdateShit();
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
             {
                 BaseModule mod = Instance.FlyModule;

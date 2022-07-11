@@ -23,11 +23,7 @@ namespace Trinity.SDK
             File.WriteAllText("Trinity/Config2.json", value);
         }
         internal static Config Load()
-        {
-            //string fileName = Process.GetCurrentProcess().MainModule.FileName;
-            //int length = fileName.LastIndexOf('\\');
-            //Config.XpPfprL5Fn = fileName.Substring(0, length) + "\\" + Config.bJmcmpUa48() + "\\";
-            //Config.t5afLIB1A2 = Config.XpPfprL5Fn + "\\Config\\";
+        { 
 
             bool exist = !File.Exists("Trinity/Config2.json");
             Config contentresult;

@@ -477,7 +477,94 @@ namespace Trinity.SDK
             Main.Instance.MoveAndChillSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Movie&Chill+ Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.movieandchill));
         }
         public static void BotMenu(){
-            Main.Instance.Privatebotbutton = new QMNestedButton(Main.Instance.BotButton.menuTransform, "Local handler", QMButtonIcons.LoadSpriteFromFile(Serpent.PlayerIconPath));
+            Main.Instance.Privatebotbutton = new QMNestedButton(Main.Instance.BotButton.menuTransform, "App Bots", QMButtonIcons.LoadSpriteFromFile(Serpent.PlayerIconPath));
+            new QMSingleButton(Main.Instance.Privatebotbutton.menuTransform, "Login", "Login to bots", null, () =>
+            {
+                Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) =>
+                {
+                    for (int i = 1; i < int.Parse(str) + 1; i++)
+                    {
+                        Trinity.Bot.Commands.Commands.LoginBots(i);
+                    }
+                });
+
+                UIU.OpenKeyboardPopup("Bot Amount", "Enter Bot Amount...", keyboardAction);
+            });
+
+            new QMSingleButton(Main.Instance.Privatebotbutton.menuTransform, "Start", "Starts bots", null, () =>
+            {
+                Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) =>
+                {
+                    for (int i = 1; i < int.Parse(str) + 1; i++)
+                    {
+                        Trinity.Bot.Commands.Commands.StartBots(i);
+                    }
+                });
+
+                UIU.OpenKeyboardPopup("Bot Amount", "Enter Bot Amount...", keyboardAction);
+            });
+            new QMSingleButton(Main.Instance.Privatebotbutton.menuTransform, "Orbit Speed", "Changes the bots orbit speed", null, () =>
+                            {
+                                Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) =>
+                                {
+                                    Trinity.Bot.Commands.Commands.OrbitSpeed = int.Parse(str);
+                                });
+
+                                UIU.OpenKeyboardPopup("Speed - Max (10)", "Speed", keyboardAction);
+                            });
+
+            new QMToggleButton(Main.Instance.Privatebotbutton.menuTransform, "Orbit Me", "Orbits local user", (v) =>
+            { 
+                if (v)
+                {
+                    Main.wse.Send("OrbitUser " + APIUser.CurrentUser.id);
+                } else
+                {
+                    Main.wse.Send("OrbitUser   ");
+                }
+            });
+
+            new QMToggleButton(Main.Instance.Privatebotbutton.menuTransform, "Unmute/Mute","Mutes/Unmutes the bots", (v) =>
+            {
+                if (v)
+                {
+                    Main.wse.Send("Mute ");
+                }
+                else
+                {
+                    Main.wse.Send("Unmute ");
+                }
+            });
+
+
+            new QMToggleButton(Main.Instance.Privatebotbutton.menuTransform, "Loud Mic", "Toggles loud mic", (v) =>
+            {
+                if (v)
+                {
+                    Main.wse.Send("LoudMicON ");
+                }
+                else
+                {
+                    Main.wse.Send("LoudMicOFF ");
+                }
+            });
+
+            new QMSingleButton(Main.Instance.Privatebotbutton.menuTransform, "Join Me", "Joins local user's instance", null, () =>
+                 {
+                     Main.wse.Send("JoinWorld " + RoomManager.field_Internal_Static_ApiWorldInstance_0.id);
+                 });
+
+            QMNestedButton btnMenu4 = new QMNestedButton(Main.Instance.Privatebotbutton.menuTransform, "Audios", null);
+            string[] files = Directory.GetFiles(Environment.CurrentDirectory + "\\Trinity\\Audios\\");
+            string[] array = files;
+            for (int i = 0; i < array.Length; i++)
+            {
+                string fileEntry = array[i];
+                new QMSingleButton(btnMenu4.menuTransform, fileEntry.Replace(Environment.CurrentDirectory + "\\Trinity\\Audios\\", ""), "Plays the selected audio through bot uspeak", null, delegate ()
+                {
+                    Main.wse.Send("PlayAudio " + fileEntry);
+                });
+            }
         }
         public static void SettingsMenu(){
             Main.Instance.SettingsButtonpreformance = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Preformance", QMButtonIcons.LoadSpriteFromFile(Serpent.preformancePath));
