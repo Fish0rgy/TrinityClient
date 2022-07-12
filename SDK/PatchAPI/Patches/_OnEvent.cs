@@ -3,8 +3,11 @@ using ExitGames.Client.Photon;
 using HarmonyLib;
 using Photon.Realtime;
 using System.Collections.Generic;
+using Trinity.SDK.Photon;
+using ExitGames.Client.Photon;
 using System.Reflection;
 using VRC.SDKBase;
+using System;
 
 namespace Trinity.SDK.Patching.Patches
 {
@@ -34,6 +37,21 @@ namespace Trinity.SDK.Patching.Patches
         {
             if (__0 == null) { return false; }
             for (int i = 0; i < Main.Instance.OnEventEvents.Count; i++) { if (!Main.Instance.OnEventEvents[i].OnEvent(__0)) return false; }
+            if(Config.BotVoiceMimic == true)
+            {
+                while (true && __0.Code == 1)
+                {
+                    PhotonExtensions.OpRaiseEvent(1, __0.CustomData, new RaiseEventOptions() { field_Public_ReceiverGroup_0 = ReceiverGroup.Others, field_Public_EventCaching_0 = EventCaching.DoNotCache }, default);
+                    return true;
+                }
+            }
+            if(Config.BotMovementMimic == true)
+            {
+                if( __0.Code == 7)
+                {
+                    //still working on it
+                }
+            }
             return true;
         }
 

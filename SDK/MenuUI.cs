@@ -504,14 +504,14 @@ namespace Trinity.SDK
                 UIU.OpenKeyboardPopup("Bot Amount", "Enter Bot Amount...", keyboardAction);
             });
             new QMSingleButton(Main.Instance.Privatebotbutton.menuTransform, "Orbit Speed", "Changes the bots orbit speed", null, () =>
-                            {
-                                Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) =>
-                                {
-                                    Trinity.Bot.Commands.Commands.OrbitSpeed = int.Parse(str);
-                                });
+            {
+                Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) =>
+                {
+                    Trinity.Bot.Commands.Commands.OrbitSpeed = int.Parse(str);
+                });
 
-                                UIU.OpenKeyboardPopup("Speed - Max (10)", "Speed", keyboardAction);
-                            });
+                UIU.OpenKeyboardPopup("Speed - Max (10)", "Speed", keyboardAction);
+             });
 
             new QMToggleButton(Main.Instance.Privatebotbutton.menuTransform, "Orbit Me", "Orbits local user", (v) =>
             { 

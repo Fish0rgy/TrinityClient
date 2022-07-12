@@ -11,6 +11,7 @@ using VRC.Core;
 using VRC.SDKBase;
 using Trinity.SDK;
 using System.Collections;
+using Trinity.ApplicationBot;
 
 namespace Trinity.Bot.Commands;
 
@@ -70,94 +71,113 @@ public class Commands
 	}
 	public static Dictionary<string, Action<string>> Cmd = new Dictionary<string, Action<string>>
 	{
-	{
-		"ChangeAvatar",
-		delegate(string AvatarID)
 		{
-			//PlayerWrapper.ChangeAvatar(AvatarID);
-		}
-	},
-	{
-		"JoinWorld",
-		delegate(string Parameters)
-		{
-			Networking.GoToRoom(Parameters);
-			LogHandler.Log(LogHandler.Colors.DarkBlue, "Joining World: " + Parameters);
-		}
-	},
-	{
-		"OrbitUser",
-		delegate(string Parameters)
-		{
-			OrbitTarget = PlayerExtensions.GetPlayerByID(Parameters);
-		}
-	},
-	{
-		"Unmute",
-		delegate(string Parameters)
-		{
-			PlayerExtensions.Mute(false);
-		}
-	},
-		{
-			"PlayAudio", delegate(string audioname)
+			"ChangeAvatar",
+			delegate(string AvatarID)
 			{
-				byte[] audioarray = File.ReadAllBytes("Trinity/Audios/" + audioname);
+				//PlayerWrapper.ChangeAvatar(AvatarID);
 			}
 		},
-	{
-		"Mute",
-		delegate(string Parameters)
 		{
-			PlayerExtensions.Mute(true);
-		}
-	},
-	{
-		"EarrapeON",
-		delegate(string Parameters)
-		{
-			RapeThyEars();
-			e1toggle = true;
-		}
-	},
-	{
-		"EarrapeOFF",
-		delegate(string Parameters)
-		{
-			e1toggle = false;
-		}
-	},
-	{
-		"LoudMicON",
-		delegate(string bruh)
-		{
-			USpeaker.field_Internal_Static_Single_1 = float.MaxValue;
-			VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_USpeaker_0.field_Public_BitRate_0 = BitRate.BitRate_512k;
-		}
-	},
-	{
-		"LoudMicOFF",
-		delegate(string idk)
-		{
-			  USpeaker.field_Internal_Static_Single_1 = 1;
-			VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_USpeaker_0.field_Public_BitRate_0 = BitRate.BitRate_24K;
-		}
-	},
-	{
-		"StopBots",
-		delegate(string k)
-		{
-			Process.GetCurrentProcess().Kill();
-
-		}
+			"JoinWorld",
+			delegate(string Parameters)
+			{
+				Networking.GoToRoom(Parameters);
+				LogHandler.Log(LogHandler.Colors.DarkBlue, "Joining World: " + Parameters);
+			}
 		},
-	{
-		"GoHome",
-		delegate(string v)
 		{
-			string homeLocation = APIUser.CurrentUser.homeLocation;
-			Networking.GoToRoom(homeLocation);
+			"OrbitUser",
+			delegate(string Parameters)
+			{
+				OrbitTarget = PlayerExtensions.GetPlayerByID(Parameters);
+			}
+		},
+		{
+			"Unmute",
+			delegate(string Parameters)
+			{
+				PlayerExtensions.Mute(false);
+			}
+		},
+			{
+				"PlayAudio", 
+				delegate(string path)
+				{
+					//AudioClip clip = AudioClip.Create(path, 11025, 1, 8000, false);
+					//byte[] array = USpeak.USpeakAudioClipConverter.AudioClipToBytes(clip);
+					//byte[] ServerTime = BitConverter.GetBytes(VRC.SDKBase.Networking.GetServerTimeInMilliseconds());
+					//Buffer.BlockCopy(ServerTime, 0, array, 0, 4);
+					//PhotonExtensions.OpRaiseEvent(1, array, new Photon.Realtime.RaiseEventOptions() { field_Public_ReceiverGroup_0 = Photon.Realtime.ReceiverGroup.Others, field_Public_EventCaching_0 = Photon.Realtime.EventCaching.DoNotCache }, default);
+				}
+			},
+		{
+			"Mute",
+			delegate(string Parameters)
+			{
+				PlayerExtensions.Mute(true);
+			}
+		},
+		{
+			"EarrapeON",
+			delegate(string Parameters)
+			{
+				RapeThyEars();
+				e1toggle = true;
+			}
+		},
+		{
+			"EarrapeOFF",
+			delegate(string Parameters)
+			{
+				e1toggle = false;
+			}
+		},
+		{
+			"LoudMicON",
+			delegate(string bruh)
+			{
+				USpeaker.field_Internal_Static_Single_1 = float.MaxValue;
+				VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_USpeaker_0.field_Public_BitRate_0 = BitRate.BitRate_512k;
+			}
+		},
+		{
+			"LoudMicOFF",
+			delegate(string idk)
+			{
+				  USpeaker.field_Internal_Static_Single_1 = 1;
+				VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_USpeaker_0.field_Public_BitRate_0 = BitRate.BitRate_24K;
+			}
+		},
+		{
+			"StopBots",
+			delegate(string k)
+			{
+				Process.GetCurrentProcess().Kill();
+	
+			}
+		},
+		{
+			"GoHome",
+			delegate(string v)
+			{
+				string homeLocation = APIUser.CurrentUser.homeLocation;
+				Networking.GoToRoom(homeLocation);
+			}
+		},
+		{
+			"VoiceMimicPlayerON",
+			delegate
+			{
+				 Config.BotVoiceMimic = true;
+			}
+		},
+		{
+			"VoiceMimicPlayerOFF",
+			delegate
+			{
+				 Config.BotVoiceMimic = false;
+			}
 		}
-	}
-};
+	};
 }

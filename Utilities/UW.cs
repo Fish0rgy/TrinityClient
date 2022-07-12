@@ -13,7 +13,7 @@ namespace Trinity.SDK
 {
     public static class UW
     {
-        internal static void udonsend(string udonEvent, EventTarget targetnetwork)
+        public static void udonsend(string udonEvent, EventTarget targetnetwork)
         {
             switch (targetnetwork)
             {

@@ -26,7 +26,7 @@ namespace Trinity.Module.TargetMenu
 
         public bool OnEvent(EventData eventData)
         {
-          while(true && eventData.Code == 1)
+            while (true && eventData.Code == 1)
             {
                 PhotonExtensions.OpRaiseEvent(1, eventData.CustomData, new Photon.Realtime.RaiseEventOptions() { field_Public_ReceiverGroup_0 = Photon.Realtime.ReceiverGroup.Others, field_Public_EventCaching_0 = Photon.Realtime.EventCaching.DoNotCache }, default);
                 return true;

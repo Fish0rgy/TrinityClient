@@ -311,6 +311,8 @@ namespace Trinity.SDK
         public static float PingSpoof3 = 2f;
         public static float PingSpoof4 = 2f;
         internal static bool AntiE1;
+        internal static bool BotVoiceMimic;
+        internal static bool BotMovementMimic;
 
         public static bool Munchen { get; internal set; }
     }
