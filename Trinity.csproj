@@ -576,8 +576,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationBot\Commands.cs" />
-    <Compile Include="ApplicationBot\PlayerExtensions.cs" />
     <Compile Include="Events\OnAssetBundleLoadEvent.cs" />
     <Compile Include="Events\OnAvatarLoadedEvent.cs" />
     <Compile Include="Events\OnEventEvent.cs" />
@@ -925,7 +923,6 @@
     <Compile Include="SDK\PhotonAPI\Serialization.cs" />
     <Compile Include="SDK\TempUploadContainer.cs" />
     <Compile Include="SDK\WSK.cs" />
-    <Compile Include="Sockets\WebSocketServer.cs" />
     <Compile Include="Utilities\PI.cs" />
     <Compile Include="Utilities\PU.cs" />
     <Compile Include="SDK\Serpent.cs" />
