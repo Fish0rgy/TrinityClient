@@ -27,7 +27,7 @@ namespace Trinity.SDK
             Console.Title = $"Trinity || v{Main.fileVersion}";
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("========================================================================================================================");
+            Console.WriteLine("======================================================================================================================");
             Console.WriteLine("                                                                                                                        ");
             Console.WriteLine("                                                                                                                        ");
             Console.WriteLine("                                  ████████╗██████╗ ██╗███╗   ██╗██╗████████╗██╗   ██╗                                   ");
@@ -38,7 +38,7 @@ namespace Trinity.SDK
             Console.WriteLine("                                     ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝                                      ");
             Console.WriteLine("                                                                                                                        ");
             Console.WriteLine("                                                                                                                        ");
-            Console.WriteLine("========================================================================================================================\n");
+            Console.WriteLine("======================================================================================================================\n");
             Console.ForegroundColor = ConsoleColor.White;
         }
         public static void LogDebug(string message)

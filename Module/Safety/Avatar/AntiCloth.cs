@@ -50,7 +50,7 @@ namespace Trinity.Module.Safety.Avatar
                         continue;
                     }
 
-                    postProcessReport = MunchenAntiCrash.ProcessCloth(clothes[i], postProcessReport.nukedCloths, postProcessReport.currentVertexCount);
+                    postProcessReport = MunchenAntiCrash.ProcessCloth(clothes[i], postProcessReport);
                 } 
                 if (postProcessReport.nukedCloths > 0)
                 { 

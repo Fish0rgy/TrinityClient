@@ -11,7 +11,7 @@ namespace Trinity.Module.Player
 {
     class GlobalBones : BaseModule
     {
-        public GlobalBones() : base("Dynamic Bones", "Bones For Everyone", Main.Instance.DynamicBonesButton, null, true, false) { }
+        public GlobalBones() : base("Dynamic Bones", "Bones For Everyone", Main.Instance.DynamicBonesButton, null, true, true) { }
 
         public override void OnEnable()
         {

@@ -15,7 +15,8 @@ namespace Trinity.Module.Settings.Theme.Buttons
     internal class ButtonColor : BaseModule, OnUpdateEvent
     {
         public ButtonColor() : base("Buttons\nColor", "Enable Any Color Of Buttons Buttons", Main.Instance.SettingsButtonTheme, QMButtonIcons.LoadSpriteFromFile(Serpent.ThemePath), false, false) { } 
-        public Color secondary; 
+        public Color buttoncolor;
+        public Color textcolor;
 
 
         public override void OnEnable()
@@ -27,41 +28,62 @@ namespace Trinity.Module.Settings.Theme.Buttons
                 {
                     case "red":
                         {
-                            secondary = Color.red;
+                            buttoncolor = Color.red;
+                            textcolor = Color.white;
                         }
                         break;
                     case "blue":
                         {
-                            secondary = Color.blue;
+                            buttoncolor = Color.blue;
+                            textcolor = Color.white;
                         }
                         break;
                     case "cyan":
                         {
-                            secondary = Color.cyan;
+                            buttoncolor = Color.cyan;
+                            textcolor = Color.white;
                         }
                         break;
                     case "green":
                         {
-                            secondary = Color.green;
+                            buttoncolor = Color.green;
+                            textcolor = Color.white;
                         }
                         break;
                     case "magenta":
                         {
-                            secondary = Color.magenta;
+                            buttoncolor = Color.magenta;
+                            textcolor = Color.white;
                         }
                         break;
                     case "yellow":
                         {
-                            secondary = Color.yellow;
+                            buttoncolor = Color.yellow;
+                            textcolor = Color.white;
+                        }
+                        break;
+                    case "black":
+                        {
+                            buttoncolor = Color.black;
+                            textcolor = Color.white;
+                        }
+                        break;
+                    case "white":
+                        {
+                            buttoncolor = Color.white;
+                            textcolor = Color.black;
                         }
                         break;
                     default:
-                        secondary = Color.white;
-                        break;
-                        UIU.ChangeTextColor(secondary);
-                        UIU.ChangeButtonColor(secondary);
-                        MenuUI.Log($"THEME: <color=green>Set Color To {str}</color>");
-                }
+                        {
+                            buttoncolor = Color.white;
+                            textcolor = Color.black;
+                        } 
+                        break; 
+                } 
+                UIU.ChangeTextColor(textcolor);
+                UIU.ChangeButtonColor(buttoncolor);
+                MenuUI.Log($"THEME: <color=green>Set Color To {str}</color>");
             });
 
             UIU.OpenKeyboardPopup("Set Button Color", "red,blue,cyan,green,magenta,yellow", keyboardAction);

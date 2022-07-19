@@ -8,7 +8,7 @@ namespace Trinity.Module.Settings.Preformance
 {
     class HideChairs : BaseModule
     {
-        public HideChairs() : base("Hide Chairs", "Hides Chairs local", Main.Instance.SettingsButtonpreformance, null, true, false)
+        public HideChairs() : base("Hide Chairs", "Hides Chairs local", Main.Instance.SettingsButtonpreformance, null, true, true)
         {
         }
 

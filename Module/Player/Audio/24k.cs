@@ -10,7 +10,7 @@ namespace Trinity.Module.Player.Audio
 {
     class _24k : BaseModule
     {
-        public _24k() : base("Default mic", "24k BitRate", Main.Instance.AudioButton, null, true, false) { }
+        public _24k() : base("Default mic", "24k BitRate", Main.Instance.AudioButton, null, true, true) { }
 
         public override void OnEnable()
         {

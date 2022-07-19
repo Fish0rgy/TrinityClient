@@ -11,7 +11,7 @@ namespace Trinity.Module.Settings.Render
 {
     class CapsuleEsp : BaseModule, OnPlayerJoinEvent, OnUpdateEvent
     {
-        public CapsuleEsp() : base("Player ESP", "See Players n shit", Main.Instance.SettingsButtonrender, null, true, false) { }
+        public CapsuleEsp() : base("Player ESP", "See Players n shit", Main.Instance.SettingsButtonrender, null, true, true) { }
         public override void OnEnable()
         {
             MenuUI.Log("ESP: <color=green>Player ESP On</color>");

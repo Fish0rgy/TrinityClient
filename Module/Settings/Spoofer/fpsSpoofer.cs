@@ -11,18 +11,14 @@ namespace Trinity.Module.Settings.Spoofer
 {
     internal class FPSSpoofer : BaseModule 
     { 
-        public FPSSpoofer() : base("FPS Spoof", "Spoofes FPS to 51", Main.Instance.SettingsButtonspoofer, null, true)
+        public FPSSpoofer() : base("FPS Spoof", "Spoofes FPS to 51", Main.Instance.SettingsButtonspoofer, null, true, true)
         {
              
         }
         public override void OnEnable()
         {
             Config.SpoofFps = true;
-            Config.FPSSpoof = 0;
-            Config.FPSSpoof1 = -12340;
-            Config.FPSSpoof2 = 20232;
-            Config.FPSSpoof3 = -10;
-            Config.FPSSpoof4 = 300;
+            Config.FPSSpoof = 0; 
         }
         public override void OnDisable()
         {

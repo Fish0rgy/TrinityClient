@@ -8,7 +8,7 @@ namespace Trinity.Module.Settings.Render
 {
     class TriggerESP : BaseModule
     {
-        public TriggerESP() : base("Trigger ESP", "World Trigger ESP", Main.Instance.SettingsButtonrender, null, true, false) { }
+        public TriggerESP() : base("Trigger ESP", "World Trigger ESP", Main.Instance.SettingsButtonrender, null, true, true) { }
 
         public override void OnEnable()
         {

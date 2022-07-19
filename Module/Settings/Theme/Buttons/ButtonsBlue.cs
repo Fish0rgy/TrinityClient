@@ -27,24 +27,10 @@ namespace Trinity.Module.Settings.Theme
         public override void OnDisable()
         {
             Main.Instance.OnUpdateEvents.Remove(this);
-        }
-        public async Task setUITheme(int WaitToUpdate)
-        {
-
-            for (int i = 0; i < WaitToUpdate; i++)
-            {
-                Trinity.Utilities.UIU.SetColor(Color.black, Color.blue);
-            }
-
-        }
+        } 
 
         public void OnUpdate()
-        {
-            try
-            {
-                setUITheme(1).Start();
-            }
-            catch (Exception) { }
+        { 
         }
     }
 }

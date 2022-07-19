@@ -11,7 +11,7 @@ using VRC.Udon;
 
 namespace Trinity.SDK
 {
-    class Keybinds
+    class OldKeyBinds
     {
         public static IEnumerator udonNukeKeyBind()
         {

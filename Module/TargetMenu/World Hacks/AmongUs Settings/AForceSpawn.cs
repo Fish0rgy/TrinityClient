@@ -22,7 +22,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.AmongUs_Settings
             {
                 APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
                 LogHandler.Log(LogHandler.Colors.Green, $"{SelectedPlayer.displayName} Forcefully Spawned", false, false);
-                LogHandler.LogDebug($"{SelectedPlayer.displayName} Forcefully Spawned"); 
+                LogHandler.LogDebug($"{SelectedPlayer.displayName} Forcefully Spawned");
                 UW.udonsend("SyncAssignB",EventTarget.Targeted);
             }
             catch (Exception ex)

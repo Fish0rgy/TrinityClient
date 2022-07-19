@@ -11,7 +11,7 @@ namespace Trinity.Module.Safety.Photon
 {
     internal class AntiLockInstance : BaseModule, OnUpdateEvent
     {
-        public AntiLockInstance() : base("Anti Lock \nInstance", "Anti Lock Instanc", Main.Instance.Networkbutton, null, true, true)
+        public AntiLockInstance() : base("Anti Lock Instance", "Anti Lock Instanc", Main.Instance.Networkbutton, null, true, true)
         {
         }
 

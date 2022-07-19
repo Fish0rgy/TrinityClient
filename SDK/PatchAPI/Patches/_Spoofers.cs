@@ -10,11 +10,16 @@ using UnhollowerBaseLib;
 using UnityEngine;
 using AccessTools = HarmonyLib.AccessTools;
 using HarmonyMethod = HarmonyLib.HarmonyMethod;
+using System.Runtime.InteropServices;
 
 namespace Trinity.SDK.Patching.Patches
 {
     public static class _Spoofers
     {
+        [DllImport("kernel32.dll", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
+        internal static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern IntPtr LoadLibrary(string lpFileName);
         public static string newHWID = string.Empty;
         public static void InitSpoofs()
         {
@@ -62,7 +67,41 @@ namespace Trinity.SDK.Patching.Patches
 
         public unsafe static void SafetyPatch()
         {
-
+            IntPtr intPtr = IntPtr.Zero;
+            try {
+                intPtr = LoadLibrary(MelonUtils.GetGameDataDirectory() + "\\Plugins\\x86_64\\steam_api64.dll");
+            }
+            catch (Exception e) { 
+                LogHandler.Log(LogHandler.Colors.Red,$"Cant Spoof Steam",false,false);
+            }
+            if(intPtr == IntPtr.Zero)
+                LogHandler.Log(LogHandler.Colors.Red, $"Cant Spoof Steam", false, false);
+            IntPtr procAddress = GetProcAddress(intPtr, "SteamAPI_Init");
+            IntPtr procAddress2 = GetProcAddress(intPtr, "SteamAPI_RestartAppIfNecessary");
+            IntPtr procAddress3 = GetProcAddress(intPtr, "SteamAPI_GetHSteamUser");
+            IntPtr procAddress4 = GetProcAddress(intPtr, "SteamAPI_RegisterCallback");
+            IntPtr procAddress5 = GetProcAddress(intPtr, "SteamAPI_UnregisterCallback");
+            IntPtr procAddress6 = GetProcAddress(intPtr, "SteamAPI_RunCallbacks");
+            IntPtr procAddress7 = GetProcAddress(intPtr, "SteamAPI_Shutdown");
+            try
+            {
+                if (Config.SpoofSteam)
+                {
+                    MelonUtils.NativeHookAttach((IntPtr)((void*)(&procAddress)), AccessTools.Method(typeof(_Spoofers), nameof(SteamSpoof), null, null).MethodHandle.GetFunctionPointer());
+                    MelonUtils.NativeHookAttach((IntPtr)((void*)(&procAddress2)), AccessTools.Method(typeof(_Spoofers), nameof(SteamSpoof), null, null).MethodHandle.GetFunctionPointer());
+                    MelonUtils.NativeHookAttach((IntPtr)((void*)(&procAddress3)), AccessTools.Method(typeof(_Spoofers), nameof(SteamSpoof), null, null).MethodHandle.GetFunctionPointer());
+                    MelonUtils.NativeHookAttach((IntPtr)((void*)(&procAddress4)), AccessTools.Method(typeof(_Spoofers), nameof(SteamSpoof), null, null).MethodHandle.GetFunctionPointer());
+                    MelonUtils.NativeHookAttach((IntPtr)((void*)(&procAddress5)), AccessTools.Method(typeof(_Spoofers), nameof(SteamSpoof), null, null).MethodHandle.GetFunctionPointer());
+                    MelonUtils.NativeHookAttach((IntPtr)((void*)(&procAddress6)), AccessTools.Method(typeof(_Spoofers), nameof(SteamSpoof), null, null).MethodHandle.GetFunctionPointer());
+                    MelonUtils.NativeHookAttach((IntPtr)((void*)(&procAddress7)), AccessTools.Method(typeof(_Spoofers), nameof(SteamSpoof), null, null).MethodHandle.GetFunctionPointer());
+                    MenuUI.steampatch = true;
+                } 
+            }
+            catch
+            {
+                MenuUI.steampatch = false;
+                LogHandler.Log(LogHandler.Colors.Red, $"Cant Spoof Steam", false, false);
+            }
             //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] PC Name New: {SystemInfo.deviceName}", false, false);
             //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] Model New: {SystemInfo.deviceModel}", false, false);
             //LogHandler.Log(LogHandler.Colors.Green, $"[Spoofer] PBU New: {SystemInfo.graphicsDeviceName}", false, false);
@@ -94,6 +133,10 @@ namespace Trinity.SDK.Patching.Patches
 
         [Obfuscation(Exclude = true)]
         private static bool VoidPatch()
+        {
+            return false;
+        }
+        private static bool SteamSpoof()
         {
             return false;
         }

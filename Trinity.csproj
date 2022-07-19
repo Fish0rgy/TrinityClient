@@ -629,10 +629,12 @@
     <Compile Include="Module\Settings\Logging\ModerationLogger.cs" />
     <Compile Include="Module\Settings\Logging\SteamID.cs" />
     <Compile Include="Module\Settings\Preformance\DeboBootyHole.cs" />
+    <Compile Include="Module\Settings\Preformance\CoolKeyBinds.cs" />
     <Compile Include="Module\Settings\Preformance\ReLogin.cs" />
     <Compile Include="Module\Settings\Preformance\RestartAndRejoin.cs" />
     <Compile Include="Module\Settings\Render\MeshESP.cs" />
     <Compile Include="Module\Settings\Spoofer\fpsSpoofer.cs" />
+    <Compile Include="Module\Settings\Spoofer\NoSteam.cs" />
     <Compile Include="Module\Settings\Spoofer\SetFPSpoof.cs" />
     <Compile Include="Module\Settings\Spoofer\SetPingSpoof.cs" />
     <Compile Include="Module\Settings\Theme\AlienTheme.cs" />
@@ -868,8 +870,9 @@
     <Compile Include="SDK\ButtonAPI\QMToggleButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMPanel.cs" />
     <Compile Include="SDK\ButtonAPI\QMButtonIcons.cs" />
+    <Compile Include="SDK\ButtonAPI\VRCButtonAPI.cs" />
     <Compile Include="SDK\Config.cs" />
-    <Compile Include="SDK\Keybinds.cs" />
+    <Compile Include="SDK\OldKeyBinds.cs" />
     <Compile Include="SDK\LogHandler.cs" />
     <Compile Include="SDK\MenuUI.cs" />
     <Compile Include="SDK\Misc.cs" />

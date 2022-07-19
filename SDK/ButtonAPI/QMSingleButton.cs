@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;
+using System.Linq;
 
 namespace Trinity.SDK.ButtonAPI
 {
@@ -28,24 +29,22 @@ namespace Trinity.SDK.ButtonAPI
             singleButton.transform.Find("Background").GetComponent<Image>().color = Color.black;
             singleButton.transform.Find("Badge_MMJump").gameObject.active = true; 
             if (Icon != null)
-            {
                 icon.sprite = Icon;
-
-            }
             else
-            {
-                UnityEngine.Object.Destroy(singleButton.transform.Find("Icon").GetComponent<Image>());
-            }
-            singleButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = toolTip;
+                UnityEngine.Object.Destroy(singleButton.transform.Find("Icon").GetComponent<Image>()); 
+            singleButton.GetComponentsInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true).ToList().ForEach(s => s.field_Public_String_0 = toolTip);
             mainButton = singleButton.GetComponent<Button>();
             mainButton.onClick = new Button.ButtonClickedEvent();
             mainButton.onClick.AddListener(action);
-            badge.color = new(1f, 0.8234f, 0f, 1f);
-            icon.color = new(1f, 0.8234f, 0f, 1f);
-            textCom.color = new(0.7189f, 0.5634f, 0f, 1f);
-            badge.gameObject.GetComponent<StyleElement>().enabled = false;
-            icon.gameObject.GetComponent<StyleElement>().enabled = false;
-            textCom.gameObject.GetComponent<StyleElement>().enabled = false;
+            if (!Main.CompLayer)
+            {
+                badge.color = new(1f, 0.8234f, 0f, 1f);
+                icon.color = new(1f, 0.8234f, 0f, 1f);
+                textCom.color = new(0.7189f, 0.5634f, 0f, 1f);
+                badge.gameObject.GetComponent<StyleElement>().enabled = false;
+                icon.gameObject.GetComponent<StyleElement>().enabled = false;
+                textCom.gameObject.GetComponent<StyleElement>().enabled = false;
+            }
             singleButton.SetActive(true);
         } 
     }

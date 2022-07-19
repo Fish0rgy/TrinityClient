@@ -15,21 +15,17 @@ namespace Trinity.SDK
         public static Config Instance;
         public Config()
         {
-         
+
         }
         internal void SaveConfig()
         {
             string value = JsonConvert.SerializeObject(this, (Formatting)1);
-            File.WriteAllText("Trinity/Config2.json", value);
+            File.WriteAllText("Trinity/Config.json", value);
         }
         internal static Config Load()
         {
-            //string fileName = Process.GetCurrentProcess().MainModule.FileName;
-            //int length = fileName.LastIndexOf('\\');
-            //Config.XpPfprL5Fn = fileName.Substring(0, length) + "\\" + Config.bJmcmpUa48() + "\\";
-            //Config.t5afLIB1A2 = Config.XpPfprL5Fn + "\\Config\\";
 
-            bool exist = !File.Exists("Trinity/Config2.json");
+            bool exist = !File.Exists("Trinity/Config.json");
             Config contentresult;
             if (exist)
             {
@@ -37,14 +33,14 @@ namespace Trinity.SDK
             }
             else
             {
-                Config.Instance = JsonConvert.DeserializeObject<Config>(File.ReadAllText("Trinity/Config2.json"));
+                Config.Instance = JsonConvert.DeserializeObject<Config>(File.ReadAllText("Trinity/Config.json"));
                 contentresult = Config.Instance;
             }
             return contentresult;
         }
         public int getConfigInt(string key, int defaultVal)
         {
-         
+
             if (File.ReadAllText("Trinity/Config.json").Contains(key))
             {
                 string[] arrLine = File.ReadAllLines("Trinity/Config.json");
@@ -64,7 +60,6 @@ namespace Trinity.SDK
                 return defaultVal;
             }
         }
-
         public void setConfigBool(string key, bool state)
         {
             string[] arrLine = File.ReadAllLines("Trinity/Config.json");
@@ -79,11 +74,11 @@ namespace Trinity.SDK
             File.WriteAllLines("Trinity/Config.json", arrLine);
         }
 
-        public bool getConfigBool(string key)
+        public static bool getConfigBool(string key)
         {
-            if (File.ReadAllText("Trinity/Config2.json").Contains(key))
+            if (File.ReadAllText("Trinity/Config.json").Contains(key))
             {
-                string[] arrLine = File.ReadAllLines("Trinity/Config2.json");
+                string[] arrLine = File.ReadAllLines("Trinity/Config.json");
                 for (int i = 0; i < arrLine.Length; i++)
                 {
                     if (arrLine[i].Contains(key))
@@ -99,7 +94,7 @@ namespace Trinity.SDK
             }
             else
             {
-               
+
                 File.AppendAllText("Trinity/Config.json", "\n" + key + "=False");
                 return false;
             }
@@ -145,7 +140,7 @@ namespace Trinity.SDK
             "outside",
             "mill"
         };
-        private string[] shaderList = new string[]
+        public static string[] shaderList = new string[]
         {
             "dbtc",
             "crash",
@@ -288,7 +283,7 @@ namespace Trinity.SDK
             "Magic3000/RGB-Glitch",
             "NEK0/Screen/Fade Screen v1",
             "VoidyShaders/Cave"
-        }; 
+        };
         public bool GB_FeetColliders = true;
         public bool GB_HandColliders = true;
         public bool GB_HipBones = true;
@@ -296,7 +291,7 @@ namespace Trinity.SDK
         public bool GB_HeadBones = true;
         public bool GB_Friends = true;
         public bool GB_Spine = false;
-        public bool GB_line = false;
+        public static bool GB_line = false;
         public static bool ItemOrbit = false;
         public static bool LowBotFPS = true;
         public static List<DynamicBone> currentWorldDynamicBones = new List<DynamicBone>();
@@ -305,16 +300,11 @@ namespace Trinity.SDK
         public static bool SpoofPing;
         public static bool SpoofFps;
         public static float FPSSpoof = 144f;
-        public static float FPSSpoof1 = 144f;
-        public static float FPSSpoof2 = 144f;
-        public static float FPSSpoof3 = 144f;
-        public static float FPSSpoof4 = 144f;
         public static float PingSpoof = 2f;
-        public static float PingSpoof1 = 2f;
-        public static float PingSpoof2 = 2f;
-        public static float PingSpoof3 = 2f;
-        public static float PingSpoof4 = 2f;
         internal static bool AntiE1;
+        internal static bool BotVoiceMimic;
+        internal static bool BotMovementMimic;
+        internal static bool SpoofSteam = false;
 
         public static bool Munchen { get; internal set; }
     }

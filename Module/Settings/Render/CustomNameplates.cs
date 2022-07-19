@@ -18,7 +18,7 @@ namespace Trinity.Module.Settings.Render
         public static List<string> Arctic = new List<string>();
         public static List<string> Serpents = new List<string>();
 
-        public CustomNameplates() : base("Nameplates", "Cool Kids Nameplate", Main.Instance.SettingsButtonrender, null, true, false)
+        public CustomNameplates() : base("Nameplates", "Cool Kids Nameplate", Main.Instance.SettingsButtonrender, null, true, true)
         {
         }
 

@@ -44,7 +44,7 @@ namespace Trinity.Module.Safety.Avatar
 
                 int nukedAudioSources = 0;
 
-                for (int i = MunchenAntiCrash.maxAudio; i < audioSources.Count; i++)
+                for (int i = MunchenAntiCrash.MaxAudioSources; i < audioSources.Count; i++)
                 {
                     if (audioSources[i] == null)
                     {

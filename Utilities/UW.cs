@@ -14,51 +14,45 @@ namespace Trinity.SDK
     public static class UW
     {
         internal static void udonsend(string udonEvent, EventTarget targetnetwork)
-        {
+        { 
+            //hacker = automating god
             switch (targetnetwork)
             {
                 case EventTarget.Targeted:
                     {
-                        for (int j = 0; j < WorldWrapper.udonBehaviours.Length; j++)
+                        
+                        WorldWrapper.udonBehaviours.ToList().ForEach(UdonObject =>
                         {
-                            foreach (string name in WorldWrapper.udonBehaviours[j]._eventTable.Keys)
+                            if (UdonObject._eventTable.ContainsKey(udonEvent))
                             {
-                                if (name == udonEvent)
-                                {
-                                    UW.SetEventOwner(WorldWrapper.udonBehaviours[j].gameObject, PU.SelectedVRCPlayer());
-                                    WorldWrapper.udonBehaviours[j].SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, name);
-                                }
+                                UW.SetEventOwner(UdonObject.gameObject, PU.SelectedVRCPlayer());
+                                UdonObject.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, udonEvent);
                             }
-                        }
+                        });
                     }
                     break;
                 case EventTarget.Everyone:
                     {
-                        for (int j = 0; j < WorldWrapper.udonBehaviours.Length; j++)
+                        WorldWrapper.udonBehaviours.ToList().ForEach(UdonObject =>
                         {
-                            foreach (string name in WorldWrapper.udonBehaviours[j]._eventTable.Keys)
+                            if (UdonObject._eventTable.ContainsKey(udonEvent))
                             {
-                                if (name == udonEvent)
-                                {
-                                    WorldWrapper.udonBehaviours[j].SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, name);
-                                }
+                                UdonObject.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, udonEvent);
                             }
-                        }
+                        });
+                             
                     }
                     break;
                 case EventTarget.Local:
                     {
-                        for (int j = 0; j < WorldWrapper.udonBehaviours.Length; j++)
+                        WorldWrapper.udonBehaviours.ToList().ForEach(UdonObject =>
                         {
-                            foreach (string name in WorldWrapper.udonBehaviours[j]._eventTable.Keys)
+                            if (UdonObject._eventTable.ContainsKey(udonEvent))
                             {
-                                if (name == udonEvent)
-                                {
-                                    UW.SetEventOwner(WorldWrapper.udonBehaviours[j].gameObject, PU.GetPlayer());
-                                    WorldWrapper.udonBehaviours[j].SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, name);
-                                }
+                                UW.SetEventOwner(UdonObject.gameObject, PU.GetPlayer());
+                                UdonObject.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, udonEvent);
                             }
-                        }
+                        });
                     }
                     break;
             }
@@ -109,74 +103,70 @@ namespace Trinity.SDK
             {
                 case EventTarget.Everyone:
                     {
-                        GameObject[] gameobjects = Resources.FindObjectsOfTypeAll<GameObject>();
-                        for (int i = 0; i < gameobjects.Length; i++)
+                         
+                        Resources.FindObjectsOfTypeAll<GameObject>().ToList().ForEach(obj =>
                         {
-                            if (gameobjects[i].gameObject.name.Contains(objectName))
+                            if (obj.name.Contains(objectName))
                             {
-                                GameObject RoomObject = gameobjects[i].gameObject.TryCast<GameObject>();
-                                UdonBehaviour PrivateRoom = gameobjects[i].transform.gameObject.GetComponentInChildren<UdonBehaviour>(RoomObject);
+                                GameObject RoomObject = obj.gameObject.TryCast<GameObject>();
+                                UdonBehaviour PrivateRoom = obj.transform.gameObject.GetComponentInChildren<UdonBehaviour>(RoomObject);
                                 PrivateRoom.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, udonEvent);
                             }
-                        }
+                        });  
                     }
                     break;
                 case EventTarget.Targeted:
                     {
-                        GameObject[] gameobjects = Resources.FindObjectsOfTypeAll<GameObject>();
-                        for (int i = 0; i < gameobjects.Length; i++)
+                        Resources.FindObjectsOfTypeAll<GameObject>().ToList().ForEach(obj =>
                         {
-                            if (gameobjects[i].gameObject.name.Contains(objectName))
+                            if (obj.name.Contains(objectName))
                             {
-                                UW.SetEventOwner(gameobjects[i].gameObject, PU.SelectedVRCPlayer());
-                                GameObject RoomObject = gameobjects[i].gameObject.TryCast<GameObject>();
-                                UdonBehaviour PrivateRoom = gameobjects[i].transform.gameObject.GetComponentInChildren<UdonBehaviour>(RoomObject);
+                                UW.SetEventOwner(obj.gameObject, PU.SelectedVRCPlayer());
+                                GameObject RoomObject = obj.gameObject.TryCast<GameObject>();
+                                UdonBehaviour PrivateRoom = obj.transform.gameObject.GetComponentInChildren<UdonBehaviour>(RoomObject);
                                 PrivateRoom.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, udonEvent);
                             }
-                        }
+                        }); 
                     }
                     break;
                 case EventTarget.Local:
                     {
-                        GameObject[] gameobjects = Resources.FindObjectsOfTypeAll<GameObject>();
-                        for (int i = 0; i < gameobjects.Length; i++)
+                        Resources.FindObjectsOfTypeAll<GameObject>().ToList().ForEach(obj =>
                         {
-                            if (gameobjects[i].gameObject.name.Contains(objectName))
+                            if (obj.name.Contains(objectName))
                             {
-                                UW.SetEventOwner(gameobjects[i].gameObject, PU.GetPlayer());
-                                GameObject RoomObject = gameobjects[i].gameObject.TryCast<GameObject>();
-                                UdonBehaviour PrivateRoom = gameobjects[i].transform.gameObject.GetComponentInChildren<UdonBehaviour>(RoomObject);
+                                UW.SetEventOwner(obj.gameObject, PU.GetPlayer());
+                                GameObject RoomObject = obj.gameObject.TryCast<GameObject>();
+                                UdonBehaviour PrivateRoom = obj.transform.gameObject.GetComponentInChildren<UdonBehaviour>(RoomObject);
                                 PrivateRoom.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, udonEvent);
                             }
-                        }
+                        }); 
                     }
                     break;
             }
         }
         public static void TargetedEvent(string udonevent, VRCPlayer player)
         {
-            for (int j = 0; j < WorldWrapper.udonBehaviours.Length; j++)
+            WorldWrapper.udonBehaviours.ToList().ForEach(UdonObject =>
             {
-                foreach (string name in WorldWrapper.udonBehaviours[j]._eventTable.Keys)
+                if (UdonObject._eventTable.ContainsKey(udonevent))
                 {
-                    if (name == udonevent)
-                    {
-                        UW.SetEventOwner(WorldWrapper.udonBehaviours[j].gameObject, player.prop_Player_0);
-                        WorldWrapper.udonBehaviours[j].SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, name);
-                    }
+                    UW.SetEventOwner(UdonObject.gameObject, player.prop_Player_0);
+                    UdonObject.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, udonevent);
                 }
-            }
+            }); 
         }
         public static VRC.Player GrabOwner(this GameObject gameObject)
         {
-            foreach (VRC.Player player in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0)
+            VRC.Player gay = null;
+            PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray().ToList().ForEach(player =>
             {
                 if (player.field_Private_VRCPlayerApi_0.IsOwner(gameObject))
                 {
-                    return player;
+                    gay =  player;
                 }
-            }
-            return null;
+            });
+            return gay; 
         }
         public static void SetEventOwner(this GameObject gameObject, VRC.Player player)
         {

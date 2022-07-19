@@ -21,13 +21,14 @@ using Trinity.SDK.ButtonAPI.AVI_FAV;
 using VRC.SDKBase;
 using Trinity.Utilities;
 using Trinity.Module.Exploit.MiscExploits;
+using System.Linq;
 
 namespace Trinity
 {
     public class Main : MelonMod
     {
         public static Main Instance { get; set; }
-
+        public static bool CompLayer { get; set; }
         public Config Config { get; set; } = new Config();
         public Serpent QuickMenuStuff { get; set; }
         public QMNestedButton PlayerButton { get; set; }
@@ -83,6 +84,8 @@ namespace Trinity
         public List<BaseModule> Modules { get; set; } = new List<BaseModule>();
         public BaseModule FlyModule = null;
         public BaseModule SpeedModule = null;
+        public BaseModule EspModule = null;
+        public BaseModule LoudMicModule = null;
         //Item Orbit
         private static VRC_Pickup[] cachedItemPickups;
         private static GameObject centerItemOrbit;
@@ -111,37 +114,31 @@ namespace Trinity
 
         public static float VarianceFPS = 0f;
         public static int VariancePing = 0;
-        public static string fileVersion = "1.8.3.5";
+        public static string fileVersion = "1.8.4.0";
         public override void OnGUI() { }
          
          
-        public override void OnApplicationStart() 
+        public override void OnApplicationStart()
         {
-             
-            Instance = new Main();
-            Config.Instance = Config.Load();
+            SecurityCheck.CheckFile();
+            SecurityCheck.CheckSteam();
+            Instance = new Main(); 
             ClassInjector.RegisterTypeInIl2Cpp<CustomNameplate>();
             LogHandler.DisplayLogo();
             SecurityCheck.CheckUpdate();
             Directory.CreateDirectory("Trinity\\LoadingScreenMusic");
             MelonCoroutines.Start(Misc.LoadingMusic());
             PU.AddClientUsers();
+            if (Misc.ModCheck("WorldClient") || Misc.ModCheck("Notorious"))
+                CompLayer = true;
             //MelonCoroutines.Start(SpectateMode.VRChat_OnUiManagerInit());
             Task.Run(() =>
             {
-                SerpentPatch.InitPatches();
+                SerpentPatch.InitPatches(); 
             });
         }
         public override void OnUpdate()
         {
-
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
-            {
-                BaseModule mod = Instance.FlyModule;
-                if (mod == null) return;
-                mod.toggleButton.Toggle(!mod.toggled);
-            }
-
             for (int i = 0; i < Instance.OnUpdateEvents.Count; i++) Instance.OnUpdateEvents[i].OnUpdate();
 
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt))
@@ -154,12 +151,11 @@ namespace Trinity
             }
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
             {
-                LogHandler.Log(LogHandler.Colors.Red, $"FUCK WORLD CLIENT AND THERE DOG SHIT BUTTON API \n ps: love you blaze",false,false);
             }
             // uDoneNuke.
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.D))
             {
-                MelonCoroutines.Start(Keybinds.udonNukeKeyBind());
+                MelonCoroutines.Start(OldKeyBinds.udonNukeKeyBind());
                 LogHandler.Log(LogHandler.Colors.Green, "[Keybind] Nuking World.....", true, false);
             }
             
@@ -175,33 +171,29 @@ namespace Trinity
         public static void InitMenu()
         {
             try
-            { 
-                UIU.WaitBitch();
-                MelonCoroutines.Start(MenuUI.StartUI()); 
-                for (int i = 0; i < Instance.Modules.Count; ++i)
-                {
-                    if (Instance.Modules[i].name == "Fly") Instance.FlyModule = Instance.Modules[i];
-                    if (Instance.Modules[i].name == "Speed") Instance.SpeedModule = Instance.Modules[i];  
-                } 
+            {
+                //UIU.WaitBitch();
+                MelonCoroutines.Start(MenuUI.StartUI());
+                Config.Instance = Config.Load();
                 LogHandler.Log(LogHandler.Colors.Green, "Client UI Initialized!", true, false);
-            } 
-            catch (Exception ex) 
-            { 
-                LogHandler.Log(LogHandler.Colors.Red, ex.Message, true, false); 
+            }
+            catch (Exception ex)
+            {
+                LogHandler.Log(LogHandler.Colors.Red, ex.Message, true, false);
             }
         }
         public override void OnApplicationQuit()
         {
-            //try
-            //{
-            //    foreach (BaseModule module in Instance.Modules)
-            //    {
-            //        if (module.save)
-            //            Instance.Config.setConfigBool(module.name, module.toggled); 
-                    
-            //    }
-            //}
-            //catch (Exception EX) { LogHandler.Log(LogHandler.Colors.Red, EX.StackTrace, true, false); }
+            try
+            {
+                foreach (BaseModule module in Instance.Modules)
+                {
+                    if (module.save)
+                        Instance.Config.setConfigBool(module.name, module.toggled);
+
+                }
+            }
+            catch (Exception EX) { LogHandler.Log(LogHandler.Colors.Red, EX.StackTrace, true, false); }
         }
     }
 }

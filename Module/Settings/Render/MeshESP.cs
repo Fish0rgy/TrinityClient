@@ -13,7 +13,7 @@ namespace Trinity.Module.Settings.Render
 {
     internal class MeshESP : BaseModule, OnPlayerJoinEvent, OnUpdateEvent
     { 
-        public MeshESP() : base("Mesh ESP", "See Players n shit", Main.Instance.SettingsButtonrender, null, true, false) { }
+        public MeshESP() : base("Mesh ESP", "See Players n shit", Main.Instance.SettingsButtonrender, null, true, true) { }
 
         public override void OnEnable()
         {
@@ -56,15 +56,23 @@ namespace Trinity.Module.Settings.Render
             Main.Instance.OnUpdateEvents.Remove(this);
         }
         public static void PlayerMeshEsp(VRC.Player player, bool State)
-        { 
+        {
             //if (PU.GetIsFriend(player.prop_APIUser_0))
             //    GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.yellow;
             //else
-            //    GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;
-            foreach (Renderer renderer in player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>())
+            //    GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;try{
+            try 
             {
-                HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(renderer, State); 
-            } 
+                foreach (Renderer renderer in player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>())
+                {
+                    HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(renderer, State);
+                }
+            }
+            catch
+            {
+
+            }
+             
         }
         public void OnPlayerJoin(VRC.Player __0)
         {

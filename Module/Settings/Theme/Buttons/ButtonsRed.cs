@@ -29,11 +29,7 @@ namespace Trinity.Module.Settings.Theme
         }
         public async Task setUITheme(int WaitToUpdate)
         {
-
-            for (int i = 0; i < WaitToUpdate; i++)
-            {
-                Trinity.Utilities.UIU.SetColor(Color.black, Color.red);
-            }
+ 
 
         }
 

@@ -12,7 +12,7 @@ namespace Trinity.Module.Settings.Theme
 {
     class CustomBGImage : BaseModule
     {
-        public CustomBGImage() : base("Enable\nBackground", "Set's our custom background image", Main.Instance.SettingsButtonTheme, null, true, false) { }
+        public CustomBGImage() : base("Custom Theme", "Set's our custom background image", Main.Instance.SettingsButtonTheme, null, true, true) { }
 
         public Sprite Background = null;
         public override void OnEnable()

@@ -13,16 +13,12 @@ namespace Trinity.Module.Settings.Spoofer
     internal class PingSpoofer : BaseModule
     {
          
-        public PingSpoofer() : base("Ping Spoof", "Spoofes Ping to from -1000 to 1000", Main.Instance.SettingsButtonspoofer, null, true, false) { }
+        public PingSpoofer() : base("Ping Spoof", "Spoofes Ping to from -1000 to 1000", Main.Instance.SettingsButtonspoofer, null, true, true) { }
 
         public override void OnEnable()
         {
             Config.SpoofPing = true;
-            Config.PingSpoof = 0;
-            Config.PingSpoof1 = -12340;
-            Config.PingSpoof2 = 20232;
-            Config.PingSpoof3 = -10;
-            Config.PingSpoof4 = 300;
+            Config.PingSpoof = 0; 
         }
         public override void OnDisable()
         {

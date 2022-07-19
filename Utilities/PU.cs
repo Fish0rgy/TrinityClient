@@ -303,6 +303,30 @@ namespace Trinity.Utilities
                 ClientUserIDs.Add(line);
             }
         }
+        public static bool isflying(VRC.Player player)
+        {
+            bool zero = player.prop_VRCPlayerApi_0.GetVelocity().Equals(0);
+            if (player.prop_VRCPlayerApi_0.IsPlayerGrounded() && !zero)
+                return true;
+            return false;
+        }
+        public static bool checkcontroller(VRC.Player player)
+        {
+            bool gay = false;
+            try
+            {
+                player.GetComponentsInChildren<CharacterController>().ToList().ForEach(s =>
+                {
+                    if (s.enabled == false)
+                        gay = true;
+                });
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return gay;
+        }
         public static bool ClientDetect(this Player player)
         {
             bool checkfile = System.IO.File.ReadLines($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt").Any(line => line.Contains(player.prop_APIUser_0.id));

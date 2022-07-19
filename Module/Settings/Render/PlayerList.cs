@@ -16,7 +16,7 @@ namespace Trinity.Module.Settings.Render
     internal class PlayerList : BaseModule, OnPlayerJoinEvent, OnPlayerLeaveEvent
     {
         QMLable playerList;
-        public PlayerList() : base("PlayerList", "PlayerList on the side", Main.Instance.SettingsButtonrender, null, true, false)
+        public PlayerList() : base("PlayerList", "PlayerList on the side", Main.Instance.SettingsButtonrender, null, true, true)
         {
         }
 

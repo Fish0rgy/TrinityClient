@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnhollowerBaseLib;
 using UnityEngine;
+using System.Text.RegularExpressions; 
 
 namespace Trinity.Module.Safety.Avatar
 {
@@ -15,44 +16,52 @@ namespace Trinity.Module.Safety.Avatar
     internal class AntiCrashRendererPostProcess
     {
         internal int nukedMeshes;
-        internal int polygonCount;
-
+        internal int meshCount;
+        internal uint polygonCount;
         internal int nukedMaterials;
         internal int materialCount;
-
         internal int nukedShaders;
         internal int shaderCount;
+        internal bool removedBlendshapeKeys;
     }
+
     internal class AntiCrashMaterialPostProcess
     {
         internal int nukedMaterials;
         internal int materialCount;
     }
+
     internal class AntiCrashShaderPostProcess
     {
         internal int nukedShaders;
         internal int shaderCount;
     }
+
     internal class AntiCrashParticleSystemPostProcess
     {
         internal int nukedParticleSystems;
         internal int currentParticleCount;
     }
+
     internal class AntiCrashClothPostProcess
     {
         internal int nukedCloths;
+        internal int clothCount;
         internal int currentVertexCount;
     }
+
     internal class AntiCrashDynamicBonePostProcess
     {
         internal int nukedDynamicBones;
         internal int dynamicBoneCount;
     }
+
     internal class AntiCrashDynamicBoneColliderPostProcess
     {
         internal int nukedDynamicBoneColliders;
         internal int dynamicBoneColiderCount;
     }
+
     internal class AntiCrashLightSourcePostProcess
     {
         internal int nukedLightSources;
@@ -61,170 +70,236 @@ namespace Trinity.Module.Safety.Avatar
     class MunchenAntiCrash
     {
         public static string[] BlackListedShaders = File.ReadAllLines("Trinity/BlackList/Avatar/Shader.txt");
-        public static int maxAudio = 150;
-        public static int maxLight = 8;
-        public static int maxMaterials = 300;
-        public static int maxMesh = 250;
-        public static int maxDynamicBonesCollider = 50;
-        public static int maxDynamicBones = 75;
-        public static int maxPoly = 2500000; 
-        public static int maxCloth = 75;
-        public static int maxClothVertices = 15000;
-        public static int maxColliders = 20;
-        public static int maxParticleLimit = 10000;
-        public static int maxParticleMeshVertices = 1000000;
-        public static int maxParticleTrails = 64;
-        public static int maxParticleCollisonShapes = 1024;
-        public static int maxParticleEmissionRate = 500;
-        public static int maxParticleSystems = 1;
-        public static int maxAnimators = 25;
-        public static int maxRegidBodies = 25; 
+        public static uint MaxPolygons = 2500000U;
+        public static int MaxMeshes = 250;
+        public static int MaxMaterials = 300;
+        public static int MaxDynamicBones = 75;
+        public static int MaxDynamicBoneColliders = 50;
+        public static int MaxAudioSources = 150;
+        public static int MaxAnimators = 25;
+        public static int MaxConstraints = 200;
+        public static int MaxShaders = 100;
+        public static int MaxLightSources = 8;
+        public static int MaxColliders = 20;
+        public static int MaxSpringJoints = 15;
+        public static int MaxTransforms = 3500;
+        public static int MaxMonobehaviours = 1500;
+        public static int MaxComponentsTotal = 6500;
+        public static int MaxDepth = 125;
+        public static int MaxChildren = 125;
+        public static float MaxHeight = 10f;
+        public static int MaxCloth = 75;
+        public static int MaxClothVertices = 15000;
+        public static float MaxClothSolverFrequency = 180f;
+        public static int MaxRigidbodies = 25;
+        public static float MaxRigidbodyMass = 10000f;
+        public static float MaxRigidbodyAngularVelocity = 100f;
+        public static float MaxRigidbodyDepenetrationVelocity = 100f;
+        public static int MaxParticleLimit = 10000;
+        public static uint MaxParticleMeshVertices = 1000000U;
+        public static int MaxParticleCollisionShapes = 1024;
+        public static int MaxParticleRibbons = 10000;
+        public static float MaxParticleEmissionRate = 500f;
+        public static int MaxParticleEmissionBurstCount = 125;
+        public static int MaxParticleTrails = 64;
+        public static float MaxParticleSimulationSpeed = 5f;
+        public static int MaxShaderLoopLimit = 128;
+        public static int MaxShaderGeometryLimit = 25;
+        public static float MaxShaderTesselationPower = 2.5f;
         public static Shader defaultShader;
         internal static void ProcessRenderer(Renderer renderer, bool limitPolygons, bool limitMaterials, bool limitShaders, ref AntiCrashRendererPostProcess previousProcess)
         {
-            if (limitPolygons == true)
+            bool flag = !ProcessMeshPolygons(renderer, ref previousProcess.meshCount, ref previousProcess.nukedMeshes, ref previousProcess.polygonCount, ref previousProcess.removedBlendshapeKeys);
+            if (flag)
             {
-                ProcessMeshPolygons(renderer, ref previousProcess.nukedMeshes, ref previousProcess.polygonCount);
-            }
+                AntiCrashMaterialPostProcess antiCrashMaterialPostProcess = ProcessMaterials(renderer, previousProcess.nukedMaterials, previousProcess.materialCount);
+                previousProcess.nukedMaterials = antiCrashMaterialPostProcess.nukedMaterials;
+                previousProcess.materialCount = antiCrashMaterialPostProcess.materialCount;
 
-            if (limitMaterials == true)
-            {
-                AntiCrashMaterialPostProcess postReport = ProcessMaterials(renderer, previousProcess.nukedMaterials, previousProcess.materialCount);
+                AntiCrashShaderPostProcess antiCrashShaderPostProcess = ProcessShaders(renderer, previousProcess.nukedShaders, previousProcess.shaderCount);
+                previousProcess.nukedShaders = antiCrashShaderPostProcess.nukedShaders;
+                previousProcess.shaderCount = antiCrashShaderPostProcess.shaderCount;
 
-                previousProcess.nukedMaterials = postReport.nukedMaterials;
-                previousProcess.materialCount = postReport.materialCount;
-            }
-
-            if (limitShaders == true)
-            {
-                AntiCrashShaderPostProcess postReport = ProcessShaders(renderer, previousProcess.nukedShaders, previousProcess.shaderCount);
-
-                previousProcess.nukedShaders = postReport.nukedShaders;
-                previousProcess.shaderCount = postReport.shaderCount;
             }
         }
-
-        internal static void ProcessMeshPolygons(Renderer renderer, ref int currentNukedMeshes, ref int currentPolygonCount)
+        internal static bool ProcessJoint(Joint joint, ref int currentSpringJoints)
+        {
+            bool overmax = currentSpringJoints >= MaxSpringJoints;
+            bool result;
+            if (overmax)
+            {
+                Object.DestroyImmediate(joint.gameObject, true);
+                result = true;
+            }
+            else
+            {
+                currentSpringJoints++;
+                joint.connectedMassScale = Clamp(joint.connectedMassScale, -25f, 25f);
+                joint.massScale = Clamp(joint.massScale, -25f, 25f);
+                joint.breakTorque = Clamp(joint.breakTorque, -100f, 100f);
+                joint.breakForce = Clamp(joint.massScale, -100f, 100f);
+                SpringJoint springJoint = joint as SpringJoint;
+                bool nullcheck = springJoint != null;
+                if (nullcheck)
+                {
+                    springJoint.damper = Clamp(springJoint.damper, -100f, 100f);
+                    springJoint.maxDistance = Clamp(springJoint.maxDistance, -100f, 100f);
+                    springJoint.minDistance = Clamp(springJoint.minDistance, -100f, 100f);
+                    springJoint.spring = Clamp(springJoint.spring, -100f, 100f);
+                    springJoint.tolerance = Clamp(springJoint.tolerance, -100f, 100f);
+                }
+                result = false;
+            }
+            return result;
+        }
+        internal static bool ProcessMeshPolygons(Renderer renderer, ref int currentMeshes, ref int currentNukedMeshes, ref uint currentPolygonCount, ref bool removedBlendshapeKeys)
         {
             SkinnedMeshRenderer skinnedMeshRenderer = renderer.TryCast<SkinnedMeshRenderer>();
-            MeshFilter meshFilter = renderer.GetComponent<MeshFilter>();
-
-            Mesh mesh = skinnedMeshRenderer?.sharedMesh ?? meshFilter?.sharedMesh;
-
-            if (mesh == null)
+            MeshFilter component = renderer.GetComponent<MeshFilter>();
+            Mesh mesh = ((skinnedMeshRenderer != null) ? skinnedMeshRenderer.sharedMesh : null) ?? ((component != null) ? component.sharedMesh : null);
+            bool checknullmesh = mesh == null;
+            bool result;
+            if (checknullmesh)
             {
-                return;
+                result = false;
             }
-
-            if (mesh.isReadable == false)
+            else
             {
-                currentNukedMeshes++;
-
-                Object.DestroyImmediate(mesh, true);
-
-                return;
-            }
-
-            if (mesh.name.ToLower().Equals("body"))
-            {
-                bool hasRevertedBlendShape = false;
-                bool hasPoseToRestBlendShape = false;
-                bool hasKey22BlendShape = false;
-                bool hasKey56BlendShape = false;
-                bool hasSlantBlendShape = false;
-
-                for (int i = 0; i < mesh.blendShapeCount; i++)
+                bool maxMesh = currentMeshes >= MaxMeshes;
+                if (maxMesh)
                 {
-                    string blendShapeName = mesh.GetBlendShapeName(i).ToLower();
-
-                    if (blendShapeName.Contains("reverted") == true)
-                    {
-                        hasRevertedBlendShape = true;
-                    }
-
-                    if (blendShapeName.Contains("posetorest") == true)
-                    {
-                        hasPoseToRestBlendShape = true;
-                    }
-                    else if (blendShapeName.Contains("key 22") == true)
-                    {
-                        hasKey22BlendShape = true;
-                    }
-                    else if (blendShapeName.Contains("key 56") == true)
-                    {
-                        hasKey56BlendShape = true;
-                    }
-                    else if (blendShapeName.Contains("slant") == true)
-                    {
-                        hasSlantBlendShape = true;
-                    }
+                    currentNukedMeshes++;
+                    Object.DestroyImmediate(renderer.gameObject, true);
+                    result = true;
                 }
-
-                //"Cyber Popular" avatar detected
-                if (hasRevertedBlendShape == true && hasPoseToRestBlendShape == true && hasKey22BlendShape == true && hasKey56BlendShape == true && hasSlantBlendShape == true)
+                else
                 {
-                    //This is the crashing BlendShape key
-                    /*int chosenBlendShapeKey = 7;
-                    ConsoleUtils.Info("AntiCrash", $"BlendShapes: {mesh.blendShapeCount}");
-                    ConsoleUtils.Info("AntiCrash", $"Chosen BlendShape: {mesh.GetBlendShapeName(chosenBlendShapeKey)}");
-                    ConsoleUtils.Info("AntiCrash", $"VertexCount: {mesh.vertexCount}");
-                    Vector3[] verticies = new Vector3[mesh.vertexCount];
-                    Vector3[] normals = new Vector3[mesh.vertexCount];
-                    Vector3[] tangents = new Vector3[mesh.vertexCount];
-                    MelonLoader.MelonLogger.Msg("1");
-                    mesh.GetBlendShapeFrameVertices(chosenBlendShapeKey, 0, verticies, normals, tangents);
-                    MelonLoader.MelonLogger.Msg("2");
-                    for (int i = 0; i < mesh.vertexCount; i++)
+                    bool NullCheck = AntiBlendShapeCrash && skinnedMeshRenderer != null;
+                    if (NullCheck)
                     {
-                        ConsoleUtils.Info("Frame", $"Index: {i} | Vertice: {verticies[i].ToString()} | Normal: {normals[i].ToString()} | Tangent: {tangents[i].ToString()}");
-                    }*/
-
-                    mesh.ClearBlendShapes();
+                        bool BadPoly = false;
+                        bool BadRevert = false;
+                        bool badKey22 = false;
+                        bool badKey56 = false;
+                        bool BadSlant = false;
+                        for (int i = 0; i < mesh.blendShapeCount; i++)
+                        {
+                            string text = mesh.GetBlendShapeName(i).ToLower(); 
+                            bool reverted = text.Contains("reverted");
+                            if (reverted)
+                            {
+                                BadPoly = true;
+                            }
+                            bool posetorest = text.Contains("posetorest");
+                            if (posetorest)
+                            {
+                                BadRevert = true;
+                            }
+                            else
+                            {
+                                bool key22 = text.Contains("key 22");
+                                if (key22)
+                                {
+                                    badKey22 = true;
+                                }
+                                else
+                                {
+                                    bool key56 = text.Contains("key 56");
+                                    if (key56)
+                                    {
+                                        badKey56 = true;
+                                    }
+                                    else
+                                    {
+                                        bool slant = text.Contains("slant");
+                                        if (slant)
+                                        {
+                                            BadSlant = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        bool Bad = BadPoly && BadRevert && badKey22 && badKey56 && BadSlant;
+                        if (Bad)
+                        {
+                            removedBlendshapeKeys = true;
+                            mesh.ClearBlendShapes();
+                        }
+                    }
+                    int SubCount;
+                    try
+                    {
+                        SubCount = mesh.subMeshCount;
+                    }
+                    catch (System.Exception)
+                    {
+                        SubCount = 0;
+                    }
+                    try
+                    {
+                        renderer.GetSharedMaterials(antiCrashTempMaterialsList);
+                        int ProcessedIndex = ProcessMesh(mesh, SubCount, ref currentNukedMeshes, ref currentPolygonCount);
+                        bool MaxIndexCound = ProcessedIndex != -1;
+                        if (MaxIndexCound)
+                        {
+                            antiCrashTempMaterialsList.RemoveRange(ProcessedIndex, antiCrashTempMaterialsList.Count - ProcessedIndex);
+                            renderer.SetMaterialArray((Il2CppReferenceArray<Material>)antiCrashTempMaterialsList.ToArray());
+                        }
+                        bool maxSub = SubCount + 2 < renderer.GetMaterialCount();
+                        if (maxSub)
+                        {
+                            Object.Destroy(renderer.gameObject);
+                            return true;
+                        }
+                    }
+                    catch (System.Exception e)
+                    {
+                        Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Red, $"[ERROR] \nClass: AntiCrash\nHandle: ProcessMeshPoly\nError: {e}", false, false);
+                    }
+                    currentMeshes++;
+                    result = false;
                 }
             }
-
-            ProcessMesh(mesh, ref currentNukedMeshes, ref currentPolygonCount);
+            return result;
         }
 
         internal static AntiCrashMaterialPostProcess ProcessMaterials(Renderer renderer, int currentNukedMaterials, int currentMaterialCount)
         {
-            int newMaterialCount = currentMaterialCount + renderer.GetMaterialCount();
-
-            if (newMaterialCount > maxMaterials)
+            int materialCount = renderer.GetMaterialCount();
+            int ActualCount = currentMaterialCount + materialCount;
+            bool MaxMaterialCount = ActualCount > MaxMaterials;
+            if (MaxMaterialCount)
             {
-                //Grab the current amount of materials
-                Il2CppSystem.Collections.Generic.List<Material> materialList = new Il2CppSystem.Collections.Generic.List<Material>();
-                renderer.GetSharedMaterials(materialList);
-
-                //Calculate the amount of materials we need to remove
-                int startRemoveIndex = (currentMaterialCount < maxMaterials) ? maxMaterials : 0;
-                int removeMaterialCount = (startRemoveIndex == 0) ? materialList.Count : (newMaterialCount - maxMaterials);
-
-                //Make sure we don't get out of bounds errors
-                if (startRemoveIndex > materialList.Count)
+                int GoodCounter = ((currentMaterialCount < MaxMaterials) ? MaxMaterials : 0);
+                int BadCounter = ((GoodCounter == 0) ? materialCount : (ActualCount - MaxMaterials));
+                bool Max = GoodCounter > materialCount;
+                if (Max)
                 {
-                    startRemoveIndex = materialList.Count;
+                    GoodCounter = materialCount;
                 }
-
-                //Make sure we don't get out of bounds errors
-                int maxRemoveableCount = materialList.Count - startRemoveIndex;
-
-                if (removeMaterialCount > maxRemoveableCount)
+                int MaxGoodMats = materialCount - GoodCounter;
+                bool flag3 = BadCounter > MaxGoodMats;
+                if (flag3)
                 {
-                    removeMaterialCount = maxRemoveableCount;
+                    BadCounter = MaxGoodMats;
                 }
-
-                //Set new values accordingly
-                currentNukedMaterials += removeMaterialCount;
-                newMaterialCount -= removeMaterialCount;
-
-                //Remove all materials deemed unneccesary
-                materialList.RemoveRange(startRemoveIndex, removeMaterialCount);
-                renderer.materials = (Il2CppReferenceArray<Material>)materialList.ToArray();
+                currentNukedMaterials += BadCounter;
+                ActualCount -= BadCounter;
+                bool flag4 = materialCount == BadCounter;
+                if (flag4)
+                {
+                    Object.DestroyImmediate(renderer.gameObject, true);
+                }
+                else
+                {
+                    Il2CppSystem.Collections.Generic.List<Material> MaterialList = new Il2CppSystem.Collections.Generic.List<Material>();
+                    renderer.GetSharedMaterials(MaterialList);
+                    MaterialList.RemoveRange(GoodCounter, BadCounter);
+                    renderer.materials = (Il2CppReferenceArray<Material>)MaterialList.ToArray();
+                }
             }
-
-            currentMaterialCount = newMaterialCount;
-
+            currentMaterialCount = ActualCount;
             return new AntiCrashMaterialPostProcess
             {
                 nukedMaterials = currentNukedMaterials,
@@ -234,266 +309,208 @@ namespace Trinity.Module.Safety.Avatar
 
         internal static AntiCrashShaderPostProcess ProcessShaders(Renderer renderer, int currentNukedShaders, int currentShaderCount)
         {
-            for (int j = 0; j < renderer.materials.Length; j++)
+            bool checknull = renderer == null;
+            AntiCrashShaderPostProcess result;
+            if (checknull)
             {
-                //Error Check
-                if (renderer.materials[j] == null)
+                result = new AntiCrashShaderPostProcess
                 {
-                    continue;
-                }
-
-                currentShaderCount++;
-
-                //Blacklist Check
-                if (BlackListedShaders.Contains(renderer.materials[j].shader.name.ToLower()))
-                {
-                    renderer.materials[j].shader = defaultShader;
-
-                    currentNukedShaders++;
-
-                    continue;
-                }
-
-                //Engine Check
-                if (renderer.materials[j].shader.isSupported == false)
-                {
-                    renderer.materials[j].shader = defaultShader;
-
-                    currentNukedShaders++;
-
-                    continue;
-                }
-
-                //Sanity Check
-                switch (renderer.materials[j].shader.name)
-                {
-                    case "Standard":
-                        {
-                            renderer.materials[j].shader = defaultShader;
-
-                            break;
-                        }
-
-                    case "Diffuse":
-                        {
-                            renderer.materials[j].shader = defaultShader;
-
-                            break;
-                        }
-                }
-            }
-
-            return new AntiCrashShaderPostProcess
-            {
-                nukedShaders = currentNukedShaders,
-                shaderCount = currentShaderCount
-            };
-        }
-
-        internal static AntiCrashClothPostProcess ProcessCloth(Cloth cloth, int nukedCloths, int currentVertexCount)
-        {
-            cloth.clothSolverFrequency = Mathf.Max(cloth.clothSolverFrequency, 300f);
-
-            Mesh skinnedMesh = cloth.GetComponent<SkinnedMeshRenderer>()?.sharedMesh;
-
-            if (skinnedMesh == null)
-            {
-                nukedCloths++;
-
-                Object.DestroyImmediate(cloth, true);
-
-                return new AntiCrashClothPostProcess
-                {
-                    nukedCloths = nukedCloths,
-                    currentVertexCount = currentVertexCount
+                    nukedShaders = currentNukedShaders,
+                    shaderCount = currentShaderCount
                 };
             }
-
-            currentVertexCount += skinnedMesh.vertexCount;
-
-            if (currentVertexCount >= maxClothVertices)
+            else
             {
-                currentVertexCount -= skinnedMesh.vertexCount;
-
-                nukedCloths++;
-
-                Object.DestroyImmediate(cloth, true);
+                for (int i = 0; i < renderer.materials.Length; i++)
+                {
+                    bool nullcheck = !(renderer.materials[i] == null);
+                    if (nullcheck)
+                    {
+                        currentShaderCount++;
+                        bool badshadercheck = ProcessShader(renderer.materials[i]);
+                        if (badshadercheck)
+                        {
+                            currentNukedShaders++;
+                        }
+                    }
+                }
+                result = new AntiCrashShaderPostProcess
+                {
+                    nukedShaders = currentNukedShaders,
+                    shaderCount = currentShaderCount
+                };
             }
+            return result;
+        }
 
-            return new AntiCrashClothPostProcess
+        internal static AntiCrashClothPostProcess ProcessCloth(Cloth cloth, AntiCrashClothPostProcess previousReport)
+        {
+            bool flag = previousReport.clothCount >= MaxCloth;
+            AntiCrashClothPostProcess result;
+            if (flag)
             {
-                nukedCloths = nukedCloths,
-                currentVertexCount = currentVertexCount
-            };
+                previousReport.nukedCloths++;
+                Object.DestroyImmediate(cloth.gameObject, true);
+                result = new AntiCrashClothPostProcess
+                {
+                    nukedCloths = previousReport.nukedCloths,
+                    clothCount = previousReport.clothCount,
+                    currentVertexCount = previousReport.currentVertexCount
+                };
+            }
+            else
+            {
+                SkinnedMeshRenderer component = cloth.GetComponent<SkinnedMeshRenderer>();
+                Mesh mesh = ((component != null) ? component.sharedMesh : null);
+                bool flag2 = mesh == null;
+                if (flag2)
+                {
+                    previousReport.nukedCloths++;
+                    Object.DestroyImmediate(cloth.gameObject, true);
+                    result = new AntiCrashClothPostProcess
+                    {
+                        nukedCloths = previousReport.nukedCloths,
+                        clothCount = previousReport.clothCount,
+                        currentVertexCount = previousReport.currentVertexCount
+                    };
+                }
+                else
+                {
+                    int num = previousReport.currentVertexCount + mesh.vertexCount;
+                    bool flag3 = num >= MaxClothVertices;
+                    if (flag3)
+                    {
+                        previousReport.nukedCloths++;
+                        Object.DestroyImmediate(cloth.gameObject, true);
+                        result = new AntiCrashClothPostProcess
+                        {
+                            nukedCloths = previousReport.nukedCloths,
+                            clothCount = previousReport.clothCount,
+                            currentVertexCount = previousReport.currentVertexCount
+                        };
+                    }
+                    else
+                    {
+                        cloth.clothSolverFrequency = Clamp(cloth.clothSolverFrequency, 0f, MaxClothSolverFrequency);
+                        previousReport.currentVertexCount = num;
+                        previousReport.clothCount++;
+                        result = new AntiCrashClothPostProcess
+                        {
+                            nukedCloths = previousReport.nukedCloths,
+                            clothCount = previousReport.clothCount,
+                            currentVertexCount = previousReport.currentVertexCount
+                        };
+                    }
+                }
+            }
+            return result;
         }
 
         internal static void ProcessParticleSystem(ParticleSystem particleSystem, ref AntiCrashParticleSystemPostProcess post)
         {
-            ParticleSystemRenderer renderer = particleSystem.GetComponent<ParticleSystemRenderer>();
-
-            if (renderer == null)
+            ParticleSystemRenderer component = particleSystem.GetComponent<ParticleSystemRenderer>();
+            bool NullComponent = component == null;
+            if (NullComponent)
             {
                 post.nukedParticleSystems++;
-
-                Object.DestroyImmediate(particleSystem, true);
-
-                return;
-            }
-
-            particleSystem.main.simulationSpeed = Clamp(particleSystem.main.simulationSpeed, 0f, 5.0f);
-            particleSystem.collision.maxCollisionShapes = Clamp(particleSystem.collision.maxCollisionShapes, 0, maxParticleCollisonShapes);
-            particleSystem.trails.ribbonCount = Clamp(particleSystem.trails.ribbonCount, 0, maxParticleTrails);
-
-            for (int i = 0; i < particleSystem.emission.burstCount; i++)
-            {
-                ParticleSystem.Burst burst = particleSystem.emission.GetBurst(i);
-
-                burst.maxCount = Clamp(burst.maxCount, (short)0, (short)125);
-                burst.cycleCount = Clamp(burst.cycleCount, 0, 125);
-            }
-
-            int particleLimit = maxParticleLimit - post.currentParticleCount;
-
-            if (particleSystem.maxParticles > particleLimit)
-            {
-                particleSystem.maxParticles = particleLimit;
-            }
-
-            post.currentParticleCount += particleSystem.maxParticles;
-
-            if (renderer.renderMode == ParticleSystemRenderMode.Mesh)
-            {
-                Il2CppReferenceArray<Mesh> meshes = new Il2CppReferenceArray<Mesh>(renderer.meshCount);
-                renderer.GetMeshes(meshes);
-
-                int polySum = 0;
-                int nukedMeshes = 0;
-
-                foreach (Mesh mesh in meshes)
-                {
-                    ProcessMesh(mesh, ref nukedMeshes, ref polySum);
-                }
-
-                if ((polySum * particleSystem.maxParticles) > maxParticleMeshVertices)
-                {
-                    particleSystem.maxParticles = maxParticleMeshVertices / polySum;
-                }
-            }
-
-            if (particleSystem.maxParticles == 0)
-            {
-                post.nukedParticleSystems++;
-
-                Object.DestroyImmediate(renderer, true);
                 Object.DestroyImmediate(particleSystem, true);
             }
-        }
-
-        internal static void ProcessMesh(Mesh mesh, ref int currentNukedMeshes, ref int currentPolygonCount)
-        {
-            int subMeshCount;
-
-            try
+            else
             {
-                subMeshCount = mesh.subMeshCount;
-            }
-            catch (System.Exception)
-            {
-                subMeshCount = 1;
-            }
-
-            for (int j = 0; j < subMeshCount; j++)
-            {
-                try
+                particleSystem.main.ringBufferMode = 0;
+                particleSystem.main.simulationSpeed = Clamp(particleSystem.main.simulationSpeed, 0f, MaxParticleSimulationSpeed);
+                particleSystem.collision.maxCollisionShapes = Clamp(particleSystem.collision.maxCollisionShapes, 0, MaxParticleCollisionShapes);
+                particleSystem.trails.ribbonCount = Clamp(particleSystem.trails.ribbonCount, 0, MaxParticleTrails);
+                particleSystem.emissionRate = Clamp(particleSystem.emissionRate, 0f, MaxParticleEmissionRate);
+                for (int i = 0; i < particleSystem.emission.burstCount; i++)
                 {
-                    uint polygonsInSubmesh = mesh.GetIndexCount(j);
-
-                    switch (mesh.GetTopology(j))
-                    {
-                        case MeshTopology.Triangles:
-                            {
-                                polygonsInSubmesh /= 3;
-
-                                break;
-                            }
-
-                        case MeshTopology.Quads:
-                            {
-                                polygonsInSubmesh /= 4;
-
-                                break;
-                            }
-
-                        case MeshTopology.Lines:
-                            {
-                                polygonsInSubmesh /= 2;
-
-                                break;
-                            }
-                    }
-
-                    if ((currentPolygonCount + polygonsInSubmesh) > maxPoly)
-                    {
-                        currentNukedMeshes++;
-
-                        Object.DestroyImmediate(mesh, true);
-
-                        continue;
-                    }
-
-                    currentPolygonCount += (int)polygonsInSubmesh;
+                    ParticleSystem.Burst burst = particleSystem.emission.GetBurst(i);
+                    burst.maxCount = Clamp3(burst.maxCount, 0, (short)MaxParticleEmissionBurstCount);
+                    burst.cycleCount = Clamp(burst.cycleCount, 0, MaxParticleEmissionBurstCount);
+                    particleSystem.emission.SetBurst(i, burst);
                 }
-                catch (System.Exception) { /* It's fine to get an exception here - we just want to be sure we don't skip any meshes */ }
+                int ParticleCount = MaxParticleLimit - post.currentParticleCount;
+                bool checkP = ParticleCount <= 0 && particleSystem.maxParticles > 100;
+                if (checkP)
+                {
+                    particleSystem.maxParticles = 100;
+                }
+                else
+                {
+                    bool CheckMax = particleSystem.maxParticles > ParticleCount;
+                    if (CheckMax)
+                    {
+                        particleSystem.maxParticles = ParticleCount;
+                    }
+                }
+                bool CheckRenderIsMesh = component.renderMode == ParticleSystemRenderMode.Mesh;
+                if (CheckRenderIsMesh)
+                {
+                    Il2CppReferenceArray<Mesh> il2CppReferenceArray = new Il2CppReferenceArray<Mesh>((long)component.meshCount);
+                    component.GetMeshes(il2CppReferenceArray);
+                    uint polyCount = 0U;
+                    int nukedMesh = 0;
+                    bool nullAndMatch = component.mesh != null && duplicatedMeshNameRegex.IsMatch(component.mesh.name);
+                    if (nullAndMatch)
+                    {
+                        component.enabled = false;
+                        particleSystem.playOnAwake = false;
+                        bool isPlaying = particleSystem.isPlaying;
+                        if (isPlaying)
+                        {
+                            particleSystem.Stop();
+                        }
+                    }
+                    foreach (Mesh mesh in il2CppReferenceArray)
+                    {
+                        int subMeshCount;
+                        try
+                        {
+                            subMeshCount = mesh.subMeshCount;
+                        }
+                        catch (System.Exception)
+                        {
+                            subMeshCount = 0;
+                        }
+                        component.GetSharedMaterials(antiCrashTempMaterialsList);
+                        int indexCount = ProcessMesh(mesh, subMeshCount, ref nukedMesh, ref polyCount);
+                        bool CheckC = indexCount != -1;
+                        if (CheckC)
+                        {
+                            antiCrashTempMaterialsList.RemoveRange(indexCount, antiCrashTempMaterialsList.Count - indexCount);
+                        }
+                        foreach (Material material in antiCrashTempMaterialsList)
+                        {
+                            bool nullcheck = !(material == null);
+                            if (nullcheck)
+                            {
+                                ProcessShader(material);
+                            }
+                        }
+                        bool checkchangec = indexCount != -1;
+                        if (checkchangec)
+                        {
+                            component.SetMaterialArray((Il2CppReferenceArray<Material>)antiCrashTempMaterialsList.ToArray());
+                        }
+                    }
+                    bool badPlyCount = (ulong)polyCount * (ulong)((long)particleSystem.maxParticles) > (ulong)MaxParticleMeshVertices;
+                    if (badPlyCount)
+                    {
+                        int particlesycount = (particleSystem.maxParticles = (int)(MaxParticleMeshVertices / polyCount));
+                    }
+                }
+                bool checksystemcount = particleSystem.maxParticles == 0;
+                if (checksystemcount)
+                {
+                    post.nukedParticleSystems++;
+                    UnityEngine.Object.DestroyImmediate(particleSystem, true);
+                }
+                post.currentParticleCount += particleSystem.maxParticles;
             }
-
-            //Sanity check in case we deleted the mesh in the previous stage
-            if (mesh == null)
-            {
-                return;
-            }
-
-            //Mesh Safety
-            if (IsBeyondLimit(mesh.bounds.extents, -100f, 100f) == true)
-            {
-                Object.DestroyImmediate(mesh, true);
-
-                return;
-            }
-
-            if (IsBeyondLimit(mesh.bounds.size, -100f, 100f) == true)
-            {
-                Object.DestroyImmediate(mesh, true);
-
-                return;
-            }
-
-            if (IsBeyondLimit(mesh.bounds.center, -100f, 100f) == true)
-            {
-                Object.DestroyImmediate(mesh, true);
-
-                return;
-            }
-
-            if (IsBeyondLimit(mesh.bounds.min, -100f, 100f) == true)
-            {
-                Object.DestroyImmediate(mesh, true);
-
-                return;
-            }
-
-            if (IsBeyondLimit(mesh.bounds.max, -100f, 100f) == true)
-            {
-                Object.DestroyImmediate(mesh, true);
-
-                return;
-            }
-
-            return;
-        }
-
+        } 
         internal static AntiCrashDynamicBonePostProcess ProcessDynamicBone(DynamicBone dynamicBone, int currentNukedDynamicBones, int currentDynamicBones)
         {
-            if (currentDynamicBones >= maxDynamicBones)
+            if (currentDynamicBones >= MaxDynamicBones)
             {
                 currentNukedDynamicBones++;
 
@@ -569,7 +586,7 @@ namespace Trinity.Module.Safety.Avatar
 
         internal static AntiCrashDynamicBoneColliderPostProcess ProcessDynamicBoneCollider(DynamicBoneCollider dynamicBoneCollider, int currentNukedDynamicBoneColliders, int currentDynamicBoneColliders)
         {
-            if (currentDynamicBoneColliders >= maxDynamicBonesCollider)
+            if (currentDynamicBoneColliders >= MaxDynamicBoneColliders)
             {
                 currentNukedDynamicBoneColliders++;
 
@@ -609,7 +626,7 @@ namespace Trinity.Module.Safety.Avatar
 
         internal static AntiCrashLightSourcePostProcess ProcessLight(Light light, int currentNukedLights, int currentLights)
         {
-            if (currentLights >= maxLight)
+            if (currentLights >= MaxLightSources)
             {
                 currentNukedLights++;
 
@@ -808,7 +825,7 @@ namespace Trinity.Module.Safety.Avatar
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static short Clamp(short value, short min, short max)
+        internal static short Clamp3(short value, short min, short max)
         {
             if (value < min)
             {
@@ -917,5 +934,191 @@ namespace Trinity.Module.Safety.Avatar
 
             return components;
         }
+
+        internal static bool ProcessShader(Material material)
+        {
+            string Shader = material.shader.name.ToLower();
+            bool CheckSupport = !material.shader.isSupported;
+            bool result;
+            if (CheckSupport)
+            {
+                SanitizeShader(material);
+                result = true;
+            }
+            else
+            {
+                bool checkEngine = IsFakeEngineShader(material);
+                if (checkEngine)
+                {
+                    SanitizeShader(material);
+                    result = true;
+                }
+                else
+                {
+                    bool AreYouMatching = isNewPoyomiShader.IsMatch(Shader);
+                    if (AreYouMatching)
+                    {
+                        result = false;
+                    }
+                    else
+                    {
+                        bool BlackList = Trinity.SDK.Config.shaderList.Contains(Shader);
+                        if (BlackList)
+                        {
+                            SanitizeShader(material);
+                            result = true;
+                        }
+                        else
+                        {
+                            int ShaderCount = (Encoding.UTF8.GetByteCount(Shader) - Shader.Length) / 4;
+                            bool BadShader = string.IsNullOrEmpty(Shader) || Shader.Length > 100 || material.shader.renderQueue > maximumRenderQueue || ShaderCount > 10 || numberRegex.IsMatch(Shader);
+                            if (BadShader)
+                            {
+                                SanitizeShader(material);
+                                result = true;
+                            }
+                            else
+                            {
+                                result = false;
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        internal static int ProcessMesh(Mesh mesh, int subMeshCount, ref int currentNukedMeshes, ref uint currentPolygonCount)
+        {
+            int Count = -1;
+            for (int i = 0; i < subMeshCount; i++)
+            {
+                try
+                {
+                    uint IndexCount = mesh.GetIndexCount(i);
+                    switch (mesh.GetTopology(i))
+                    {
+                        case MeshTopology.Triangles:
+                            IndexCount /= 3U;
+                            break;
+                        case MeshTopology.Quads:
+                            IndexCount /= 4U;
+                            break;
+                        case MeshTopology.Lines:
+                            IndexCount /= 2U;
+                            break;
+                    }
+                    bool checkmax = currentPolygonCount + IndexCount > MaxPolygons;
+                    if (checkmax)
+                    {
+                        currentPolygonCount += IndexCount;
+                        currentNukedMeshes++;
+                        bool Check = Count == -1;
+                        if (Check)
+                        {
+                            Count = i;
+                        }
+                        Object.DestroyImmediate(mesh, true);
+                        break;
+                    }
+                    currentPolygonCount += IndexCount;
+                }
+                catch (System.Exception e)
+                {
+                    Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Red,$"[ERROR] \nClass: AntiCrash\nHandle: SubMesh Processor\nError: {e}",false,false);
+                }
+            }
+            bool nullcheck = mesh == null;
+            int result;
+            if (nullcheck)
+            {
+                result = Count;
+            }
+            else
+            {
+                bool extents = IsBeyondLimit(mesh.bounds.extents, -100f, 100f);
+                if (extents)
+                {
+                    Object.DestroyImmediate(mesh, true);
+                    result = Count;
+                }
+                else
+                {
+                    bool size = IsBeyondLimit(mesh.bounds.size, -100f, 100f);
+                    if (size)
+                    {
+                        Object.DestroyImmediate(mesh, true);
+                        result = Count;
+                    }
+                    else
+                    {
+                        bool center = IsBeyondLimit(mesh.bounds.center, -100f, 100f);
+                        if (center)
+                        {
+                            Object.DestroyImmediate(mesh, true);
+                            result = Count;
+                        }
+                        else
+                        {
+                            bool min = IsBeyondLimit(mesh.bounds.min, -100f, 100f);
+                            if (min)
+                            {
+                                Object.DestroyImmediate(mesh, true);
+                                result = Count;
+                            }
+                            else
+                            {
+                                bool max = IsBeyondLimit(mesh.bounds.max, -100f, 100f);
+                                if (max)
+                                {
+                                    Object.DestroyImmediate(mesh, true);
+                                    result = Count;
+                                }
+                                else
+                                {
+                                    result = Count;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        public static bool AntiBlendShapeCrash = false;
+        private static readonly Regex numberRegex = new Regex("^\\d{5,20}");
+        internal static void SanitizeShader(Material material) => material.shader = GetStandardShader();
+        private static readonly int maximumRenderQueue = 85899;
+        private static readonly List<string> engineShaders = new List<string> { "shader", "diffuse", "particle", "transparent/diffuse", "unlit/texture" };
+        internal static bool IsFakeEngineShader(Material material)
+        {
+            for (int i = 0; i < engineShaders.Count; i++)
+            {
+                bool CheckShaderName = material.shader.name == engineShaders[i] && material.shaderKeywords.Length == 0;
+                if (CheckShaderName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private static readonly Regex duplicatedMeshNameRegex = new Regex("[a-zA-Z0-9]+(\\s|\\.\\d+)+(\\(\\d+\\)|\\d+|\\.\\d+)");
+        private static readonly Regex isNewPoyomiShader = new Regex("hidden\\/(locked\\/|)(\\.|)poiyomi\\/(\\s|•|?|\\?|)+poiyomi (pro|toon|cutout|transparent)(\\s|•|?|\\?|)+\\/[a-z0-9\\s\\.\\d-_\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)=\\]\\[]+");
+        internal static Shader GetStandardShader()
+        {
+            bool nullcheck = standardShader == null;
+            if (nullcheck)
+                standardShader = Shader.Find("Standard");
+            return standardShader;
+        }
+        private static readonly Il2CppSystem.Collections.Generic.List<Material> antiCrashTempMaterialsList = new Il2CppSystem.Collections.Generic.List<Material>();
+        internal static Shader GetDiffuseShader()
+        {
+            bool nullcheck = diffuseShader == null;
+            if (nullcheck)
+                diffuseShader = Shader.Find("Diffuse");
+            return diffuseShader;
+        }
+        private static Shader standardShader;
+        private static Shader diffuseShader;
     }
 }

@@ -28,12 +28,7 @@ namespace Trinity.Module.Settings.Theme
             Main.Instance.OnUpdateEvents.Remove(this);
         }
         public async Task setUITheme(int WaitToUpdate)
-        {
-
-            for (int i = 0; i < WaitToUpdate; i++)
-            {
-                Trinity.Utilities.UIU.SetColor(Color.black, Color.magenta);
-            }
+        { 
 
         }
 

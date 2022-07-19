@@ -9,7 +9,7 @@ namespace Trinity.Module.Settings.Theme
 {
     class munchen : BaseModule, OnUpdateEvent
     {
-        public munchen() : base("Hide Tab", "Hides/Shows Munchen", Main.Instance.SettingsButtonTheme, null, true, false) { }
+        public munchen() : base("Hide Tab", "Hides/Shows Munchen", Main.Instance.SettingsButtonTheme, null, true, true) { }
 
         public override void OnEnable()
         {

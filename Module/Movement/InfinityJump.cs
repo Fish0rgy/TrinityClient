@@ -11,13 +11,11 @@ namespace Trinity.Module.World
 
         public void OnUpdate()
         {
+            if (VRCInputManager.Method_Public_Static_VRCInput_String_0("Jump").prop_Single_2 == 1f)
             {
-                if (VRCInputManager.Method_Public_Static_VRCInput_String_0("Jump").prop_Single_2 == 1f)
-                {
-                    var velocity = Networking.LocalPlayer.GetVelocity();
-                    velocity.y = Networking.LocalPlayer.GetJumpImpulse();
-                    Networking.LocalPlayer.SetVelocity(velocity);
-                }
+                var velocity = Networking.LocalPlayer.GetVelocity();
+                velocity.y = Networking.LocalPlayer.GetJumpImpulse();
+                Networking.LocalPlayer.SetVelocity(velocity);
             }
         }
 

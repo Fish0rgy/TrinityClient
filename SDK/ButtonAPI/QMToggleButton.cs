@@ -28,7 +28,7 @@ namespace Trinity.SDK.ButtonAPI
             singleButton.transform.Find("Background").GetComponent<Image>().color = Color.black;
             singleButton.transform.Find("Icon_On").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.ToggleOnPath);
             singleButton.transform.Find("Icon_Off").GetComponent<Image>().sprite = SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.ToggleOffPath);
-            singleButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = toolTip;
+            singleButton.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = toolTip;
             toggleButton = singleButton.GetComponent<Toggle>();
             toggleAction = action;
             toggleButton.isOn = false;

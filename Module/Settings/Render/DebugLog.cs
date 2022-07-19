@@ -14,7 +14,7 @@ namespace Trinity.Module.Settings.Render
     class DebugLog : BaseModule
     {
         public static QMLable debugLog;
-        public DebugLog() : base("LogList", "Debug on the side", Main.Instance.SettingsButtonrender, null, true, false)
+        public DebugLog() : base("LogList", "Debug on the side", Main.Instance.SettingsButtonrender, null, true, true)
         {
         }
 

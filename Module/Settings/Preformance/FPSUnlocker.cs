@@ -6,7 +6,7 @@ namespace Trinity.Module.Player
 {
     class FPSUnlocker : BaseModule
     {
-        public FPSUnlocker() : base("FPS Unlocker", "140 Fps", Main.Instance.SettingsButtonpreformance, null, true, false) { }
+        public FPSUnlocker() : base("FPS Unlocker", "140 Fps", Main.Instance.SettingsButtonpreformance, null, true, true) { }
 
         public override void OnEnable()
         {

@@ -10,7 +10,7 @@ namespace Trinity.Module.Settings.Render
     class ObjectESP : BaseModule, OnUpdateEvent
     {
         public static bool check = false;
-        public ObjectESP() : base("Item ESP", "Draws Items threw walls", Main.Instance.SettingsButtonrender, null, true, false) { }
+        public ObjectESP() : base("Item ESP", "Draws Items threw walls", Main.Instance.SettingsButtonrender, null, true, true) { }
 
         public override void OnEnable()
         {

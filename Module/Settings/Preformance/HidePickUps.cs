@@ -9,7 +9,7 @@ namespace Trinity.Module.Settings.Preformance
 {
     class HidePickUps : BaseModule
     {
-        public HidePickUps() : base("Hide Items", "Hides pick ups local", Main.Instance.SettingsButtonpreformance, null, true, false)
+        public HidePickUps() : base("Hide Items", "Hides pick ups local", Main.Instance.SettingsButtonpreformance, null, true, true)
         {
         }
 

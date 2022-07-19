@@ -11,7 +11,7 @@ namespace Trinity.Module
         public bool toggled;
         public bool save;
 
-        string discription;
+        string discription; 
         QMNestedButton category;
         bool isToggle;
         Sprite image;
@@ -51,7 +51,7 @@ namespace Trinity.Module
         {
             if (isToggle)
             {
-                QMToggleButton qMToggleButton = new QMToggleButton(category.menuTransform, name, discription, new Action<bool>((bool state) =>
+                toggleButton = new QMToggleButton(category.menuTransform, name, discription, new Action<bool>((bool state) =>
                 {
                     this.toggled = state;
                     switch (state)
@@ -68,17 +68,17 @@ namespace Trinity.Module
                             break;
                     }
                 }));
-                if (save) 
+                if (save)
                 {
-                    //if(Trinity.SDK.Config.getConfigBool(name) == true)
-                    //    OnEnable();
-                    //else
-                    //    OnDisable();
+                    if (Trinity.SDK.Config.getConfigBool(name) == true)
+                    {
+                        toggleButton.Toggle(true);
+                    }
                 }
             }
             else
             {
-                new QMSingleButton(category.menuTransform, name, discription, image, delegate
+                singleButton = new QMSingleButton(category.menuTransform, name, discription, image, delegate
                 {
                     OnEnable();
                 });

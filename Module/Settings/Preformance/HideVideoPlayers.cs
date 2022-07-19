@@ -9,7 +9,7 @@ namespace Trinity.Module.Settings.Preformance
 {
     class HideVideoPlayers : BaseModule
     {
-        public HideVideoPlayers() : base("Hide VideoPlayers", "Hides Video Player local", Main.Instance.SettingsButtonpreformance, null, true, false)
+        public HideVideoPlayers() : base("Hide VideoPlayers", "Hides Video Player local", Main.Instance.SettingsButtonpreformance, null, true, true)
         {
         }
 

@@ -10,7 +10,7 @@ namespace Trinity.Module.Player.Audio
 {
     class _512k : BaseModule
     {
-        public _512k() : base("512k BitRate", "512k BitRate", Main.Instance.AudioButton, null, true, false) { }
+        public _512k() : base("512k BitRate", "512k BitRate", Main.Instance.AudioButton, null, true, true) { }
         public override void OnEnable()
         {
             MenuUI.Log("AUDIO: <color=green>Set Bit Rate To 512k</color>");

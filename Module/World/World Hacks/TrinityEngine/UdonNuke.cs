@@ -25,32 +25,20 @@ namespace Trinity.Module.Exploit.UdonExploits
         {
             while (this.toggled)
             {
-                for (int f = 0; f < WorldWrapper.udonBehaviours.Length; f++)
+                WorldWrapper.udonBehaviours.ToList().ForEach(UdonObject =>
                 {
-                    foreach (UdonBehaviour udonobjects in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+                    UdonObject._eventTable.keys.ToString().ToList().ForEach(UdonKey =>
                     {
-                        Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Collections.Generic.List<uint>>.Enumerator fatblackman = udonobjects._eventTable.GetEnumerator();
-                        while (fatblackman.MoveNext())
-                        {
-                            Il2CppSystem.Collections.Generic.KeyValuePair<string, Il2CppSystem.Collections.Generic.List<uint>> name = fatblackman.current;
-                            try
-                            { 
-                                udonobjects.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, name.Key);
-                                name = null;
-                            }
-                            catch (Exception ex)
-                            {
-                                LogHandler.Log(LogHandler.Colors.Red, $"Cant Send {name.Key}");
-                            }
-                             
-                        }
-                        fatblackman = null;
-                    }
-                    yield return new WaitForSeconds(0.1f);
-                    if (!this.toggled)
-                        break;
-                }
+                        string key = UdonKey.ToString();
+                        UdonObject.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, key);
+
+                    });
+
+                });
+                if (!this.toggled)
+                    break;
                 yield return new WaitForSeconds(0.1f);
+                 
             }
             yield break;
         }

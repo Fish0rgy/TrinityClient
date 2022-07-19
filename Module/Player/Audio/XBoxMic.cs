@@ -4,7 +4,7 @@ namespace Trinity.Module.Player
 {
     class XBoxMic : BaseModule
     {
-        public XBoxMic() : base("Xbox Mic", "1v1 in COD bro", Main.Instance.AudioButton, null, true, false) { }
+        public XBoxMic() : base("Xbox Mic", "1v1 in COD bro", Main.Instance.AudioButton, null, true, true) { }
 
 
 

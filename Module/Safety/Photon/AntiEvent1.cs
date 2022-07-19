@@ -8,7 +8,7 @@ namespace Trinity.Module.Safety.Photon
 {
     internal class AntiEvent1 : BaseModule 
     {
-        public AntiEvent1() : base("Anti LouddMic", "Destroy Bad Event Data From Event 1", Main.Instance.Networkbutton, null, true, true)
+        public AntiEvent1() : base("Anti Loud Mic", "Destroy Bad Event Data From Event 1", Main.Instance.Networkbutton, null, true, true)
         {
         }
 

@@ -51,26 +51,17 @@ namespace Trinity.Module.Safety.Photon
                     {
                         if (Config.AntiE1)
                         {
-                            byte[] EventData = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(eventData.CustomData.Pointer);
-                            var payload = PU.Params2JSON(eventData.Parameters);
-                            if (E1BlockedPlayers.Contains(player.field_Private_APIUser_0.id))
-                                return false;
-
-                            if (E1Data.Contains(payload) || BitConverter.ToInt32(EventData, 0) != eventData.sender || EventData.Length <= 8)
+                             
+                            byte[] voicepackets = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(eventData.CustomData.Pointer);
+                            bool bad = Misc.FilterBadData(eventData.Sender, voicepackets);
+                            if (!bad)
+                                return true;
+                            if (!E1BlockedPlayers.Contains(player.field_Private_APIUser_0.id))
                             {
                                 Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Yellow, $"[Event Safety] \nEvent: {eventData.Code} \nEvent Sender: {EventSender} \nValid: False", false, false);
                                 MenuUI.Log($"Safety: <color=red>Event 1 From {EventSender} | Valid: False</color>");
                                 E1BlockedPlayers.Add(player.field_Private_APIUser_0.id);
-                                PU.Delay(27f, delegate
-                                {
-                                    MenuUI.Log($"Safety: <color=green>Event 1 From {EventSender} | Valid: True</color>");
-                                    Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Yellow, $"[Event Safety] \nEvent: {eventData.Code} \nEvent Sender: {EventSender} \nValid: True", false, false);
-                                    E1BlockedPlayers.Remove(player.field_Private_APIUser_0.id);
-                                });
-                                return false;
                             }
-                            if (!E1Data.Contains(payload))
-                                E1Data.Add(payload);
                         }
                         break;
                     }
