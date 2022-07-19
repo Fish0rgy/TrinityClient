@@ -23,7 +23,7 @@ namespace Trinity.SDK
     { 
         public static string RandomString(int length)
         {
-            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!§$%&/()=?";
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!§$%&/()=?"; 
             string s = "";
             System.Random rand = new System.Random();
             for (int i = 0; i < length; i++)

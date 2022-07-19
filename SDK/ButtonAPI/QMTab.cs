@@ -20,7 +20,7 @@ namespace Trinity.SDK.ButtonAPI
                 menu = new QMMenu(menuName, pagetitle, true, false);
                 menuTransform = menu.menuContents;
 
-                GameObject tab =
+                GameObject tab = 
                     UnityEngine.Object.Instantiate(Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_AudioSettings").gameObject,
                     Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/Page_Buttons_QM/HorizontalLayoutGroup"));
 

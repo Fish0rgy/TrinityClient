@@ -16,7 +16,7 @@ namespace Trinity.SDK.ButtonAPI.AVI_FAV
             UiVRCList.clearUnseenListOnCollapse = false;
             UiVRCList.usePagination = false;
             UiVRCList.hideElementsWhenContracted = false;
-            UiVRCList.hideWhenEmpty = false;
+            UiVRCList.hideWhenEmpty = false; 
             UiVRCList.field_Protected_Dictionary_2_Int32_List_1_ApiModel_0.Clear();
 
 

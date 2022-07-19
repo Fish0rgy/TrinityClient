@@ -14,7 +14,7 @@ namespace Trinity.SDK.ButtonAPI
             var toinst = GameObject.Find("UserInterface").transform.Find("MenuContent/Backdrop/Header/Tabs/ViewPort/Content/SafetyPageTab");
             var instanciated = GameObject.Instantiate(toinst, parent.transform);
             reset(instanciated.gameObject);
-            instanciated.transform.rotation = new Quaternion(0, 0, 0, 0);
+            instanciated.transform.rotation = new Quaternion(0, 0, 0, 0); 
             instanciated.name = $"BTN_{text}";
             Component.Destroy(instanciated.GetComponent<VRCUiPageTab>());
             var button = instanciated.transform.Find("Button").GetComponent<UnityEngine.UI.Button>();

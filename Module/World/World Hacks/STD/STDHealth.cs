@@ -9,7 +9,7 @@ namespace Trinity.Module.World.World_Hacks.STD
 {
     internal class STDHealth : BaseModule
     {
-        public STDHealth() : base("Give Health", "", Main.Instance.STDButton, null, false)
+        public STDHealth() : base("Give Health", "", Main.Instance.STDButton, null, false) 
         {
         }
         public override void OnEnable()

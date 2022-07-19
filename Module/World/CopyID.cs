@@ -4,7 +4,7 @@ using Trinity.SDK;
 namespace Trinity.Module.World
 {
     class CopyWID : BaseModule
-    {
+    { 
         public CopyWID() : base("World ID", "Copies the World & InstanceID", Main.Instance.WorldButton, SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath), false, false) { }
 
         public override void OnEnable()

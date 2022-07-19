@@ -15,7 +15,7 @@ namespace Trinity.SDK.ButtonAPI.AVI_FAV
 			string contents = JsonConvert.SerializeObject(this, (Formatting)1);
 			File.WriteAllText("Trinity/AvatarConfig.json", contents);
 		}
-
+		 
 		internal static AviConfig LoadAvatarFav()
 		{
 			bool check = !File.Exists("Trinity/AvatarConfig.json");

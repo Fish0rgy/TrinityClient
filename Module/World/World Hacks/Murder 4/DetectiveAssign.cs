@@ -15,7 +15,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
         }
         public override void OnEnable()
         {
-            try
+            try 
             {
                 LogHandler.Log(LogHandler.Colors.Green, "Assigned You The Detective Role", false, false);
                 LogHandler.LogDebug("Assigned You The Detective Role");

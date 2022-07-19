@@ -16,7 +16,7 @@ namespace Trinity.Module.World.World_Hacks.TrinityEngine
     class TriggerNuke : BaseModule
     {
         public TriggerNuke() : base("Trigger Nuker", "Spamms Trigger Objects FAST AS FUCK",Main.Instance.udonexploitbutton, null, true) { }
-
+         
         public override void OnEnable()
         {
             VRC_Trigger[] triggers = Resources.FindObjectsOfTypeAll<VRC_Trigger>();

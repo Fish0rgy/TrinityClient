@@ -21,7 +21,7 @@ namespace Trinity.SDK
         public static string GetID() => CurrentWorld().id;
         public static string GetLocation() => PU.GetPlayer().GetAPIUser().location;
         public static ApiWorld CurrentWorld() => RoomManager.field_Internal_Static_ApiWorld_0;
-        public static ApiWorldInstance CurrentWorldInstance() => RoomManager.field_Internal_Static_ApiWorldInstance_0;
+        public static ApiWorldInstance CurrentWorldInstance() => RoomManager.field_Internal_Static_ApiWorldInstance_0; 
         public static string GetWorldID => PU.GetAPIUser(PU.GetPlayer()).location;
         public static void Init()
         {

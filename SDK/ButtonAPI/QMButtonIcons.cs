@@ -24,7 +24,7 @@ namespace Trinity.SDK.ButtonAPI
 
             Sprite sprite = Sprite.CreateSprite_Injected(tex, ref rect, ref pivot, 100, 0, SpriteMeshType.Tight, ref border, false);
             return sprite;
-        }
+        } 
     }
 
 }

@@ -19,7 +19,7 @@ namespace Trinity.SDK.ButtonAPI
             text.text = contents;
             text.enableAutoSizing = true;
             text.color = Color.white;
-            text.m_fontColor = Color.white;
+            text.m_fontColor = Color.white; 
             lable.gameObject.SetActive(false);
         }
     }

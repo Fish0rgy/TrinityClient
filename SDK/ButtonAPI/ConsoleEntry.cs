@@ -12,7 +12,7 @@ namespace Trinity.SDK.ButtonAPI
     {
         public GameObject mainObj;
         public TextMeshProUGUI txtCom;
-
+         
         public ConsoleEntry(string txt)
         {
             Init(txt);

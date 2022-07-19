@@ -18,3 +18,4 @@ namespace Trinity.SDK
 		internal bool LielB51gc;
 	}
 }
+ 

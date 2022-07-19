@@ -26,7 +26,7 @@ namespace Trinity.SDK
         public const string PlayerIconPath = "Trinity\\Icons\\Player.png";
         public const string LocalHandlerIconPath = "Trinity\\Icons\\Exploit Manager.png";
         public const string APIHandlerIconPath = "Trinity\\Icons\\";
-        public const string WorldHacksIconPath = "Trinity\\Icons\\World.png";
+        public const string WorldHacksIconPath = "Trinity\\Icons\\World.png"; 
         public const string TabAlienPath = "Trinity\\Icons\\Logo.png";
         public const string SpaceShipPath = "Trinity\\Icons\\Logo.png";
         public const string raygunPath = "Trinity\\Icons\\TargetCrash.png";

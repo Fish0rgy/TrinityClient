@@ -20,7 +20,7 @@ namespace Trinity.WebAPI
         public string CorruptBundleData = "avtr_7465fab7-d993-42a4-b26f-8eeba973fc92";
         public string GameCloseData = "avtr_7465fab7-d993-42a4-b26f-8eeba973fc92";
         public string AudioCrashData = "avtr_7465fab7-d993-42a4-b26f-8eeba973fc92";
-        public string CorruptPCData = "avtr_7465fab7-d993-42a4-b26f-8eeba973fc92";
+        public string CorruptPCData = "avtr_7465fab7-d993-42a4-b26f-8eeba973fc92"; 
         public string QuestCloseData = "avtr_8ae0a389-c60e-40bf-a91d-b52286ac72b4";
         public string VoidBypassData = "avtr_abd8a361-b18e-4337-8c1f-6975bd5a6ba9";
 

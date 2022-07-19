@@ -16,7 +16,7 @@ namespace Trinity.Module.World
 
         public override void OnEnable()
         {
-            Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) =>
+            Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) => 
             {
                 if (string.IsNullOrWhiteSpace(str)) return; 
 

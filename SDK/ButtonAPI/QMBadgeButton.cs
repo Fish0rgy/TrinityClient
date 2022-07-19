@@ -13,7 +13,7 @@ namespace Trinity.SDK.ButtonAPI
             GameObject BadgeButton = UnityEngine.Object.Instantiate<GameObject>(Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMNotificationsArea/DebugInfoPanel/Panel/Background").gameObject, parent);          
             BadgeButton.transform.localPosition = new Vector3(x, y, -1);
             BadgeButton.name = "_Trinity_ConsoleBackground";
-            BadgeButton.transform.parent = parent;
+            BadgeButton.transform.parent = parent; 
         }
     }
 }

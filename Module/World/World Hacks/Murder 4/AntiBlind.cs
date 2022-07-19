@@ -7,7 +7,7 @@ using Trinity.SDK;
 using UnityEngine;
 
 namespace Trinity.Module.World.World_Hacks.Murder_4
-{
+{ 
     class AntiBlind : BaseModule
     {
         public AntiBlind() : base("Anti Blind", "no blinding", Main.Instance.Murderbutton, null, false)

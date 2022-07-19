@@ -80,7 +80,7 @@ namespace Trinity.SDK.ButtonAPI
             Main.Instance.QuickMenuStuff.menuStateController.Method_Public_Void_String_UIContext_Boolean_TransitionType_0(page.field_Public_String_0, null, false);
         }
 
-        public void CloseMenu()
+        public void CloseMenu() 
         {
             page.Method_Public_Virtual_New_Void_0();
         }

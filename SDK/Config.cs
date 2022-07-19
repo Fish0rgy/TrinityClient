@@ -17,7 +17,7 @@ namespace Trinity.SDK
         {
 
         }
-        internal void SaveConfig()
+        internal void SaveConfig() 
         {
             string value = JsonConvert.SerializeObject(this, (Formatting)1);
             File.WriteAllText("Trinity/Config.json", value);

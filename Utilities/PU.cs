@@ -18,13 +18,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC;
 using VRC.Animation;
-using VRC.Core;
+using VRC.Core; 
 using VRC.DataModel;
 using VRC.SDKBase;
 using VRC.UI;
 using VRC.UI.Elements.Menus;
 
-namespace Trinity.Utilities
+namespace Trinity.Utilities 
 {
     static class PU
     {

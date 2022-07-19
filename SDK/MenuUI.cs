@@ -498,7 +498,7 @@ namespace Trinity.SDK
         public static void BotMenu(){
             Main.Instance.Privatebotbutton = new QMNestedButton(Main.Instance.BotButton.menuTransform, "App Bots", QMButtonIcons.LoadSpriteFromFile(Serpent.PlayerIconPath));
         }
-        public static void SettingsMenu(){
+        public static void SettingsMenu(){ 
             Main.Instance.SettingsButtonpreformance = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Performance", QMButtonIcons.LoadSpriteFromFile(Serpent.preformancePath));
             Main.Instance.SettingsButtonrender = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Render", QMButtonIcons.LoadSpriteFromFile(Serpent.renderPath));
             Main.Instance.SettingsButtonLoggging = new QMNestedButton(Main.Instance.SettingsButton.menuTransform, "Logging", QMButtonIcons.LoadSpriteFromFile(Serpent.loggingPath));

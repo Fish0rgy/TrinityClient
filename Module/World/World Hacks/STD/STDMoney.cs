@@ -8,7 +8,7 @@ using Trinity.SDK;
 namespace Trinity.Module.World.World_Hacks.STD
 {
     internal class STDMoney : BaseModule
-    {
+    { 
         public STDMoney() : base("Give Money", "", Main.Instance.STDButton, null, false)
         {
         }

@@ -14,13 +14,13 @@ namespace Trinity.Utilities
 	{
 		public static GameObject QuickMenu = UserInterface.transform.Find("Canvas_QuickMenu(Clone)").gameObject;
 		public static TextMeshProUGUI[] ButtonText = (TextMeshProUGUI[])UnityEngine.Object.FindObjectsOfType<TextMeshProUGUI>(); 
-		public static Image[] ButtonColor = (Image[])UnityEngine.Object.FindObjectsOfType<Image>(); 
+		public static Image[] ButtonColor = (Image[])UnityEngine.Object.FindObjectsOfType<Image>();  
         public static GameObject UserInterface => GameObject.Find("UserInterface");
         public static VRCUiPopupInput keyboardPopup => VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.field_Public_VRCUiPopupInput_0;
 
         public static void CloseVRCUI() => VRCUiManager.prop_VRCUiManager_0.Method_Public_Void_Boolean_Boolean_1(true, false);
         public static Il2CppSystem.Action CloseVRCUIAction => DelegateSupport.ConvertDelegate<Il2CppSystem.Action>(new Action(() => { UIU.CloseVRCUI(); }));
-
+         
         public static void OpenVRCUIPopup(string title, string body, string acceptText, Action acceptAction, string declineText, Action declineAction = null)
         {
             Il2CppSystem.Action newAcceptAction = DelegateSupport.ConvertDelegate<Il2CppSystem.Action>(acceptAction);

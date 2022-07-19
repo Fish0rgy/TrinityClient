@@ -23,7 +23,7 @@ namespace Trinity.SDK.ButtonAPI
             singleButton.transform.parent = parent;
             singleButton.name = text + "_Trinity_Button";         
             singleButton.transform.Find("Text_H4").gameObject.GetComponent<TextMeshProUGUI>().text = text;
-            textCom = singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>();
+            textCom = singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>(); 
             badge = singleButton.transform.Find("Badge_MMJump").GetComponent<Image>();
             icon = singleButton.transform.Find("Icon").GetComponent<Image>();
             singleButton.transform.Find("Background").GetComponent<Image>().color = Color.black;

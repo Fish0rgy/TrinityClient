@@ -886,7 +886,6 @@
     <Compile Include="SDK\ButtonAPI\ConsoleEntry.cs" />
     <Compile Include="SDK\ButtonAPI\PopUp\TContent.cs" />
     <Compile Include="SDK\ButtonAPI\PopUp\QMCustomNoti.cs" />
-    <Compile Include="SDK\ButtonAPI\QMActionMenu.cs" />
     <Compile Include="SDK\ButtonAPI\QMButtonGroup.cs" />
     <Compile Include="SDK\ButtonAPI\QMCreateAvatar.cs" />
     <Compile Include="SDK\ButtonAPI\QMCreateButton.cs" />
@@ -896,15 +895,13 @@
     <Compile Include="SDK\ButtonAPI\QMLoadingScreen.cs" />
     <Compile Include="SDK\ButtonAPI\QMMenu.cs" />
     <Compile Include="SDK\ButtonAPI\QMNestedButton.cs" />
-    <Compile Include="SDK\ButtonAPI\QMOuterButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMSingleButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMBadgeButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMTab.cs" />
     <Compile Include="SDK\ButtonAPI\QMSpacer.cs" />
     <Compile Include="SDK\ButtonAPI\QMToggleButton.cs" />
-    <Compile Include="SDK\ButtonAPI\QMPanel.cs" />
     <Compile Include="SDK\ButtonAPI\QMButtonIcons.cs" />
-    <Compile Include="SDK\ButtonAPI\VRCButtonAPI.cs" />
+    <Compile Include="SDK\ButtonAPI\TrinityButtonAPI.cs" />
     <Compile Include="SDK\Config.cs" />
     <Compile Include="SDK\OldKeyBinds.cs" />
     <Compile Include="SDK\LogHandler.cs" />
@@ -922,7 +919,6 @@
     <Compile Include="SDK\PhotonAPI\PhotonExtensions.cs" />
     <Compile Include="SDK\PhotonAPI\Serialization.cs" />
     <Compile Include="SDK\TempUploadContainer.cs" />
-    <Compile Include="SDK\WSK.cs" />
     <Compile Include="Utilities\PI.cs" />
     <Compile Include="Utilities\PU.cs" />
     <Compile Include="SDK\Serpent.cs" />

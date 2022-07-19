@@ -10,8 +10,7 @@ using UnityEngine;
 namespace Trinity.Module.Settings.Render
 {
     class TimePanel : BaseModule
-    {
-        public static VrConsoleLog TimeLog;
+    { 
         public TimePanel() : base("Time", "Shows Current Time", Main.Instance.SettingsButtonrender, null, true, false)
         {
         }

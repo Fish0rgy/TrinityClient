@@ -13,7 +13,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
         {
             try
             {
-                LogHandler.Log(LogHandler.Colors.Green, "Teleported Every Object To Your Position", false, false);
+                LogHandler.Log(LogHandler.Colors.Green, "Teleported Every Object To Your Position", false, false); 
                 LogHandler.LogDebug("Teleported Every Object To Your Position");
                 MurderMisc.MurderGive("Revolver");
                 MurderMisc.MurderGive("Knife");

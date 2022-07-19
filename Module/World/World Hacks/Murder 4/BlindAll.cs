@@ -11,7 +11,7 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
         {
         }
         public override void OnEnable()
-        {
+        { 
             try
             {
                 LogHandler.Log(LogHandler.Colors.Green, "Blinded Everyone In The Lobby", false, false);

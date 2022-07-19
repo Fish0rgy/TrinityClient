@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Trinity.Module.World.World_Hacks.STD
 {
     internal class STDMisc
-    {
+    { 
         public static void Health()
         {
             GameObject health = GameObject.Find("HealthController");

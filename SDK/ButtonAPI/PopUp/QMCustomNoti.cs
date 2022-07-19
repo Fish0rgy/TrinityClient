@@ -15,7 +15,7 @@ namespace Trinity.SDK.ButtonAPI.PopUp
         public static Text TitleText;
         public static readonly float DurationOnScreen = 2f; //duration of how long till fade off
         public static readonly float DurationOfFade = 2f; // how long should alpha of canvas group to turn from 0 to 1
-
+        //keafys vrc noti popup 
         internal static void SetUp()
         {
             byte[] assetarray = File.ReadAllBytes("Trinity\\Misc\\join");

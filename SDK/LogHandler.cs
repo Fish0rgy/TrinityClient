@@ -20,7 +20,7 @@ namespace Trinity.SDK
         private static string lastMsg = ""; 
         [DllImport("user32.dll", EntryPoint = "FindWindow")]
         public static extern System.IntPtr FindWindow(System.String className, System.String windowName);
-
+         
         public static void DisplayLogo()
         {
             APIUser currentUser = APIUser.CurrentUser; 

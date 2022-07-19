@@ -9,7 +9,7 @@ namespace Trinity.Module.World.World_Hacks.ZombieTag
     class PrisionMisc
     {
         public static bool Check()
-        {
+        { 
             string WORLDID = "";
             return RoomManager.Method_Public_Static_String_0().Contains(WORLDID); //Method_Internal_Static_String_0
         }

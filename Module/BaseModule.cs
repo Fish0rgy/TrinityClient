@@ -14,7 +14,7 @@ namespace Trinity.Module
         string discription; 
         QMNestedButton category;
         bool isToggle;
-        Sprite image;
+        Sprite image; 
 
         public QMToggleButton toggleButton;
         public QMSingleButton singleButton;

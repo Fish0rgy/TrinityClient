@@ -20,7 +20,7 @@ namespace Trinity.SDK.ButtonAPI
                 Spacer.transform.Find("Badge_MMJump").gameObject.active = false;
                 Spacer.transform.Find("Icon").gameObject.active = false;
                 Spacer.SetActive(true);
-            }
+            } 
             catch (Exception e) { LogHandler.Error(e); }
              
         }

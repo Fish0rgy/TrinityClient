@@ -19,10 +19,10 @@ namespace Trinity.Utilities
         RANK_USER = 4,
         RANK_KNOWN = 5,
         RANK_TRUSTED = 6,
-        RANK_VETERAN = 7,
+        RANK_VETERAN = 7, 
         RANK_VRCHATTEAM = 8,
         RANK_FRIEND = 9
-    }
+    } 
 
     internal enum TrustRanks
     {

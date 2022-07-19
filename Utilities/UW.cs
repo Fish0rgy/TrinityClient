@@ -19,7 +19,7 @@ namespace Trinity.SDK
             switch (targetnetwork)
             {
                 case EventTarget.Targeted:
-                    {
+                    { 
                         
                         WorldWrapper.udonBehaviours.ToList().ForEach(UdonObject =>
                         {

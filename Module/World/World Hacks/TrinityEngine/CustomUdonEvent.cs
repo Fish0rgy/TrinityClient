@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Trinity.Utilities;
-
+ 
 namespace Trinity.Module.Player
 {
     class CustomUdonEvent : BaseModule

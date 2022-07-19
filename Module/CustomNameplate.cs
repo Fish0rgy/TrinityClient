@@ -16,7 +16,7 @@ namespace Trinity.Module
         private byte frames, ping;
         private int noUpdateCount = 0;
         public string UserID = "";
-        public bool isStaf  = false;
+        public bool isStaf  = false; 
         public static string rank;
 
 

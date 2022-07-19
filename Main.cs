@@ -174,7 +174,7 @@ namespace Trinity
             {
                 //UIU.WaitBitch();
                 MelonCoroutines.Start(MenuUI.StartUI());
-                Config.Instance = Config.Load();
+                Config.Instance = Config.Load(); 
                 LogHandler.Log(LogHandler.Colors.Green, "Client UI Initialized!", true, false);
             }
             catch (Exception ex)
@@ -184,16 +184,11 @@ namespace Trinity
         }
         public override void OnApplicationQuit()
         {
-            try
+            Instance.Modules.ToList().ForEach(module =>
             {
-                foreach (BaseModule module in Instance.Modules)
-                {
-                    if (module.save)
-                        Instance.Config.setConfigBool(module.name, module.toggled);
-
-                }
-            }
-            catch (Exception EX) { LogHandler.Log(LogHandler.Colors.Red, EX.StackTrace, true, false); }
+                if (module.save)
+                    Instance.Config.setConfigBool(module.name, module.toggled);
+            });
         }
     }
 }

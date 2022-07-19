@@ -7,7 +7,7 @@ namespace Trinity.Module.Exploit
 {
     class InstanceLock : BaseModule, OnSendOPEvent
     {
-        public InstanceLock() : base("Instance Lock", "Needs to be Master Client", Main.Instance.WorldButton, null, true, false)
+        public InstanceLock() : base("Instance Lock", "Needs to be Master Client", Main.Instance.WorldButton, null, true, false) 
         {
         }
 

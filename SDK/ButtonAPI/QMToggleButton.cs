@@ -20,7 +20,7 @@ namespace Trinity.SDK.ButtonAPI
             singleButton.name = text + "_Trinity_ToggleButton";
 
             singleButton.transform.Find("Text_H4").gameObject.GetComponent<TextMeshProUGUI>().text = text;
-            textCom = singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>();
+            textCom = singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>(); 
 
             textCom.color = new(0.7189f, 0.5634f, 0f, 1f);
             textCom.gameObject.GetComponent<StyleElement>().enabled = false;
@@ -37,11 +37,9 @@ namespace Trinity.SDK.ButtonAPI
             singleButton.SetActive(true);
 
         }
-
         public void Toggle(bool state)
         {
             toggleButton.isOn = state;
         }
-
     }
 }

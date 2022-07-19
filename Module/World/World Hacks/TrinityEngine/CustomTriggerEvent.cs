@@ -11,7 +11,7 @@ using UnityEngine.UI;
 using Trinity.Utilities;
 
 namespace Trinity.Module.World.World_Hacks
-{
+{ 
     class CustomTriggerEvent : BaseModule
     {
         public CustomTriggerEvent() : base("Send\n Trigger Event", "Sends Custom udon event from clipboard", Main.Instance.udonexploitbutton, QMButtonIcons.LoadSpriteFromFile(Serpent.FinderPath), false, false) { }

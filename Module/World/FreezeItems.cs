@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using VRC.SDKBase;
 
 namespace Trinity.Module.World
-{
+{ 
     class FreezeItems : BaseModule, OnUpdateEvent
 	{
 		public FreezeItems() : base("FreezePickups", "No one besides you can use Pickups", Main.Instance.WorldButton, null, true, true)

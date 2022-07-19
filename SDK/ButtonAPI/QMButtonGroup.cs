@@ -17,7 +17,7 @@ namespace Trinity.SDK.ButtonAPI
         {
             buttonGroup = UnityEngine.Object.Instantiate<GameObject>(Main.Instance.QuickMenuStuff.quickMenu.transform.Find("Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks").gameObject, parent);
             buttonGroup.name = "Buttons_" + name;
-            buttonGroup.GetComponent<GridLayoutGroup>().childAlignment = TextAnchor.MiddleLeft;
+            buttonGroup.GetComponent<GridLayoutGroup>().childAlignment = TextAnchor.MiddleLeft; 
             for (int i = 0; i < buttonGroup.transform.childCount; i++)
                 GameObject.Destroy(buttonGroup.transform.GetChild(i).gameObject);
         }
