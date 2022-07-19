@@ -8,3 +8,4 @@ namespace Trinity.Events
         bool OnPhotonPeer(byte __0, Dictionary<byte, Il2CppSystem.Object> __1, SendOptions __2);
     }
 }
+ 

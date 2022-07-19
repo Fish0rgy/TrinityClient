@@ -11,3 +11,4 @@ namespace Trinity.Events
         void OnWorldInit();
     }
 }
+ 

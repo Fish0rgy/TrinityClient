@@ -8,3 +8,4 @@ namespace Trinity.Events
         bool OnUdon(string __0, Player __1, UdonSync __instance);
     }
 }
+ 

@@ -7,3 +7,4 @@ namespace Trinity.Events
         bool OnAvatarLoad(VRCPlayer player, GameObject __0);
     }
 }
+ 

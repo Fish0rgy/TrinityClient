@@ -7,3 +7,4 @@ namespace Trinity.Events
         bool OnSendOP(byte opCode, ref Il2CppSystem.Object parameters, ref RaiseEventOptions raiseEventOptions);
     }
 }
+ 
