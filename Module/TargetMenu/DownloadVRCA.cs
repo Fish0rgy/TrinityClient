@@ -5,7 +5,7 @@ using System;
 using System.Net;
 using VRC.Core;
 
-namespace Trinity.Module.TargetMenu
+namespace Trinity.Module.TargetMenu 
 {
     internal class DownloadVRCSelected : BaseModule
     {
