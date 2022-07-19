@@ -128,9 +128,6 @@
     <Reference Include="Iced">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\Iced.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>$(VRCPATH)\MelonLoader\Managed\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="Il2CppMono.Security">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\Il2CppMono.Security.dll</HintPath>
     </Reference>
@@ -251,6 +248,9 @@
     <Reference Include="Transmtn">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\Transmtn.dll</HintPath>
     </Reference>
+    <Reference Include="UIExpansionKit">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\UIExpansionKit.dll</HintPath>
+    </Reference>
     <Reference Include="UnhollowerBaseLib">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
     </Reference>
@@ -272,8 +272,19 @@
     <Reference Include="UniTask.TextMeshPro">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\UniTask.TextMeshPro.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.InputSystem">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\Unity.InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
@@ -473,6 +484,25 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\UnityEngine.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="ValueTupleBridge">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\ValueTupleBridge.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.Collections, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.Dynamics, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.Dynamics.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.SDK3.Dynamics.Contact, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.SDK3.Dynamics.Contact.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.SDK3.Dynamics.PhysBone, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRC.SDK3.Dynamics.PhysBone.dll</HintPath>
+    </Reference>
     <Reference Include="VRC.SDKBase.Editor.BuildPipeline">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\VRC.SDKBase.Editor.BuildPipeline.dll</HintPath>
     </Reference>
@@ -521,6 +551,9 @@
     <Reference Include="VRCCore-Standalone">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
     </Reference>
+    <Reference Include="VRChatUtilityKit">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\VRChatUtilityKit.dll</HintPath>
+    </Reference>
     <Reference Include="VRCLog">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\VRCLog.dll</HintPath>
     </Reference>
@@ -536,12 +569,15 @@
     <Reference Include="VRCSDKBase">
       <HintPath>$(VRCPATH)\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>$(VRCPATH)\MelonLoader\Managed\websocket-sharp.dll</HintPath>
+    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationBot\Commands.cs" />
+    <Compile Include="ApplicationBot\PlayerExtensions.cs" />
     <Compile Include="Events\OnAssetBundleLoadEvent.cs" />
     <Compile Include="Events\OnAvatarLoadedEvent.cs" />
     <Compile Include="Events\OnEventEvent.cs" />
@@ -889,6 +925,7 @@
     <Compile Include="SDK\PhotonAPI\Serialization.cs" />
     <Compile Include="SDK\TempUploadContainer.cs" />
     <Compile Include="SDK\WSK.cs" />
+    <Compile Include="Sockets\WebSocketServer.cs" />
     <Compile Include="Utilities\PI.cs" />
     <Compile Include="Utilities\PU.cs" />
     <Compile Include="SDK\Serpent.cs" />
@@ -907,6 +944,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetName).dll" "$(VRCPATH)\Mods\trinity.dll"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetName).dll" "C:\Program Files (x86)\Steam\steamapps\common\VRChat\Mods\trinity.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

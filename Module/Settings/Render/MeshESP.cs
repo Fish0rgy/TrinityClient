@@ -89,6 +89,7 @@ namespace Trinity.Module.Settings.Render
                 for (int i = 0; i < PU.GetAllPlayers().Length; i++)
                 {
                     VRC.Player player = PU.GetAllPlayers()[i];
+
                     if(player != PU.GetPlayer())
                     {
                         if (PU.GetIsFriend(player.prop_APIUser_0))

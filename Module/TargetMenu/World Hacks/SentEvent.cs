@@ -27,7 +27,7 @@ namespace Trinity.Module.Player
                     UW.udonsend(str, EventTarget.Targeted);
                     MenuUI.Log($"UDON: <color=green>Sent Custom Event {str}</color>");
                     LogHandler.Log(LogHandler.Colors.Green, $"[Custom Udon Event] Event Name: {str} | Object Name: {WorldWrapper.udonBehaviours[j].gameObject.name}", false, false);
-                }
+                } 
             });
 
             UIU.OpenKeyboardPopup("Send Udon Event", "Enter Event Name...", keyboardAction);
