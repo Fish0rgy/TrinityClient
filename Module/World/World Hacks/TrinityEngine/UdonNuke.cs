@@ -21,24 +21,22 @@ namespace Trinity.Module.Exploit.UdonExploits
         {
             MelonCoroutines.Start(UdonKill());
         }
-        public IEnumerator UdonKill()
+        IEnumerator UdonKill()
         {
             while (this.toggled)
             {
-                WorldWrapper.udonBehaviours.ToList().ForEach(UdonObject =>
-                {
-                    UdonObject._eventTable.keys.ToString().ToList().ForEach(UdonKey =>
+                UnityEngine.Object.FindObjectsOfType<UdonBehaviour>().ToList().ForEach(UdonObject =>
+                { 
+                    Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Collections.Generic.List<uint>>.Enumerator fatblackman = UdonObject._eventTable.GetEnumerator();
+                    while (fatblackman.MoveNext())
                     {
-                        string key = UdonKey.ToString();
-                        UdonObject.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, key);
-
-                    });
-
-                });
+                        Il2CppSystem.Collections.Generic.KeyValuePair<string, Il2CppSystem.Collections.Generic.List<uint>> name = fatblackman.current;
+                        UdonObject.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, name.Key); 
+                    }
+                });  
                 if (!this.toggled)
                     break;
                 yield return new WaitForSeconds(0.1f);
-                 
             }
             yield break;
         }

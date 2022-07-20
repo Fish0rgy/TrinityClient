@@ -339,7 +339,7 @@ namespace Trinity.Utilities
             bool checkfile = System.IO.File.ReadLines($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt").Any(line => line.Contains(player.prop_APIUser_0.id));
             float fps = player.GetFrames();
             short ping = player.GetPing();
-            bool redFlags = ping > 300 || ping < -2 || fps > 100 || fps < -2 || ControllerCheck(player.GetVRCPlayer()) == true || player.transform.localPosition.y < -10 ||  FakeFreezeServerTime(player) == true;
+            bool redFlags = ping > 300 || ping < -2 || fps > 100 || fps < -2 || player.transform.localPosition.y < -10 ||  FakeFreezeServerTime(player) == true;
             if (redFlags == true)
             {
                 if (!ClientUserIDs.Contains(player.prop_APIUser_0.id))

@@ -36,7 +36,7 @@ namespace Trinity.Module.World.World_Hacks.MovieAndChill
         {
             while (toggled)
             {
-                UW.ObjectEvent("Door Room 1 OPEN", "Teleport", 0);
+                UW.ObjectEvent("Private Room TP", "Teleport", EventTarget.Everyone);
                 yield return new WaitForSecondsRealtime(0.2f);
             }
             yield break;

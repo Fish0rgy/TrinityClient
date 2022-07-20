@@ -149,10 +149,6 @@ namespace Trinity
                     OnApplicationQuit();
                 }
             }
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
-            {
-            }
-            // uDoneNuke.
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.D))
             {
                 MelonCoroutines.Start(OldKeyBinds.udonNukeKeyBind());
