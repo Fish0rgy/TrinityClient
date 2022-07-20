@@ -56,9 +56,7 @@ namespace Trinity.SDK
         }
         public static void SpamInvites(string userIDString)
         {
-            var webRequest =
-                (HttpWebRequest)WebRequest.Create(
-                    $"https://api.vrchat.cloud/api/1/requestInvite/{userIDString}");
+            var webRequest =  (HttpWebRequest)WebRequest.Create($"https://api.vrchat.cloud/api/1/requestInvite/{userIDString}");
             webRequest.Method = "POST";
             webRequest.Headers["Cookie"] = $"apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth=" +
                                            ApiCredentials.GetString("authToken");
@@ -69,7 +67,11 @@ namespace Trinity.SDK
             webRequest.Host = "api.vrchat.cloud";
             webRequest.GetResponse();
         }
-
+        public static void SendRequest(string url)
+        {
+            var webRequest = (HttpWebRequest)WebRequest.Create($"{url}");
+            webRequest.GetResponse();
+        }
         public static string GetBase64StringForImage(string imgPath)
         {
             byte[] imageBytes = System.IO.File.ReadAllBytes(imgPath);
