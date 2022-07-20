@@ -109,7 +109,7 @@ namespace Trinity.SDK
             new QMSocialButton("Quick Req Inv", delegate ()
             {
                 Misc.SpamInvites(PU.SocialInfo().field_Private_APIUser_0.id);
-            }, -193.8669f, -147.8986f);
+            });
 
             if (Misc.ModCheck("WorldClient"))
                 LogHandler.Log(LogHandler.Colors.Cyan, "We love world client", false, false);

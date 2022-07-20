@@ -15,7 +15,7 @@ namespace Trinity.SDK.ButtonAPI
         private Text buttonText;
         private Button buttonHandler;
         private Action onButtonClick;
-        public QMSocialButton(string text, Action action, float x,float y)
+        public QMSocialButton(string text, Action action)
         { 
             socialButton = Object.Instantiate<GameObject>(GameObject.Find("UserInterface/MenuContent/Screens/UserInfo").transform.Find("Buttons/RightSideButtons/RightUpperButtonColumn/PlaylistsButton").gameObject, GameObject.Find("UserInterface/MenuContent/Screens/UserInfo").transform.Find("Buttons/RightSideButtons/RightUpperButtonColumn").gameObject.transform);
             Object.Destroy(socialButton.GetComponent<VRCUiButton>());
@@ -25,9 +25,6 @@ namespace Trinity.SDK.ButtonAPI
             buttonText.text = text;
             socialButton.GetComponent<Button>().onClick.AddListener(action);
             buttonHandler.interactable = true;
-            socialButton.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-            RectTransform trans = socialButton.GetComponent<RectTransform>();
-            trans.anchoredPosition = new(x, y);
             socialButton.gameObject.SetActive(true);
         }
     }
