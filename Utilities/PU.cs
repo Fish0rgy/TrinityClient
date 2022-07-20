@@ -317,22 +317,28 @@ namespace Trinity.Utilities
                 return true;
             return false;
         }
-        public static bool checkcontroller(VRC.Player player)
+        public static bool Fly(VRC.Player player)
         {
-            bool gay = false;
+            int seconds = 0;
             try
             {
-                player.GetComponentsInChildren<CharacterController>().ToList().ForEach(s =>
+                while(!player.prop_VRCPlayerApi_0.IsPlayerGrounded())
                 {
-                    if (s.enabled == false)
-                        gay = true;
-                });
+                    new WaitForSeconds(1);
+                    seconds++;
+                    if (seconds > 5)
+                    {
+                        seconds = 0;
+                        return true;
+                    }
+                }
+                    
             }
-            catch (Exception ex)
+            catch
             {
-
+                return false;
             }
-            return gay;
+            return false;
         }
         public static bool ClientDetect(this Player player)
         {
@@ -341,7 +347,7 @@ namespace Trinity.Utilities
                 bool checkfile = System.IO.File.ReadLines($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt").Any(line => line.Contains(player.prop_APIUser_0.id));
                 float fps = player.GetFrames();
                 short ping = player.GetPing();
-                bool redFlags = ping > 300 || ping < -2 || fps > 100 || fps < -2 || player.transform.localPosition.y < -10 || FakeFreezeServerTime(player) == true;
+                bool redFlags = ping > 300 || ping < -2 || fps > 100 || fps < -2 || Fly(player) == true || FakeFreezeServerTime(player) == true;
                 if (redFlags == true)
                 {
                     if (!ClientUserIDs.Contains(player.prop_APIUser_0.id))
