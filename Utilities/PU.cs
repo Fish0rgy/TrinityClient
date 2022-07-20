@@ -336,25 +336,31 @@ namespace Trinity.Utilities
         }
         public static bool ClientDetect(this Player player)
         {
-            bool checkfile = System.IO.File.ReadLines($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt").Any(line => line.Contains(player.prop_APIUser_0.id));
-            float fps = player.GetFrames();
-            short ping = player.GetPing();
-            bool redFlags = ping > 300 || ping < -2 || fps > 100 || fps < -2 || player.transform.localPosition.y < -10 ||  FakeFreezeServerTime(player) == true;
-            if (redFlags == true)
+            try
             {
-                if (!ClientUserIDs.Contains(player.prop_APIUser_0.id))
+                bool checkfile = System.IO.File.ReadLines($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt").Any(line => line.Contains(player.prop_APIUser_0.id));
+                float fps = player.GetFrames();
+                short ping = player.GetPing();
+                bool redFlags = ping > 300 || ping < -2 || fps > 100 || fps < -2 || player.transform.localPosition.y < -10 || FakeFreezeServerTime(player) == true;
+                if (redFlags == true)
                 {
-                    if (player.prop_APIUser_0.IsOnMobile == true)
-                        return false;
-                    ClientUserIDs.Add(player.prop_APIUser_0.id);
-                    MenuUI.Log($"DETECTOR: <color=green>{player.prop_APIUser_0.displayName} Is A Client User</color>");
-                    if(!checkfile)
-                        System.IO.File.AppendAllText($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt", $"{player.prop_APIUser_0.id}{Environment.NewLine}"); 
+                    if (!ClientUserIDs.Contains(player.prop_APIUser_0.id))
+                    {
+                        if (player.prop_APIUser_0.IsOnMobile == true)
+                            return false;
+                        ClientUserIDs.Add(player.prop_APIUser_0.id);
+                        MenuUI.Log($"DETECTOR: <color=green>{player.prop_APIUser_0.displayName} Is A Client User</color>");
+                        if (!checkfile)
+                            System.IO.File.AppendAllText($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt", $"{player.prop_APIUser_0.id}{Environment.NewLine}");
+                    }
+                    return true;
                 }
-                return true;
+                else
+                    return false;
             }
-            else
-                return false;
+            catch { return false; }
+
+             
         }
         public static bool FakeFreezeServerTime(Player player)
         {
