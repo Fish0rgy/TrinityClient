@@ -71,7 +71,7 @@ namespace Trinity.SDK
             Main.Instance.QuickMenuStuff = new Serpent();
             QMTab mainTab = new QMTab("TrinityClient", "", "Made By Fish.#0002", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath));
             Serpent.Spacer(mainTab.menuTransform);
-             
+
 
             Main.Instance.WorldButton = new QMNestedButton(mainTab.menuTransform, "World", QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath));
             HackedGames();
@@ -87,7 +87,8 @@ namespace Trinity.SDK
             Main.Instance.SettingsButton = new QMNestedButton(mainTab.menuTransform, "Settings", QMButtonIcons.LoadSpriteFromFile(Serpent.SettingsIconPath));
             SettingsMenu();
             TargetMenu();
-            new QMSingleButton(mainTab.menuTransform, "Clear Console", "Serpent Logout Button", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), delegate () {
+            new QMSingleButton(mainTab.menuTransform, "Clear Console", "Serpent Logout Button", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), delegate ()
+            {
                 Console.Clear();
                 LogHandler.DisplayLogo();
                 Log($"", true);
@@ -102,20 +103,14 @@ namespace Trinity.SDK
                 Log($"", true);
                 Log($"", true);
                 Log($"", true);
-                Log($"", true); 
+                Log($"", true);
                 MenuUI.Log("CONSOLE: <color=green>Cleard Melonloader Console</color>");
             });
-            try
+            new QMSocialButton("Quick Req Inv", delegate ()
             {
-                new QMSocialButton("Req Inv +10", delegate () {
-                    Misc.SpamInvites(PU.SocialInfo().field_Private_APIUser_0.id);
-                }, new Vector3(-193.8669f, -147.8986f, 0f));
-            }
-            catch (Exception e)
-            {
-                LogHandler.Log(LogHandler.Colors.Red, $"Cant Create SocialButton \n{e}", false, false);
-            }
-             
+                Misc.SpamInvites(PU.SocialInfo().field_Private_APIUser_0.id);
+            }, -193.8669f, -147.8986f);
+
             if (Misc.ModCheck("WorldClient"))
                 LogHandler.Log(LogHandler.Colors.Cyan, "We love world client", false, false);
             Transform buttonContainer = mainTab.menu.menuContents;
@@ -190,7 +185,7 @@ namespace Trinity.SDK
             Log($"<color=#cf9700>[Spoofer] OS:{SystemInfo.operatingSystem}</color>", true);
             Log($"<color=#cf9700>[Spoofer] HWID: {_Spoofers.newHWID}</color>", true);
 
-             
+
 
 
             Assembly assm = Assembly.GetExecutingAssembly();
@@ -203,7 +198,7 @@ namespace Trinity.SDK
                 object newObj = Convert.ChangeType(newInst, t);
                 Main.Instance.Modules.Add((BaseModule)newObj);
                 yield return null;
-            } 
+            }
             Main.Instance.Modules.ToList().ForEach(module =>
             {
                 if (module.name == "Fly") Main.Instance.FlyModule = module;
@@ -230,8 +225,8 @@ namespace Trinity.SDK
 
             pasteButton.onClick = new Button.ButtonClickedEvent();
             pasteButton.onClick.AddListener(pasteAction);
-              
-              
+
+
             Console.Clear();
             LogHandler.DisplayLogo();
             //QMCustomNoti.SetUp();

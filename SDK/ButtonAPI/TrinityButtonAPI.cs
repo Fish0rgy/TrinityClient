@@ -20,6 +20,7 @@ namespace Trinity.SDK.ButtonAPI
 {
     internal class TrinityButtonAPI
     {
+        //button api anyone can take from client and use
         public class QMNestedButton
         {
             public QMMenu menu;
@@ -482,6 +483,28 @@ namespace Trinity.SDK.ButtonAPI
                 gameobject.transform.localPosition = new Vector3(0, 0, 0);
                 gameobject.transform.localRotation = new Quaternion(0, 0, 0, 0);
                 gameobject.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+        public class QMSocialButton
+        {
+            private GameObject socialButton;
+            private Text buttonText;
+            private Button buttonHandler;
+            private Action onButtonClick;
+            public QMSocialButton(string text, Action action, float x, float y)
+            {
+                socialButton = UnityEngine.Object.Instantiate<GameObject>(GameObject.Find("UserInterface/MenuContent/Screens/UserInfo").transform.Find("Buttons/RightSideButtons/RightUpperButtonColumn/PlaylistsButton").gameObject, GameObject.Find("UserInterface/MenuContent/Screens/UserInfo").transform.Find("Buttons/RightSideButtons/RightUpperButtonColumn").gameObject.transform);
+                UnityEngine.Object.Destroy(socialButton.GetComponent<VRCUiButton>());
+                buttonText = socialButton.GetComponentInChildren<Text>();
+                buttonHandler = socialButton.GetComponent<Button>();
+                socialButton.name = text;
+                buttonText.text = text;
+                socialButton.GetComponent<Button>().onClick.AddListener(action);
+                buttonHandler.interactable = true;
+                socialButton.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                RectTransform trans = socialButton.GetComponent<RectTransform>();
+                trans.anchoredPosition = new(x, y);
+                socialButton.gameObject.SetActive(true);
             }
         }
         internal class QMButtonIcons

@@ -56,21 +56,18 @@ namespace Trinity.SDK
         }
         public static void SpamInvites(string userIDString)
         {
-            for (var i = 0; i < 10; i++)
-            {
-                var webRequest =
-                    (HttpWebRequest)WebRequest.Create(
-                        $"https://api.vrchat.cloud/api/1/requestInvite/{userIDString}");
-                webRequest.Method = "POST";
-                webRequest.Headers["Cookie"] = $"apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth=" +
-                                               ApiCredentials.GetString("authToken");
-                webRequest.Headers["X-Client-Version"] = "2022.1.1p4-1173--Release";
-                webRequest.Headers["X-Platform"] = "android";
-                webRequest.ContentType = "application/json";
-                webRequest.UserAgent = "Transmtn-Pipeline";
-                webRequest.Host = "api.vrchat.cloud";
-                webRequest.GetResponse();
-            }
+            var webRequest =
+                (HttpWebRequest)WebRequest.Create(
+                    $"https://api.vrchat.cloud/api/1/requestInvite/{userIDString}");
+            webRequest.Method = "POST";
+            webRequest.Headers["Cookie"] = $"apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth=" +
+                                           ApiCredentials.GetString("authToken");
+            webRequest.Headers["X-Client-Version"] = "2022.1.1p4-1173--Release";
+            webRequest.Headers["X-Platform"] = "android";
+            webRequest.ContentType = "application/json";
+            webRequest.UserAgent = "Transmtn-Pipeline";
+            webRequest.Host = "api.vrchat.cloud";
+            webRequest.GetResponse();
         }
 
         public static string GetBase64StringForImage(string imgPath)
@@ -367,26 +364,15 @@ namespace Trinity.SDK
             internal int sum;
             internal float lastSeen;
             internal int totalDetections;
-        }  
+        }
         public static void MeshESP(VRC.Player player, bool State)
         {
             if (player == PU.GetPlayer()) return;
-            if (PU.GetIsFriend(player.prop_APIUser_0))
+            GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;
+            player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>().ToList().ForEach(render =>
             {
-                GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.yellow;
-                player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>().ToList().ForEach(render =>
-                {
-                    HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(render, State);
-                });
-            }
-            else
-            {
-                GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;
-                player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>().ToList().ForEach(render =>
-                {
-                    HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(render, State);
-                });
-            }
+                HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(render, State);
+            });
         }
     }
     public enum TargetClass
