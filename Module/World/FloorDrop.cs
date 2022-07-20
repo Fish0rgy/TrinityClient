@@ -19,8 +19,7 @@ namespace Trinity.Module.World
         public FloorDrop() : base("Floor Drop", "Removes floor from underneath", Main.Instance.WorldButton, SDK.ButtonAPI.QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath), false, false) { }
 
         public override void OnEnable()
-        {
-            Trinity.SDK.WSK.FloorDropper();
+        { 
             LogHandler.Log(LogHandler.Colors.Green, "Floor Dropper Activivated!", false, false);
         }
     } 

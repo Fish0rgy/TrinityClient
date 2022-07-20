@@ -52,6 +52,7 @@ using Trinity.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
+using VRC.UI;
 
 namespace Trinity.SDK
 {
@@ -104,6 +105,17 @@ namespace Trinity.SDK
                 Log($"", true); 
                 MenuUI.Log("CONSOLE: <color=green>Cleard Melonloader Console</color>");
             });
+            try
+            {
+                new QMSocialButton("Req Inv +10", delegate () {
+                    Misc.SpamInvites(PU.SocialInfo().field_Private_APIUser_0.id);
+                }, new Vector3(-193.8669f, -147.8986f, 0f));
+            }
+            catch (Exception e)
+            {
+                LogHandler.Log(LogHandler.Colors.Red, $"Cant Create SocialButton \n{e}", false, false);
+            }
+             
             if (Misc.ModCheck("WorldClient"))
                 LogHandler.Log(LogHandler.Colors.Cyan, "We love world client", false, false);
             Transform buttonContainer = mainTab.menu.menuContents;
@@ -281,10 +293,8 @@ namespace Trinity.SDK
             "MurderWin",
             "NoReload",
             "KillAll",
-            "KillLoop",
-            "FloorDrop",
-            "NoCollidersForDoors",
-            "FloorDrop",
+            "KillLoop", 
+            "NoCollidersForDoors", 
             "NoSteam",
             "BlindAll",
             "FlashLoop",
@@ -388,8 +398,7 @@ namespace Trinity.SDK
             "DebugLog",
             "CustomNameplates",
             "TriggerESP",
-            "ObjectESP",
-            "CapsuleEsp",
+            "ObjectESP", 
             //ghost
             "AvatSelected",
             "GiveCurrency", 

@@ -16,6 +16,7 @@ using Trinity.SDK.ButtonAPI.PopUp;
 using VRC.SDKBase;
 using Trinity.Module;
 using System.Linq;
+using VRC.Core;
 
 namespace Trinity.SDK
 {
@@ -53,7 +54,24 @@ namespace Trinity.SDK
             }
             return "";
         }
-
+        public static void SpamInvites(string userIDString)
+        {
+            for (var i = 0; i < 10; i++)
+            {
+                var webRequest =
+                    (HttpWebRequest)WebRequest.Create(
+                        $"https://api.vrchat.cloud/api/1/requestInvite/{userIDString}");
+                webRequest.Method = "POST";
+                webRequest.Headers["Cookie"] = $"apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth=" +
+                                               ApiCredentials.GetString("authToken");
+                webRequest.Headers["X-Client-Version"] = "2022.1.1p4-1173--Release";
+                webRequest.Headers["X-Platform"] = "android";
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Transmtn-Pipeline";
+                webRequest.Host = "api.vrchat.cloud";
+                webRequest.GetResponse();
+            }
+        }
 
         public static string GetBase64StringForImage(string imgPath)
         {
@@ -230,6 +248,31 @@ namespace Trinity.SDK
         {
             MelonCoroutines.Start(e);
         }
+        public static void HighlightColor(Color highlightcolor)
+        {
+            if (Resources.FindObjectsOfTypeAll<HighlightsFXStandalone>().Count != 0)
+                Resources.FindObjectsOfTypeAll<HighlightsFXStandalone>().FirstOrDefault().highlightColor = highlightcolor;
+        }
+        public static void PlayerMeshEsp(VRC.Player player, bool State)
+        {
+            if (player == PU.GetPlayer()) return;
+            if (PU.GetIsFriend(player.prop_APIUser_0))
+            {
+                GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.yellow;
+                player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>().ToList().ForEach(render =>
+                {
+                    HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(render, State);
+                });
+            }
+            else
+            {
+                GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;
+                player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>().ToList().ForEach(render =>
+                {
+                    HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(render, State);
+                });
+            }
+        }
         public static string GetMachineGuid()
         {
             string location = @"SOFTWARE\Microsoft\Cryptography";
@@ -324,119 +367,27 @@ namespace Trinity.SDK
             internal int sum;
             internal float lastSeen;
             internal int totalDetections;
-        }
-        public static void ClearVD()
+        }  
+        public static void MeshESP(VRC.Player player, bool State)
         {
-            VoicePackets.Clear();
-        }
-        public static bool FilterBadData(int actorId, byte[] voiceData)
-        {
-            bool NullCheck = voiceData.Length <= 8;
-            bool result;
-            if (NullCheck)
+            if (player == PU.GetPlayer()) return;
+            if (PU.GetIsFriend(player.prop_APIUser_0))
             {
-                result = true;
+                GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.yellow;
+                player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>().ToList().ForEach(render =>
+                {
+                    HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(render, State);
+                });
             }
             else
             {
-                int SenderID = BitConverter.ToInt32(voiceData, 0);
-                bool NotRealSender = SenderID != actorId;
-                if (NotRealSender)
+                GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;
+                player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>().ToList().ForEach(render =>
                 {
-                    result = true;
-                }
-                else
-                {
-                    int VDP = 0;
-                    for (int i = 8; i < voiceData.Length; i++)
-                    {
-                        VDP += (int)voiceData[i];
-                    }
-                    bool checkvalidSender = VoicePackets.ContainsKey(actorId);
-                    if (checkvalidSender)
-                    {
-                        bool Goodpackets = false;
-                        bool Badpackets = false;
-                        for (int ii = 0; ii < VoicePackets[actorId].Count; ii++)
-                        {
-                            int minimum = VoicePackets[actorId][ii].sum - 64;
-                            int maximum = VoicePackets[actorId][ii].sum + 64;
-                            bool Good = VDP < minimum || VDP > maximum;
-                            if (!Good)
-                            {
-                                Goodpackets = true;
-                                bool timecheck = Time.realtimeSinceStartup - VoicePackets[actorId][ii].lastSeen < 1f;
-                                if (timecheck)
-                                {
-                                    bool maxdetections = VoicePackets[actorId][ii].totalDetections >= 3;
-                                    if (maxdetections)
-                                    {
-                                        Badpackets = true;
-                                        bool countdetector = ii == VoicePackets[actorId].Count - 1;
-                                        if (countdetector)
-                                        {
-                                            VoicePackets[actorId].Add(new LoggedData
-                                            {
-                                                sum = VoicePackets[actorId][ii].sum + 64,
-                                                lastSeen = Time.realtimeSinceStartup,
-                                                totalDetections = VoicePackets[actorId][ii].totalDetections
-                                            });
-                                        }
-                                        int totalDetections = VoicePackets[actorId][ii].totalDetections;
-                                        for (int k = 0; k < VoicePackets[actorId].Count; k++)
-                                        {
-                                            VoicePackets[actorId][k].lastSeen = Time.realtimeSinceStartup;
-                                            VoicePackets[actorId][k].totalDetections = totalDetections;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        VoicePackets[actorId][ii].lastSeen = Time.realtimeSinceStartup;
-                                        VoicePackets[actorId][ii].totalDetections++;
-                                    }
-                                }
-                                else
-                                {
-                                    VoicePackets[actorId][ii].lastSeen = Time.realtimeSinceStartup;
-                                    VoicePackets[actorId][ii].totalDetections--;
-                                }
-                                break;
-                            }
-                        }
-                        bool ValidCheck =! Goodpackets;
-                        if (ValidCheck)
-                        {
-                            VoicePackets[actorId].Add(new LoggedData
-                            {
-                                sum = VDP,
-                                lastSeen = Time.realtimeSinceStartup,
-                                totalDetections = 0
-                            });
-                        }
-                        bool invalidCheck = Badpackets;
-                        if (invalidCheck)
-                        {
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        VoicePackets.Add(actorId, new List<LoggedData>
-                        {
-                            new LoggedData
-                            {
-                                sum = VDP,
-                                lastSeen = Time.realtimeSinceStartup,
-                                totalDetections = 0
-                            }
-                        });
-                    }
-                    result = false;
-                }
+                    HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(render, State);
+                });
             }
-            return result;
         }
-        private static readonly Dictionary<int, List<LoggedData>> VoicePackets = new Dictionary<int, List<LoggedData>>();
     }
     public enum TargetClass
     {

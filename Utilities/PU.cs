@@ -30,6 +30,7 @@ namespace Trinity.Utilities
     {
         //converted all the bs to one lines to clean the class
 
+        private static PageUserInfo InfoUser;
         public static Player GetPlayer() => Player.prop_Player_0;
         public static Player GetPlayer(int ActorNumber) => (from p in AllPlayers2().Array.ToList() where p.GetActorNumber2() == ActorNumber select p).FirstOrDefault<Player>();
         public static VRCPlayer GetVRCPlayer() => VRCPlayer.field_Internal_Static_VRCPlayer_0;
@@ -87,6 +88,12 @@ namespace Trinity.Utilities
             }
 
             return null;
+        }
+        internal static PageUserInfo SocialInfo()
+        {
+
+            InfoUser = GameObject.Find("UserInterface/MenuContent/Screens/UserInfo").GetComponent<PageUserInfo>();
+            return InfoUser;
         }
         public static void ShowSelf(bool state)
         {

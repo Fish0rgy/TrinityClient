@@ -41,76 +41,26 @@ namespace Trinity.Module.Safety.Photon
             ParameterDictionary parameters = eventData.Parameters;
             int Sender = eventData.sender;
             var player = PlayerManager.field_Private_Static_PlayerManager_0.GetPlayer(Sender);
-            string EventSender = player != null ? player.prop_APIUser_0.displayName : "VRC Server";
-            bool paramsCheck = player._playerNet.field_Private_Int16_0 <= 0 && 1000 / (int)player._playerNet.field_Private_Byte_0 <= 0;
+            string EventSender = player != null ? player.prop_APIUser_0.displayName : "VRC Server"; 
             byte code = eventData.Code;
 
             switch (code)
             {
-                case 1:
-                    {
-                        if (Config.AntiE1)
-                        {
-                             
-                            byte[] voicepackets = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(eventData.CustomData.Pointer);
-                            bool bad = Misc.FilterBadData(eventData.Sender, voicepackets);
-                            if (!bad)
-                                return true;
-                            if (!E1BlockedPlayers.Contains(player.field_Private_APIUser_0.id))
-                            {
-                                Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Yellow, $"[Event Safety] \nEvent: {eventData.Code} \nEvent Sender: {EventSender} \nValid: False", false, false);
-                                MenuUI.Log($"Safety: <color=red>Event 1 From {EventSender} | Valid: False</color>");
-                                E1BlockedPlayers.Add(player.field_Private_APIUser_0.id);
-                            }
-                        }
-                        break;
-                    }
+                 
                 case 6:
                     {
-                        if (paramsCheck && player != VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_Player_0)
-                        {
-                            Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Yellow, $"[Event Safety] \nEvent: {eventData.Code} \nEvent Sender: {EventSender} \nValid: False \nBot: True", false, false);
-                            MenuUI.Log($"Safety: <color=red> {eventData.Code} From {EventSender} | Valid: False | Bot: True</color>");
-                            return false;
-                        }
-                        if (player.transform.position == Vector3.zero && player != VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_Player_0)
-                            return false;
                         return false;
                     }
                 case 9:
                     {
-                        if (paramsCheck && player != VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_Player_0)
-                        {
-                            Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Yellow, $"[Event Safety] \nEvent: {eventData.Code} \nEvent Sender: {EventSender} \nValid: False \nBot: True", false, false);
-                            MenuUI.Log($"Safety: <color=red> {eventData.Code} From {EventSender} | Valid: False | Bot: True</color>");
-                            return false;
-                        }
-                        if (player.transform.position == Vector3.zero && player != VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_Player_0)
-                            return false;
                         return false;
                     }
                 case 209:
                     {
-                        if (paramsCheck && player != VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_Player_0)
-                        {
-                            Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Yellow, $"[Event Safety] \nEvent: {eventData.Code} \nEvent Sender: {EventSender} \nValid: False \nBot: True", false, false);
-                            MenuUI.Log($"Safety: <color=red> {eventData.Code} From {EventSender} | Valid: False | Bot: True</color>");
-                            return false;
-                        }
-                        if (player.transform.position == Vector3.zero && player != VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_Player_0)
-                            return false;
                         return false;
                     }
                 case 210:
                     {
-                        if (paramsCheck && player != VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_Player_0)
-                        {
-                            Trinity.SDK.LogHandler.Log(Trinity.SDK.LogHandler.Colors.Yellow, $"[Event Safety] \nEvent: {eventData.Code} \nEvent Sender: {EventSender} \nValid: False \nBot: True", false, false);
-                            MenuUI.Log($"Safety: <color=red> {eventData.Code} From {EventSender} | Valid: False | Bot: True</color>");
-                            return false;
-                        }
-                        if (player.transform.position == Vector3.zero && player != VRCPlayer.field_Internal_Static_VRCPlayer_0.prop_Player_0)
-                            return false;
                         return false;
                     }
                 default:

@@ -48,7 +48,7 @@ namespace Trinity.SDK.Patching.Patches
 
         private static void OnPlayerLeave(VRC.Player __0)
         {
-            if(__0 == PU.GetPlayer()) { Misc.ClearVD(); Module.Safety.Photon.PhotonProtection.E1BlockedPlayers.Clear(); }
+            
             for (int i = 0; i < Main.Instance.OnPlayerLeaveEvents.Count; i++)
                 Main.Instance.OnPlayerLeaveEvents[i].PlayerLeave(__0);
             PU.PlayersActorID.Remove(__0.GetActorNumber());

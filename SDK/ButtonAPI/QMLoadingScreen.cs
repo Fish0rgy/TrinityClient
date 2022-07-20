@@ -88,7 +88,8 @@ namespace Trinity.SDK.ButtonAPI
             isbackround2.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
             var bg2img = isbackround2.GetComponent<Image>();
             bg2img.color = Color.cyan;
-            MelonCoroutines.Start(loadspriterest(bg2img, "http://nocturnal-client.xyz/cl/Download/Media/just%20border.png"));
+            GameObject.Find("UserInterface/MenuContent/Popups/LoadingPopup/Video/Backround").gameObject.GetComponentInChildren<Image>().color = new Color(0,0,0.396f,1);
+            //MelonCoroutines.Start(loadspriterest(bg2img, "http://nocturnal-client.xyz/cl/Download/Media/just%20border.png"));
 
 
 

@@ -897,6 +897,7 @@
     <Compile Include="SDK\ButtonAPI\QMNestedButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMSingleButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMBadgeButton.cs" />
+    <Compile Include="SDK\ButtonAPI\QMSocialButton.cs" />
     <Compile Include="SDK\ButtonAPI\QMTab.cs" />
     <Compile Include="SDK\ButtonAPI\QMSpacer.cs" />
     <Compile Include="SDK\ButtonAPI\QMToggleButton.cs" />
