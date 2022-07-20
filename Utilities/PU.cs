@@ -322,20 +322,21 @@ namespace Trinity.Utilities
             int seconds = 0;
             try
             {
-                while(!player.prop_VRCPlayerApi_0.IsPlayerGrounded())
-                {
-                    new WaitForSeconds(1);
+                while (player.prop_VRCPlayerApi_0.GetVelocity().y == 0f && !player.prop_VRCPlayerApi_0.IsPlayerGrounded())
+                { 
                     seconds++;
-                    if (seconds > 5)
+                    new WaitForSeconds(1);
+                    if (seconds >= 5)
                     {
                         seconds = 0;
                         return true;
                     }
                 }
-                    
+                seconds = 0; 
             }
             catch
             {
+                seconds = 0;
                 return false;
             }
             return false;
@@ -352,7 +353,7 @@ namespace Trinity.Utilities
                 {
                     if (!ClientUserIDs.Contains(player.prop_APIUser_0.id))
                     {
-                        if (player.prop_APIUser_0.IsOnMobile == true)
+                        if (player.prop_APIUser_0.IsOnMobile && ping < 3000)
                             return false;
                         ClientUserIDs.Add(player.prop_APIUser_0.id);
                         MenuUI.Log($"DETECTOR: <color=green>{player.prop_APIUser_0.displayName} Is A Client User</color>");

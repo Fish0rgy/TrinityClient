@@ -691,17 +691,6 @@
     <Compile Include="Module\TargetMenu\Forceclone.cs" />
     <Compile Include="Module\TargetMenu\Avatar Settings\Reuploader.cs" />
     <Compile Include="Module\TargetMenu\ForceLewd.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\MunchenCore\bewPwUL7OkVgMwtScoj.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\ChangeTag.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\ChangeTagColor.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\MunchenCore\Bssd1xLohZE2831sTyO.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\MunchenCore\cRMLef3MSSFd6H8SHap.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\MunchenCore\JsonParserForConfig.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\MunchenCore\MunchenMisc.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\MunchenCore\uCw26LLyNN5g4c6ce5J.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\RemoveColor.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\RemoveRank.cs" />
-    <Compile Include="Module\TargetMenu\MuchenAdmin\MunchenCore\UploadQueueConfig.cs" />
     <Compile Include="Module\TargetMenu\obitthatbitch.cs" />
     <Compile Include="Module\TargetMenu\RemoveClientList.cs" />
     <Compile Include="Module\TargetMenu\SafetySettings\TargetAntiPhoton.cs" />

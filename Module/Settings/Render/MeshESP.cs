@@ -18,12 +18,7 @@ namespace Trinity.Module.Settings.Render
         public override void OnEnable()
         {
             MenuUI.Log("ESP: <color=green>Player Mesh ESP On</color>");
-            try {
-                PU.GetAllPlayers().ToList().ForEach(player =>
-                {
-                    Misc.MeshESP(player, true);
-                });
-            } catch (Exception ex) { }
+            try { PU.GetAllPlayers().ToList().ForEach(player => { Misc.MeshESP(player, true); }); } catch (Exception ex) { }
             Main.Instance.OnPlayerJoinEvents.Add(this);
             Main.Instance.OnUpdateEvents.Add(this);
         }
@@ -51,8 +46,6 @@ namespace Trinity.Module.Settings.Render
                     Misc.MeshESP(player, true);
                 });
             } catch (Exception ex) {  }
-             
         }
-         
     }
 }

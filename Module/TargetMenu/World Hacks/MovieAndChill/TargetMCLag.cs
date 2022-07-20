@@ -14,21 +14,18 @@ namespace Trinity.Module.TargetMenu.World_Hacks.MovieAndChill
 {
     class TargetMCLag : BaseModule
     {
-        public TargetMCLag() : base("Target Lag", "Targeted Item/Trigger Lagger", Main.Instance.MoveAndChillSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), true, true) { }
+        public TargetMCLag() : base("Teleport", "Targeted Teleport Once", Main.Instance.MoveAndChillSettings, QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath), false, false) { }
 
         public override void OnEnable()
         {
             try
             {
                 APIUser SelectedPlayer = Trinity.Utilities.PU.SelectedVRCPlayer().prop_APIUser_0;
-                LogHandler.Log(LogHandler.Colors.Green, $"{SelectedPlayer.displayName} Is Lagging", false, false);
-                LogHandler.LogDebug($"{SelectedPlayer.displayName} Is Lagging"); 
-                MenuUI.Log($"MOVIE: <color=green>Target Lagging {SelectedPlayer.displayName}</color>");
-                for (int i = 0; i < 10; i++)
-                {
-                    UW.udonsend("OnObjectRootPickupUseDown", EventTarget.Targeted);
+                LogHandler.Log(LogHandler.Colors.Green, $"{SelectedPlayer.displayName} Teleported", false, false);
+                LogHandler.LogDebug($"{SelectedPlayer.displayName} Teleported"); 
+                MenuUI.Log($"MOVIE: <color=green>Target Teleport {SelectedPlayer.displayName}</color>");
+                UW.ObjectEvent("Private Room TP", "Teleport", EventTarget.Targeted);
 
-                }
             }
             catch (Exception ex)
             {

@@ -37,33 +37,36 @@ namespace Trinity.Module.Settings.Render
 
         public void OnPlayerJoin(VRC.Player player)
         {
-            CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
-            nameplate.player = player;
-            var userid = player.prop_APIUser_0.id;
-            // var user = StaffCheck(player.prop_APIUser_0.id);
-            if (MunchenCheck(userid) == true)
+            try
             {
-                Munchen.Add(userid);
-                //LogHandler.Log(LogHandler.Colors.Green, "Staff:" + player.prop_APIUser_0.displayName + "\nUserID:" + player.prop_APIUser_0.id + "\nUpdated Player Info");
+                CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
+                nameplate.player = player;
+                var userid = player.prop_APIUser_0.id;
+                // var user = StaffCheck(player.prop_APIUser_0.id);
+                //if (MunchenCheck(userid) == true)
+                //{
+                //    Munchen.Add(userid);
+                //    //LogHandler.Log(LogHandler.Colors.Green, "Staff:" + player.prop_APIUser_0.displayName + "\nUserID:" + player.prop_APIUser_0.id + "\nUpdated Player Info");
+                //}
+                //if (ArcticCheck(userid) == true)
+                //{
+                //    Arctic.Add(userid);
+                //}
+                Users.Add(userid);
             }
-            if(ArcticCheck(userid) == true)
-            {
-                Arctic.Add(userid);
-            }
-            Users.Add(userid);
+            catch { } 
         }
 
         public void OnPlayerLeft(VRC.Player player)
         {
             Main.Instance.OnPlayerJoinEvents.Remove(this);
-            try
-            {
-                Munchen.Remove(player.prop_APIUser_0.id);
-                Arctic.Remove(player.prop_APIUser_0.id);
-                Users.Remove(player.prop_APIUser_0.id);
+            //try
+            //{
+            //    Munchen.Remove(player.prop_APIUser_0.id);
+            //    Arctic.Remove(player.prop_APIUser_0.id);
+            //    Users.Remove(player.prop_APIUser_0.id);
 
-            }
-            catch { }
+            //} 
         }
 
         public void UpdatePlayerlistInfo()
@@ -77,18 +80,18 @@ namespace Trinity.Module.Settings.Render
                     CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
                     nameplate.player = player;
                     var userid = player.prop_APIUser_0.id;
-                    if (MunchenCheck(userid) == true)
-                    {
-                        Munchen.Add(userid);
-                        LogHandler.Log(LogHandler.Colors.Green, $"-> Munchen User Found! \nUsername: {player.prop_APIUser_0.displayName} \nUserID: {player.prop_APIUser_0.id} \nUpdated Player Info");
-                    }
-                    if (ArcticCheck(userid) == true)
-                    {
-                        Arctic.Add(userid);
-                        LogHandler.Log(LogHandler.Colors.Green, $"-> Arctic User Found! \nUsername: {player.prop_APIUser_0.displayName} \nUserID: {player.prop_APIUser_0.id} \nUpdated Player Info");
-                    }
-                    Users.Add(userid);
-                    //  LogHandler.Log(LogHandler.Colors.Green, "User:" + player.prop_APIUser_0.displayName + "\nUserID:" + player.prop_APIUser_0.id + "\nUpdated Player Info");
+                    //if (MunchenCheck(userid) == true)
+                    //{
+                    //    Munchen.Add(userid);
+                    //    LogHandler.Log(LogHandler.Colors.Green, $"-> Munchen User Found! \nUsername: {player.prop_APIUser_0.displayName} \nUserID: {player.prop_APIUser_0.id} \nUpdated Player Info");
+                    //}
+                    //if (ArcticCheck(userid) == true)
+                    //{
+                    //    Arctic.Add(userid);
+                    //    LogHandler.Log(LogHandler.Colors.Green, $"-> Arctic User Found! \nUsername: {player.prop_APIUser_0.displayName} \nUserID: {player.prop_APIUser_0.id} \nUpdated Player Info");
+                    //}
+                    //Users.Add(userid);
+                    ////  LogHandler.Log(LogHandler.Colors.Green, "User:" + player.prop_APIUser_0.displayName + "\nUserID:" + player.prop_APIUser_0.id + "\nUpdated Player Info");
                     if (i >= PU.GetAllPlayers().Length)
                     {
                         break;
@@ -96,9 +99,9 @@ namespace Trinity.Module.Settings.Render
                     changecolor(player);
                 }
             }
-            catch (Exception ERROR)
-            {
-                LogHandler.Log(LogHandler.Colors.Green, ERROR.Message, false, false);
+            catch (Exception ERROR) { 
+            
+                LogHandler.Log(LogHandler.Colors.Red, ERROR.Message, false, false);
             }
         }
         public static void changecolor(VRC.Player player)

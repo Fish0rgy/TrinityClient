@@ -86,9 +86,7 @@ namespace Trinity.Module.Settings.Render
                     string info = "";         
                     for (int i = 0; i < PU.GetAllPlayers().Length; i++)
                     {
-                        VRC.Player player = PU.GetAllPlayers()[i];
-                        info += $"[ID] {player.GetActorNumber()}";
-                        //info += $"[PH] {player.GetPhotonID()}";
+                        VRC.Player player = PU.GetAllPlayers()[i]; 
                         if (player.GetIsMaster() == true)
                         {
                             info += " [<color=#FFB300>H</color>]";

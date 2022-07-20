@@ -56,16 +56,19 @@ namespace Trinity.SDK
         }
         public static void SpamInvites(string userIDString)
         {
-            var webRequest =  (HttpWebRequest)WebRequest.Create($"https://api.vrchat.cloud/api/1/requestInvite/{userIDString}");
-            webRequest.Method = "POST";
-            webRequest.Headers["Cookie"] = $"apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth=" +
-                                           ApiCredentials.GetString("authToken");
-            webRequest.Headers["X-Client-Version"] = "2022.1.1p4-1173--Release";
-            webRequest.Headers["X-Platform"] = "android";
-            webRequest.ContentType = "application/json";
-            webRequest.UserAgent = "Transmtn-Pipeline";
-            webRequest.Host = "api.vrchat.cloud";
-            webRequest.GetResponse();
+            for (int i = 0; i < 10; i++)
+            {
+                var webRequest = (HttpWebRequest)WebRequest.Create($"https://api.vrchat.cloud/api/1/requestInvite/{userIDString}");
+                webRequest.Method = "POST";
+                webRequest.Headers["Cookie"] = $"apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26; auth=" +
+                                               ApiCredentials.GetString("authToken");
+                webRequest.Headers["X-Client-Version"] = "2022.1.1p4-1173--Release";
+                webRequest.Headers["X-Platform"] = "android";
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Transmtn-Pipeline";
+                webRequest.Host = "api.vrchat.cloud";
+                webRequest.GetResponse();
+            }
         }
         public static void SendRequest(string url)
         {
@@ -370,7 +373,7 @@ namespace Trinity.SDK
         public static void MeshESP(VRC.Player player, bool State)
         {
             if (player == PU.GetPlayer()) return;
-            GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = Color.red;
+            GameObject.Find("Camera (eye)").GetComponent<HighlightsFXStandalone>().highlightColor = new Color(8, 247, 254, 0.004f);
             player._vrcplayer.field_Internal_GameObject_0.GetComponentsInChildren<Renderer>().ToList().ForEach(render =>
             {
                 HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(render, State);

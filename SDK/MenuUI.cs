@@ -106,13 +106,11 @@ namespace Trinity.SDK
                 Log($"", true);
                 MenuUI.Log("CONSOLE: <color=green>Cleard Melonloader Console</color>");
             });
-            new QMSocialButton("Quick Req Inv", delegate ()
+            new QMSocialButton("Req Inv +10", delegate ()
             {
                 Misc.SpamInvites(PU.SocialInfo().field_Private_APIUser_0.id);
             });
-
-            if (Misc.ModCheck("WorldClient"))
-                LogHandler.Log(LogHandler.Colors.Cyan, "We love world client", false, false);
+             
             Transform buttonContainer = mainTab.menu.menuContents;
             GameObject menuObj = mainTab.menu.menuObj;
 
