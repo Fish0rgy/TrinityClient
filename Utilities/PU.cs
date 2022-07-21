@@ -357,6 +357,7 @@ namespace Trinity.Utilities
                             return false;
                         ClientUserIDs.Add(player.prop_APIUser_0.id);
                         MenuUI.Log($"DETECTOR: <color=green>{player.prop_APIUser_0.displayName} Is A Client User</color>");
+                        Trinity.SDK.LogHandler.Log(SDK.LogHandler.Colors.Red, $"{player.prop_APIUser_0.displayName} Is A Client User", false, false);
                         if (!checkfile)
                             System.IO.File.AppendAllText($"{MelonUtils.GameDirectory}\\Trinity\\Misc\\ClientUsers.txt", $"{player.prop_APIUser_0.id}{Environment.NewLine}");
                     }

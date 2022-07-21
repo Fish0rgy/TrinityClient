@@ -23,6 +23,12 @@ namespace Trinity.SDK.Patching.Patches
         [Obfuscation(Exclude = true)]
         private static bool OnUdon(string __0, VRC.Player __1, UdonSync __instance)
         {
+            //bool gay = true;
+            //Main.Instance.OnUdonEvents.ForEach(udon => {
+            //    if (!udon.OnUdon(__0, __1, __instance))
+            //        gay = false;
+            //});
+            //return gay;
             for (int i = 0; i < Main.Instance.OnUdonEvents.Count; i++)
                 if (!Main.Instance.OnUdonEvents[i].OnUdon(__0, __1, __instance))
                     return false;

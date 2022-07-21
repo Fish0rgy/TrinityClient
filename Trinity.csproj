@@ -702,6 +702,7 @@
     <Compile Include="Module\TargetMenu\VoiceIM.cs" />
     <Compile Include="Module\TargetMenu\World Hacks\AmongUs Settings\AForceSpawn.cs" />
     <Compile Include="Module\TargetMenu\World Hacks\AmongUs Settings\AmongUsKill.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\AmongUs Settings\AmongUsTeleport.cs" />
     <Compile Include="Module\TargetMenu\World Hacks\AmongUs Settings\AssignCrew.cs" />
     <Compile Include="Module\TargetMenu\World Hacks\AmongUs Settings\AssignImposter.cs" />
     <Compile Include="Module\TargetMenu\World Hacks\GhostMenu\TGiveMoney.cs" />
@@ -727,6 +728,7 @@
     <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\MurderAssignTarget.cs" />
     <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\MurderGoBoomBoom.cs" />
     <Compile Include="Module\TargetMenu\World Hacks\Murder4 Settings\MurderKillTarget.cs" />
+    <Compile Include="Module\TargetMenu\World Hacks\Orion\DisableLobbyTarget.cs" />
     <Compile Include="Module\TargetMenu\World Hacks\SentEvent.cs" />
     <Compile Include="Module\World\FloorDrop.cs" />
     <Compile Include="Module\World\FreezeItems.cs" />
@@ -794,6 +796,7 @@
     <Compile Include="Module\World\World Hacks\Among Us\A-SkipVote.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-StartGame.cs" />
     <Compile Include="Module\World\World Hacks\Among Us\A-TaskDone.cs" />
+    <Compile Include="Module\World\World Hacks\Among Us\A-TeleportAll.cs" />
     <Compile Include="Module\World\World Hacks\Ghost\ClaimClues.cs" />
     <Compile Include="Module\World\World Hacks\Ghost\CraftAllGuns.cs" />
     <Compile Include="Module\World\World Hacks\Ghost\GhostMisc.cs" />
@@ -908,7 +911,6 @@
     <Compile Include="SDK\PatchAPI\SerpentPatch.cs" />
     <Compile Include="SDK\PhotonAPI\PhotonExtensions.cs" />
     <Compile Include="SDK\PhotonAPI\Serialization.cs" />
-    <Compile Include="SDK\TempUploadContainer.cs" />
     <Compile Include="Utilities\PI.cs" />
     <Compile Include="Utilities\PU.cs" />
     <Compile Include="SDK\Serpent.cs" />

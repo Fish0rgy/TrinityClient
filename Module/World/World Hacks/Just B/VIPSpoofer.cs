@@ -12,7 +12,8 @@ namespace Trinity.Module.World.World_Hacks.Just_B
 {
     class VIPSpoofer : BaseModule, OnUpdateEvent
     {
-        private static bool state = false; 
+        private static bool state = false;
+        public static string name;
         public VIPSpoofer() : base("VIP Spoofer", "Not Local : EVERYONE CAN SEE THIS !", Main.Instance.Justbbutton, null, true)
         {
 
@@ -20,6 +21,7 @@ namespace Trinity.Module.World.World_Hacks.Just_B
         public override void OnEnable()
         {
             state = true;
+
             Main.Instance.OnUpdateEvents.Add(this);
         }
 

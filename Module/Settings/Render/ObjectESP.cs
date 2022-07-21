@@ -1,3 +1,4 @@
+using System.Linq;
 using Trinity.Events;
 using Trinity.SDK;
 using Trinity.Utilities;
@@ -23,20 +24,23 @@ namespace Trinity.Module.Settings.Render
         {
             MenuUI.Log("OBJECTS: <color=red>Item ESP Off</color>"); 
             Main.Instance.OnUpdateEvents.Remove(this);
-            Il2CppArrayBase<VRC_Pickup> il2CppArrayBase = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
-            foreach (VRC_Pickup vrc_Pickup in il2CppArrayBase)
+            WorldWrapper.vrc_Pickups.ToList().ForEach(pickup =>
             {
-                bool Object = !(vrc_Pickup == null) && !(vrc_Pickup.gameObject == null) && vrc_Pickup.gameObject.active && vrc_Pickup.enabled && vrc_Pickup.pickupable && !vrc_Pickup.name.Contains("ViewFinder") && !(HighlightsFX.prop_HighlightsFX_0 == null);
+                bool Object = !(pickup == null) && !(pickup.gameObject == null) && pickup.gameObject.active && pickup.enabled && pickup.pickupable && !pickup.name.Contains("ViewFinder") && !(HighlightsFX.prop_HighlightsFX_0 == null);
                 if (Object)
                 {
-                    HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(vrc_Pickup.GetComponentInChildren<MeshRenderer>(), false);
+                    HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(pickup.GetComponentInChildren<MeshRenderer>(), false);
                 }
-            }
+                Networking.SetOwner(Networking.LocalPlayer, pickup.gameObject);
+            });  
         } 
 
         public void OnUpdate()
-        { 
-            Il2CppArrayBase<VRC_Pickup> il2CppArrayBase = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
+        {
+            WorldWrapper.vrc_Pickups.ToList().ForEach(pickup =>
+            {
+            });
+                Il2CppArrayBase<VRC_Pickup> il2CppArrayBase = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
             foreach (VRC_Pickup vrc_Pickup in il2CppArrayBase)
             {
                 bool Object = !(vrc_Pickup == null) && !(vrc_Pickup.gameObject == null) && vrc_Pickup.gameObject.active && vrc_Pickup.enabled && vrc_Pickup.pickupable && !vrc_Pickup.name.Contains("ViewFinder") && !(HighlightsFX.prop_HighlightsFX_0 == null);

@@ -13,7 +13,7 @@ namespace Trinity.Module.Player
         {
             Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> keyboardAction = new((str, l, txt) =>
             {
-                MenuUI.Log("EXPLOITS: <color=yellow>Starting Avatar Crash...</color>");
+                MenuUI.Log("EXPLOITS: <color=yellow>Changing Into Avatar By ID...</color>");
                 if (!str.StartsWith("avtr")) return;
                 PU.ChangeAvatar(str);
             });

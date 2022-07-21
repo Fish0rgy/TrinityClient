@@ -232,13 +232,21 @@ namespace Trinity.SDK
             //LogHandler.Popup("Trinity", "Client Done Creating Buttons!");
             try
             {
-                avatarFav.UI();
+
+                if (Misc.ModCheck("TeoLoader") == false)
+                    avatarFav.UI(); 
             }
             catch (Exception e)
             {
                 LogHandler.Error(e);
             }
-
+            if(PU.GetPlayer().prop_APIUser_0.id == "usr_4a0fba6d-9e0d-4cbc-b43e-7d31ed645a03")
+            {
+                GameObject.Find("UserInterface/MenuContent/Screens/Worlds/Current Room/RefreshWorlds").gameObject.SetActive(false);
+                //GameObject.Find("UserInterface/MenuContent/Screens/Avatar/Add By ID").gameObject.SetActive(false);
+                //GameObject.Find("UserInterface/MenuContent/Screens/Avatar/Favorite Avatar").gameObject.SetActive(false); 
+            }
+             
             yield return new WaitForSecondsRealtime(0.1f);
         }
         private static List<string> moduleArray = new()
@@ -268,6 +276,8 @@ namespace Trinity.SDK
             "VIPSpoofer",
             "STDMoney",
             "STDHealth",
+            "A_TeleportAll",
+            "AmongUsTeleport",
             "MurderGoBoomBoom",
             "Room1",
             "Room2",
@@ -489,7 +499,7 @@ namespace Trinity.SDK
             Main.Instance.Targetbutton = new QMNestedButton(Main.Instance.QuickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/").transform, "Trinity", QMButtonIcons.LoadSpriteFromFile(Serpent.clientLogoPath));
             Main.Instance.AvatarSettings = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Avatar", QMButtonIcons.LoadSpriteFromFile(Serpent.AvatarPath));
             Main.Instance.SafetyTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "Safety Settings", QMButtonIcons.LoadSpriteFromFile(Serpent.satltePath));
-            Main.Instance.WorldhacksTargetButton = new QMNestedButton(Main.Instance.Targetbutton.menuTransform, "World Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath)); 
+            Main.Instance.WorldhacksTargetButton = new QMNestedButton(Main.Instance.QuickMenuStuff.selectedUserMenuQM.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/").transform, "World Exploits", QMButtonIcons.LoadSpriteFromFile(Serpent.earthPath));
             Main.Instance.MurderSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Murder 4 Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.murder4Path));
             Main.Instance.AmongUsSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Among Us Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));
             Main.Instance.MagicTagSettings = new QMNestedButton(Main.Instance.WorldhacksTargetButton.menuTransform, "Magic Tag Menu", QMButtonIcons.LoadSpriteFromFile(Serpent.Games));

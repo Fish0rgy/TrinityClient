@@ -25,6 +25,16 @@ namespace Trinity.Module.World.World_Hacks.Murder_4
                 }
             }
         }
+        public static void TargetedNadeNLag()
+        {
+            Resources.FindObjectsOfTypeAll<GameObject>().ToList().ForEach(Obj =>
+            {
+                if (Obj.gameObject.name != "Frag (0)") return;
+                UW.SetEventOwner(Obj, PU.SelectedVRCPlayer());
+                Obj.gameObject.transform.position = new Vector3(PU.SelectedVRCPlayer().gameObject.transform.position.x, PU.SelectedVRCPlayer().gameObject.transform.position.y + 1f, PU.SelectedVRCPlayer().gameObject.transform.position.z);
+                UW.PathEvent(Obj, "Explode", EventTarget.Targeted);
+            });
+        }
         public static void ObjectInteract(string ObjectName)
         {
             foreach(GameObject Doors in DoorList()) 

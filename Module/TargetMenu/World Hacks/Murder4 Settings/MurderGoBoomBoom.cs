@@ -25,7 +25,7 @@ namespace Trinity.Module.TargetMenu.World_Hacks.Murder4_Settings
                 LogHandler.Log(LogHandler.Colors.Green, $"Boom Boom {SelectedPlayer.displayName}", false, false);
                 MenuUI.Log($"MURDER: <color=green>Boom Boom {SelectedPlayer.displayName}</color>");
                 LogHandler.LogDebug($"Boom Boom {SelectedPlayer.displayName}");
-                MurderMisc.TargetBoomBoom();
+                MurderMisc.TargetedNadeNLag();
             }
             catch (Exception ex)
             {

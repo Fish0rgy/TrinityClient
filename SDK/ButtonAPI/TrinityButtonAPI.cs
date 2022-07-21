@@ -12,7 +12,7 @@ using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Menus;
 
-namespace SoulMod.API
+namespace Trinity.SDK.ButtonAPI
 {
     internal class TrinityButtonAPI
     {
@@ -27,7 +27,7 @@ namespace SoulMod.API
 
             public QMSingleButton button;
 
-            public QMNestedButton(Transform perant, string name, Sprite icon = null)
+            public QMNestedButton(Transform perant, string name, float x,float y,ButtonSize type, Sprite icon = null)
             {
                 menu = new QMMenu(name, name, false, true);
                 menuTransform = menu.menuContents;
@@ -35,7 +35,7 @@ namespace SoulMod.API
                 button = new QMSingleButton(perant, name, name, icon, delegate
                 {
                     menu.OpenMenu();
-                });
+                },x,y,type);
             }
         }
         class VrConsoleLog
@@ -62,7 +62,7 @@ namespace SoulMod.API
             private Image badge;
             private Image icon;
 
-            public QMSingleButton(Transform parent, string text, string toolTip, Sprite Icon, Action action)
+            public QMSingleButton(Transform parent, string text, string toolTip, Sprite Icon, Action action, float btnXLocation, float btnYLocation, ButtonSize type)
             {
                 GameObject singleButton = UnityEngine.Object.Instantiate<GameObject>(quickMenu.transform.Find("Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Emojis").gameObject, parent);
                 singleButton.transform.parent = parent;
@@ -70,7 +70,7 @@ namespace SoulMod.API
                 singleButton.transform.Find("Text_H4").gameObject.GetComponent<TextMeshProUGUI>().text = text;
                 textCom = singleButton.transform.Find("Text_H4").GetComponent<TMP_Text>();
                 badge = singleButton.transform.Find("Badge_MMJump").GetComponent<Image>();
-                icon = singleButton.transform.Find("Icon").GetComponent<Image>();
+                icon = singleButton.transform.Find("Icon").GetComponent<Image>(); 
                 singleButton.transform.Find("Background").GetComponent<Image>().color = Color.black;
                 singleButton.transform.Find("Badge_MMJump").gameObject.active = true;
                 if (Icon != null)
@@ -89,11 +89,21 @@ namespace SoulMod.API
                     badge.gameObject.GetComponent<StyleElement>().enabled = false;
                     icon.gameObject.GetComponent<StyleElement>().enabled = false;
                     textCom.gameObject.GetComponent<StyleElement>().enabled = false;
+                } 
+                if(type == ButtonSize.Half)
+                {
+                    btnYLocation -= 0.21f;
+                    singleButton.GetComponentInChildren<RectTransform>().sizeDelta /= new Vector2(1f, 2f);
+                    singleButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition = new Vector2(0, 22);
                 }
+                SetLocation(singleButton, new Vector2(btnXLocation, btnYLocation));
                 singleButton.SetActive(true);
 
             }
-             
+            public void SetLocation(GameObject button, Vector2 location)
+            {
+                button.GetComponent<RectTransform>().anchoredPosition = location;
+            }
             //public static bool ModCheck(string mod)
             //{
             //    if (System.AppDomain.CurrentDomain.GetAssemblies().Any(x => x.GetName().Name == mod))
@@ -376,6 +386,11 @@ namespace SoulMod.API
                     GameObject.Destroy(buttonGroup.transform.GetChild(i).gameObject);
             }
         }
+        
     }
-
+    public enum ButtonSize
+    {
+        Normal,
+        Half
+    }
 }

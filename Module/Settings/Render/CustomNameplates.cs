@@ -13,10 +13,7 @@ namespace Trinity.Module.Settings.Render
     internal class CustomNameplates : BaseModule, OnPlayerJoinEvent
     {
         public VRC.Player player = new VRC.Player();
-        public static List<string> Users = new List<string>();
-        public static List<string> Munchen = new List<string>();
-        public static List<string> Arctic = new List<string>();
-        public static List<string> Serpents = new List<string>();
+        public static List<string> Users = new List<string>(); 
 
         public CustomNameplates() : base("Nameplates", "Cool Kids Nameplate", Main.Instance.SettingsButtonrender, null, true, true)
         {
@@ -24,15 +21,26 @@ namespace Trinity.Module.Settings.Render
 
         public override void OnEnable()
         {
-            MenuUI.Log("NAMEPLATES: <color=green>Custom Nameplates On</color>"); 
-            Main.Instance.OnPlayerJoinEvents.Add(this);
-            UpdatePlayerlistInfo();
+            try
+            {
+                MenuUI.Log("NAMEPLATES: <color=green>Custom Nameplates On</color>");
+                Main.Instance.OnPlayerJoinEvents.Add(this);
+                UpdatePlayerlistInfo();
+            }
+            catch { } 
         }
 
         public override void OnDisable()
         {
-            MenuUI.Log("NAMEPLATES: <color=red>Custom Nameplates Off</color>");
-            Main.Instance.OnPlayerJoinEvents.Remove(this);
+            try
+            {
+                MenuUI.Log("NAMEPLATES: <color=red>Custom Nameplates Off</color>");
+                Main.Instance.OnPlayerJoinEvents.Remove(this);
+            }
+            catch{
+
+            }
+             
         }
 
         public void OnPlayerJoin(VRC.Player player)
@@ -59,7 +67,11 @@ namespace Trinity.Module.Settings.Render
 
         public void OnPlayerLeft(VRC.Player player)
         {
-            Main.Instance.OnPlayerJoinEvents.Remove(this);
+            try
+            {
+                Users.Remove(player.prop_APIUser_0.id);
+            }
+            catch { }
             //try
             //{
             //    Munchen.Remove(player.prop_APIUser_0.id);
@@ -72,12 +84,13 @@ namespace Trinity.Module.Settings.Render
         public void UpdatePlayerlistInfo()
         {
             try
-            {
-
+            { 
                 for (int i = 0; i < PU.GetAllPlayers().Length; i++)
                 {
                     VRC.Player player = PU.GetAllPlayers()[i];
                     CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
+                    if(nameplate == null)
+                        continue;
                     nameplate.player = player;
                     var userid = player.prop_APIUser_0.id;
                     //if (MunchenCheck(userid) == true)
@@ -92,48 +105,60 @@ namespace Trinity.Module.Settings.Render
                     //}
                     //Users.Add(userid);
                     ////  LogHandler.Log(LogHandler.Colors.Green, "User:" + player.prop_APIUser_0.displayName + "\nUserID:" + player.prop_APIUser_0.id + "\nUpdated Player Info");
-                    if (i >= PU.GetAllPlayers().Length)
+                    if (i >= PU.GetAllPlayers().Length) { break;  }
+                    try
                     {
-                        break;
+                        changecolor(player);
                     }
-                    changecolor(player);
+                    catch
+                    {
+
+                    } 
                 }
             }
             catch (Exception ERROR) { 
             
-                LogHandler.Log(LogHandler.Colors.Red, ERROR.Message, false, false);
+                //LogHandler.Log(LogHandler.Colors.Red, ERROR.Message, false, false);
             }
         }
         public static void changecolor(VRC.Player player)
         {
-            CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
-            Transform stats = UnityEngine.Object.Instantiate<Transform>(nameplate.gameObject.transform.Find("Contents/Quick Stats"), nameplate.gameObject.transform.Find("Contents"));
-            Transform NamePlateBg = nameplate.gameObject.transform.Find("Contents/Main/Background");
-            Transform statsBg = nameplate.gameObject.transform.Find("Contents/Quick Stats");
-            Transform NameMain = nameplate.gameObject.transform.Find("Contents/Main");
-            Transform NameIcon = nameplate.gameObject.transform.Find("Contents/Icon");
+            try
+            {
+                CustomNameplate nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate").gameObject.AddComponent<CustomNameplate>();
+                Transform stats = UnityEngine.Object.Instantiate<Transform>(nameplate.gameObject.transform.Find("Contents/Quick Stats"), nameplate.gameObject.transform.Find("Contents"));
+                Transform NamePlateBg = nameplate.gameObject.transform.Find("Contents/Main/Background");
+                Transform statsBg = nameplate.gameObject.transform.Find("Contents/Quick Stats");
+                Transform NameMain = nameplate.gameObject.transform.Find("Contents/Main");
+                Transform NameIcon = nameplate.gameObject.transform.Find("Contents/Icon");
 
-            NamePlateBg.GetComponent<ImageThreeSlice>().color = player.GetTrustColor(); // Gets The PlayerRank And Sets To Plate
-            stats.GetComponent<ImageThreeSlice>().color = player.GetTrustColor(); // Gets The PlayerRank And Sets To Plate
-            statsBg.GetComponent<ImageThreeSlice>().color = player.GetTrustColor(); // Gets The PlayerRank And Sets To Plate
-            NameMain.Find("Glow").GetComponent<ImageThreeSlice>().color = player.GetTrustColor();
-            NameIcon.Find("Pulse").GetComponent<Image>().color = player.GetTrustColor();
-            try
-            {
-                NameIcon.Find("Background").GetComponent<Image>().color = player.GetTrustColor();
+                NamePlateBg.GetComponent<ImageThreeSlice>().color = player.GetTrustColor(); // Gets The PlayerRank And Sets To Plate
+                stats.GetComponent<ImageThreeSlice>().color = player.GetTrustColor(); // Gets The PlayerRank And Sets To Plate
+                statsBg.GetComponent<ImageThreeSlice>().color = player.GetTrustColor(); // Gets The PlayerRank And Sets To Plate
+                NameMain.Find("Glow").GetComponent<ImageThreeSlice>().color = player.GetTrustColor();
+                NameIcon.Find("Pulse").GetComponent<Image>().color = player.GetTrustColor();
+                try
+                {
+                    NameIcon.Find("Background").GetComponent<Image>().color = player.GetTrustColor();
+                }
+                catch
+                {
+                    NameIcon.Find("Background").GetComponent<ImageThreeSlice>().color = player.GetTrustColor();
+                }
+                try
+                {
+                    NameIcon.Find("Glow").GetComponent<Image>().color = player.GetTrustColor();
+                }
+                catch
+                {
+                    NameIcon.Find("Glow").GetComponent<ImageThreeSlice>().color = player.GetTrustColor();
+                }
             }
             catch
             {
-                NameIcon.Find("Background").GetComponent<ImageThreeSlice>().color = player.GetTrustColor();
+
             }
-            try
-            {
-                NameIcon.Find("Glow").GetComponent<Image>().color = player.GetTrustColor();
-            }
-            catch
-            {
-                NameIcon.Find("Glow").GetComponent<ImageThreeSlice>().color = player.GetTrustColor();
-            }
+             
         }
         public bool MunchenCheck(string userID)
         {

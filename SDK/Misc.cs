@@ -33,6 +33,7 @@ namespace Trinity.SDK
             }
             return s;
         }
+         
         public static bool ModCheck(string mod)
         {
             if (System.AppDomain.CurrentDomain.GetAssemblies().Any(x => x.GetName().Name == mod))

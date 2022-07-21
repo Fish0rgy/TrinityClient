@@ -128,7 +128,7 @@ namespace Trinity
             SecurityCheck.CheckUpdate();
             Directory.CreateDirectory("Trinity\\LoadingScreenMusic");
             MelonCoroutines.Start(Misc.LoadingMusic());
-            PU.AddClientUsers();
+            PU.AddClientUsers(); 
             if (Misc.ModCheck("WorldClient") || Misc.ModCheck("Notorious"))
                 CompLayer = true;
             //MelonCoroutines.Start(SpectateMode.VRChat_OnUiManagerInit());
